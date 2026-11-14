@@ -1,0 +1,8 @@
+prefix=/home/wyt/RC_planner/src/Primitive-Planner/install
+
+Name: primitive_planner
+Description: Description of primitive_planner
+Version: 0.0.0
+Cflags: -I${prefix}/include
+Libs: -L${prefix}/lib -lprimitive_planner
+Requires: traj_utils pcl_ros

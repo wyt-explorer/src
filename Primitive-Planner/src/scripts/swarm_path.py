@@ -351,7 +351,7 @@ def timeSpaceCorrespondence(lib_dir, max_vel, max_acc, arc_length, arc_radius, d
         filename = lib_dir + f"trajectory/{int(round(v_start*10))}/{int(round(v_start*10))}_infeasible_id.ply"
         file_infeasible_id = open(filename, 'w')
 
-        path_id = -1
+        path_id = 0
         # [x y z path_id time]
         pos_all = np.zeros(shape=(0, 5))
         # reserve vel = max_vel --- pos_all and primitive_end_all

@@ -1,0 +1,18 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/home/wyt/RC_planner/src/Primitive-Planner/src/Utils/pose_utils/include/pose_utils.h
+iostream
+-
+armadillo
+/home/wyt/RC_planner/src/Primitive-Planner/src/Utils/pose_utils/include/armadillo
+
+/home/wyt/RC_planner/src/Primitive-Planner/src/Utils/pose_utils/src/pose_utils.cpp
+pose_utils.h
+/home/wyt/RC_planner/src/Primitive-Planner/src/Utils/pose_utils/src/pose_utils.h
+
