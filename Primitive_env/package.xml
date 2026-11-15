@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<package format="2">
+  <name>primitive_env</name>
+  <version>0.0.1</version>
+  <description>Custom obstacle cloud and waypoint visualization for Primitive-Planner.</description>
+  <maintainer email="maintainer@example.com">Demo Maintainer</maintainer>
+  <license>MIT</license>
+  <buildtool_depend>catkin</buildtool_depend>
+  <exec_depend>rospy</exec_depend>
+  <exec_depend>sensor_msgs</exec_depend>
+  <exec_depend>std_msgs</exec_depend>
+  <exec_depend>geometry_msgs</exec_depend>
+  <exec_depend>visualization_msgs</exec_depend>
+  <exec_depend>rviz</exec_depend>
+</package>
