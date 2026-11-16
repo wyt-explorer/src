@@ -1,5 +1,3 @@
-# 配置演示环境的 RViz 显示项、世界坐标系、交互工具和初始视角。
-# 面板布局和工具栏外观。
 Panels:
   - Class: rviz/Displays
     Help Height: 70
@@ -16,7 +14,6 @@ Toolbars:
   toolButtonStyle: 2
 Visualization Manager:
   Class: ""
-  # 显示地面网格、障碍物点云、起终点、无人机模型及飞行路径。
   Displays:
     - Alpha: 0.5
       Cell Size: 1
@@ -105,14 +102,12 @@ Visualization Manager:
       Unreliable: false
       Value: true
   Enabled: true
-  # 所有显示项统一使用 world 固定坐标系。
   Global Options:
     Background Color: 48; 48; 48
     Default Light: true
     Fixed Frame: world
     Frame Rate: 30
   Name: root
-  # PublishPoint 向 /clicked_point 发布点击，供启动节点触发固定任务。
   Tools:
     - Class: rviz/Interact
       Hide Inactive Objects: true
@@ -122,11 +117,10 @@ Visualization Manager:
       Single click: true
       Topic: /clicked_point
   Value: true
-  # 设置启动时的轨道相机位置与观察方向。
   Views:
     Current:
       Class: rviz/Orbit
-      Distance: 24.868432998657227
+      Distance: 14.698728561401367
       Enable Stereo Rendering:
         Stereo Eye Separation: 0.05999999865889549
         Stereo Focal Distance: 1
@@ -142,11 +136,10 @@ Visualization Manager:
       Invert Z Axis: false
       Name: Current View
       Near Clip Distance: 0.009999999776482582
-      Pitch: 0.7349985837936401
+      Pitch: 0.43479618430137634
       Target Frame: <Fixed Frame>
-      Yaw: 6.133184909820557
+      Yaw: 6.168184757232666
     Saved: ~
-# 保存窗口尺寸及停靠面板状态。
 Window Geometry:
   Displays:
     collapsed: false
@@ -155,5 +148,5 @@ Window Geometry:
   Hide Right Dock: false
   QMainWindow State: 000000ff00000000fd0000000100000000000001560000023ffc0200000001fb000000100044006900730070006c006100790073010000003d0000023f000000c900ffffff000002630000023f00000004000000040000000800000008fc0000000100000002000000010000000a0054006f006f006c00730100000000ffffffff0000000000000000
   Width: 959
-  X: 405
-  Y: 403
+  X: 1244
+  Y: 270
