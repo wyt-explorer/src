@@ -1,13 +1,15 @@
-#include <nav_msgs/Odometry.h>
-#include <nav_msgs/Path.h>
+#include <memory>
+#include <chrono>
+#include <nav_msgs/msg/odometry.hpp>
+#include <nav_msgs/msg/path.hpp>
 #include <pcl/filters/voxel_grid.h>
 #include <pcl/kdtree/kdtree_flann.h>
 #include <pcl/point_cloud.h>
 #include <pcl/point_types.h>
 #include <pcl/search/kdtree.h>
 #include <pcl_conversions/pcl_conversions.h>
-#include <ros/ros.h>
-#include <sensor_msgs/PointCloud2.h>
+#include <rclcpp/rclcpp.hpp>
+#include <sensor_msgs/msg/point_cloud2.hpp>
 #include <Eigen/Dense>
 #include <fstream>
 #include <iostream>
@@ -17,21 +19,21 @@
 using namespace std;
 using namespace Eigen;
 
-ros::Publisher pub_cloud;
+rclcpp::Publisher<sensor_msgs::msg::PointCloud2>::SharedPtr pub_cloud;
 
-sensor_msgs::PointCloud2 local_map_pcl;
-sensor_msgs::PointCloud2 local_depth_pcl;
+sensor_msgs::msg::PointCloud2 local_map_pcl;
+sensor_msgs::msg::PointCloud2 local_depth_pcl;
 
-ros::Subscriber odom_sub;
-ros::Subscriber global_map_sub, local_map_sub;
+rclcpp::SubscriptionBase::SharedPtr odom_sub;
+rclcpp::SubscriptionBase::SharedPtr global_map_sub, local_map_sub;
 
-ros::Timer local_sensing_timer;
+rclcpp::Timer local_sensing_timer;
 
 bool has_global_map(false);
 bool has_local_map(false);
 bool has_odom(false);
 
-nav_msgs::Odometry _odom;
+nav_msgs::msg::Odometry _odom;
 
 double sensing_horizon, sensing_rate, estimation_rate;
 double _x_size, _y_size, _z_size;
@@ -39,7 +41,7 @@ double _gl_xl, _gl_yl, _gl_zl;
 double _resolution, _inv_resolution;
 int _GLX_SIZE, _GLY_SIZE, _GLZ_SIZE;
 
-ros::Time last_odom_stamp = ros::TIME_MAX;
+rclcpp::Time last_odom_stamp = rclcpp::Time::max();
 
 inline Eigen::Vector3d gridIndex2coord(const Eigen::Vector3i& index) {
   Eigen::Vector3d pt;
@@ -62,7 +64,7 @@ inline Eigen::Vector3i coord2gridIndex(const Eigen::Vector3d& pt) {
   return idx;
 };
 
-void rcvOdometryCallbck(const nav_msgs::Odometry& odom) {
+void rcvOdometryCallbck(const nav_msgs::msg::Odometry& odom) {
   /*if(!has_global_map)
     return;*/
   has_odom = true;
@@ -71,17 +73,17 @@ void rcvOdometryCallbck(const nav_msgs::Odometry& odom) {
 
 pcl::PointCloud<pcl::PointXYZ> _cloud_all_map, _local_map;
 pcl::VoxelGrid<pcl::PointXYZ> _voxel_sampler;
-sensor_msgs::PointCloud2 _local_map_pcd;
+sensor_msgs::msg::PointCloud2 _local_map_pcd;
 
 pcl::search::KdTree<pcl::PointXYZ> _kdtreeLocalMap;
 vector<int> _pointIdxRadiusSearch;
 vector<float> _pointRadiusSquaredDistance;
 
 void rcvGlobalPointCloudCallBack(
-    const sensor_msgs::PointCloud2& pointcloud_map) {
+    const sensor_msgs::msg::PointCloud2& pointcloud_map) {
   if (has_global_map) return;
 
-  ROS_WARN("Global Pointcloud received..");
+  // Global pointcloud received;
 
   pcl::PointCloud<pcl::PointXYZ> cloud_input;
   pcl::fromROSMsg(pointcloud_map, cloud_input);
@@ -95,7 +97,7 @@ void rcvGlobalPointCloudCallBack(
   has_global_map = true;
 }
 
-void renderSensedPoints(const ros::TimerEvent& event) {
+void renderSensedPoints() {
   if (!has_global_map || !has_odom) return;
 
   Eigen::Quaterniond q;
@@ -148,55 +150,23 @@ void renderSensedPoints(const ros::TimerEvent& event) {
   pcl::toROSMsg(_local_map, _local_map_pcd);
   _local_map_pcd.header.frame_id = "world";
 
-  pub_cloud.publish(_local_map_pcd);
+  pub_cloud->publish(_local_map_pcd);
 }
 
 void rcvLocalPointCloudCallBack(
-    const sensor_msgs::PointCloud2& pointcloud_map) {
+    const sensor_msgs::msg::PointCloud2& pointcloud_map) {
   // do nothing, fix later
 }
 
 int main(int argc, char** argv) {
-  ros::init(argc, argv, "pcl_render");
-  ros::NodeHandle nh("~");
-
-  nh.getParam("sensing_horizon", sensing_horizon);
-  nh.getParam("sensing_rate", sensing_rate);
-  nh.getParam("estimation_rate", estimation_rate);
-
-  nh.getParam("map/x_size", _x_size);
-  nh.getParam("map/y_size", _y_size);
-  nh.getParam("map/z_size", _z_size);
-
-  // subscribe point cloud
-  global_map_sub = nh.subscribe("global_map", 1, rcvGlobalPointCloudCallBack);
-  local_map_sub = nh.subscribe("local_map", 1, rcvLocalPointCloudCallBack);
-  odom_sub = nh.subscribe("odometry", 50, rcvOdometryCallbck);
-
-  // publisher depth image and color image
-  pub_cloud =
-      nh.advertise<sensor_msgs::PointCloud2>("pcl_render_node/cloud", 10);
-
-  double sensing_duration = 1.0 / sensing_rate * 2.5;
-
-  local_sensing_timer =
-      nh.createTimer(ros::Duration(sensing_duration), renderSensedPoints);
-
-  _inv_resolution = 1.0 / _resolution;
-
-  _gl_xl = -_x_size / 2.0;
-  _gl_yl = -_y_size / 2.0;
-  _gl_zl = 0.0;
-
-  _GLX_SIZE = (int)(_x_size * _inv_resolution);
-  _GLY_SIZE = (int)(_y_size * _inv_resolution);
-  _GLZ_SIZE = (int)(_z_size * _inv_resolution);
-
-  ros::Rate rate(100);
-  bool status = ros::ok();
-  while (status) {
-    ros::spinOnce();
-    status = ros::ok();
-    rate.sleep();
-  }
+  rclcpp::init(argc, argv); auto nh=std::make_shared<rclcpp::Node>("pcl_render");
+  sensing_horizon=nh->declare_parameter("sensing_horizon",5.0); sensing_rate=nh->declare_parameter("sensing_rate",10.0); estimation_rate=nh->declare_parameter("estimation_rate",10.0);
+  _x_size=nh->declare_parameter("map/x_size",50.0); _y_size=nh->declare_parameter("map/y_size",50.0); _z_size=nh->declare_parameter("map/z_size",5.0);
+  auto global_sub=nh->create_subscription<sensor_msgs::msg::PointCloud2>("global_map",1,[](auto m){rcvGlobalPointCloudCallBack(*m);});
+  auto local_sub=nh->create_subscription<sensor_msgs::msg::PointCloud2>("local_map",1,[](auto m){rcvLocalPointCloudCallBack(*m);});
+  auto odom=nh->create_subscription<nav_msgs::msg::Odometry>("odometry",50,[](auto m){rcvOdometryCallbck(*m);});
+  pub_cloud=nh->create_publisher<sensor_msgs::msg::PointCloud2>("pcl_render_node/cloud",10);
+  _inv_resolution=1.0/_resolution; _gl_xl=-_x_size/2.; _gl_yl=-_y_size/2.; _gl_zl=0.; _GLX_SIZE=(int)(_x_size*_inv_resolution); _GLY_SIZE=(int)(_y_size*_inv_resolution); _GLZ_SIZE=(int)(_z_size*_inv_resolution);
+  auto timer=nh->create_wall_timer(std::chrono::duration<double>(1.0/sensing_rate*2.5),[](){renderSensedPoints();});
+  rclcpp::spin(nh); rclcpp::shutdown(); return 0;
 }

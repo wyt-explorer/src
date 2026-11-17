@@ -1,18 +1,1 @@
-<?xml version="1.0"?>
-<!-- 声明自定义仿真环境功能包的元数据和 ROS 运行依赖。 -->
-<package format="2">
-  <!-- 功能包标识、维护者与许可证。 -->
-  <name>primitive_env</name>
-  <version>0.0.1</version>
-  <description>Custom obstacle cloud and waypoint visualization for Primitive-Planner.</description>
-  <maintainer email="maintainer@example.com">Demo Maintainer</maintainer>
-  <license>MIT</license>
-  <!-- 使用 Catkin 构建；下列运行依赖支持节点通信和可视化。 -->
-  <buildtool_depend>catkin</buildtool_depend>
-  <exec_depend>rospy</exec_depend>
-  <exec_depend>sensor_msgs</exec_depend>
-  <exec_depend>std_msgs</exec_depend>
-  <exec_depend>geometry_msgs</exec_depend>
-  <exec_depend>visualization_msgs</exec_depend>
-  <exec_depend>rviz</exec_depend>
-</package>
+<?xml version="1.0"?><package format="3"><name>primitive_env</name><version>0.1.0</version><description>Custom obstacle cloud and waypoint visualization for Primitive-Planner.</description><maintainer email="maintainer@example.com">Demo Maintainer</maintainer><license>MIT</license><buildtool_depend>ament_cmake</buildtool_depend><depend>rclpy</depend><depend>sensor_msgs</depend><depend>std_msgs</depend><depend>geometry_msgs</depend><depend>visualization_msgs</depend><exec_depend>rviz2</exec_depend></package>

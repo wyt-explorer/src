@@ -1,9 +1,9 @@
 #include <Eigen/Geometry>
-#include <nav_msgs/Odometry.h>
-#include <quadrotor_msgs/SO3Command.h>
+#include <nav_msgs/msg/odometry.hpp>
+#include <quadrotor_msgs/msg/so3_command.hpp>
 #include <quadrotor_simulator/Quadrotor.h>
-#include <ros/ros.h>
-#include <sensor_msgs/Imu.h>
+#include <rclcpp/rclcpp.hpp>
+#include <sensor_msgs/msg/imu.hpp>
 #include <uav_utils/geometry_utils.h>
 
 typedef struct _Control
@@ -32,9 +32,9 @@ static Command     command;
 static Disturbance disturbance;
 
 void stateToOdomMsg(const QuadrotorSimulator::Quadrotor::State& state,
-                    nav_msgs::Odometry&                         odom);
+                    nav_msgs::msg::Odometry&                         odom);
 void quadToImuMsg(const QuadrotorSimulator::Quadrotor& quad,
-                  sensor_msgs::Imu&                    imu);
+                  sensor_msgs::msg::Imu&                    imu);
 
 static Control
 getControl(const QuadrotorSimulator::Quadrotor& quad, const Command& cmd)
@@ -158,7 +158,7 @@ getControl(const QuadrotorSimulator::Quadrotor& quad, const Command& cmd)
 }
 
 static void
-cmd_callback(const quadrotor_msgs::SO3Command::ConstPtr& cmd)
+cmd_callback(const quadrotor_msgs::msg::SO3Command::ConstPtr& cmd)
 {
   command.force[0]         = cmd->force.x;
   command.force[1]         = cmd->force.y;
@@ -203,8 +203,8 @@ main(int argc, char** argv)
 
   ros::NodeHandle n("~");
 
-  ros::Publisher  odom_pub = n.advertise<nav_msgs::Odometry>("odom", 100);
-  ros::Publisher  imu_pub  = n.advertise<sensor_msgs::Imu>("imu", 10);
+  ros::Publisher  odom_pub = n.advertise<nav_msgs::msg::Odometry>("odom", 100);
+  ros::Publisher  imu_pub  = n.advertise<sensor_msgs::msg::Imu>("imu", 10);
   ros::Subscriber cmd_sub =
     n.subscribe("cmd", 100, &cmd_callback, ros::TransportHints().tcpNoDelay());
   ros::Subscriber f_sub =
@@ -241,11 +241,11 @@ main(int argc, char** argv)
 
   Control control;
 
-  nav_msgs::Odometry odom_msg;
+  nav_msgs::msg::Odometry odom_msg;
   odom_msg.header.frame_id = "/world";
   odom_msg.child_frame_id  = "/" + quad_name;
 
-  sensor_msgs::Imu imu;
+  sensor_msgs::msg::Imu imu;
   imu.header.frame_id = "/simulator";
 
   /*
@@ -304,7 +304,7 @@ main(int argc, char** argv)
 
 void
 stateToOdomMsg(const QuadrotorSimulator::Quadrotor::State& state,
-               nav_msgs::Odometry&                         odom)
+               nav_msgs::msg::Odometry&                         odom)
 {
   odom.pose.pose.position.x = state.x(0);
   odom.pose.pose.position.y = state.x(1);
@@ -326,7 +326,7 @@ stateToOdomMsg(const QuadrotorSimulator::Quadrotor::State& state,
 }
 
 void
-quadToImuMsg(const QuadrotorSimulator::Quadrotor& quad, sensor_msgs::Imu& imu)
+quadToImuMsg(const QuadrotorSimulator::Quadrotor& quad, sensor_msgs::msg::Imu& imu)
 
 {
   QuadrotorSimulator::Quadrotor::State state = quad.getState();

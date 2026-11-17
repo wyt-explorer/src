@@ -3,7 +3,6 @@
 
 #include <Eigen/Eigen>
 #include <vector>
-#include <ros/ros.h>
 
 using std::vector;
 

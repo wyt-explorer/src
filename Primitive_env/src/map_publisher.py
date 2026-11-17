@@ -3,7 +3,8 @@
 import os
 import yaml
 import numpy as np
-import rospy
+import rclpy
+from rclpy.node import Node
 from std_msgs.msg import Header
 from sensor_msgs.msg import PointCloud2
 from sensor_msgs import point_cloud2
@@ -70,24 +71,15 @@ def build_points(cfg):
     # 合并所有障碍物；无障碍物时保留合法的空点云形状。
     return np.concatenate(parts) if parts else np.empty((0,3),dtype=np.float32)
 
-# 初始化节点，加载地图，并以 1 Hz 发布带当前时间戳的全局点云。
+class MapPublisher(Node):
+    def __init__(self):
+        super().__init__('custom_map_publisher')
+        self.declare_parameter('map_file',''); self.declare_parameter('cloud_topic','/map_generator/global_cloud')
+        with open(os.path.expanduser(self.get_parameter('map_file').value),encoding='utf-8') as f: cfg=yaml.safe_load(f)
+        self.points=build_points(cfg); self.frame=cfg['map'].get('frame_id','world')
+        self.pub=self.create_publisher(PointCloud2,self.get_parameter('cloud_topic').value,1); self.create_timer(1.,self.publish)
+    def publish(self):
+        h=Header(stamp=self.get_clock().now().to_msg(),frame_id=self.frame); self.pub.publish(point_cloud2.create_cloud_xyz32(h,self.points.tolist()))
 def main():
-    rospy.init_node('custom_map_publisher')
-    filename=rospy.get_param('~map_file')
-    with open(os.path.expanduser(filename),encoding='utf-8') as f: cfg=yaml.safe_load(f)
-    points=build_points(cfg)
-    frame=cfg['map'].get('frame_id','world')
-    topic=rospy.get_param('~cloud_topic','/map_generator/global_cloud')
-    # 锁存最近一条消息，供后续接入的订阅者立即获取地图。
-    pub=rospy.Publisher(topic,PointCloud2,queue_size=1,latch=True)
-    rospy.loginfo('Map ready: %d points on %s, frame=%s',len(points),topic,frame)
-    rate=rospy.Rate(1)
-    while not rospy.is_shutdown():
-        header=Header(stamp=rospy.Time.now(),frame_id=frame)
-        pub.publish(point_cloud2.create_cloud_xyz32(header,points.tolist()))
-        rate.sleep()
-
-# 脚本入口：正常处理 ROS 关闭引发的中断。
-if __name__=='__main__':
-    try: main()
-    except rospy.ROSInterruptException: pass
+    rclpy.init(); n=MapPublisher(); rclpy.spin(n); n.destroy_node(); rclpy.shutdown()
+if __name__=='__main__': main()

@@ -1,3 +1,6 @@
+#include <thread>
+#include <chrono>
+#include <memory>
 #include <pcl/point_cloud.h>
 #include <pcl/point_types.h>
 // #include <pcl/search/kdtree.h>
@@ -5,13 +8,13 @@
 #include <pcl_conversions/pcl_conversions.h>
 #include <iostream>
 
-#include <geometry_msgs/PoseStamped.h>
-#include <geometry_msgs/Vector3.h>
+#include <geometry_msgs/msg/pose_stamped.hpp>
+#include <geometry_msgs/msg/vector3.hpp>
 #include <math.h>
-#include <nav_msgs/Odometry.h>
-#include <ros/console.h>
-#include <ros/ros.h>
-#include <sensor_msgs/PointCloud2.h>
+#include <nav_msgs/msg/odometry.hpp>
+#include <rclcpp/rclcpp.hpp>
+
+#include <sensor_msgs/msg/point_cloud2.hpp>
 #include <Eigen/Eigen>
 #include <random>
 #include <fstream>
@@ -33,10 +36,10 @@ uniform_real_distribution<double> rand_w;
 uniform_real_distribution<double> rand_h;
 uniform_real_distribution<double> rand_inf;
 
-ros::Publisher _local_map_pub;
-ros::Publisher _all_map_pub;
-ros::Publisher click_map_pub_;
-ros::Subscriber _odom_sub;
+rclcpp::Publisher<sensor_msgs::msg::PointCloud2>::SharedPtr _local_map_pub;
+rclcpp::Publisher<sensor_msgs::msg::PointCloud2>::SharedPtr _all_map_pub;
+rclcpp::Publisher<sensor_msgs::msg::PointCloud2>::SharedPtr click_map_pub_;
+rclcpp::SubscriptionBase::SharedPtr _odom_sub;
 
 vector<double> _state;
 
@@ -58,10 +61,10 @@ uniform_real_distribution<double> rand_theta_;
 uniform_real_distribution<double> rand_theta_tilt_;
 uniform_real_distribution<double> rand_z_;
 
-sensor_msgs::PointCloud2 globalMap_pcd;
+sensor_msgs::msg::PointCloud2 globalMap_pcd;
 pcl::PointCloud<pcl::PointXYZ> cloudMap;
 
-sensor_msgs::PointCloud2 localMap_pcd;
+sensor_msgs::msg::PointCloud2 localMap_pcd;
 pcl::PointCloud<pcl::PointXYZ> clicked_cloud_;
 
 void RandomMapGenerate()
@@ -157,7 +160,7 @@ void RandomMapGenerate()
   cloudMap.height = 1;
   cloudMap.is_dense = true;
 
-  ROS_WARN("Finished generate random map ");
+  // Finished generate random map
 
   kdtreeLocalMap.setInputCloud(cloudMap.makeShared());
 
@@ -182,7 +185,7 @@ void RandomMapGenerateCylinder()
   rand_z_ = uniform_real_distribution<double>(z_l_, z_h_);
 
   // generate polar obs
-  for (int i = 0; i < _obs_num && ros::ok(); i++)
+  for (int i = 0; i < _obs_num && rclcpp::ok(); i++)
   {
     double x, y, w, h, inf;
     x = rand_x(eng);
@@ -281,7 +284,7 @@ void RandomMapGenerateCylinder()
   cloudMap.height = 1;
   cloudMap.is_dense = true;
 
-  ROS_WARN("Finished generate random map ");
+  // Finished generate random map
 
   kdtreeLocalMap.setInputCloud(cloudMap.makeShared());
 
@@ -349,7 +352,7 @@ bool GenerateMapFromObstacleFile(const std::string file_path) {
   cloudMap.height = 1;
   cloudMap.is_dense = true;
 
-  ROS_WARN("Finished reading map. ");
+  // Finished reading map
 
   kdtreeLocalMap.setInputCloud(cloudMap.makeShared());
 
@@ -376,7 +379,7 @@ void RandomInclinedColumn()
   rand_z_ = uniform_real_distribution<double>(z_l_, z_h_);
 
   // generate inclined column obs
-  for (int i = 0; i < _obs_num && ros::ok(); i++)
+  for (int i = 0; i < _obs_num && rclcpp::ok(); i++)
   {
     double x, y, w, h, inf;
     x = rand_x(eng);
@@ -429,14 +432,14 @@ void RandomInclinedColumn()
   cloudMap.height = 1;
   cloudMap.is_dense = true;
 
-  ROS_WARN("Finished generate random map ");
+  // Finished generate random map
 
   kdtreeLocalMap.setInputCloud(cloudMap.makeShared());
 
   _map_ok = true;
 }
 
-void clickCallback(const geometry_msgs::PoseStamped &msg)
+void clickCallback(const geometry_msgs::msg::PoseStamped &msg)
 {
   double x = msg.pose.position.x;
   double y = msg.pose.position.y;
@@ -469,7 +472,7 @@ void clickCallback(const geometry_msgs::PoseStamped &msg)
 
   pcl::toROSMsg(clicked_cloud_, localMap_pcd);
   localMap_pcd.header.frame_id = "world";
-  click_map_pub_.publish(localMap_pcd);
+  click_map_pub_->publish(localMap_pcd);
 
   cloudMap.width = cloudMap.points.size();
 
@@ -479,49 +482,49 @@ void clickCallback(const geometry_msgs::PoseStamped &msg)
 int i = 0;
 void pubPoints()
 {
-  while (ros::ok())
+  while (rclcpp::ok())
   {
-    ros::spinOnce();
+    rclcpp::spin_some(n);
     if (_map_ok)
       break;
   }
 
   pcl::toROSMsg(cloudMap, globalMap_pcd);
   globalMap_pcd.header.frame_id = "world";
-  _all_map_pub.publish(globalMap_pcd);
+  _all_map_pub->publish(globalMap_pcd);
 }
 
 int main(int argc, char **argv)
 {
-  ros::init(argc, argv, "random_map_sensing");
-  ros::NodeHandle n("~");
+  rclcpp::init(argc, argv);
+  auto n = std::make_shared<rclcpp::Node>("random_map_sensing");
 
-  _local_map_pub = n.advertise<sensor_msgs::PointCloud2>("/map_generator/local_cloud", 1);
-  _all_map_pub = n.advertise<sensor_msgs::PointCloud2>("/map_generator/global_cloud", 1);
+  _local_map_pub = n->create_publisher<sensor_msgs::msg::PointCloud2>("/map_generator/local_cloud", 1);
+  _all_map_pub = n->create_publisher<sensor_msgs::msg::PointCloud2>("/map_generator/global_cloud", 1);
 
   click_map_pub_ =
-      n.advertise<sensor_msgs::PointCloud2>("/pcl_render_node/local_map", 1);
+      n->create_publisher<sensor_msgs::msg::PointCloud2>("/pcl_render_node/local_map", 1);
 
-  n.param("map/x_size", _x_size, 50.0);
-  n.param("map/y_size", _y_size, 50.0);
-  n.param("map/z_size", _z_size, 5.0);
-  n.param("map/obs_num", _obs_num, 30);
-  n.param("map/resolution", _resolution, 0.1);
-  n.param("map/circle_num", circle_num_, 30);
+  _x_size = n->declare_parameter("map/x_size", 50.0);
+  _y_size = n->declare_parameter("map/y_size", 50.0);
+  _z_size = n->declare_parameter("map/z_size", 5.0);
+  _obs_num = n->declare_parameter("map/obs_num", 30);
+  _resolution = n->declare_parameter("map/resolution", 0.1);
+  circle_num_ = n->declare_parameter("map/circle_num", 30);
 
-  n.param("ObstacleShape/lower_rad", _w_l, 0.3);
-  n.param("ObstacleShape/upper_rad", _w_h, 0.8);
-  n.param("ObstacleShape/lower_hei", _h_l, 3.0);
-  n.param("ObstacleShape/upper_hei", _h_h, 7.0);
+  _w_l = n->declare_parameter("ObstacleShape/lower_rad", 0.3);
+  _w_h = n->declare_parameter("ObstacleShape/upper_rad", 0.8);
+  _h_l = n->declare_parameter("ObstacleShape/lower_hei", 3.0);
+  _h_h = n->declare_parameter("ObstacleShape/upper_hei", 7.0);
 
-  n.param("ObstacleShape/radius_l", radius_l_, 7.0);
-  n.param("ObstacleShape/radius_h", radius_h_, 7.0);
-  n.param("ObstacleShape/z_l", z_l_, 7.0);
-  n.param("ObstacleShape/z_h", z_h_, 7.0);
-  n.param("ObstacleShape/theta", theta_, 7.0);
+  radius_l_ = n->declare_parameter("ObstacleShape/radius_l", 7.0);
+  radius_h_ = n->declare_parameter("ObstacleShape/radius_h", 7.0);
+  z_l_ = n->declare_parameter("ObstacleShape/z_l", 7.0);
+  z_h_ = n->declare_parameter("ObstacleShape/z_h", 7.0);
+  theta_ = n->declare_parameter("ObstacleShape/theta", 7.0);
 
-  n.param("pub_rate", _pub_rate, 10.0);
-  n.param("min_distance", _min_dist, 1.0);
+  _pub_rate = n->declare_parameter("pub_rate", 10.0);
+  _min_dist = n->declare_parameter("min_distance", 1.0);
 
   _x_l = -_x_size / 2.0;
   _x_h = +_x_size / 2.0;
@@ -532,7 +535,7 @@ int main(int argc, char **argv)
   _obs_num = min(_obs_num, (int)_x_size * 10);
   _z_limit = _z_size;
 
-  ros::Duration(0.5).sleep();
+  std::this_thread::sleep_for(std::chrono::milliseconds(500));
 
   unsigned int seed = rd();
   eng.seed(seed);
@@ -542,12 +545,13 @@ int main(int argc, char **argv)
   // RandomInclinedColumn();
   // GenerateMapFromObstacleFile("/home/hjl/project/A_personal_project/primitive_swarm/src/scripts/obstacles.txt");
 
-  ros::Rate loop_rate(_pub_rate);
+  auto period = std::chrono::duration<double>(1.0 / _pub_rate);
 
-  while (ros::ok())
+  while (rclcpp::ok())
   {
     pubPoints();
-    ros::spinOnce();
-    loop_rate.sleep();
+    rclcpp::spin_some(n);
+    std::this_thread::sleep_for(period);
   }
+  rclcpp::shutdown();
 }

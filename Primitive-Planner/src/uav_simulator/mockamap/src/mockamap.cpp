@@ -1,5 +1,7 @@
-#include <ros/ros.h>
-#include <sensor_msgs/PointCloud2.h>
+#include <cstdio>
+#define ROS_INFO(...) ((void)0)
+#include <rclcpp/rclcpp.hpp>
+#include <sensor_msgs/msg/point_cloud2.hpp>
 
 #include <algorithm>
 #include <iostream>
@@ -66,9 +68,9 @@ main(int argc, char** argv)
   ros::NodeHandle nh_private("~");
 
   ros::Publisher pcl_pub =
-    nh.advertise<sensor_msgs::PointCloud2>("mock_map", 1);
+    nh.advertise<sensor_msgs::msg::PointCloud2>("mock_map", 1);
   pcl::PointCloud<pcl::PointXYZ> cloud;
-  sensor_msgs::PointCloud2       output;
+  sensor_msgs::msg::PointCloud2       output;
   // Fill in the cloud data
 
   int seed;

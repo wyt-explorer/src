@@ -1,55 +1,22 @@
-cmake_minimum_required(VERSION 2.8.3)
+cmake_minimum_required(VERSION 3.8)
 project(traj_utils)
-
-set(CMAKE_BUILD_TYPE "Release")
-set(CMAKE_CXX_FLAGS "-std=c++11")
-set(CMAKE_CXX_FLAGS_RELEASE "-O3 -Wall -g")
-# set(ENABLE_PRECOMPILED_HEADERS "OFF")
-
-find_package(catkin REQUIRED COMPONENTS
-  roscpp
-  std_msgs
-  geometry_msgs
-  message_generation
-)
-
+set(CMAKE_CXX_STANDARD 17)
+find_package(ament_cmake REQUIRED)
+find_package(rosidl_default_generators REQUIRED)
+find_package(std_msgs REQUIRED)
+find_package(geometry_msgs REQUIRED)
+find_package(visualization_msgs REQUIRED)
+find_package(rclcpp REQUIRED)
 find_package(Eigen3 REQUIRED)
-# find_package(PCL 1.7 REQUIRED) #to help find Eigen
-
-# Generate messages in the 'msg' folder
-add_message_files(
-  FILES
-  # primitiveTraj.msg
-  swarmPrimitiveTraj.msg
-  Polynomial.msg
-  )
-  
-# Generate added messages and services with any dependencies listed here
-generate_messages(
-  DEPENDENCIES
-  std_msgs
-  geometry_msgs
-)
-
-catkin_package(
- INCLUDE_DIRS include
- LIBRARIES traj_utils 
- CATKIN_DEPENDS message_runtime
-#  DEPENDS system_lib
-)
-
-include_directories( 
-    SYSTEM 
-    include 
-    ${catkin_INCLUDE_DIRS}
-    ${Eigen3_INCLUDE_DIRS} 
-)
-
-# link_directories(${PCL_LIBRARY_DIRS})
-
-add_library( traj_utils
-    src/planning_visualization.cpp 
-    )
-target_link_libraries( traj_utils
-    ${catkin_LIBRARIES} 
-    )  
+rosidl_generate_interfaces(${PROJECT_NAME}
+  msg/swarmPrimitiveTraj.msg msg/Polynomial.msg
+  DEPENDENCIES std_msgs geometry_msgs visualization_msgs)
+add_library(traj_utils src/planning_visualization.cpp)
+target_include_directories(traj_utils PUBLIC include ${EIGEN3_INCLUDE_DIRS})
+ament_target_dependencies(traj_utils rclcpp geometry_msgs visualization_msgs std_msgs)
+install(TARGETS traj_utils ARCHIVE DESTINATION lib LIBRARY DESTINATION lib)
+install(DIRECTORY include/ DESTINATION include)
+ament_export_dependencies(rosidl_default_runtime)
+ament_export_include_directories(include)
+ament_export_libraries(traj_utils)
+ament_package()

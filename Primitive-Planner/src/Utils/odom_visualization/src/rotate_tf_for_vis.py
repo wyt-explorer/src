@@ -1,32 +1,14 @@
-#!/usr/bin/env python
-# -*- coding: utf-8 -*-
-import rospy
-import tf
+#!/usr/bin/env python3
 import math
-
-def publish_rotate_transform(angular_velocity):
-    broadcaster = tf.TransformBroadcaster()
-    rate = rospy.Rate(30.0)  # 10Hz
-
-    while not rospy.is_shutdown():
-        now = rospy.Time.now()  # 获取当前时间
-
-        # 定义变换
-        broadcaster.sendTransform(
-            (0, 0, 0),             # translation: 在原点 (x, y, z)
-            (0, 0, math.sin(angular_velocity * now.to_sec()), math.cos(angular_velocity * now.to_sec())),  # rotation: 绕z轴旋转的四元数
-            now,                   # time
-            "rotate",              # child frame
-            "world"                # parent frame
-        )
-
-        rate.sleep()
-
-
+import rclpy
+from rclpy.node import Node
+from geometry_msgs.msg import TransformStamped
+from tf2_ros import TransformBroadcaster
+class RotateTF(Node):
+    def __init__(self):
+        super().__init__('rotate_tf_for_vis'); self.br=TransformBroadcaster(self); self.t0=self.get_clock().now(); self.timer=self.create_timer(1/30,self.tick)
+    def tick(self):
+        t=self.get_clock().now(); sec=(t-self.t0).nanoseconds*1e-9; m=TransformStamped(); m.header.stamp=t.to_msg(); m.header.frame_id='world'; m.child_frame_id='rotate'; m.transform.rotation.z=math.sin(.01*sec); m.transform.rotation.w=math.cos(.01*sec); self.br.sendTransform(m)
 def main():
-    rospy.init_node('rotate_tf_for_vis')
-    angular_velocity = 0.01  # 给定角速度，单位：弧度/秒
-    publish_rotate_transform(angular_velocity)
-
-if __name__ == '__main__':
-    main()
+    rclpy.init(); n=RotateTF(); rclpy.spin(n); n.destroy_node(); rclpy.shutdown()
+if __name__=='__main__': main()

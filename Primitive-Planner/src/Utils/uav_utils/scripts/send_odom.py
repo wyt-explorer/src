@@ -1,42 +1,29 @@
-#!/usr/bin/env python
-
-import rospy
-import numpy as np
-import tf
-from tf import transformations as tfs
+#!/usr/bin/env python3
+import rclpy
+from rclpy.node import Node
 from nav_msgs.msg import Odometry
 
-if __name__ == "__main__":
-	rospy.init_node("odom_sender")
+class OdomSender(Node):
+    def __init__(self):
+        super().__init__('odom_sender')
+        self.pub = self.create_publisher(Odometry, 'odom', 10)
+        self.msg = Odometry()
+        self.msg.header.frame_id = 'world'
+        self.msg.pose.pose.orientation.w = 1.0
+        self.timer = self.create_timer(1.0, self.publish)
+        self.counter = 0
+    def publish(self):
+        self.counter += 1
+        self.msg.header.stamp = self.get_clock().now().to_msg()
+        self.pub.publish(self.msg)
+        self.get_logger().info(f'Send {self.counter:3d} msg(s).')
 
-	msg = Odometry()
-
-	msg.header.stamp = rospy.Time.now()-rospy.Duration(0.2)
-	msg.header.frame_id = "world"
-
-	q = tfs.quaternion_from_euler(0,0,0,"rzyx")
-
-	msg.pose.pose.position.x = 0
-	msg.pose.pose.position.y = 0
-	msg.pose.pose.position.z = 0
-	msg.twist.twist.linear.x = 0
-	msg.twist.twist.linear.y = 0
-	msg.twist.twist.linear.z = 0
-	msg.pose.pose.orientation.x = q[0]
-	msg.pose.pose.orientation.y = q[1]
-	msg.pose.pose.orientation.z = q[2]
-	msg.pose.pose.orientation.w = q[3]
-
-	print(msg)
-
-	pub = rospy.Publisher("odom", Odometry, queue_size=10)
-	
-	counter = 0
-	r = rospy.Rate(1)
-
-	while not rospy.is_shutdown():
-		counter += 1
-		msg.header.stamp = rospy.Time.now()-rospy.Duration(0.2)
-		pub.publish(msg)
-		rospy.loginfo("Send %3d msg(s)."%counter)
-		r.sleep()
+def main():
+    rclpy.init()
+    node = OdomSender()
+    try:
+        rclpy.spin(node)
+    finally:
+        node.destroy_node(); rclpy.shutdown()
+if __name__ == '__main__':
+    main()

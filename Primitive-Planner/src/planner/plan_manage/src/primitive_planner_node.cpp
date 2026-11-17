@@ -1,21 +1,4 @@
-#include <ros/ros.h>
-#include <visualization_msgs/Marker.h>
-
+#include <rclcpp/rclcpp.hpp>
 #include <plan_manage/pp_replan_fsm.h>
-
 using namespace primitive_planner;
-
-int main(int argc, char **argv)
-{
-
-  ros::init(argc, argv, "primitive_planner_node");
-  ros::NodeHandle nh("~");
-
-  PPReplanFSM rebo_replan;
-
-  rebo_replan.init(nh);
-
-  ros::spin();
-
-  return 0;
-}
+int main(int argc,char**argv){rclcpp::init(argc,argv);auto node=std::make_shared<rclcpp::Node>("primitive_planner_node");PPReplanFSM planner;planner.init(node);rclcpp::spin(node);rclcpp::shutdown();return 0;}

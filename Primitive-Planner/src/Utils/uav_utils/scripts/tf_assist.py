@@ -1,162 +1,47 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
+import math
+import rclpy
+from rclpy.node import Node
+from nav_msgs.msg import Odometry, Path
+from geometry_msgs.msg import PoseStamped, TransformStamped
+from tf2_ros import TransformBroadcaster
 
-import rospy
-import numpy as np
-import tf
-from tf import transformations as tfs
-from math import pi
-from nav_msgs.msg import Odometry
-from nav_msgs.msg import Path
-from geometry_msgs.msg import PoseStamped
-from sensor_msgs.msg import Imu
-from sensor_msgs.msg import Joy
+def euler(q):
+    x,y,z,w=q
+    roll=math.atan2(2*(w*x+y*z),1-2*(x*x+y*y))
+    pitch=math.asin(max(-1.0,min(1.0,2*(w*y-z*x))))
+    yaw=math.atan2(2*(w*z+x*y),1-2*(y*y+z*z))
+    return roll,pitch,yaw
 
+def quat(roll,pitch,yaw):
+    cr,cp,cy=math.cos(roll/2),math.cos(pitch/2),math.cos(yaw/2)
+    sr,sp,sy=math.sin(roll/2),math.sin(pitch/2),math.sin(yaw/2)
+    return (sr*cp*cy-cr*sp*sy, cr*sp*cy+sr*cp*sy, cr*cp*sy-sr*sp*cy, cr*cp*cy+sr*sp*sy)
 
-imu_pub = None
-odom_pub = None
-br = None
-
-
-class OdometryConverter(object):
-
-    def __init__(self, frame_id_in_, frame_id_out_, broadcast_tf_, body_frame_id_, intermediate_frame_id_, world_frame_id_):
-        self.frame_id_in = frame_id_in_
-        self.frame_id_out = frame_id_out_
-        self.broadcast_tf = broadcast_tf_
-        self.body_frame_id = body_frame_id_
-        self.intermediate_frame_id = intermediate_frame_id_
-        self.world_frame_id = world_frame_id_
-        self.in_odom_sub = None
-        self.out_odom_pub = None
-        self.out_path_pub = None
-        self.path_pub_timer = None
-        self.tf_pub_flag = True
-        if self.broadcast_tf:
-            rospy.loginfo('ROSTopic: [%s]->[%s] TF: [%s]-[%s]-[%s]',
-                          self.frame_id_in, self.frame_id_out, self.body_frame_id, self.intermediate_frame_id, self.world_frame_id)
-        else:
-            rospy.loginfo('ROSTopic: [%s]->[%s] No TF',
-                          self.frame_id_in, self.frame_id_out)
-
-        self.path = []
-
-    def in_odom_callback(self, in_odom_msg):
-        q = np.array([in_odom_msg.pose.pose.orientation.x,
-                      in_odom_msg.pose.pose.orientation.y,
-                      in_odom_msg.pose.pose.orientation.z,
-                      in_odom_msg.pose.pose.orientation.w])
-        p = np.array([in_odom_msg.pose.pose.position.x,
-                      in_odom_msg.pose.pose.position.y,
-                      in_odom_msg.pose.pose.position.z])
-
-        e = tfs.euler_from_quaternion(q, 'rzyx')
-        wqb = tfs.quaternion_from_euler(e[0], e[1], e[2], 'rzyx')
-        wqc = tfs.quaternion_from_euler(e[0],  0.0,  0.0, 'rzyx')
-
-        #### odom ####
-        odom_msg = in_odom_msg
-        assert(in_odom_msg.header.frame_id == self.frame_id_in)
-        odom_msg.header.frame_id = self.frame_id_out
-        odom_msg.child_frame_id = ""
-        self.out_odom_pub.publish(odom_msg)
-
-        #### tf ####
-        if self.broadcast_tf and self.tf_pub_flag:
-            self.tf_pub_flag = False
-            if not self.frame_id_in == self.frame_id_out:
-                br.sendTransform((0.0, 0.0, 0.0),
-                                 tfs.quaternion_from_euler(0.0, 0.0, 0.0, 'rzyx'),
-                                 odom_msg.header.stamp,
-                                 self.frame_id_in,
-                                 self.frame_id_out)
-
-            if not self.world_frame_id == self.frame_id_out:
-                br.sendTransform((0.0, 0.0, 0.0),
-                                 tfs.quaternion_from_euler(0.0, 0.0, 0.0, 'rzyx'),
-                                 odom_msg.header.stamp,
-                                 self.world_frame_id,
-                                 self.frame_id_out)
-
-            br.sendTransform((p[0], p[1], p[2]),
-                             wqb,
-                             odom_msg.header.stamp,
-                             self.body_frame_id,
-                             self.world_frame_id)
-
-            br.sendTransform(((p[0], p[1], p[2])),
-                             wqc,
-                             odom_msg.header.stamp,
-                             self.intermediate_frame_id,
-                             self.world_frame_id)
-        #### path ####
-        pose = PoseStamped()
-        pose.header = odom_msg.header
-        pose.pose.position.x = p[0]
-        pose.pose.position.y = p[1]
-        pose.pose.position.z = p[2]
-        pose.pose.orientation.x = q[0]
-        pose.pose.orientation.y = q[1]
-        pose.pose.orientation.z = q[2]
-        pose.pose.orientation.w = q[3]
-
-        self.path.append(pose)
-
-    def path_pub_callback(self, event):
+class TFAssist(Node):
+    def __init__(self):
+        super().__init__('tf_assist')
+        self.declare_parameter('frame_id_in','world'); self.declare_parameter('frame_id_out','world')
+        self.declare_parameter('body_frame_id','body'); self.declare_parameter('intermediate_frame_id','intermediate')
+        self.declare_parameter('world_frame_id','world'); self.declare_parameter('broadcast_tf',False)
+        self.fi=self.get_parameter('frame_id_in').value; self.fo=self.get_parameter('frame_id_out').value
+        self.body=self.get_parameter('body_frame_id').value; self.inter=self.get_parameter('intermediate_frame_id').value; self.world=self.get_parameter('world_frame_id').value
+        self.broadcast=self.get_parameter('broadcast_tf').value; self.path=[]; self.tf=TransformBroadcaster(self)
+        self.pub=self.create_publisher(Odometry,'out_odom',10); self.path_pub=self.create_publisher(Path,'out_path',10)
+        self.create_subscription(Odometry,'in_odom',self.odom,10); self.create_timer(.5,self.publish_path)
+    def odom(self,m):
+        if self.fi and m.header.frame_id and m.header.frame_id != self.fi: self.get_logger().warn(f'expected {self.fi}, got {m.header.frame_id}')
+        q=(m.pose.pose.orientation.x,m.pose.pose.orientation.y,m.pose.pose.orientation.z,m.pose.pose.orientation.w); p=m.pose.pose.position; r,pi,y=euler(q)
+        m.header.frame_id=self.fo; m.child_frame_id=''; self.pub.publish(m)
+        if self.broadcast:
+            self.send(self.world,self.body,p.x,p.y,p.z,quat(r,pi,y),m.header.stamp)
+            self.send(self.world,self.inter,p.x,p.y,p.z,quat(r,0,0),m.header.stamp)
+        pose=PoseStamped(); pose.header=m.header; pose.pose=m.pose.pose; self.path.append(pose); self.path=self.path[-30000:]
+    def send(self,parent,child,x,y,z,q,stamp):
+        t=TransformStamped(); t.header.stamp=stamp; t.header.frame_id=parent; t.child_frame_id=child; t.transform.translation.x=x; t.transform.translation.y=y; t.transform.translation.z=z; t.transform.rotation.x=q[0]; t.transform.rotation.y=q[1]; t.transform.rotation.z=q[2]; t.transform.rotation.w=q[3]; self.tf.sendTransform(t)
+    def publish_path(self):
         if self.path:
-            path = Path()
-            path.header = self.path[-1].header
-            path.poses = self.path[-30000::1]
-            self.out_path_pub.publish(path)
-
-    def tf_pub_callback(self, event):
-        self.tf_pub_flag = True
-
-
-if __name__ == "__main__":
-    rospy.init_node('tf_assist')
-
-    converters = []
-    index = 0
-    while True:
-        prefix = "~converter%d/" % index
-        try:
-            frame_id_in = rospy.get_param('%sframe_id_in' % prefix)
-            frame_id_out = rospy.get_param('%sframe_id_out' % prefix)
-            broadcast_tf = rospy.get_param('%sbroadcast_tf' % prefix, False)
-            body_frame_id = rospy.get_param('%sbody_frame_id' % prefix, 'body')
-            intermediate_frame_id = rospy.get_param(
-                '%sintermediate_frame_id' % prefix, 'intermediate')
-            world_frame_id = rospy.get_param(
-                '%sworld_frame_id' % prefix, 'world')
-
-            converter = OdometryConverter(
-                frame_id_in, frame_id_out, broadcast_tf, body_frame_id, intermediate_frame_id, world_frame_id)
-            converter.in_odom_sub = rospy.Subscriber(
-                '%sin_odom' % prefix, Odometry, converter.in_odom_callback, tcp_nodelay=True)
-            converter.out_odom_pub = rospy.Publisher(
-                '%sout_odom' % prefix, Odometry, queue_size=10, tcp_nodelay=True)
-            converter.out_path_pub = rospy.Publisher(
-                '%sout_path' % prefix, Path, queue_size=10)
-
-            converter.tf_pub_timer = rospy.Timer(
-                rospy.Duration(0.1), converter.tf_pub_callback)
-
-            converter.path_pub_timer = rospy.Timer(
-                rospy.Duration(0.5), converter.path_pub_callback)
-
-            index += 1
-        except KeyError, e:
-            if index == 0:
-                raise(KeyError(e))
-            else:
-                if index == 1:
-                    rospy.loginfo(
-                        'prefix:"%s" not found. Generate %d converter.' % (prefix, index))
-                else:
-                    rospy.loginfo(
-                        'prefix:"%s" not found. Generate %d converters' % (prefix, index))
-                break
-
-    br = tf.TransformBroadcaster()
-
-    rospy.spin()
+            p=Path(); p.header=self.path[-1].header; p.poses=list(self.path); self.path_pub.publish(p)
+def main():
+    rclpy.init(); n=TFAssist(); rclpy.spin(n); n.destroy_node(); rclpy.shutdown()
+if __name__=='__main__': main()

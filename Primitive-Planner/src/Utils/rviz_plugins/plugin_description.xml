@@ -1,7 +1,7 @@
-<library path="lib/librviz_plugins">
+<library path="rviz_plugins">
   <class name="rviz_plugins/Goal3DTool"
          type="rviz::Goal3DTool"
-         base_class_type="rviz::Tool">
+         base_class_type="rviz_common::Tool">
     <description>
       Tool for setting 3D goal
     </description>
@@ -9,7 +9,7 @@
 
   <class name="rviz_plugins/ProbMapDisplay"
          type="rviz::ProbMapDisplay"
-         base_class_type="rviz::Display">
+         base_class_type="rviz_common::Display">
     <description>
       Display of -inf +inf probabilistic occupancy grid map
     </description>
@@ -17,7 +17,7 @@
 
   <class name="rviz_plugins/GameLikeInput"
          type="GameLikeInput"
-         base_class_type="rviz::Tool">
+         base_class_type="rviz_common::Tool">
     <description>
       game usage
     </description>
@@ -25,7 +25,7 @@
 
   <class name="rviz_plugins/AerialMapDisplay"
          type="rviz::AerialMapDisplay"
-         base_class_type="rviz::Display">
+         base_class_type="rviz_common::Display">
     <description>
       Display of aerial map
     </description>
@@ -33,7 +33,7 @@
 
   <class name="rviz_plugins/MultiProbMapDisplay"
          type="rviz::MultiProbMapDisplay"
-         base_class_type="rviz::Display">
+         base_class_type="rviz_common::Display">
     <description>
       Display of multiple -inf +inf probabilistic occupancy grid map
     </description>

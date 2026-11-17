@@ -3,11 +3,11 @@
 
 #include <stdio.h>
 #include <stdlib.h>
-#include <ros/ros.h>
+#include <rclcpp/rclcpp.hpp>
 #include <traj_utils/planning_visualization.h>
 #include <traj_utils/plan_container.hpp>
-#include <nav_msgs/Odometry.h>
-#include <sensor_msgs/PointCloud2.h>
+#include <nav_msgs/msg/odometry.hpp>
+#include <sensor_msgs/msg/point_cloud2.hpp>
 
 #include<vector>
 #include<map>
@@ -34,9 +34,9 @@ namespace primitive_planner
 
     EIGEN_MAKE_ALIGNED_OPERATOR_NEW
 
-    void initPlanModules(ros::NodeHandle &nh, PlanningVisualization::Ptr vis = NULL);
-    void odomCallback(const nav_msgs::OdometryConstPtr &odom);
-    void cloudCallback(const sensor_msgs::PointCloud2ConstPtr &img);
+    void initPlanModules(rclcpp::Node::SharedPtr &nh, PlanningVisualization::Ptr vis = NULL);
+    void odomCallback(const nav_msgs::msg::Odometry::ConstSharedPtr &odom);
+    void cloudCallback(const sensor_msgs::msg::PointCloud2::ConstSharedPtr &img);
     bool labelObsCollisionPaths(const Eigen::Vector3d &start_pt, const Eigen::Matrix3d &rotVW);
     bool labelAgentCollisionPaths(const Eigen::Vector3d &start_pt, const Eigen::Vector3d &start_v, const double& start_time, const Eigen::Matrix3d &rotVW);
     vector<int> scorePaths(const Eigen::Vector3d &start_pt, const Eigen::Vector3d &global_goal, const Eigen::Matrix3d &rotWV);
@@ -68,7 +68,7 @@ namespace primitive_planner
   private:
     PlanningVisualization::Ptr visualization_;
 
-    ros::Subscriber dep_odom_sub_, dep_cloud_sub_;
+    rclcpp::SubscriptionBase::SharedPtr dep_odom_sub_, dep_cloud_sub_;
 
     Eigen::Vector3d robot_pos_;
     Eigen::Quaterniond robot_q_;

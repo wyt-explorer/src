@@ -1,42 +1,13 @@
-cmake_minimum_required(VERSION 2.8.3)
+cmake_minimum_required(VERSION 3.8)
 project(manual_take_over)
-
-set(CMAKE_BUILD_TYPE "Release")
-ADD_COMPILE_OPTIONS(-std=c++11 )
-ADD_COMPILE_OPTIONS(-std=c++14 )
-set(CMAKE_CXX_FLAGS_RELEASE "-O3 -Wall -g")
-
-find_package(Eigen3 REQUIRED)
-
-find_package(catkin REQUIRED COMPONENTS
-  roscpp
-  std_msgs
-  quadrotor_msgs
-  sensor_msgs
-)
-
-catkin_package(
-  DEPENDS quadrotor_msgs
-)
-
-include_directories(
-  SYSTEM
-  ${catkin_INCLUDE_DIRS}
-  ${EIGEN3_INCLUDE_DIR}
-)
-
-add_executable(manual_take_over
-  src/manual_take_over.cpp 
-  )
-target_link_libraries(manual_take_over 
-  ${catkin_LIBRARIES}
-  )
-
-add_executable(manual_take_over_station
-  src/ground_station.cpp 
-  )
-target_link_libraries(manual_take_over_station 
-  ${catkin_LIBRARIES}
-  )
-
-
+find_package(ament_cmake REQUIRED)
+find_package(rclcpp REQUIRED)
+find_package(sensor_msgs REQUIRED)
+find_package(std_msgs REQUIRED)
+find_package(quadrotor_msgs REQUIRED)
+add_executable(manual_take_over src/manual_take_over.cpp)
+add_executable(manual_take_over_ground_station src/ground_station.cpp)
+ament_target_dependencies(manual_take_over rclcpp sensor_msgs std_msgs quadrotor_msgs)
+ament_target_dependencies(manual_take_over_ground_station rclcpp sensor_msgs)
+install(TARGETS manual_take_over manual_take_over_ground_station DESTINATION lib/${PROJECT_NAME})
+ament_package()

@@ -5,7 +5,7 @@
 #include <ctime>
 #include <iomanip>
 #include <filesystem>
-#include <ros/ros.h>
+#include <rclcpp/rclcpp.hpp>
 
 
 class CSVLogger {
@@ -75,10 +75,10 @@ public:
     }
 
     // 将ros::Time和std::vector<double>转换为CSV格式的字符串
-    std::string toCSV(const ros::Time& stamp, const std::vector<double>& values) {
+    std::string toCSV(const rclcpp::Time& stamp, const std::vector<double>& values) {
         std::stringstream ss;
         // 将ros::Time转换为秒数并输出
-        ss << stamp.sec << "." << stamp.nsec;
+        ss << stamp.seconds();
         // 遍历vector，输出每个值
         for (size_t i = 0; i < values.size(); ++i) {
             ss << "," << values[i]; 

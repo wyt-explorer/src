@@ -1,31 +1,32 @@
+#include <cstdio>
 #include <plan_manage/planner_manager.h>
 #include <thread>
-#include "visualization_msgs/Marker.h" 
+#include "visualization_msgs/msg/marker.hpp" 
 
 using namespace std;
 
 namespace primitive_planner
 {
 
-void PPPlannerManager::initPlanModules(ros::NodeHandle &nh, PlanningVisualization::Ptr vis){
-  nh.param<std::string>("manager/primitiveFolder", primitiveFolder_, "none");
-  nh.param("manager/depthCloudStackNum", depthCloudStackNum_, 4);//local map 12Hz - save 1s pointcloud
-  nh.param("manager/boxX", boxX_, 8.0);
-  nh.param("manager/boxY", boxY_, 9.0);
-  nh.param("manager/boxZ", boxZ_, 9.0);
-  nh.param("manager/arc_length", arc_length_, 5.0);
-  nh.param("manager/voxelSize", voxelSize_, 0.1);
-  // nh.param("manager/pathNum", pathNum_, 61);
-  nh.param("manager/sampleSize", sampleSize_, 2000);
-  // nh.param("manager/lamda_c", lamda_c_, 12.0);
-  nh.param("manager/lamda_l", lamda_l_, 12.0);
-  nh.param("manager/lamda_b", lamda_b_, 12.0);
-  nh.param("manager/map_size_x", x_size_, -1.0);
-  nh.param("manager/map_size_y", y_size_, -1.0);
-  nh.param("manager/map_size_z", z_size_, -1.0);
-  nh.param("manager/max_vel", max_vel_, -1.0);
-  nh.param("manager/drone_id", drone_id, -1);
-  nh.param("manager/swarm_clearence", swarm_clearence_, -1.0);
+void PPPlannerManager::initPlanModules(rclcpp::Node::SharedPtr nh, PlanningVisualization::Ptr vis){
+  primitiveFolder_ = nh->declare_parameter<std::string>("manager/primitiveFolder", "none");
+  depthCloudStackNum_ = nh->declare_parameter("manager/depthCloudStackNum", 4);//local map 12Hz - save 1s pointcloud
+  boxX_ = nh->declare_parameter("manager/boxX", 8.0);
+  boxY_ = nh->declare_parameter("manager/boxY", 9.0);
+  boxZ_ = nh->declare_parameter("manager/boxZ", 9.0);
+  arc_length_ = nh->declare_parameter("manager/arc_length", 5.0);
+  voxelSize_ = nh->declare_parameter("manager/voxelSize", 0.1);
+  // pathNum_ = nh->declare_parameter("manager/pathNum", 61);
+  sampleSize_ = nh->declare_parameter("manager/sampleSize", 2000);
+  // lamda_c_ = nh->declare_parameter("manager/lamda_c", 12.0);
+  lamda_l_ = nh->declare_parameter("manager/lamda_l", 12.0);
+  lamda_b_ = nh->declare_parameter("manager/lamda_b", 12.0);
+  x_size_ = nh->declare_parameter("manager/map_size_x", -1.0);
+  y_size_ = nh->declare_parameter("manager/map_size_y", -1.0);
+  z_size_ = nh->declare_parameter("manager/map_size_z", -1.0);
+  max_vel_ = nh->declare_parameter("manager/max_vel", -1.0);
+  drone_id = nh->declare_parameter("manager/drone_id", -1);
+  swarm_clearence_ = nh->declare_parameter("manager/swarm_clearence", -1.0);
 
 
   voxelNumX_ = int(boxX_ / voxelSize_);
@@ -44,13 +45,13 @@ void PPPlannerManager::initPlanModules(ros::NodeHandle &nh, PlanningVisualizatio
   }
 
   // ros::Time t1, t2;
-  // t1 = ros::Time::now();
+  // t1 = rclcpp::Clock(RCL_ROS_TIME).now();
 
   pathNum_ = readPathList();
   readPathAll();
   readCorrespondences();
   readAgentCorrespondences();
-  // t2 = ros::Time::now();
+  // t2 = rclcpp::Clock(RCL_ROS_TIME).now();
 
   // std::cout << "======readCorrespondences time====== " << (t2 - t1).toSec() << std::endl;
 
@@ -72,7 +73,7 @@ void PPPlannerManager::initPlanModules(ros::NodeHandle &nh, PlanningVisualizatio
   visualization_ = vis;
 }
 
-void PPPlannerManager::odomCallback(const nav_msgs::OdometryConstPtr &odom)
+void PPPlannerManager::odomCallback(const nav_msgs::msg::Odometry::ConstSharedPtr &odom)
 {
 
   robot_pos_(0) = odom->pose.pose.position.x;
@@ -87,7 +88,7 @@ void PPPlannerManager::odomCallback(const nav_msgs::OdometryConstPtr &odom)
   has_odom_ = true;
 }
 
-void PPPlannerManager::cloudCallback(const sensor_msgs::PointCloud2ConstPtr &img)
+void PPPlannerManager::cloudCallback(const sensor_msgs::msg::PointCloud2::ConstSharedPtr &img)
 {
   // std::cout << "cloudCallback 0" << std::endl;
   // *latestCloud in world frame
@@ -172,7 +173,7 @@ bool PPPlannerManager::labelObsCollisionPaths(const Eigen::Vector3d &start_pt, c
     int indX, indY, indZ, ind, occPathByVoxelNum;
 
     // ros::Time t1, t2;
-    // t1 = ros::Time::now();
+    // t1 = rclcpp::Clock(RCL_ROS_TIME).now();
     // TODO: [???] GPU parallel computation
     for(int i = 0; i < plannerCloudSize; i++){
       //pointcloud: world frame in simulation; body frame in experiment;
@@ -253,7 +254,7 @@ bool PPPlannerManager::labelObsCollisionPaths(const Eigen::Vector3d &start_pt, c
             }
           }
     }
-    // t2 = ros::Time::now();
+    // t2 = rclcpp::Clock(RCL_ROS_TIME).now();
 
     // std::cout << "for loop time: " << (t2 - t1).toSec() << std::endl;
   
@@ -337,7 +338,7 @@ vector<int> PPPlannerManager::scorePaths(const Eigen::Vector3d &start_pt,
     // visualization_->displayInitPathList(pathAllWorld_[select_path_id.front()], 0.05, select_color, 0);
 
   } else{
-    ROS_WARN("====[id:%d] All primitives are infeasible!====", drone_id);
+    std::fprintf(stderr, "====[id:%d] All primitives are infeasible!====\n", drone_id);
   }
 
   // std::cout << "select_path_id: ";
@@ -588,7 +589,7 @@ void PPPlannerManager::readPathAll()
       }
     }
     else {
-      ROS_ERROR("Illegal pathID=%d", pathID);
+      std::fprintf(stderr, "Illegal pathID=%d\n", pathID);
       exit(0);
     }
     
@@ -704,10 +705,10 @@ bool PPPlannerManager::trajReplan(const Eigen::Vector3d &start_pt, const Eigen::
   Eigen::Matrix3d RVW = RWV.inverse();
 
   bool success_obs, success_agents;
-  ros::Time t0, t1, t2, t3;
-  t0 = ros::Time::now();
+  rclcpp::Time t0, t1, t2, t3;
+  t0 = rclcpp::Clock(RCL_ROS_TIME).now();
   success_obs = labelObsCollisionPaths(start_pt, RVW);
-  t1 = ros::Time::now();
+  t1 = rclcpp::Clock(RCL_ROS_TIME).now();
 
   // bool safe = false;
   // for (auto it : clearPathList_)
@@ -722,7 +723,7 @@ bool PPPlannerManager::trajReplan(const Eigen::Vector3d &start_pt, const Eigen::
   // std::cout << "trajReplan 1" << std::endl;
 
   success_agents = labelAgentCollisionPaths(start_pt, start_v, start_time, RVW);
-  t2 = ros::Time::now();
+  t2 = rclcpp::Clock(RCL_ROS_TIME).now();
 
   // safe = false;
   // for (auto it : clearPathList_)
@@ -743,7 +744,7 @@ bool PPPlannerManager::trajReplan(const Eigen::Vector3d &start_pt, const Eigen::
   // visAllPaths(start_pt, RWV);
 
   select_path_id = scorePaths(start_pt, global_goal, RWV);
-  t3 = ros::Time::now();
+  t3 = rclcpp::Clock(RCL_ROS_TIME).now();
 
   // printf("\033[44;97m In id=%d, t1=%.1f, t2=%.1f, t3=%.1f \033[0m\n", drone_id, (t1-t0).toSec() * 1000, (t2-t0).toSec() * 1000, (t3-t0).toSec() * 1000);
 

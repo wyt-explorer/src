@@ -1,14 +1,17 @@
-#include <nav_msgs/Odometry.h>
-#include <quadrotor_msgs/PositionCommand.h>
-#include <std_msgs/Empty.h>
-#include <std_msgs/Float64MultiArray.h>
-#include <std_msgs/Float64.h>
-#include <traj_utils/swarmPrimitiveTraj.h>
-#include <traj_utils/Polynomial.h>
-#include <visualization_msgs/Marker.h>
-#include <ros/ros.h>
+#include <cstdio>
+#include <nav_msgs/msg/odometry.hpp>
+#include <quadrotor_msgs/msg/position_command.hpp>
+#include <std_msgs/msg/empty.hpp>
+#include <std_msgs/msg/float64_multi_array.hpp>
+#include <std_msgs/msg/float64.hpp>
+#include <traj_utils/msg/swarm_primitive_traj.hpp>
+#include <traj_utils/msg/polynomial.hpp>
+#include <visualization_msgs/msg/marker.hpp>
+#include <rclcpp/rclcpp.hpp>
 #include <Eigen/Eigen>
 #include <iostream>
+#include <chrono>
+#include <memory>
 #include <vector>
 #include <string>
 #include <sstream>
@@ -18,18 +21,19 @@ using namespace std;
 
 const double loop_time_ = 0.01;
 
-ros::Publisher pos_cmd_pub, select_path_end_pub;
+rclcpp::Publisher<quadrotor_msgs::msg::PositionCommand>::SharedPtr pos_cmd_pub;
+rclcpp::Publisher<std_msgs::msg::Float64MultiArray>::SharedPtr select_path_end_pub;
 
-quadrotor_msgs::PositionCommand cmd;
+quadrotor_msgs::msg::PositionCommand cmd;
 
 bool receive_traj_ = false, require_yaw_turning_ = false, require_yaw_turning_external_ = false;
 double traj_duration_;
-ros::Time start_time_(0), last_traj_start_time_(0);
+rclcpp::Time start_time_(0), last_traj_start_time_(0);
 bool have_new_ = false;
 
 std::vector<int> path_id_;
 
-ros::Time heartbeat_time_(0);
+rclcpp::Time heartbeat_time_(0);
 Eigen::Vector3d last_pos_, last_vel_, global_goal_, init_odom_pos_, odom_pos_;
 double odom_yaw_, init_odom_yaw_;
 std::vector<Eigen::Vector3d> traj_pos_, traj_vel_, traj_acc_;
@@ -74,9 +78,9 @@ double limit_yaw(double yaw)
 void publish_cmd(Vector3d p, Vector3d v, Vector3d a, double y, double yd)
 {
 
-  cmd.header.stamp = ros::Time::now();
+  cmd.header.stamp = rclcpp::Time::now();
   cmd.header.frame_id = "world";
-  cmd.trajectory_flag = quadrotor_msgs::PositionCommand::TRAJECTORY_STATUS_READY;
+  cmd.trajectory_flag = quadrotor_msgs::msg::PositionCommand::TRAJECTORY_STATUS_READY;
   // cmd.trajectory_id = traj_id_;
 
   cmd.position.x = p(0);
@@ -94,18 +98,18 @@ void publish_cmd(Vector3d p, Vector3d v, Vector3d a, double y, double yd)
   // cmd.acceleration.z = 0;
   cmd.yaw = y;
   cmd.yaw_dot = yd;
-  pos_cmd_pub.publish(cmd);
+  pos_cmd_pub->publish(cmd);
 
   last_pos_ = p;
   last_vel_ = v; 
 }
 
-void heartbeatCallback(std_msgs::EmptyPtr msg)
+void heartbeatCallback(std_msgs::msg::Empty::SharedPtr msg)
 {
-  heartbeat_time_ = ros::Time::now();
+  heartbeat_time_ = rclcpp::Time::now();
 }
 
-void odometryCallback(const nav_msgs::OdometryConstPtr msg)
+void odometryCallback(const nav_msgs::msg::Odometry::ConstSharedPtr msg)
 {
     odom_pos_(0) = msg->pose.pose.position.x;
     odom_pos_(1) = msg->pose.pose.position.y;
@@ -123,20 +127,20 @@ void odometryCallback(const nav_msgs::OdometryConstPtr msg)
     have_odom_ = true;
 }
 
-void stopCommandCallback(const std_msgs::Float64MultiArrayPtr msg)
+void stopCommandCallback(const std_msgs::msg::Float64MultiArray::SharedPtr msg)
 {
   Eigen::Vector3d stop_pos(msg->data[0], msg->data[1], msg->data[2]);
-  ROS_WARN("[TRAJ_SERVER] No suitable path exists 2!!!");
+  fprintf(stderr, "%s\n", "[TRAJ_SERVER] No suitable path exists 2!!!");
   publish_cmd(stop_pos, Vector3d::Zero(), Vector3d::Zero(),  last_yaw_, 0);
   //TODO: After emergency stop, not restart
   // receive_traj_ = false;
 }
 
-void goalEndCallback(const std_msgs::Float64MultiArrayPtr msg)
+void goalEndCallback(const std_msgs::msg::Float64MultiArray::SharedPtr msg)
 {
   if(!have_odom_)
   {
-    ROS_ERROR("[traj_server] no odom!");
+    fprintf(stderr, "%s\n", "[traj_server] no odom!");
     return;
   }
 
@@ -159,11 +163,11 @@ void goalEndCallback(const std_msgs::Float64MultiArrayPtr msg)
   // std::cout << "global_goal_: " << global_goal_ << std::endl;
 }
 
-void yawCmdCallback(const std_msgs::Float64Ptr msg)
+void yawCmdCallback(const std_msgs::msg::Float64::SharedPtr msg)
 {
   if(!have_odom_)
   {
-    ROS_ERROR("[traj_server] no odom!");
+    fprintf(stderr, "%s\n", "[traj_server] no odom!");
     return;
   }
 
@@ -181,12 +185,12 @@ void yawCmdCallback(const std_msgs::Float64Ptr msg)
   // std::cout << "yaw_cmd_external_: " << yaw_cmd_external_ << std::endl;
 }
 
-void trajCallback(traj_utils::swarmPrimitiveTrajPtr msg)
+void trajCallback(traj_utils::msg::SwarmPrimitiveTraj::SharedPtr msg)
 {
   // if(!have_odom_){
   //   return;
   // }
-  // ROS_WARN("[-----New Traj-----] Start !!!");
+  // fprintf(stderr, "%s\n", "[-----New Traj-----] Start !!!");
 
   Eigen::Vector3d start_pos;
   start_pos << msg->start_p[0], msg->start_p[1], msg->start_p[2];
@@ -222,7 +226,7 @@ void trajCallback(traj_utils::swarmPrimitiveTrajPtr msg)
     }
 
     if(idx >= (int)path_id_.size()){
-      ROS_WARN("[TRAJ_SERVER]No suitable path exists 1!!!");
+      fprintf(stderr, "%s\n", "[TRAJ_SERVER]No suitable path exists 1!!!");
       publish_cmd(last_pos_, Vector3d::Zero(), Vector3d::Zero(), last_yaw_, 0);
     }
   }
@@ -270,11 +274,11 @@ void trajCallback(traj_utils::swarmPrimitiveTrajPtr msg)
   fclose(filePtr);
 
   // last end point position
-  std_msgs::Float64MultiArray pos_msg;
+  std_msgs::msg::Float64MultiArray pos_msg;
   for(int i = 0; i < 3; i++){
     pos_msg.data.push_back(pos_world(i));
   }
-  select_path_end_pub.publish(pos_msg);
+  select_path_end_pub->publish(pos_msg);
   start_time_ = msg->start_time;
 
   // obtain traj_pos_ traj_vel_ traj_acc_ [frame transform!!!] traj_duration_ from file
@@ -284,7 +288,7 @@ void trajCallback(traj_utils::swarmPrimitiveTrajPtr msg)
   require_yaw_turning_external_ = false;
 }
 
-void polytrajCallback(traj_utils::PolynomialPtr msg)
+void polytrajCallback(traj_utils::msg::Polynomial::SharedPtr msg)
 {
   Eigen::Matrix<double, 3, 6, Eigen::RowMajor> coeff;
   memcpy(coeff.row(0).data(), &msg->coeff_x, 6 * 8);
@@ -358,7 +362,7 @@ std::pair<double, double> calculate_yaw(double t_cur, Eigen::Vector3d &pos, doub
   return yaw_yawdot;
 }
 
-void cmdCallback(const ros::TimerEvent &e)
+void cmdCallback()
 {
   /* no publishing before receive traj_ and have heartbeat */
   if (heartbeat_time_.toSec() <= 1e-5)
@@ -369,11 +373,11 @@ void cmdCallback(const ros::TimerEvent &e)
 
   if ( receive_traj_ )
   {
-    ros::Time time_now = ros::Time::now();
+    rclcpp::Time time_now = rclcpp::Time::now();
 
     if ((time_now - heartbeat_time_).toSec() > 0.5)
     {
-      ROS_ERROR("[traj_server] Lost heartbeat from the planner, is it dead?");
+      fprintf(stderr, "%s\n", "[traj_server] Lost heartbeat from the planner, is it dead?");
 
       receive_traj_ = false;
       publish_cmd(last_pos_, Vector3d::Zero(), Vector3d::Zero(), last_yaw_, 0);
@@ -389,7 +393,7 @@ void cmdCallback(const ros::TimerEvent &e)
     Eigen::Vector3d pos(Eigen::Vector3d::Zero()), vel(Eigen::Vector3d::Zero()), acc(Eigen::Vector3d::Zero());
     std::pair<double, double> yaw_yawdot(0, 0);
 
-    static ros::Time time_last = ros::Time::now();
+    static rclcpp::Time time_last = rclcpp::Time::now();
     if (t_cur <= traj_duration_ && t_cur >= 0.0 && idx_t < traj_pos_.size() ) // to make sure the "vel = 0" command is published 
     {
       pos = traj_pos_[idx_t];
@@ -459,39 +463,23 @@ void cmdCallback(const ros::TimerEvent &e)
 
 int main(int argc, char **argv)
 {
-  ros::init(argc, argv, "traj_server");
-  // ros::NodeHandle node;
-  ros::NodeHandle nh("~");
-  nh.param<std::string>("traj_server/primitiveFolder", primitiveFolder_, "none");
-  nh.param("traj_server/max_vel", max_vel_, -1.0);
-  nh.param("traj_server/time_delay_idx", time_delay_idx_, 1);
-  nh.param("init_x", _init_x,  0.0);
-  nh.param("init_y", _init_y,  0.0);
-  nh.param("init_z", _init_z,  0.0);
-
-  ros::Subscriber selected_path_id = nh.subscribe("planning/selected_path_id", 10, trajCallback);
-  ros::Subscriber heartbeat_sub = nh.subscribe("heartbeat", 10, heartbeatCallback);
-  ros::Subscriber odom_sub = nh.subscribe("odom", 1, odometryCallback);
-  ros::Subscriber poly_traj_sub = nh.subscribe("planning/polynomial_traj", 1, polytrajCallback);
-
-  ros::Subscriber stop_sub = nh.subscribe("stop_command", 1, stopCommandCallback);
-  ros::Subscriber global_goal_sub = nh.subscribe("planning/global_goal", 1, goalEndCallback);
-  ros::Subscriber yaw_cmd_sub = nh.subscribe("planning/yaw_cmd", 1, yawCmdCallback);
-
-  pos_cmd_pub = nh.advertise<quadrotor_msgs::PositionCommand>("/position_cmd", 50);
-  select_path_end_pub = nh.advertise<std_msgs::Float64MultiArray>("planning/select_path_end", 10);
-
-  ros::Timer cmd_timer = nh.createTimer(ros::Duration(loop_time_), cmdCallback);
-
-  nh.param("traj_server/time_forward", time_forward_, -1.0);
-  last_yaw_ = 0.0;
-  last_yawdot_ = 0.0;
-
-  ros::Duration(1.0).sleep();
-
-  ROS_INFO("[Traj server]: ready.");
-
-  ros::spin();
-
-  return 0;
+  rclcpp::init(argc, argv);
+  auto node = std::make_shared<rclcpp::Node>("traj_server");
+  primitiveFolder_ = node->declare_parameter<std::string>("primitiveFolder", "none");
+  max_vel_ = node->declare_parameter("max_vel", -1.0);
+  time_delay_idx_ = node->declare_parameter("time_delay_idx", 1);
+  _init_x = node->declare_parameter("init_x", 0.0); _init_y = node->declare_parameter("init_y", 0.0); _init_z = node->declare_parameter("init_z", 0.0);
+  time_forward_ = node->declare_parameter("time_forward", -1.0); last_yaw_=0.; last_yawdot_=0.;
+  auto s1=node->create_subscription<std_msgs::msg::Empty>("heartbeat",10,heartbeatCallback);
+  auto s2=node->create_subscription<nav_msgs::msg::Odometry>("odom",10,odometryCallback);
+  auto s3=node->create_subscription<std_msgs::msg::Float64MultiArray>("stop_command",10,stopCommandCallback);
+  auto s4=node->create_subscription<std_msgs::msg::Float64MultiArray>("planning/global_goal",10,goalEndCallback);
+  auto s5=node->create_subscription<std_msgs::msg::Float64>("planning/yaw_cmd",10,yawCmdCallback);
+  auto s6=node->create_subscription<traj_utils::msg::SwarmPrimitiveTraj>("planning/selected_path_id",10,trajCallback);
+  auto s7=node->create_subscription<traj_utils::msg::Polynomial>("planning/polynomial_traj",10,polytrajCallback);
+  pos_cmd_pub=node->create_publisher<quadrotor_msgs::msg::PositionCommand>("/position_cmd",50);
+  select_path_end_pub=node->create_publisher<std_msgs::msg::Float64MultiArray>("planning/select_path_end",10);
+  auto timer=node->create_wall_timer(std::chrono::duration<double>(loop_time_),[](){cmdCallback();});
+  RCLCPP_INFO(node->get_logger(), "Traj server ready.");
+  rclcpp::spin(node); rclcpp::shutdown(); return 0;
 }

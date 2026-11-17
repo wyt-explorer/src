@@ -6,21 +6,21 @@
 #include <iostream>
 #include <vector>
 #include <string>
-#include <ros/ros.h>
+#include <rclcpp/rclcpp.hpp>
 #include <plan_manage/planner_manager.h>
 #include <traj_utils/planning_visualization.h>
-#include <nav_msgs/Odometry.h>
-#include <std_msgs/Empty.h>
-#include <std_msgs/Int8MultiArray.h>
+#include <nav_msgs/msg/odometry.hpp>
+#include <std_msgs/msg/empty.hpp>
+#include <std_msgs/msg/int8_multi_array.hpp>
 // #include <traj_utils/primitiveTraj.h>
-#include <quadrotor_msgs/GoalSet.h>
-#include <traj_utils/swarmPrimitiveTraj.h>
-#include <traj_utils/Polynomial.h>
-#include <std_msgs/Float64.h>
-#include <std_msgs/Float64MultiArray.h>
-#include <geometry_msgs/PoseStamped.h>
-#include <quadrotor_msgs/PositionCommand.h>
-#include <nav_msgs/Odometry.h>
+#include <quadrotor_msgs/msg/goal_set.hpp>
+#include <traj_utils/msg/swarm_primitive_traj.hpp>
+#include <traj_utils/msg/polynomial.hpp>
+#include <std_msgs/msg/float64.hpp>
+#include <std_msgs/msg/float64_multi_array.hpp>
+#include <geometry_msgs/msg/pose_stamped.hpp>
+#include <quadrotor_msgs/msg/position_command.hpp>
+#include <nav_msgs/msg/odometry.hpp>
 
 #include <plan_manage/CSVLogger.h>
 
@@ -32,7 +32,7 @@ namespace primitive_planner
             PPReplanFSM() {}
             ~PPReplanFSM();
 
-            void init(ros::NodeHandle &nh);
+            void init(rclcpp::Node::SharedPtr &nh);
 
             EIGEN_MAKE_ALIGNED_OPERATOR_NEW
         
@@ -57,10 +57,10 @@ namespace primitive_planner
 
             bool flag_realworld_experiment_, have_trigger_, have_odom_, have_target_, have_log_files_;
 
-            ros::Timer exec_timer_;
-            ros::Subscriber trigger_sub_, odom_sub_, mandatory_stop_sub_, select_path_end_sub_, cmd_sub_, broadcast_primitive_sub_, waypoint_sub_;
+            rclcpp::TimerBase::SharedPtr exec_timer_;
+            rclcpp::SubscriptionBase::SharedPtr trigger_sub_, odom_sub_, mandatory_stop_sub_, select_path_end_sub_, cmd_sub_, broadcast_primitive_sub_, waypoint_sub_;
 
-            ros::Publisher path_id_pub_, stop_pub_, heartbeat_pub_, global_pub_, broadcast_primitive_pub_, poly_pub_, yaw_cmd_pub_;
+            rclcpp::PublisherBase::SharedPtr path_id_pub_, stop_pub_, heartbeat_pub_, global_pub_, broadcast_primitive_pub_, poly_pub_, yaw_cmd_pub_;
 
             double waypoints_[10][3];
             int waypoint_num_;
@@ -89,12 +89,12 @@ namespace primitive_planner
             Eigen::Quaterniond start_q_;
 
             double no_replan_thresh_, replan_thresh_;
-            ros::Time start_time_;
+            rclcpp::Time start_time_;
 
             bool enable_fail_safe_, flag_escape_emergency_;
             
             // crash recovery
-            ros::Time crash_rec_start_time_;
+            rclcpp::Time crash_rec_start_time_;
             bool flag_wait_crash_rec_;
             int crash_rec_stage_;
             double final_yaw_des_;
@@ -110,21 +110,21 @@ namespace primitive_planner
             LocalTrajData myself_traj_;
 
             /* state machine functions */
-            void execFSMCallback(const ros::TimerEvent &e);
+            void execFSMCallback(const rclcpp::TimerBase::SharedPtrEvent &e);
             void changeFSMExecState(FSM_EXEC_STATE new_state, std::string pos_call);
             void printFSMExecState();
 
             bool planPrimitive(bool first_plan, double xV_offset = 0.0);
             bool callEmergencyStop(Eigen::Vector3d stop_pos);
-            void mandatoryStopCallback(const std_msgs::Empty &msg);
+            void mandatoryStopCallback(const std_msgs::msg::Empty &msg);
             void pubPolyTraj(const Eigen::Vector3d &start_p, const Eigen::Vector3d &start_v, const Eigen::Vector3d &end_p, const double dura);
 
-            void triggerCallback(const geometry_msgs::PoseStampedPtr &msg);
+            void triggerCallback(const geometry_msgs::msg::PoseStamped::SharedPtr &msg);
             void RecvBroadcastPrimitiveCallback(const traj_utils::swarmPrimitiveTrajConstPtr &msg);
-            void odometryCallback(const nav_msgs::OdometryConstPtr &msg);
-            void pathEndCallback(const std_msgs::Float64MultiArrayPtr &msg);
-            void cmdCallback(const quadrotor_msgs::PositionCommandPtr &cmd);
-            void waypointCallback(const quadrotor_msgs::GoalSetPtr &msg);
+            void odometryCallback(const nav_msgs::msg::Odometry::ConstSharedPtr &msg);
+            void pathEndCallback(const std_msgs::msg::Float64MultiArray::SharedPtr &msg);
+            void cmdCallback(const quadrotor_msgs::msg::PositionCommand::SharedPtr &cmd);
+            void waypointCallback(const quadrotor_msgs::msg::GoalSet::SharedPtr &msg);
 
             bool readLocalTrajPos(Eigen::Vector3d& start_pos, int& vel_id, Eigen::Matrix<double, 3, 3>& Rwv, std::vector<int>& path_id, std::vector<Eigen::Vector3d>& traj_pos, double& traj_duration);
             bool checkCollision(int recv_id);

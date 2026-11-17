@@ -1,51 +1,19 @@
-cmake_minimum_required(VERSION 2.8.3)
+cmake_minimum_required(VERSION 3.8)
 project(so3_quadrotor_simulator)
-
-add_compile_options(-std=c++11)
-
-set(CMAKE_BUILD_TYPE "Release")
-set(CMAKE_CXX_FLAGS "-std=c++11")
-set(CMAKE_CXX_FLAGS_RELEASE "-O3 -Wall -g")
-
-find_package(catkin REQUIRED COMPONENTS
-  roscpp
-  quadrotor_msgs
-  uav_utils
-  # cmake_utils
-)
-
-###########
-## Build ##
-###########
-
+set(CMAKE_CXX_STANDARD 17)
+find_package(ament_cmake REQUIRED)
+find_package(rclcpp REQUIRED)
+find_package(nav_msgs REQUIRED)
+find_package(sensor_msgs REQUIRED)
+find_package(quadrotor_msgs REQUIRED)
+find_package(uav_utils REQUIRED)
 find_package(Eigen3 REQUIRED)
-
-include_directories(${EIGEN3_INCLUDE_DIR})
-include_directories(${CMAKE_CURRENT_SOURCE_DIR}/include/ode)
-##
 find_package(Armadillo REQUIRED)
-include_directories(${ARMADILLO_INCLUDE_DIRS})
-
-catkin_package(
-  INCLUDE_DIRS include
-#  LIBRARIES irobot_msgs
-  CATKIN_DEPENDS roscpp quadrotor_msgs uav_utils
-  DEPENDS Eigen3 system_lib
-)
-
-include_directories(include)
-include_directories(
-  ${catkin_INCLUDE_DIRS}
-)
-
+include_directories(include ${EIGEN3_INCLUDE_DIRS} ${ARMADILLO_INCLUDE_DIRS} ${CMAKE_CURRENT_SOURCE_DIR}/include/ode)
 add_library(quadrotor_dynamics src/dynamics/Quadrotor.cpp)
-
-## Declare a cpp executable
-#add_executable(odom_visualization src/odom_visualization.cpp)
-add_executable(quadrotor_simulator_so3
-  src/quadrotor_simulator_so3.cpp)
-
-target_link_libraries(quadrotor_simulator_so3 
-   ${catkin_LIBRARIES}
-   quadrotor_dynamics
-)
+add_executable(quadrotor_simulator_so3 src/quadrotor_simulator_ros2.cpp)
+ament_target_dependencies(quadrotor_dynamics rclcpp quadrotor_msgs uav_utils)
+ament_target_dependencies(quadrotor_simulator_so3 rclcpp nav_msgs sensor_msgs quadrotor_msgs uav_utils)
+target_link_libraries(quadrotor_simulator_so3 quadrotor_dynamics ${ARMADILLO_LIBRARIES})
+install(TARGETS quadrotor_dynamics quadrotor_simulator_so3 ARCHIVE DESTINATION lib LIBRARY DESTINATION lib RUNTIME DESTINATION lib/${PROJECT_NAME})
+ament_package()

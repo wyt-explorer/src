@@ -12,12 +12,12 @@
 #include <pcl/search/kdtree.h>
 #include <pcl_conversions/pcl_conversions.h>
 
-#include <geometry_msgs/PoseStamped.h>
-#include <geometry_msgs/Vector3.h>
-#include <nav_msgs/Odometry.h>
-#include <ros/console.h>
-#include <ros/ros.h>
-#include <sensor_msgs/PointCloud2.h>
+#include <geometry_msgs/msg/pose_stamped.hpp>
+#include <geometry_msgs/msg/vector3.hpp>
+#include <nav_msgs/msg/odometry.hpp>
+#include <rclcpp/rclcpp.hpp>
+
+#include <sensor_msgs/msg/point_cloud2.hpp>
 
 #include <Eigen/Eigen>
 #include <Eigen/SVD>
@@ -27,8 +27,8 @@
 #include <sys/time.h>
 #include <time.h>
 
-#include "visualization_msgs/Marker.h"
-#include "visualization_msgs/MarkerArray.h"
+#include <visualization_msgs/msg/marker.hpp>
+#include <visualization_msgs/msg/marker_array.hpp>
 
 //! @todo historical above
 #include "maps.hpp"
@@ -46,30 +46,30 @@ pcl::search::KdTree<pcl::PointXYZ> kdtreeLocalMap;
 vector<int>                        pointIdxRadiusSearch;
 vector<float>                      pointRadiusSquaredDistance;
 
-ros::Publisher _local_map_pub;
-ros::Publisher _local_map_inflate_pub;
-ros::Publisher _global_map_pub;
+rclcpp::Publisher<sensor_msgs::msg::PointCloud2>::SharedPtr _local_map_pub;
+rclcpp::Publisher<sensor_msgs::msg::PointCloud2>::SharedPtr _local_map_inflate_pub;
+rclcpp::Publisher<sensor_msgs::msg::PointCloud2>::SharedPtr _global_map_pub;
 
-ros::Subscriber _map_sub;
-ros::Subscriber _odom_sub;
+rclcpp::SubscriptionBase::SharedPtr _map_sub;
+rclcpp::SubscriptionBase::SharedPtr _odom_sub;
 
-deque<nav_msgs::Odometry> _odom_queue;
+deque<nav_msgs::msg::Odometry> _odom_queue;
 vector<double>            _state;
 const size_t              _odom_queue_size = 200;
-nav_msgs::Odometry        _odom;
+nav_msgs::msg::Odometry        _odom;
 
 double z_limit;
 double _SenseRate;
 double _sensing_range;
 
-// ros::Timer vis_map;
+// rclcpp::Timer vis_map;
 bool map_ok    = false;
 bool _has_odom = false;
 
-sensor_msgs::PointCloud2       globalMap_pcd;
-sensor_msgs::PointCloud2       localMap_pcd;
+sensor_msgs::msg::PointCloud2       globalMap_pcd;
+sensor_msgs::msg::PointCloud2       localMap_pcd;
 pcl::PointCloud<pcl::PointXYZ> cloudMap;
-ros::Time                      begin_time = ros::TIME_MAX;
+rclcpp::Time                      begin_time = rclcpp::Time::max();
 
 typedef Eigen::Vector3d ObsPos;
 typedef Eigen::Vector3d ObsSize; // x, y, height --- z
@@ -155,7 +155,7 @@ fixedMapGenerate()
 }
 
 void
-rcvOdometryCallbck(const nav_msgs::Odometry odom)
+rcvOdometryCallbck(const nav_msgs::msg::Odometry odom)
 {
   if (odom.child_frame_id == "X" || odom.child_frame_id == "O")
     return;
@@ -185,7 +185,7 @@ publishAllPoints()
   if (!map_ok)
     return;
 
-  if ((ros::Time::now() - begin_time).toSec() > 7.0)
+  if ((rclcpp::Time::now() - begin_time).seconds() > 7.0)
     return;
 
   frequence_division_global--;
@@ -193,7 +193,7 @@ publishAllPoints()
   {
     pcl::toROSMsg(cloudMap, globalMap_pcd);
     globalMap_pcd.header.frame_id = kFrameIdNs_;
-    _global_map_pub.publish(globalMap_pcd);
+    _global_map_pub->publish(globalMap_pcd);
     frequence_division_global = 40;
     ROS_ERROR("[SERVER]Publish one global map");
   }
@@ -205,7 +205,7 @@ pubSensedPoints()
   if (!map_ok || !_has_odom)
     return;
 
-  // ros::Time time_bef_sensing = ros::Time::now();
+  // rclcpp::Time time_bef_sensing = rclcpp::Time::now();
 
   pcl::PointCloud<pcl::PointXYZ> localMap;
 
@@ -245,11 +245,11 @@ pubSensedPoints()
   pcl::toROSMsg(localMap, localMap_pcd);
 
   localMap_pcd.header.frame_id = kFrameIdNs_;
-  _local_map_pub.publish(localMap_pcd);
+  _local_map_pub->publish(localMap_pcd);
 
-  ros::Time time_aft_sensing = ros::Time::now();
+  rclcpp::Time time_aft_sensing = rclcpp::Time::now();
 
-  if ((time_aft_sensing - begin_time).toSec() > 5.0)
+  if ((time_aft_sensing - begin_time).seconds() > 5.0)
     return;
 
   frequence_division_global--;
@@ -257,7 +257,7 @@ pubSensedPoints()
   {
     pcl::toROSMsg(cloudMap, globalMap_pcd);
     globalMap_pcd.header.frame_id = kFrameIdNs_;
-    _global_map_pub.publish(globalMap_pcd);
+    _global_map_pub->publish(globalMap_pcd);
     frequence_division_global = 40;
     ROS_INFO("[SERVER]Publish one global map");
   }

@@ -1,40 +1,45 @@
+#include <thread>
+#include <chrono>
+#include <cstdio>
 #include <traj_utils/planning_visualization.h>
+#include <visualization_msgs/msg/marker.hpp>
+#include <visualization_msgs/msg/marker_array.hpp>
 
 using std::cout;
 using std::endl;
 namespace primitive_planner
 {
-  PlanningVisualization::PlanningVisualization(ros::NodeHandle &nh)
+  PlanningVisualization::PlanningVisualization(rclcpp::Node::SharedPtr nh)
   {
     node = nh;
 
-    goal_point_pub = nh.advertise<visualization_msgs::Marker>("goal_point", 2);
-    global_list_pub = nh.advertise<visualization_msgs::Marker>("global_list", 2);
-    init_list_pub = nh.advertise<visualization_msgs::Marker>("init_list", 2);
-    optimal_list_pub = nh.advertise<visualization_msgs::Marker>("optimal_list", 2);
-    failed_list_pub = nh.advertise<visualization_msgs::Marker>("failed_list", 2);
-    a_star_list_pub = nh.advertise<visualization_msgs::Marker>("a_star_list", 20);
+    goal_point_pub = nh->create_publisher<visualization_msgs::msg::Marker>("goal_point", 10);
+    global_list_pub = nh->create_publisher<visualization_msgs::msg::Marker>("global_list", 10);
+    init_list_pub = nh->create_publisher<visualization_msgs::msg::Marker>("init_list", 10);
+    optimal_list_pub = nh->create_publisher<visualization_msgs::msg::Marker>("optimal_list", 10);
+    failed_list_pub = nh->create_publisher<visualization_msgs::msg::Marker>("failed_list", 10);
+    a_star_list_pub = nh->create_publisher<visualization_msgs::msg::Marker>("a_star_list", 10);
 
-    // intermediate_pt0_pub = nh.advertise<visualization_msgs::Marker>("pt0_dur_opt", 10);
-    // intermediate_grad0_pub = nh.advertise<visualization_msgs::MarkerArray>("grad0_dur_opt", 10);
-    // intermediate_pt1_pub = nh.advertise<visualization_msgs::Marker>("pt1_dur_opt", 10);
-    // intermediate_grad1_pub = nh.advertise<visualization_msgs::MarkerArray>("grad1_dur_opt", 10);
-    // intermediate_grad_smoo_pub = nh.advertise<visualization_msgs::MarkerArray>("smoo_grad_dur_opt", 10);
-    // intermediate_grad_dist_pub = nh.advertise<visualization_msgs::MarkerArray>("dist_grad_dur_opt", 10);
-    // intermediate_grad_feas_pub = nh.advertise<visualization_msgs::MarkerArray>("feas_grad_dur_opt", 10);
-    // intermediate_grad_swarm_pub = nh.advertise<visualization_msgs::MarkerArray>("swarm_grad_dur_opt", 10);
+    // intermediate_pt0_pub = nh->create_publisher<visualization_msgs::msg::Marker>("pt0_dur_opt", 10);
+    // intermediate_grad0_pub = nh.advertise<visualization_msgs::msg::MarkerArray>("grad0_dur_opt", 10);
+    // intermediate_pt1_pub = nh->create_publisher<visualization_msgs::msg::Marker>("pt1_dur_opt", 10);
+    // intermediate_grad1_pub = nh.advertise<visualization_msgs::msg::MarkerArray>("grad1_dur_opt", 10);
+    // intermediate_grad_smoo_pub = nh.advertise<visualization_msgs::msg::MarkerArray>("smoo_grad_dur_opt", 10);
+    // intermediate_grad_dist_pub = nh.advertise<visualization_msgs::msg::MarkerArray>("dist_grad_dur_opt", 10);
+    // intermediate_grad_feas_pub = nh.advertise<visualization_msgs::msg::MarkerArray>("feas_grad_dur_opt", 10);
+    // intermediate_grad_swarm_pub = nh.advertise<visualization_msgs::msg::MarkerArray>("swarm_grad_dur_opt", 10);
   }
 
   // // real ids used: {id, id+1000}
-  void PlanningVisualization::displayMarkerList(ros::Publisher &pub, const vector<Eigen::Vector3d> &list, double scale,
+  void PlanningVisualization::displayMarkerList(rclcpp::Publisher<visualization_msgs::msg::Marker>::SharedPtr &pub, const vector<Eigen::Vector3d> &list, double scale,
                                                 Eigen::Vector4d color, int id, bool show_sphere /* = true */ )
   {
-    visualization_msgs::Marker sphere, line_strip;
+    visualization_msgs::msg::Marker sphere, line_strip;
     sphere.header.frame_id = line_strip.header.frame_id = "world";
-    sphere.header.stamp = line_strip.header.stamp = ros::Time::now();
-    sphere.type = visualization_msgs::Marker::SPHERE_LIST;
-    line_strip.type = visualization_msgs::Marker::LINE_STRIP;
-    sphere.action = line_strip.action = visualization_msgs::Marker::ADD;
+    sphere.header.stamp = line_strip.header.stamp = node->get_clock()->now().to_msg();
+    sphere.type = visualization_msgs::msg::Marker::SPHERE_LIST;
+    line_strip.type = visualization_msgs::msg::Marker::LINE_STRIP;
+    sphere.action = line_strip.action = visualization_msgs::msg::Marker::ADD;
     sphere.id = id;
     line_strip.id = id + 1000;
 
@@ -56,20 +61,20 @@ namespace primitive_planner
       if (show_sphere) sphere.points.push_back(pt);
       line_strip.points.push_back(pt);
     }
-    if (show_sphere) pub.publish(sphere);
-    pub.publish(line_strip);
+    if (show_sphere) pub->publish(sphere);
+    pub->publish(line_strip);
   }
 
   // real ids used: {id, id+1}
-  void PlanningVisualization::generatePathDisplayArray(visualization_msgs::MarkerArray &array,
+  void PlanningVisualization::generatePathDisplayArray(visualization_msgs::msg::MarkerArray &array,
                                                        const vector<Eigen::Vector3d> &list, double scale, Eigen::Vector4d color, int id)
   {
-    visualization_msgs::Marker sphere, line_strip;
+    visualization_msgs::msg::Marker sphere, line_strip;
     sphere.header.frame_id = line_strip.header.frame_id = "world";
-    sphere.header.stamp = line_strip.header.stamp = ros::Time::now();
-    sphere.type = visualization_msgs::Marker::SPHERE_LIST;
-    line_strip.type = visualization_msgs::Marker::LINE_STRIP;
-    sphere.action = line_strip.action = visualization_msgs::Marker::ADD;
+    sphere.header.stamp = line_strip.header.stamp = node->get_clock()->now().to_msg();
+    sphere.type = visualization_msgs::msg::Marker::SPHERE_LIST;
+    line_strip.type = visualization_msgs::msg::Marker::LINE_STRIP;
+    sphere.action = line_strip.action = visualization_msgs::msg::Marker::ADD;
     sphere.id = id;
     line_strip.id = id + 1;
 
@@ -96,14 +101,14 @@ namespace primitive_planner
   }
 
   // real ids used: {1000*id ~ (arrow nums)+1000*id}
-  void PlanningVisualization::generateArrowDisplayArray(visualization_msgs::MarkerArray &array,
+  void PlanningVisualization::generateArrowDisplayArray(visualization_msgs::msg::MarkerArray &array,
                                                         const vector<Eigen::Vector3d> &list, double scale, Eigen::Vector4d color, int id)
   {
-    visualization_msgs::Marker arrow;
+    visualization_msgs::msg::Marker arrow;
     arrow.header.frame_id = "world";
-    arrow.header.stamp = ros::Time::now();
-    arrow.type = visualization_msgs::Marker::ARROW;
-    arrow.action = visualization_msgs::Marker::ADD;
+    arrow.header.stamp = node->get_clock()->now().to_msg();
+    arrow.type = visualization_msgs::msg::Marker::ARROW;
+    arrow.action = visualization_msgs::msg::Marker::ADD;
 
     // geometry_msgs::Point start, end;
     // arrow.points
@@ -140,11 +145,11 @@ namespace primitive_planner
 
   void PlanningVisualization::displayGoalPoint(Eigen::Vector3d goal_point, Eigen::Vector4d color, const double scale, int id)
   {
-    visualization_msgs::Marker sphere;
+    visualization_msgs::msg::Marker sphere;
     sphere.header.frame_id = "world";
-    sphere.header.stamp = ros::Time::now();
-    sphere.type = visualization_msgs::Marker::SPHERE;
-    sphere.action = visualization_msgs::Marker::ADD;
+    sphere.header.stamp = node->get_clock()->now().to_msg();
+    sphere.type = visualization_msgs::msg::Marker::SPHERE;
+    sphere.action = visualization_msgs::msg::Marker::ADD;
     sphere.id = id;
 
     sphere.pose.orientation.w = 1.0;
@@ -159,7 +164,7 @@ namespace primitive_planner
     sphere.pose.position.y = goal_point(1);
     sphere.pose.position.z = goal_point(2);
 
-    goal_point_pub.publish(sphere);
+    goal_point_pub->publish(sphere);
   }
 
   void PlanningVisualization::displayGlobalPathList(vector<Eigen::Vector3d> init_pts, const double scale, int id)
@@ -189,7 +194,7 @@ namespace primitive_planner
       Eigen::Vector4d color(0, 0, 0, 0);
       vector<Eigen::Vector3d> blank;
       displayMarkerList(init_list_pub, blank, scale, color, id, false);
-      ros::Duration(0.001).sleep();
+      std::this_thread::sleep_for(std::chrono::milliseconds(1));
     }
     last_nums = 0;
 
@@ -197,7 +202,7 @@ namespace primitive_planner
     {
       Eigen::Vector4d color(0, 0, 1, 0.7);
       displayMarkerList(init_list_pub, init_trajs[id], scale, color, id, false);
-      ros::Duration(0.001).sleep();
+      std::this_thread::sleep_for(std::chrono::milliseconds(1));
       last_nums++;
     }
 
@@ -232,7 +237,7 @@ namespace primitive_planner
       blank.push_back(Eigen::Vector3d::Zero());
       blank.push_back(Eigen::Vector3d::Zero());
       displayMarkerList(optimal_list_pub, blank, scale, color, id + 10, false);
-      ros::Duration(0.001).sleep();
+      std::this_thread::sleep_for(std::chrono::milliseconds(1));
     }
     last_nums = 0;
 
@@ -240,7 +245,7 @@ namespace primitive_planner
     {
       Eigen::Vector4d color(0, 0, 1, 0.2);
       displayMarkerList(optimal_list_pub, optimal_trajs[id], scale, color, id + 10, false);
-      ros::Duration(0.001).sleep();
+      std::this_thread::sleep_for(std::chrono::milliseconds(1));
       last_nums++;
     }
 
@@ -303,15 +308,15 @@ namespace primitive_planner
     }
   }
 
-  void PlanningVisualization::displayArrowList(ros::Publisher &pub, const vector<Eigen::Vector3d> &list, double scale, Eigen::Vector4d color, int id)
+  void PlanningVisualization::displayArrowList(rclcpp::Publisher<visualization_msgs::msg::Marker>::SharedPtr &pub, const vector<Eigen::Vector3d> &list, double scale, Eigen::Vector4d color, int id)
   {
-    visualization_msgs::MarkerArray array;
+    visualization_msgs::msg::MarkerArray array;
     // clear
-    pub.publish(array);
+    pub->publish(array);
 
     generateArrowDisplayArray(array, list, scale, color, id);
 
-    pub.publish(array);
+    pub->publish(array);
   }
 
   void PlanningVisualization::displayIntermediatePt(std::string type, Eigen::MatrixXd &pts, int id, Eigen::Vector4d color)
@@ -337,7 +342,7 @@ namespace primitive_planner
   {
     if ( pts.cols() != grad.cols() )
     {
-      ROS_ERROR("pts.cols() != grad.cols()");
+      std::fprintf(stderr, "pts.cols() != grad.cols()\n");
       return;
     }
     std::vector<Eigen::Vector3d> arrow_;

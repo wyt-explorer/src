@@ -1,34 +1,21 @@
-cmake_minimum_required(VERSION 2.8.3)
+cmake_minimum_required(VERSION 3.8)
 project(selected_points_publisher)
-find_package(catkin REQUIRED COMPONENTS rviz)
-catkin_package()
-
-include_directories(include ${catkin_INCLUDE_DIRS})
-link_directories(${catkin_LIBRARY_DIRS})
-
-find_package(Qt5 ${rviz_QT_VERSION} EXACT REQUIRED Core Widgets Quick)
-set(QT_LIBRARIES Qt5::Widgets)
-qt5_wrap_cpp(MOC_FILES
-  include/selected_points_publisher/selected_points_publisher.hpp
-  )
-add_definitions(-DQT_NO_KEYWORDS)
-
-add_library(${PROJECT_NAME}
-  src/selected_points_publisher.cpp
-  ${MOC_FILES}
-  )
-
-target_link_libraries(${PROJECT_NAME}
-  ${QT_LIBRARIES}
-  ${catkin_LIBRARIES}
-  )
-
-install(TARGETS ${PROJECT_NAME}
-  ARCHIVE DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION}
-  LIBRARY DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION}
-  RUNTIME DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
-  )
-
-install(FILES
-  plugin_description.xml
-  DESTINATION ${CATKIN_PACKAGE_SHARE_DESTINATION})
+set(CMAKE_CXX_STANDARD 17)
+find_package(ament_cmake REQUIRED)
+find_package(rclcpp REQUIRED)
+find_package(rviz_common REQUIRED)
+find_package(rviz_rendering REQUIRED)
+find_package(pluginlib REQUIRED)
+find_package(geometry_msgs REQUIRED)
+find_package(visualization_msgs REQUIRED)
+find_package(Qt5 REQUIRED COMPONENTS Core Widgets)
+set(CMAKE_AUTOMOC ON)
+add_library(${PROJECT_NAME} SHARED src/selected_points_publisher.cpp)
+target_include_directories(${PROJECT_NAME} PUBLIC include)
+target_link_libraries(${PROJECT_NAME} Qt5::Widgets)
+ament_target_dependencies(${PROJECT_NAME} rclcpp rviz_common rviz_rendering pluginlib geometry_msgs visualization_msgs)
+pluginlib_export_plugin_description_file(rviz_common plugin_description.xml)
+install(TARGETS ${PROJECT_NAME} DESTINATION lib)
+install(DIRECTORY include/ DESTINATION include)
+install(FILES plugin_description.xml DESTINATION share/${PROJECT_NAME})
+ament_package()

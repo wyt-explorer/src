@@ -1,7 +1,7 @@
 <!-- 介绍自定义仿真环境的启动方法、目录结构、ROS 话题及地图配置。 -->
 # Primitive_env
 
-基于 ROS Noetic 的自定义三维障碍物环境，复用 **Primitive-Planner** 的运动基元规划算法，在 RViz 中显示地图并通过鼠标点击触发单架无人机的规划与仿真。
+基于 ROS 2 Jazzy 的自定义三维障碍物环境，复用 **Primitive-Planner** 的运动基元规划算法，在 RViz 中显示地图并通过鼠标点击触发单架无人机的规划与仿真。
 
 ## 1. 运行指令
 
@@ -13,15 +13,15 @@
 
 ```bash
 cd ~/RC_planner
-source /opt/ros/noetic/setup.bash
-catkin_make
-source devel/setup.bash
+source /opt/ros/jazzy/setup.bash
+colcon build --symlink-install
+source install/setup.bash
 ```
 
 以后每次打开新终端，运行 ROS 命令前先加载环境：
 
 ```bash
-source ~/RC_planner/devel/setup.bash
+source ~/RCplanner/install/setup.bash
 ```
 
 修改 `map_01.yaml`、普通 Python 脚本、`demo.launch` 或 `demo.rviz`，通常**不需要重新编译**；保存后重新启动相应节点即可。
@@ -29,8 +29,8 @@ source ~/RC_planner/devel/setup.bash
 ### 1.2 启动地图、规划器与 RViz
 
 ```bash
-source ~/RC_planner/devel/setup.bash
-roslaunch primitive_env demo.launch
+source ~/RCplanner/install/setup.bash
+ros2 launch primitive_env demo.launch.py
 ```
 
 `demo.launch` 同时启动地图点云发布、起终点标记、Primitive-Planner 单机规划及仿真、RViz 和鼠标点击触发节点。
@@ -48,23 +48,23 @@ roslaunch primitive_env demo.launch
 
 ```bash
 # 查看功能包是否被 ROS 识别
-rospack find primitive_env
+ros2 pkg prefix primitive_env
 
 # 查看规划器及仿真节点
-rosnode list | grep drone_0
+ros2 node list | grep drone_0
 
 # 检查全局障碍物点云
-rostopic hz /map_generator/global_cloud
+ros2 topic hz /map_generator/global_cloud
 
 # 查看 RViz 点击事件与规划触发话题
-rostopic info /clicked_point
-rostopic info /traj_start_trigger
+ros2 topic info /clicked_point
+ros2 topic info /traj_start_trigger
 
 # 查看可用于轨迹或无人机显示的实际话题
-rostopic list | grep -E 'odom|visualization|planning|pos_cmd'
+ros2 topic list | grep -E 'odom|visualization|planning|pos_cmd'
 ```
 
-结束运行：在启动 `roslaunch` 的终端按 **Ctrl+C**。
+结束运行：在启动 `ros2 launch` 的终端按 **Ctrl+C**。
 
 ## 2. 文件夹结构
 
@@ -100,7 +100,7 @@ rostopic list | grep -E 'odom|visualization|planning|pos_cmd'
 | `src/rviz_click_trigger.py` | 订阅 RViz 的 `/clicked_point`，发布 `/traj_start_trigger` 启动一次固定目标规划任务。 |
 | `launch/demo.launch` | 统一启动地图节点、起终点节点、Primitive-Planner 仿真与规划节点、点击触发节点及 RViz；设置无人机初始位置和目标。 |
 | `rviz/demo.rviz` | 保存 RViz 的固定坐标系、网格、点云、起终点 Marker、工具栏等显示配置。 |
-| `CMakeLists.txt` | Catkin 构建配置及 Python 节点安装配置。 |
+| `CMakeLists.txt` | ament_cmake 构建配置及 Python 节点安装配置。 |
 | `package.xml` | ROS 功能包名称、版本和依赖声明。 |
 | `README.md` | 项目使用指令和目录说明。 |
 
@@ -112,7 +112,7 @@ rostopic list | grep -E 'odom|visualization|planning|pos_cmd'
 | `/clicked_point` | RViz `Publish Point` 工具发布的点击坐标。 |
 | `/traj_start_trigger` | 触发 Primitive-Planner 开始当前规划任务。 |
 
-无人机模型、里程计和轨迹可视化话题的名称以当前启动后的 `rostopic list` 为准。
+无人机模型、里程计和轨迹可视化话题的名称以当前启动后的 `ros2 topic list` 为准。
 
 ## 5. 修改地图
 
@@ -126,4 +126,4 @@ rostopic list | grep -E 'odom|visualization|planning|pos_cmd'
   tube_radius: 0.15
 ```
 
-`axis: x / y / z` 分别表示圆环平面法向量沿 X / Y / Z 轴。地图脚本在启动时读取 YAML，因此修改后**重新启动 `roslaunch primitive_env demo.launch`** 即可，不需要重新编译，也不需要重新生成运动基元库。
+`axis: x / y / z` 分别表示圆环平面法向量沿 X / Y / Z 轴。地图脚本在启动时读取 YAML，因此修改后**重新启动 `ros2 launch primitive_env demo.launch.py`** 即可，不需要重新编译，也不需要重新生成运动基元库。
