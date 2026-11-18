@@ -1,3 +1,8 @@
+/*
+ * 文件作用：提供 ROS 2 节点消息回调；由包内可执行程序启动。
+ * 输入/输出：见 create_subscription/create_publisher 的消息及话题声明。
+ * 运行模式：ROS 2；位置单位为米，时间为秒；依赖 rclcpp 和对应消息包。
+ */
 #include <memory>
 #include <chrono>
 #include <nav_msgs/msg/odometry.hpp>
@@ -27,7 +32,7 @@ sensor_msgs::msg::PointCloud2 local_depth_pcl;
 rclcpp::SubscriptionBase::SharedPtr odom_sub;
 rclcpp::SubscriptionBase::SharedPtr global_map_sub, local_map_sub;
 
-rclcpp::Timer local_sensing_timer;
+rclcpp::TimerBase::SharedPtr local_sensing_timer;
 
 bool has_global_map(false);
 bool has_local_map(false);
@@ -149,6 +154,7 @@ void renderSensedPoints() {
 
   pcl::toROSMsg(_local_map, _local_map_pcd);
   _local_map_pcd.header.frame_id = "world";
+  _local_map_pcd.header.stamp = _odom.header.stamp;
 
   pub_cloud->publish(_local_map_pcd);
 }
@@ -162,10 +168,12 @@ int main(int argc, char** argv) {
   rclcpp::init(argc, argv); auto nh=std::make_shared<rclcpp::Node>("pcl_render");
   sensing_horizon=nh->declare_parameter("sensing_horizon",5.0); sensing_rate=nh->declare_parameter("sensing_rate",10.0); estimation_rate=nh->declare_parameter("estimation_rate",10.0);
   _x_size=nh->declare_parameter("map/x_size",50.0); _y_size=nh->declare_parameter("map/y_size",50.0); _z_size=nh->declare_parameter("map/z_size",5.0);
-  auto global_sub=nh->create_subscription<sensor_msgs::msg::PointCloud2>("global_map",1,[](auto m){rcvGlobalPointCloudCallBack(*m);});
-  auto local_sub=nh->create_subscription<sensor_msgs::msg::PointCloud2>("local_map",1,[](auto m){rcvLocalPointCloudCallBack(*m);});
-  auto odom=nh->create_subscription<nav_msgs::msg::Odometry>("odometry",50,[](auto m){rcvOdometryCallbck(*m);});
+  auto global_sub=nh->create_subscription<sensor_msgs::msg::PointCloud2>("global_map",1,[](sensor_msgs::msg::PointCloud2::SharedPtr m){rcvGlobalPointCloudCallBack(*m);});
+  auto local_sub=nh->create_subscription<sensor_msgs::msg::PointCloud2>("local_map",1,[](sensor_msgs::msg::PointCloud2::SharedPtr m){rcvLocalPointCloudCallBack(*m);});
+  auto odom=nh->create_subscription<nav_msgs::msg::Odometry>("odometry",50,[](nav_msgs::msg::Odometry::SharedPtr m){rcvOdometryCallbck(*m);});
   pub_cloud=nh->create_publisher<sensor_msgs::msg::PointCloud2>("pcl_render_node/cloud",10);
+  _resolution=nh->declare_parameter("map/resolution",0.1);
+  if (_resolution <= 0.0 || sensing_rate <= 0.0) throw std::invalid_argument("resolution and sensing_rate must be positive");
   _inv_resolution=1.0/_resolution; _gl_xl=-_x_size/2.; _gl_yl=-_y_size/2.; _gl_zl=0.; _GLX_SIZE=(int)(_x_size*_inv_resolution); _GLY_SIZE=(int)(_y_size*_inv_resolution); _GLZ_SIZE=(int)(_z_size*_inv_resolution);
   auto timer=nh->create_wall_timer(std::chrono::duration<double>(1.0/sensing_rate*2.5),[](){renderSensedPoints();});
   rclcpp::spin(nh); rclcpp::shutdown(); return 0;

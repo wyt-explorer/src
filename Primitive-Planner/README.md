@@ -1,5 +1,28 @@
 # Primitive_Planner
 
+## 当前 `new` 分支：ROS 2 Jazzy
+
+本分支的单机规划闭环已完成 ROS 2 Jazzy 基础编译与运行验证。完整说明以[仓库根目录 README](../README.md)为准；环境配置见 [Primitive_env README](../Primitive_env/README.md)。
+
+从仓库根目录 `~/RC_planner/src` 编译并启动：
+
+```bash
+source /opt/ros/jazzy/setup.bash
+colcon build --packages-up-to primitive_planner --cmake-args -DCMAKE_BUILD_TYPE=Release
+source install/setup.bash
+ros2 launch primitive_planner single_drone.launch.py
+```
+
+等待 `WAIT_TARGET` 后，在另一个已加载同一环境的终端触发：
+
+```bash
+ros2 topic pub --once /traj_start_trigger geometry_msgs/msg/PoseStamped '{header: {frame_id: world}, pose: {orientation: {w: 1.0}}}'
+```
+
+起终点与地图共用 `Primitive_env/map/map_01.yaml`，可以通过 `map_file:=/absolute/path/map.yaml` 替换。当前使用理想位置指令跟踪器；旧 RViz 插件、完整 SO3 动力学、多机和实机尚未验证通过。
+
+下方保留原项目的论文、架构与 ROS 1 历史说明。`catkin_make`、`devel/setup.bash`、`roslaunch` 和旧 XML launch 不适用于当前 ROS 2 启动流程。
+
 ## Paper
 
 Primitive-Swarm: An Ultra-lightweight and Scalable Planner for Large-scale Aerial Swarms, Accepted by IEEE Transactions on Robotics 2025. [[IEEE TRO]](https://ieeexplore.ieee.org/document/11015263) [[Arxiv]](https://arxiv.org/abs/2502.16887) [[Video]](https://www.bilibili.com/video/BV1Q4PNeeE7D?spm_id_from=333.788.videopod.episodes&vd_source=acac17792f24970ff76c5eae9ba38289&p=2)
@@ -27,7 +50,7 @@ Author list: Jialiang Hou, Xin Zhou, Neng Pan, Ang Li, Yuxiang Guan, Chao Xu, Zh
 </p>
 
 
-## Requirements
+## 原项目 ROS 1 环境要求（历史记录）
 
 The code is tested on clean Ubuntu 20.04 with ROS noetic installation.
 
@@ -36,7 +59,7 @@ Install the required package toppra:
 sudo pip3 install toppra catkin_pkg PyYAML empy matplotlib pyrfc3339
 ```
 
-## Run the code
+## 原项目 ROS 1 使用方式（历史记录）
 
 ### 1. Download and compile the code
 

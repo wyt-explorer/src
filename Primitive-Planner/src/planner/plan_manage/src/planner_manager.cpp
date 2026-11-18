@@ -1,3 +1,10 @@
+/*
+ * 文件作用：ROS 2 Jazzy 规划与仿真组件，保留原运动基元算法。
+ * 调用关系：由对应包的节点或库调用；输入输出见消息回调与发布接口。
+ * 输入：ROS 2 消息、参数及运动基元文件（SI 单位，world 坐标系）。
+ * 输出：规划轨迹、控制指令或可视化数据。
+ * 运行模式：ROS 2 仿真/实机；依赖 rclcpp 和对应包的消息类型。
+ */
 #include <cstdio>
 #include <plan_manage/planner_manager.h>
 #include <thread>
@@ -9,6 +16,7 @@ namespace primitive_planner
 {
 
 void PPPlannerManager::initPlanModules(rclcpp::Node::SharedPtr nh, PlanningVisualization::Ptr vis){
+  nh_ = nh;
   primitiveFolder_ = nh->declare_parameter<std::string>("manager/primitiveFolder", "none");
   depthCloudStackNum_ = nh->declare_parameter("manager/depthCloudStackNum", 4);//local map 12Hz - save 1s pointcloud
   boxX_ = nh->declare_parameter("manager/boxX", 8.0);
@@ -45,21 +53,21 @@ void PPPlannerManager::initPlanModules(rclcpp::Node::SharedPtr nh, PlanningVisua
   }
 
   // ros::Time t1, t2;
-  // t1 = rclcpp::Clock(RCL_ROS_TIME).now();
+  // t1 = nh_->now();
 
   pathNum_ = readPathList();
   readPathAll();
   readCorrespondences();
   readAgentCorrespondences();
-  // t2 = rclcpp::Clock(RCL_ROS_TIME).now();
+  // t2 = nh_->now();
 
-  // std::cout << "======readCorrespondences time====== " << (t2 - t1).toSec() << std::endl;
+  // std::cout << "======readCorrespondences time====== " << (t2 - t1).seconds() << std::endl;
 
   depthCloudCount_ = 0;
-  dep_odom_sub_ = nh.subscribe<nav_msgs::Odometry>("plan_manage/odom", 10, &PPPlannerManager::odomCallback, this);
+  dep_odom_sub_ = nh->create_subscription<nav_msgs::msg::Odometry>("plan_manage/odom", 10, std::bind(&PPPlannerManager::odomCallback, this, std::placeholders::_1));
 
   //订阅局部点云(world) 转换为局部robot系下 标记path
-  dep_cloud_sub_ = nh.subscribe<sensor_msgs::PointCloud2>("plan_manage/cloud", 10, &PPPlannerManager::cloudCallback, this);
+  dep_cloud_sub_ = nh->create_subscription<sensor_msgs::msg::PointCloud2>("plan_manage/cloud", rclcpp::SensorDataQoS(), std::bind(&PPPlannerManager::cloudCallback, this, std::placeholders::_1));
 
   // init depthCloudStack_
   depthCloudStack_.resize(depthCloudStackNum_);
@@ -173,7 +181,7 @@ bool PPPlannerManager::labelObsCollisionPaths(const Eigen::Vector3d &start_pt, c
     int indX, indY, indZ, ind, occPathByVoxelNum;
 
     // ros::Time t1, t2;
-    // t1 = rclcpp::Clock(RCL_ROS_TIME).now();
+    // t1 = nh_->now();
     // TODO: [???] GPU parallel computation
     for(int i = 0; i < plannerCloudSize; i++){
       //pointcloud: world frame in simulation; body frame in experiment;
@@ -254,9 +262,9 @@ bool PPPlannerManager::labelObsCollisionPaths(const Eigen::Vector3d &start_pt, c
             }
           }
     }
-    // t2 = rclcpp::Clock(RCL_ROS_TIME).now();
+    // t2 = nh_->now();
 
-    // std::cout << "for loop time: " << (t2 - t1).toSec() << std::endl;
+    // std::cout << "for loop time: " << (t2 - t1).seconds() << std::endl;
   
   }
 
@@ -706,9 +714,9 @@ bool PPPlannerManager::trajReplan(const Eigen::Vector3d &start_pt, const Eigen::
 
   bool success_obs, success_agents;
   rclcpp::Time t0, t1, t2, t3;
-  t0 = rclcpp::Clock(RCL_ROS_TIME).now();
+  t0 = nh_->now();
   success_obs = labelObsCollisionPaths(start_pt, RVW);
-  t1 = rclcpp::Clock(RCL_ROS_TIME).now();
+  t1 = nh_->now();
 
   // bool safe = false;
   // for (auto it : clearPathList_)
@@ -723,7 +731,7 @@ bool PPPlannerManager::trajReplan(const Eigen::Vector3d &start_pt, const Eigen::
   // std::cout << "trajReplan 1" << std::endl;
 
   success_agents = labelAgentCollisionPaths(start_pt, start_v, start_time, RVW);
-  t2 = rclcpp::Clock(RCL_ROS_TIME).now();
+  t2 = nh_->now();
 
   // safe = false;
   // for (auto it : clearPathList_)
@@ -744,9 +752,9 @@ bool PPPlannerManager::trajReplan(const Eigen::Vector3d &start_pt, const Eigen::
   // visAllPaths(start_pt, RWV);
 
   select_path_id = scorePaths(start_pt, global_goal, RWV);
-  t3 = rclcpp::Clock(RCL_ROS_TIME).now();
+  t3 = nh_->now();
 
-  // printf("\033[44;97m In id=%d, t1=%.1f, t2=%.1f, t3=%.1f \033[0m\n", drone_id, (t1-t0).toSec() * 1000, (t2-t0).toSec() * 1000, (t3-t0).toSec() * 1000);
+  // printf("\033[44;97m In id=%d, t1=%.1f, t2=%.1f, t3=%.1f \033[0m\n", drone_id, (t1-t0).seconds() * 1000, (t2-t0).seconds() * 1000, (t3-t0).seconds() * 1000);
 
   if(select_path_id.empty())
     return false;

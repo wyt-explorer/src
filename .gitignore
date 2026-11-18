@@ -1,0 +1,4 @@
+# Local ROS 2 verification artifacts
+.jazzy-check/
+.jazzy-check-output*.txt
+__pycache__/

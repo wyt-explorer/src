@@ -1,3 +1,9 @@
+/*
+ * 文件作用：将里程计和控制指令转换为 RViz2 可视化及 TF2。
+ * 调用关系：odom_visualization 节点订阅 odom/cmd，发布姿态、轨迹和模型标记。
+ * 输入：米/秒制里程计及位置指令；输出：world 下可视化消息。
+ * 运行模式：仿真/实机；依赖 rclcpp、TF2、Armadillo 和 pose_utils。
+ */
 #include <iostream>
 #include <string>
 #include <rclcpp/rclcpp.hpp>
@@ -132,14 +138,14 @@ void odom_callback(const nav_msgs::msg::Odometry::ConstSharedPtr &msg)
 
   // Path
   static rclcpp::Time prevt = msg->header.stamp;
-  if ((msg->header.stamp - prevt).toSec() > 0.1)
+  if ((rclcpp::Time(msg->header.stamp) - prevt).seconds() > 0.1)
   {
     prevt = msg->header.stamp;
     pathROS.header = poseROS.header;
     pathROS.poses.push_back(poseROS);
     pathPub->publish(pathROS);
   }
-  rclcpp::Time now_time = rclcpp::Time::now();
+  rclcpp::Time now_time = rclcpp::Time(msg->header.stamp);
   if ( !zero_speed_start_time_updated )
   {
     if ( sqrt(vel(0) * vel(0) + vel(1) * vel(1) + vel(2) * vel(2)) < 0.01 )
@@ -153,7 +159,7 @@ void odom_callback(const nav_msgs::msg::Odometry::ConstSharedPtr &msg)
     if ( sqrt(vel(0) * vel(0) + vel(1) * vel(1) + vel(2) * vel(2)) > 0.01 )
     {
       zero_speed_start_time_updated = false;
-      if ( (now_time - zero_speed_start_time).toSec() > 1.0 )
+      if ( (now_time - zero_speed_start_time).seconds() > 1.0 )
       {
         pathROS.poses.clear();
       }
@@ -274,10 +280,10 @@ void odom_callback(const nav_msgs::msg::Odometry::ConstSharedPtr &msg)
   static colvec ppose = pose;
   static rclcpp::Time pt = msg->header.stamp;
   rclcpp::Time t = msg->header.stamp;
-  if ((t - pt).toSec() > 0.5)
+  if ((t - pt).seconds() > 0.5)
   {
     trajROS.header.frame_id = string("world");
-    trajROS.header.stamp = rclcpp::Time::now();
+    trajROS.header.stamp = rclcpp::Time(msg->header.stamp);
     trajROS.ns = string("trajectory");
     trajROS.type = visualization_msgs::msg::Marker::LINE_LIST;
     trajROS.action = visualization_msgs::msg::Marker::ADD;
@@ -295,7 +301,7 @@ void odom_callback(const nav_msgs::msg::Odometry::ConstSharedPtr &msg)
     trajROS.color.g = 1.0;
     trajROS.color.b = 0.0;
     trajROS.color.a = 0.8;
-    geometry_msgs::Point p;
+    geometry_msgs::msg::Point p;
     p.x = ppose(0);
     p.y = ppose(1);
     p.z = ppose(2);
@@ -304,7 +310,7 @@ void odom_callback(const nav_msgs::msg::Odometry::ConstSharedPtr &msg)
     p.y = pose(1);
     p.z = pose(2);
     trajROS.points.push_back(p);
-    std_msgs::ColorRGBA color;
+    std_msgs::msg::ColorRGBA color;
     color.r = r;
     color.g = g;
     color.b = b;
@@ -455,23 +461,23 @@ int main(int argc, char **argv)
   rclcpp::init(argc, argv);
   auto n = std::make_shared<rclcpp::Node>("odom_visualization");
 
-  n->declare_parameter("mesh_resource", mesh_resource, std::string("package://odom_visualization/meshes/fake_drone.dae"));
-  n->declare_parameter("color/r", color_r, 1.0);
-  n->declare_parameter("color/g", color_g, 0.0);
-  n->declare_parameter("color/b", color_b, 0.0);
-  n->declare_parameter("color/a", color_a, 1.0);
-  n->declare_parameter("origin", origin, false);
-  n->declare_parameter("robot_scale", scale, 2.0);
-  n->declare_parameter("frame_id", _frame_id, string("world"));
-  n->declare_parameter("rotate_yaw_deg", rotate_yaw, 0.0);
+  mesh_resource = n->declare_parameter("mesh_resource", std::string("package://odom_visualization/meshes/fake_drone.dae"));
+  color_r = n->declare_parameter("color/r", 1.0);
+  color_g = n->declare_parameter("color/g", 0.0);
+  color_b = n->declare_parameter("color/b", 0.0);
+  color_a = n->declare_parameter("color/a", 1.0);
+  origin = n->declare_parameter("origin", false);
+  scale = n->declare_parameter("robot_scale", 2.0);
+  _frame_id = n->declare_parameter("frame_id", string("world"));
+  rotate_yaw = n->declare_parameter("rotate_yaw_deg", 0.0);
 
-  n->declare_parameter("cross_config", cross_config, false);
-  n->declare_parameter("tf45", tf45, false);
-  n->declare_parameter("covariance_scale", cov_scale, 100.0);
-  n->declare_parameter("covariance_position", cov_pos, false);
-  n->declare_parameter("covariance_velocity", cov_vel, false);
-  n->declare_parameter("covariance_color", cov_color, false);
-  n->declare_parameter("drone_id", _drone_id, -1);
+  cross_config = n->declare_parameter("cross_config", false);
+  tf45 = n->declare_parameter("tf45", false);
+  cov_scale = n->declare_parameter("covariance_scale", 100.0);
+  cov_pos = n->declare_parameter("covariance_position", false);
+  cov_vel = n->declare_parameter("covariance_velocity", false);
+  cov_color = n->declare_parameter("covariance_color", false);
+  _drone_id = n->declare_parameter("drone_id", -1);
 
   auto sub_odom = n->create_subscription<nav_msgs::msg::Odometry>("odom", 100, odom_callback);
   auto sub_cmd = n->create_subscription<quadrotor_msgs::msg::PositionCommand>("cmd", 100, cmd_callback);

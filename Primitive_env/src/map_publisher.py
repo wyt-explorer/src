@@ -1,5 +1,8 @@
 #!/usr/bin/env python3
-# 读取地图配置，将长方体、圆柱和圆环障碍物转换为 ROS 点云并发布。
+"""由 demo.launch.py 调用，从 YAML（米、world 坐标）生成障碍物点云。
+输入：map_file 参数；输出：PointCloud2；模式：ROS 2 仿真地图。
+依赖：rclpy、sensor_msgs_py、NumPy、PyYAML。
+"""
 import os
 import yaml
 import numpy as np
@@ -7,7 +10,7 @@ import rclpy
 from rclpy.node import Node
 from std_msgs.msg import Header
 from sensor_msgs.msg import PointCloud2
-from sensor_msgs import point_cloud2
+from sensor_msgs_py import point_cloud2
 
 # 在闭区间内均匀采样，包含两端点，采样间距不超过 res（要求 a < b、res > 0）。
 def axis(a,b,res):
@@ -15,6 +18,7 @@ def axis(a,b,res):
 
 # 按配置生成各障碍物的实体采样点，返回形状为 (N, 3) 的 float32 数组。
 def build_points(cfg):
+    """按米制地图配置生成 world 下 Nx3 点；拒绝非法尺寸或未知类型。"""
     # 检查点云分辨率，避免采样数量计算无效。
     res=float(cfg['map'].get('resolution',0.1))
     if res<=0: raise ValueError('resolution must be positive')
@@ -66,7 +70,7 @@ def build_points(cfg):
             else:
                 pts=np.column_stack(((x+a).ravel(),(y+b).ravel(),(z+d).ravel()))
         else:
-            rospy.logwarn('Unsupported obstacle type: %s',ob['type']); continue
+            raise ValueError(f"Unsupported obstacle type: {ob['type']}")
         parts.append(pts.astype(np.float32))
     # 合并所有障碍物；无障碍物时保留合法的空点云形状。
     return np.concatenate(parts) if parts else np.empty((0,3),dtype=np.float32)
@@ -79,6 +83,7 @@ class MapPublisher(Node):
         self.points=build_points(cfg); self.frame=cfg['map'].get('frame_id','world')
         self.pub=self.create_publisher(PointCloud2,self.get_parameter('cloud_topic').value,1); self.create_timer(1.,self.publish)
     def publish(self):
+        """使用节点时钟标记静态点云，周期发布以支持后加入的订阅者。"""
         h=Header(stamp=self.get_clock().now().to_msg(),frame_id=self.frame); self.pub.publish(point_cloud2.create_cloud_xyz32(h,self.points.tolist()))
 def main():
     rclpy.init(); n=MapPublisher(); rclpy.spin(n); n.destroy_node(); rclpy.shutdown()

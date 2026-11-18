@@ -1,3 +1,10 @@
+/*
+ * 文件作用：ROS 2 Jazzy 规划与仿真组件，保留原运动基元算法。
+ * 调用关系：由对应包的节点或库调用；输入输出见消息回调与发布接口。
+ * 输入：ROS 2 消息、参数及运动基元文件（SI 单位，world 坐标系）。
+ * 输出：规划轨迹、控制指令或可视化数据。
+ * 运行模式：ROS 2 仿真/实机；依赖 rclcpp 和对应包的消息类型。
+ */
 #include <thread>
 #include <chrono>
 #include <cstdio>
@@ -36,7 +43,7 @@ namespace primitive_planner
   {
     visualization_msgs::msg::Marker sphere, line_strip;
     sphere.header.frame_id = line_strip.header.frame_id = "world";
-    sphere.header.stamp = line_strip.header.stamp = node->get_clock()->now().to_msg();
+    sphere.header.stamp = line_strip.header.stamp = node->get_clock()->now();
     sphere.type = visualization_msgs::msg::Marker::SPHERE_LIST;
     line_strip.type = visualization_msgs::msg::Marker::LINE_STRIP;
     sphere.action = line_strip.action = visualization_msgs::msg::Marker::ADD;
@@ -52,7 +59,7 @@ namespace primitive_planner
     sphere.scale.y = scale;
     sphere.scale.z = scale;
     line_strip.scale.x = scale / 2;
-    geometry_msgs::Point pt;
+    geometry_msgs::msg::Point pt;
     for (int i = 0; i < int(list.size()); i++)
     {
       pt.x = list[i](0);
@@ -71,7 +78,7 @@ namespace primitive_planner
   {
     visualization_msgs::msg::Marker sphere, line_strip;
     sphere.header.frame_id = line_strip.header.frame_id = "world";
-    sphere.header.stamp = line_strip.header.stamp = node->get_clock()->now().to_msg();
+    sphere.header.stamp = line_strip.header.stamp = node->get_clock()->now();
     sphere.type = visualization_msgs::msg::Marker::SPHERE_LIST;
     line_strip.type = visualization_msgs::msg::Marker::LINE_STRIP;
     sphere.action = line_strip.action = visualization_msgs::msg::Marker::ADD;
@@ -87,7 +94,7 @@ namespace primitive_planner
     sphere.scale.y = scale;
     sphere.scale.z = scale;
     line_strip.scale.x = scale / 3;
-    geometry_msgs::Point pt;
+    geometry_msgs::msg::Point pt;
     for (int i = 0; i < int(list.size()); i++)
     {
       pt.x = list[i](0);
@@ -106,11 +113,11 @@ namespace primitive_planner
   {
     visualization_msgs::msg::Marker arrow;
     arrow.header.frame_id = "world";
-    arrow.header.stamp = node->get_clock()->now().to_msg();
+    arrow.header.stamp = node->get_clock()->now();
     arrow.type = visualization_msgs::msg::Marker::ARROW;
     arrow.action = visualization_msgs::msg::Marker::ADD;
 
-    // geometry_msgs::Point start, end;
+    // geometry_msgs::msg::Point start, end;
     // arrow.points
 
     arrow.color.r = color(0);
@@ -121,7 +128,7 @@ namespace primitive_planner
     arrow.scale.y = 2 * scale;
     arrow.scale.z = 2 * scale;
 
-    geometry_msgs::Point start, end;
+    geometry_msgs::msg::Point start, end;
     for (int i = 0; i < int(list.size() / 2); i++)
     {
       // arrow.color.r = color(0) / (1+i);
@@ -147,7 +154,7 @@ namespace primitive_planner
   {
     visualization_msgs::msg::Marker sphere;
     sphere.header.frame_id = "world";
-    sphere.header.stamp = node->get_clock()->now().to_msg();
+    sphere.header.stamp = node->get_clock()->now();
     sphere.type = visualization_msgs::msg::Marker::SPHERE;
     sphere.action = visualization_msgs::msg::Marker::ADD;
     sphere.id = id;
@@ -170,7 +177,7 @@ namespace primitive_planner
   void PlanningVisualization::displayGlobalPathList(vector<Eigen::Vector3d> init_pts, const double scale, int id)
   {
 
-    if (global_list_pub.getNumSubscribers() == 0)
+    if (global_list_pub->get_subscription_count() == 0)
     {
       return;
     }
@@ -182,7 +189,7 @@ namespace primitive_planner
   void PlanningVisualization::displayMultiInitPathList(vector<vector<Eigen::Vector3d>> init_trajs, const double scale)
   {
 
-    if (init_list_pub.getNumSubscribers() == 0)
+    if (init_list_pub->get_subscription_count() == 0)
     {
       return;
     }
@@ -211,7 +218,7 @@ namespace primitive_planner
   void PlanningVisualization::displayInitPathList(vector<Eigen::Vector3d> init_pts, const double scale, Eigen::Vector4d color, int id)
   {
 
-    if (init_list_pub.getNumSubscribers() == 0)
+    if (init_list_pub->get_subscription_count() == 0)
     {
       return;
     }
@@ -223,7 +230,7 @@ namespace primitive_planner
   void PlanningVisualization::displayMultiOptimalPathList(vector<vector<Eigen::Vector3d>> optimal_trajs, const double scale) // zxzxzx
   {
 
-    if (optimal_list_pub.getNumSubscribers() == 0)
+    if (optimal_list_pub->get_subscription_count() == 0)
     {
       return;
     }
@@ -254,7 +261,7 @@ namespace primitive_planner
   void PlanningVisualization::displayOptimalList(std::vector<Eigen::Vector3d> &optimal_pts, int id)
   {
 
-    if (optimal_list_pub.getNumSubscribers() == 0)
+    if (optimal_list_pub->get_subscription_count() == 0)
     {
       return;
     }
@@ -266,7 +273,7 @@ namespace primitive_planner
   void PlanningVisualization::displayFailedList(Eigen::MatrixXd failed_pts, int id)
   {
 
-    if (failed_list_pub.getNumSubscribers() == 0)
+    if (failed_list_pub->get_subscription_count() == 0)
     {
       return;
     }
@@ -284,7 +291,7 @@ namespace primitive_planner
   void PlanningVisualization::displayAStarList(std::vector<std::vector<Eigen::Vector3d>> a_star_paths, int id /* = Eigen::Vector4d(0.5,0.5,0,1)*/)
   {
 
-    if (a_star_list_pub.getNumSubscribers() == 0)
+    if (a_star_list_pub->get_subscription_count() == 0)
     {
       return;
     }
@@ -312,11 +319,11 @@ namespace primitive_planner
   {
     visualization_msgs::msg::MarkerArray array;
     // clear
-    pub->publish(array);
+    for (const auto &marker : array.markers) pub->publish(marker);
 
     generateArrowDisplayArray(array, list, scale, color, id);
 
-    pub->publish(array);
+    for (const auto &marker : array.markers) pub->publish(marker);
   }
 
   void PlanningVisualization::displayIntermediatePt(std::string type, Eigen::MatrixXd &pts, int id, Eigen::Vector4d color)

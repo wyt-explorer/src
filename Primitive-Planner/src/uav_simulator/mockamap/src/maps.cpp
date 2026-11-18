@@ -31,9 +31,9 @@ Maps::randomMapGenerate()
   double _w_l, _w_h;
   int    _ObsNum;
 
-  info.nh_private->param("width_min", _w_l, 0.6);
-  info.nh_private->param("width_max", _w_h, 1.5);
-  info.nh_private->param("obstacle_number", _ObsNum, 10);
+  _w_l = info.nh_private->declare_parameter("width_min", 0.6);
+  _w_h = info.nh_private->declare_parameter("width_max", 1.5);
+  _ObsNum = info.nh_private->declare_parameter("obstacle_number", 10);
 
   std::uniform_real_distribution<double> rand_x;
   std::uniform_real_distribution<double> rand_y;
@@ -108,10 +108,10 @@ Maps::perlin3D()
   int    fractal;
   double attenuation;
 
-  info.nh_private->param("complexity", complexity, 0.142857);
-  info.nh_private->param("fill", fill, 0.38);
-  info.nh_private->param("fractal", fractal, 1);
-  info.nh_private->param("attenuation", attenuation, 0.5);
+  complexity = info.nh_private->declare_parameter("complexity", 0.142857);
+  fill = info.nh_private->declare_parameter("fill", 0.38);
+  fractal = info.nh_private->declare_parameter("fractal", 1);
+  attenuation = info.nh_private->declare_parameter("attenuation", 0.5);
 
   info.cloud->width  = info.sizeX * info.sizeY * info.sizeZ;
   info.cloud->height = 1;
@@ -610,10 +610,10 @@ Maps::maze2D()
   int    type;
   int    addWallX;
   int    addWallY;
-  info.nh_private->param("road_width", width, 1.0);
-  info.nh_private->param("add_wall_x", addWallX, 0);
-  info.nh_private->param("add_wall_y", addWallY, 0);
-  info.nh_private->param("maze_type", type, 1);
+  width = info.nh_private->declare_parameter("road_width", 1.0);
+  addWallX = info.nh_private->declare_parameter("add_wall_x", 0);
+  addWallY = info.nh_private->declare_parameter("add_wall_y", 0);
+  type = info.nh_private->declare_parameter("maze_type", 1);
 
   int mx = info.sizeX / (width * info.scale);
   int my = info.sizeY / (width * info.scale);
@@ -786,10 +786,10 @@ Maps::Maze3DGen()
   int    nodeRad;
   int    roadRad;
 
-  info.nh_private->param("numNodes", numNodes, 10);
-  info.nh_private->param("connectivity", connectivity, 0.5);
-  info.nh_private->param("nodeRad", nodeRad, 3);
-  info.nh_private->param("roadRad", roadRad, 2);
+  numNodes = info.nh_private->declare_parameter("numNodes", 10);
+  connectivity = info.nh_private->declare_parameter("connectivity", 0.5);
+  nodeRad = info.nh_private->declare_parameter("nodeRad", 3);
+  roadRad = info.nh_private->declare_parameter("roadRad", 2);
   ROS_INFO("received parameters : numNodes: %d connectivity: "
            "%f nodeRad: %d roadRad: %d",
            numNodes,

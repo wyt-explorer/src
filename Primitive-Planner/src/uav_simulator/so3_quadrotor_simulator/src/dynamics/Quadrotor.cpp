@@ -4,7 +4,7 @@
 #include <boost/bind.hpp>
 #include <iostream>
 
-#include <ros/ros.h>
+// Dynamics are independent of the ROS middleware.
 namespace odeint = boost::numeric::odeint;
 
 namespace QuadrotorSimulator

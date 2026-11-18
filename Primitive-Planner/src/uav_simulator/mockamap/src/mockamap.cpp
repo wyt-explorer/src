@@ -63,12 +63,12 @@ optimizeMap(mocka::Maps::BasicInfo& in)
 int
 main(int argc, char** argv)
 {
-  ros::init(argc, argv, "mockamap");
-  ros::NodeHandle nh;
-  ros::NodeHandle nh_private("~");
+  rclcpp::init(argc, argv);
+  auto nh = std::make_shared<rclcpp::Node>("mockamap");
 
-  ros::Publisher pcl_pub =
-    nh.advertise<sensor_msgs::msg::PointCloud2>("mock_map", 1);
+
+  auto pcl_pub =
+    nh->create_publisher<sensor_msgs::msg::PointCloud2>("mock_map", 1);
   pcl::PointCloud<pcl::PointXYZ> cloud;
   sensor_msgs::msg::PointCloud2       output;
   // Fill in the cloud data
@@ -84,14 +84,14 @@ main(int argc, char** argv)
 
   int type;
 
-  nh_private.param("seed", seed, 4546);
-  nh_private.param("update_freq", update_freq, 1.0);
-  nh_private.param("resolution", scale, 0.38);
-  nh_private.param("x_length", sizeX, 100);
-  nh_private.param("y_length", sizeY, 100);
-  nh_private.param("z_length", sizeZ, 10);
+  seed = nh->declare_parameter("seed", 4546);
+  update_freq = nh->declare_parameter("update_freq", 1.0);
+  scale = nh->declare_parameter("resolution", 0.38);
+  sizeX = nh->declare_parameter("x_length", 100);
+  sizeY = nh->declare_parameter("y_length", 100);
+  sizeZ = nh->declare_parameter("z_length", 10);
 
-  nh_private.param("type", type, 1);
+  type = nh->declare_parameter("type", 1);
 
   scale = 1 / scale;
   sizeX = sizeX * scale;
@@ -99,7 +99,7 @@ main(int argc, char** argv)
   sizeZ = sizeZ * scale;
 
   mocka::Maps::BasicInfo info;
-  info.nh_private = &nh_private;
+  info.nh_private = nh;
   info.sizeX      = sizeX;
   info.sizeY      = sizeY;
   info.sizeZ      = sizeZ;
@@ -115,11 +115,11 @@ main(int argc, char** argv)
   //  optimizeMap(info);
 
   //! @note publish loop
-  ros::Rate loop_rate(update_freq);
-  while (ros::ok())
+  rclcpp::Rate loop_rate(update_freq);
+  while (rclcpp::ok())
   {
-    pcl_pub.publish(output);
-    ros::spinOnce();
+    pcl_pub->publish(output);
+    rclcpp::spin_some(nh);
     loop_rate.sleep();
   }
   return 0;

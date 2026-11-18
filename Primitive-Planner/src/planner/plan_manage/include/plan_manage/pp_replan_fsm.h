@@ -1,3 +1,17 @@
+/*
+ * 文件作用：ROS 2 Jazzy 规划与仿真组件，保留原运动基元算法。
+ * 调用关系：由对应包的节点或库调用；输入输出见消息回调与发布接口。
+ * 输入：ROS 2 消息、参数及运动基元文件（SI 单位，world 坐标系）。
+ * 输出：规划轨迹、控制指令或可视化数据。
+ * 运行模式：ROS 2 仿真/实机；依赖 rclcpp 和对应包的消息类型。
+ */
+/*
+ * 文件作用：ROS 2 Jazzy 规划与仿真组件，保留原运动基元算法。
+ * 调用关系：由对应包的节点或库调用；输入输出见消息回调与发布接口。
+ * 输入：ROS 2 消息、参数及运动基元文件（SI 单位，world 坐标系）。
+ * 输出：规划轨迹、控制指令或可视化数据。
+ * 运行模式：ROS 2 仿真/实机；依赖 rclcpp 和对应包的消息类型。
+ */
 #ifndef _PP_REPLAN_FSM_H_
 #define _PP_REPLAN_FSM_H_
 
@@ -32,7 +46,7 @@ namespace primitive_planner
             PPReplanFSM() {}
             ~PPReplanFSM();
 
-            void init(rclcpp::Node::SharedPtr &nh);
+            void init(rclcpp::Node::SharedPtr nh);
 
             EIGEN_MAKE_ALIGNED_OPERATOR_NEW
         
@@ -60,7 +74,12 @@ namespace primitive_planner
             rclcpp::TimerBase::SharedPtr exec_timer_;
             rclcpp::SubscriptionBase::SharedPtr trigger_sub_, odom_sub_, mandatory_stop_sub_, select_path_end_sub_, cmd_sub_, broadcast_primitive_sub_, waypoint_sub_;
 
-            rclcpp::PublisherBase::SharedPtr path_id_pub_, stop_pub_, heartbeat_pub_, global_pub_, broadcast_primitive_pub_, poly_pub_, yaw_cmd_pub_;
+            rclcpp::Node::SharedPtr nh_;
+            rclcpp::Publisher<traj_utils::msg::SwarmPrimitiveTraj>::SharedPtr path_id_pub_, broadcast_primitive_pub_;
+            rclcpp::Publisher<std_msgs::msg::Float64MultiArray>::SharedPtr stop_pub_, global_pub_;
+            rclcpp::Publisher<std_msgs::msg::Empty>::SharedPtr heartbeat_pub_;
+            rclcpp::Publisher<traj_utils::msg::Polynomial>::SharedPtr poly_pub_;
+            rclcpp::Publisher<std_msgs::msg::Float64>::SharedPtr yaw_cmd_pub_;
 
             double waypoints_[10][3];
             int waypoint_num_;
@@ -78,7 +97,7 @@ namespace primitive_planner
             bool have_latest_safe_pt_;
 
             const int TOTAL_DRONE_NUM_ = 1000;
-            typedef std::pair<bool, traj_utils::swarmPrimitiveTraj> SharedMemory;
+            typedef std::pair<bool, traj_utils::msg::SwarmPrimitiveTraj> SharedMemory;
             SharedMemory* swarm_traj_ptr_ = nullptr;
             void* shared_memory_ = nullptr;
             int shm_id_ = -1;
@@ -110,7 +129,7 @@ namespace primitive_planner
             LocalTrajData myself_traj_;
 
             /* state machine functions */
-            void execFSMCallback(const rclcpp::TimerBase::SharedPtrEvent &e);
+            void execFSMCallback();
             void changeFSMExecState(FSM_EXEC_STATE new_state, std::string pos_call);
             void printFSMExecState();
 
@@ -119,12 +138,12 @@ namespace primitive_planner
             void mandatoryStopCallback(const std_msgs::msg::Empty &msg);
             void pubPolyTraj(const Eigen::Vector3d &start_p, const Eigen::Vector3d &start_v, const Eigen::Vector3d &end_p, const double dura);
 
-            void triggerCallback(const geometry_msgs::msg::PoseStamped::SharedPtr &msg);
-            void RecvBroadcastPrimitiveCallback(const traj_utils::swarmPrimitiveTrajConstPtr &msg);
+            void triggerCallback(const geometry_msgs::msg::PoseStamped::SharedPtr msg);
+            void RecvBroadcastPrimitiveCallback(const traj_utils::msg::SwarmPrimitiveTraj::ConstSharedPtr &msg);
             void odometryCallback(const nav_msgs::msg::Odometry::ConstSharedPtr &msg);
-            void pathEndCallback(const std_msgs::msg::Float64MultiArray::SharedPtr &msg);
-            void cmdCallback(const quadrotor_msgs::msg::PositionCommand::SharedPtr &cmd);
-            void waypointCallback(const quadrotor_msgs::msg::GoalSet::SharedPtr &msg);
+            void pathEndCallback(const std_msgs::msg::Float64MultiArray::SharedPtr msg);
+            void cmdCallback(const quadrotor_msgs::msg::PositionCommand::SharedPtr cmd);
+            void waypointCallback(const quadrotor_msgs::msg::GoalSet::SharedPtr msg);
 
             bool readLocalTrajPos(Eigen::Vector3d& start_pos, int& vel_id, Eigen::Matrix<double, 3, 3>& Rwv, std::vector<int>& path_id, std::vector<Eigen::Vector3d>& traj_pos, double& traj_duration);
             bool checkCollision(int recv_id);

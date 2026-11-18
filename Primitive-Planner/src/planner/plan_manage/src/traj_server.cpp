@@ -1,3 +1,17 @@
+/*
+ * 文件作用：ROS 2 Jazzy 规划与仿真组件，保留原运动基元算法。
+ * 调用关系：由对应包的节点或库调用；输入输出见消息回调与发布接口。
+ * 输入：ROS 2 消息、参数及运动基元文件（SI 单位，world 坐标系）。
+ * 输出：规划轨迹、控制指令或可视化数据。
+ * 运行模式：ROS 2 仿真/实机；依赖 rclcpp 和对应包的消息类型。
+ */
+/*
+ * 文件作用：ROS 2 Jazzy 规划与仿真组件，保留原运动基元算法。
+ * 调用关系：由对应包的节点或库调用；输入输出见消息回调与发布接口。
+ * 输入：ROS 2 消息、参数及运动基元文件（SI 单位，world 坐标系）。
+ * 输出：规划轨迹、控制指令或可视化数据。
+ * 运行模式：ROS 2 仿真/实机；依赖 rclcpp 和对应包的消息类型。
+ */
 #include <cstdio>
 #include <nav_msgs/msg/odometry.hpp>
 #include <quadrotor_msgs/msg/position_command.hpp>
@@ -18,6 +32,8 @@
 
 using namespace Eigen;
 using namespace std;
+
+rclcpp::Node::SharedPtr node;
 
 const double loop_time_ = 0.01;
 
@@ -78,7 +94,7 @@ double limit_yaw(double yaw)
 void publish_cmd(Vector3d p, Vector3d v, Vector3d a, double y, double yd)
 {
 
-  cmd.header.stamp = rclcpp::Time::now();
+  cmd.header.stamp = node->now();
   cmd.header.frame_id = "world";
   cmd.trajectory_flag = quadrotor_msgs::msg::PositionCommand::TRAJECTORY_STATUS_READY;
   // cmd.trajectory_id = traj_id_;
@@ -106,7 +122,7 @@ void publish_cmd(Vector3d p, Vector3d v, Vector3d a, double y, double yd)
 
 void heartbeatCallback(std_msgs::msg::Empty::SharedPtr msg)
 {
-  heartbeat_time_ = rclcpp::Time::now();
+  heartbeat_time_ = node->now();
 }
 
 void odometryCallback(const nav_msgs::msg::Odometry::ConstSharedPtr msg)
@@ -365,7 +381,7 @@ std::pair<double, double> calculate_yaw(double t_cur, Eigen::Vector3d &pos, doub
 void cmdCallback()
 {
   /* no publishing before receive traj_ and have heartbeat */
-  if (heartbeat_time_.toSec() <= 1e-5)
+  if (heartbeat_time_.seconds() <= 1e-5)
   {
     // ROS_ERROR_ONCE("[traj_server] No heartbeat from the planner received");
     return;
@@ -373,9 +389,9 @@ void cmdCallback()
 
   if ( receive_traj_ )
   {
-    rclcpp::Time time_now = rclcpp::Time::now();
+    rclcpp::Time time_now = node->now();
 
-    if ((time_now - heartbeat_time_).toSec() > 0.5)
+    if ((time_now - heartbeat_time_).seconds() > 0.5)
     {
       fprintf(stderr, "%s\n", "[traj_server] Lost heartbeat from the planner, is it dead?");
 
@@ -383,7 +399,7 @@ void cmdCallback()
       publish_cmd(last_pos_, Vector3d::Zero(), Vector3d::Zero(), last_yaw_, 0);
     }
 
-    double t_cur = (time_now - start_time_).toSec();
+    double t_cur = (time_now - start_time_).seconds();
     // std::cout << "t_cur: " << t_cur << std::endl; 
     int idx_t = floor(t_cur *100) + time_delay_idx_; // 1000/10 10ms-traj resolution
 
@@ -393,7 +409,7 @@ void cmdCallback()
     Eigen::Vector3d pos(Eigen::Vector3d::Zero()), vel(Eigen::Vector3d::Zero()), acc(Eigen::Vector3d::Zero());
     std::pair<double, double> yaw_yawdot(0, 0);
 
-    static rclcpp::Time time_last = rclcpp::Time::now();
+    static rclcpp::Time time_last = node->now();
     if (t_cur <= traj_duration_ && t_cur >= 0.0 && idx_t < traj_pos_.size() ) // to make sure the "vel = 0" command is published 
     {
       pos = traj_pos_[idx_t];
@@ -401,7 +417,7 @@ void cmdCallback()
       acc = traj_acc_[idx_t];
 
       /*** calculate yaw ***/
-      yaw_yawdot = calculate_yaw(t_cur, pos, (time_now - time_last).toSec());
+      yaw_yawdot = calculate_yaw(t_cur, pos, (time_now - time_last).seconds());
       /*** calculate yaw ***/
 
       // compute total length
@@ -412,7 +428,7 @@ void cmdCallback()
       }
       else{
         integ_dis_ = (pos - last_pos_).norm();
-        integ_time_ = (time_now - time_last).toSec();
+        integ_time_ = (time_now - time_last).seconds();
       }
       total_length_ += integ_dis_;
       total_time_ += integ_time_;
@@ -464,7 +480,7 @@ void cmdCallback()
 int main(int argc, char **argv)
 {
   rclcpp::init(argc, argv);
-  auto node = std::make_shared<rclcpp::Node>("traj_server");
+  node = std::make_shared<rclcpp::Node>("traj_server");
   primitiveFolder_ = node->declare_parameter<std::string>("primitiveFolder", "none");
   max_vel_ = node->declare_parameter("max_vel", -1.0);
   time_delay_idx_ = node->declare_parameter("time_delay_idx", 1);

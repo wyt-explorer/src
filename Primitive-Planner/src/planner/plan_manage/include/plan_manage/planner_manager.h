@@ -1,3 +1,10 @@
+/*
+ * 文件作用：ROS 2 Jazzy 规划与仿真组件，保留原运动基元算法。
+ * 调用关系：由对应包的节点或库调用；输入输出见消息回调与发布接口。
+ * 输入：ROS 2 消息、参数及运动基元文件（SI 单位，world 坐标系）。
+ * 输出：规划轨迹、控制指令或可视化数据。
+ * 运行模式：ROS 2 仿真/实机；依赖 rclcpp 和对应包的消息类型。
+ */
 #ifndef _PLANNER_MANAGER_H_
 #define _PLANNER_MANAGER_H_
 
@@ -34,7 +41,7 @@ namespace primitive_planner
 
     EIGEN_MAKE_ALIGNED_OPERATOR_NEW
 
-    void initPlanModules(rclcpp::Node::SharedPtr &nh, PlanningVisualization::Ptr vis = NULL);
+    void initPlanModules(rclcpp::Node::SharedPtr nh, PlanningVisualization::Ptr vis = NULL);
     void odomCallback(const nav_msgs::msg::Odometry::ConstSharedPtr &odom);
     void cloudCallback(const sensor_msgs::msg::PointCloud2::ConstSharedPtr &img);
     bool labelObsCollisionPaths(const Eigen::Vector3d &start_pt, const Eigen::Matrix3d &rotVW);
@@ -66,6 +73,7 @@ namespace primitive_planner
     bool has_odom_, has_cloud_;
 
   private:
+    rclcpp::Node::SharedPtr nh_;
     PlanningVisualization::Ptr visualization_;
 
     rclcpp::SubscriptionBase::SharedPtr dep_odom_sub_, dep_cloud_sub_;

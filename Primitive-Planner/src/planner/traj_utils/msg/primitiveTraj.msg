@@ -1,4 +1,4 @@
-time start_time
+builtin_interfaces/Time start_time
 float32[3] start_p
 float32[3] start_v
 float32[3] end_p

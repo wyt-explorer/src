@@ -1,3 +1,17 @@
+/*
+ * 文件作用：ROS 2 Jazzy 规划与仿真组件，保留原运动基元算法。
+ * 调用关系：由对应包的节点或库调用；输入输出见消息回调与发布接口。
+ * 输入：ROS 2 消息、参数及运动基元文件（SI 单位，world 坐标系）。
+ * 输出：规划轨迹、控制指令或可视化数据。
+ * 运行模式：ROS 2 仿真/实机；依赖 rclcpp 和对应包的消息类型。
+ */
+/*
+ * 文件作用：ROS 2 Jazzy 规划与仿真组件，保留原运动基元算法。
+ * 调用关系：由对应包的节点或库调用；输入输出见消息回调与发布接口。
+ * 输入：ROS 2 消息、参数及运动基元文件（SI 单位，world 坐标系）。
+ * 输出：规划轨迹、控制指令或可视化数据。
+ * 运行模式：ROS 2 仿真/实机；依赖 rclcpp 和对应包的消息类型。
+ */
 #include <thread>
 #include <chrono>
 #include <functional>
@@ -32,12 +46,16 @@ double limit_yaw(double yaw)
 
 PPReplanFSM::~PPReplanFSM()
 {
+#if USE_SHARED_MEMORY
     detach_shared_memory(shared_memory_);
     remove_shared_memory(shm_id_);
+#endif
 }
 
+/** 加载规划参数、基元库并注册 ROS 2 回调；无有效预置目标时拒绝启动。 */
 void PPReplanFSM::init(rclcpp::Node::SharedPtr nh)
 {
+    nh_ = nh;
     have_odom_ = false;
     have_target_ = false;
     flag_escape_emergency_ = true;
@@ -54,6 +72,9 @@ void PPReplanFSM::init(rclcpp::Node::SharedPtr nh)
     enable_fail_safe_ = nh->declare_parameter("fsm/fail_safe", true);
     no_replan_thresh_ = nh->declare_parameter("fsm/no_replan_thresh", 4.0);
     waypoint_num_ = nh->declare_parameter("fsm/waypoint_num", -1);
+    if (waypoint_num_ > 10 || (target_type_ == 2 && waypoint_num_ < 1)) {
+      throw std::invalid_argument("fsm/waypoint_num must be in [1, 10] for preset goals");
+    }
 
 #if USE_SHARED_MEMORY
     // shared memory
@@ -85,9 +106,7 @@ void PPReplanFSM::init(rclcpp::Node::SharedPtr nh)
 
   #if not USE_SHARED_MEMORY
     broadcast_primitive_sub_ = nh->create_subscription<traj_utils::msg::SwarmPrimitiveTraj>("planning/broadcast_primitive_recv", 100,
-                                                                  &PPReplanFSM::RecvBroadcastPrimitiveCallback,
-                                                                  this,
-                                                                  );
+                                                                  std::bind(&PPReplanFSM::RecvBroadcastPrimitiveCallback, this, std::placeholders::_1));
   #endif
 
     path_id_pub_ = nh->create_publisher<traj_utils::msg::SwarmPrimitiveTraj>("planning/selected_path_id", 100);
@@ -102,16 +121,16 @@ void PPReplanFSM::init(rclcpp::Node::SharedPtr nh)
     int count = 0;
     while (rclcpp::ok() && count++ < 3000)
     {
-      rclcpp::spin_some(nh);
+      rclcpp::spin_some(nh_);
       std::this_thread::sleep_for(std::chrono::milliseconds(1));
     }
     while (rclcpp::ok() && !have_odom_)
     {
-      rclcpp::spin_some(nh);
+      rclcpp::spin_some(nh_);
       std::this_thread::sleep_for(std::chrono::milliseconds(1));
     }
 
-    exec_timer_ = nh->create_wall_timer(std::chrono::duration<double>(0.01), &PPReplanFSM::execFSMCallback, this);
+    exec_timer_ = nh->create_wall_timer(std::chrono::duration<double>(0.01), std::bind(&PPReplanFSM::execFSMCallback, this));
 
     // global goal
     if (target_type_ == 1)
@@ -132,18 +151,18 @@ void PPReplanFSM::init(rclcpp::Node::SharedPtr nh)
           goal_id_ = 0;
           global_goal_ = all_goal_[goal_id_];
           // send global goal
-          std_msgs::Float64MultiArray goal_msg;
+          std_msgs::msg::Float64MultiArray goal_msg;
           for(int i = 0; i < 3; i++){
             goal_msg.data.push_back(global_goal_(i));
           }
-          global_pub_.publish(goal_msg);
+          global_pub_->publish(goal_msg);
 
           visualization_->displayGoalPoint(global_goal_, Eigen::Vector4d(0, 0.5, 0.5, 1), 0.3, 0);
 
 
           Eigen::Vector3d dir_to_goal = global_goal_ - odom_pos_;
           double yaw_des = limit_yaw(atan2(dir_to_goal(1), dir_to_goal(0)));
-          std_msgs::Float64 yaw_cmd;
+          std_msgs::msg::Float64 yaw_cmd;
           yaw_cmd.data = yaw_des;
           // cout << "yaw_des=" << yaw_des << ", dir_to_goal=" << dir_to_goal.transpose() <<  endl;
 
@@ -152,7 +171,7 @@ void PPReplanFSM::init(rclcpp::Node::SharedPtr nh)
           {
             if (count++ % 100 == 0)
             {
-              yaw_cmd_pub_.publish(yaw_cmd);
+              yaw_cmd_pub_->publish(yaw_cmd);
               // cout <<"odom_yaw_" << odom_yaw_ << ", yaw_des=" << yaw_des << endl;
             }
             
@@ -163,7 +182,7 @@ void PPReplanFSM::init(rclcpp::Node::SharedPtr nh)
             if(abs(diff) < 0.1)
               break;
 
-            rclcpp::spin_some(nh);
+            rclcpp::spin_some(nh_);
             std::this_thread::sleep_for(std::chrono::milliseconds(10));
           }
           have_target_ = true;
@@ -174,7 +193,7 @@ void PPReplanFSM::init(rclcpp::Node::SharedPtr nh)
 
 }
 
-void PPReplanFSM::waypointCallback(const quadrotor_msgs::msg::GoalSet::SharedPtr &msg)
+void PPReplanFSM::waypointCallback(const quadrotor_msgs::msg::GoalSet::SharedPtr msg)
 {
   if ( msg->drone_id != planner_manager_->drone_id )
     return;
@@ -187,36 +206,29 @@ void PPReplanFSM::waypointCallback(const quadrotor_msgs::msg::GoalSet::SharedPtr
   all_goal_.push_back(Eigen::Vector3d(msg->goal[0], msg->goal[1], msg->goal[2]));
   global_goal_ = all_goal_[0];
 
-  std_msgs::Float64MultiArray goal_msg;
+  std_msgs::msg::Float64MultiArray goal_msg;
   for(int i = 0; i < 3; i++){
     goal_msg.data.push_back(global_goal_(i));
   }
-  global_pub_.publish(goal_msg);
+  global_pub_->publish(goal_msg);
   visualization_->displayGoalPoint(global_goal_, Eigen::Vector4d(0, 0.5, 0.5, 1), 0.15, 0);
 
   Eigen::Vector3d dir_to_goal = global_goal_ - odom_pos_;
   double yaw_des = atan2(dir_to_goal(1), dir_to_goal(0));
-  if ( exec_state_ == WAIT_TARGET )
-  {
-    while (rclcpp::ok())
-    {
-      double diff = odom_yaw_ - yaw_des;
-      diff = std::fmod(diff + M_PI, 2 * M_PI) - M_PI;
-      if (diff < -M_PI)
-        diff += 2 * M_PI;
-      if(abs(diff) < 0.1)
-        break;
-
-      rclcpp::spin_some(nh);
-      std::this_thread::sleep_for(std::chrono::milliseconds(10));
-    }
+  // Executor callbacks must not spin the same node recursively. The trajectory
+  // server applies yaw commands asynchronously while odometry continues arriving.
+  if (exec_state_ == WAIT_TARGET) {
+    std_msgs::msg::Float64 yaw_command;
+    yaw_command.data = yaw_des;
+    yaw_cmd_pub_->publish(yaw_command);
   }
   have_target_ = true;
   have_trigger_ = true;
   changeFSMExecState(GEN_NEW_TRAJ, "NEW_GOAL");
 }
 
-void PPReplanFSM::triggerCallback(const geometry_msgs::msg::PoseStamped::SharedPtr &msg)
+/** 接收 world 下的启动信号；保持回调非阻塞以继续处理里程计。 */
+void PPReplanFSM::triggerCallback(const geometry_msgs::msg::PoseStamped::SharedPtr msg)
 {
     // generate folder together
     // odom_logger_.init("/home/hjl/project/A_personal_project/primitive_swarm/bags_and_logs", "odom", planner_manager_->drone_id);
@@ -225,14 +237,7 @@ void PPReplanFSM::triggerCallback(const geometry_msgs::msg::PoseStamped::SharedP
     // computing_time_logger_.appendData("timestamp,computing_time");
 
     
-    fprintf(stderr, "%s\n", "Wait for 2 seconds.");
-    int count = 0;
-    while (rclcpp::ok() && count++ < 2000)
-    {
-      rclcpp::spin_some(nh);
-      std::this_thread::sleep_for(std::chrono::milliseconds(1));
-    }
-
+    // Trigger immediately; keep the executor available for sensor callbacks.
     have_trigger_ = true;
     have_log_files_ = true;
     std::cout << "Triggered!" << std::endl;
@@ -281,7 +286,7 @@ void PPReplanFSM::RecvBroadcastPrimitiveCallback(const traj_utils::msg::SwarmPri
       }
 
       planner_manager_->swarm_traj[recv_id].drone_id = recv_id;
-      planner_manager_->swarm_traj[recv_id].start_time = msg->start_time.seconds();
+      planner_manager_->swarm_traj[recv_id].start_time = rclcpp::Time(msg->start_time).seconds();
       planner_manager_->swarm_traj[recv_id].traj_duration = traj_duration;
       planner_manager_->swarm_traj[recv_id].traj_pos = traj_pos;
 
@@ -300,7 +305,7 @@ void PPReplanFSM::RecvBroadcastPrimitiveCallback(const traj_utils::msg::SwarmPri
     else
     {
       planner_manager_->swarm_traj[recv_id].drone_id = -2;
-      planner_manager_->swarm_traj[recv_id].start_time = msg->start_time.seconds();
+      planner_manager_->swarm_traj[recv_id].start_time = rclcpp::Time(msg->start_time).seconds();
     }
 
 }
@@ -471,7 +476,7 @@ bool PPReplanFSM::readPrimitivePos()
 }
 
 
-void PPReplanFSM::odometryCallback(const nav_msgs::OdometryConstPtr &msg)
+void PPReplanFSM::odometryCallback(const nav_msgs::msg::Odometry::ConstSharedPtr &msg)
 {
     odom_pos_(0) = msg->pose.pose.position.x;
     odom_pos_(1) = msg->pose.pose.position.y;
@@ -552,13 +557,13 @@ void PPReplanFSM::odometryCallback(const nav_msgs::OdometryConstPtr &msg)
     //   data.push_back(0);
     //   data.push_back(0);
     //   data.push_back(0);
-    //   std::string csv_data = odom_logger_.toCSV(rclcpp::Clock(RCL_ROS_TIME).now(), data);
+    //   std::string csv_data = odom_logger_.toCSV(nh_->now(), data);
     //   odom_logger_.appendData(csv_data);
     // } 
     
 }
 
-void PPReplanFSM::pathEndCallback(const std_msgs::Float64MultiArrayPtr &msg)
+void PPReplanFSM::pathEndCallback(const std_msgs::msg::Float64MultiArray::SharedPtr msg)
 {
     select_path_end_last_ = select_path_end_;
 
@@ -567,7 +572,7 @@ void PPReplanFSM::pathEndCallback(const std_msgs::Float64MultiArrayPtr &msg)
     select_path_end_(2) = msg->data[2];
 }
 
-void PPReplanFSM::cmdCallback(const quadrotor_msgs::PositionCommandPtr &cmd)
+void PPReplanFSM::cmdCallback(const quadrotor_msgs::msg::PositionCommand::SharedPtr cmd)
 {
   start_pt_(0) = cmd->position.x;
   start_pt_(1) = cmd->position.y;
@@ -577,11 +582,12 @@ void PPReplanFSM::cmdCallback(const quadrotor_msgs::PositionCommandPtr &cmd)
   start_v_(2) = cmd->velocity.z;
 }
 
-void PPReplanFSM::execFSMCallback(const rclcpp::TimerBase::TimerCallbackType &e)
+/** 以 100 Hz 推进规划状态机，输出基元轨迹和心跳。 */
+void PPReplanFSM::execFSMCallback()
 {
-    exec_timer_.stop(); // To avoid blockage
-    std_msgs::Empty heartbeat_msg;
-    heartbeat_pub_.publish(heartbeat_msg);
+    // The single-threaded executor prevents concurrent FSM callbacks.
+    std_msgs::msg::Empty heartbeat_msg;
+    heartbeat_pub_->publish(heartbeat_msg);
 
     static int fsm_num = 0;
     fsm_num++;
@@ -596,7 +602,7 @@ void PPReplanFSM::execFSMCallback(const rclcpp::TimerBase::TimerCallbackType &e)
     // if (traj_count == 10)
     // {
     //   traj_count = 0;
-    //   double t_now = rclcpp::Clock(RCL_ROS_TIME).now().seconds();
+    //   double t_now = nh_->now().seconds();
     //   for ( int i=0; i<planner_manager_->swarm_traj.size(); ++i )
     //   {
     //     if ( exec_state_ != WAIT_TARGET && i != planner_manager_->drone_id)
@@ -726,7 +732,7 @@ void PPReplanFSM::execFSMCallback(const rclcpp::TimerBase::TimerCallbackType &e)
 
     case EXEC_TRAJ:
     {
-        double delta_t = (rclcpp::Clock(RCL_ROS_TIME).now() - start_time_).seconds();
+        double delta_t = (nh_->now() - start_time_).seconds();
         if((odom_pos_ - global_goal_).norm() < no_replan_thresh_ ){
             if(goal_id_ == (waypoint_num_ - 1)){
                 changeFSMExecState(APPROACH_GOAL, "FSM");
@@ -737,11 +743,11 @@ void PPReplanFSM::execFSMCallback(const rclcpp::TimerBase::TimerCallbackType &e)
                 global_goal_ = all_goal_[goal_id_];
 
                 // send global goal
-                std_msgs::Float64MultiArray goal_msg;
+                std_msgs::msg::Float64MultiArray goal_msg;
                 for(int i = 0; i < 3; i++){
                   goal_msg.data.push_back(global_goal_(i));
                 }
-                global_pub_.publish(goal_msg);
+                global_pub_->publish(goal_msg);
             }
         }
         else if(delta_t > replan_thresh_){
@@ -796,10 +802,10 @@ void PPReplanFSM::execFSMCallback(const rclcpp::TimerBase::TimerCallbackType &e)
           if ( yaw_cmd_count_ < 4 )
           {
             yaw_cmd_count_++;
-            std_msgs::Float64 yaw_cmd;
+            std_msgs::msg::Float64 yaw_cmd;
             final_yaw_des_ = limit_yaw(odom_yaw_ + M_PI * 0.5);
             yaw_cmd.data = final_yaw_des_;
-            yaw_cmd_pub_.publish(yaw_cmd);
+            yaw_cmd_pub_->publish(yaw_cmd);
 
             flag_pub_first_yaw_ = true;
           }
@@ -815,7 +821,7 @@ void PPReplanFSM::execFSMCallback(const rclcpp::TimerBase::TimerCallbackType &e)
       {
         if ( flag_wait_crash_rec_ )
         {
-          if ((rclcpp::Clock(RCL_ROS_TIME).now() - crash_rec_start_time_).seconds() > 5.0) // 5.0s time out
+          if ((nh_->now() - crash_rec_start_time_).seconds() > 5.0) // 5.0s time out
           {
             flag_wait_crash_rec_ = false;
             changeFSMExecState(CRASH_RECOVER, "FSM");
@@ -831,7 +837,7 @@ void PPReplanFSM::execFSMCallback(const rclcpp::TimerBase::TimerCallbackType &e)
         {
           pubPolyTraj(odom_pos_, odom_vel_, latest_safe_pt_, 1.0);
           flag_wait_crash_rec_ = true;
-          crash_rec_start_time_ = rclcpp::Clock(RCL_ROS_TIME).now();
+          crash_rec_start_time_ = nh_->now();
         }
       }
       else
@@ -843,7 +849,7 @@ void PPReplanFSM::execFSMCallback(const rclcpp::TimerBase::TimerCallbackType &e)
 
     }
 
-    exec_timer_.start(); 
+
 }
 
 void PPReplanFSM::changeFSMExecState(FSM_EXEC_STATE new_state, std::string pos_call)
@@ -851,7 +857,7 @@ void PPReplanFSM::changeFSMExecState(FSM_EXEC_STATE new_state, std::string pos_c
     static std::string state_str[8] = {"INIT", "WAIT_TARGET", "GEN_NEW_TRAJ", "REPLAN_TRAJ", "EXEC_TRAJ", "EMERGENCY_STOP", "APPROACH_GOAL", "CRASH_RECOVER"};
     int pre_s = int(exec_state_);
     exec_state_ = new_state;
-    std::cout << "[" + pos_call + "]" << "Drone " << planner_manager_->drone_id << " from " + state_str[pre_s] + " to " + state_str[int(new_state)] << " t=" << rclcpp::Clock(RCL_ROS_TIME).now() - rclcpp::Duration::from_seconds(1725265839) << std::endl;
+    std::cout << "[" + pos_call + "]" << "Drone " << planner_manager_->drone_id << " from " + state_str[pre_s] + " to " + state_str[int(new_state)] << " t=" << nh_->now().seconds() << std::endl;
 }
 
 void PPReplanFSM::printFSMExecState()
@@ -883,7 +889,7 @@ void PPReplanFSM::printFSMExecState()
 
 bool PPReplanFSM::planPrimitive(bool first_plan, double xV_offset /*= 0.0*/ )
 {
-    rclcpp::Time t0 = rclcpp::Clock(RCL_ROS_TIME).now();
+    rclcpp::Time t0 = nh_->now();
 #if USE_SHARED_MEMORY
     // share trajecotry using shared memory
     if(planner_manager_->swarm_traj.size() < TOTAL_DRONE_NUM_){
@@ -901,19 +907,19 @@ bool PPReplanFSM::planPrimitive(bool first_plan, double xV_offset /*= 0.0*/ )
 
         if ( swarm_traj_ptr_[i].second.drone_id != -1 && std::abs(swarm_traj_ptr_[i].second.start_time.seconds() - planner_manager_->swarm_traj[i].start_time) > 0.001 )
         {
-          traj_utils::swarmPrimitiveTrajPtr traj_ptr = boost::make_shared<traj_utils::msg::SwarmPrimitiveTraj>();
-          std::memcpy(traj_ptr.get(), &(swarm_traj_ptr_[i].second), sizeof(traj_utils::swarmPrimitiveTraj));
+          traj_utils::msg::SwarmPrimitiveTraj::SharedPtr traj_ptr = std::make_shared<traj_utils::msg::SwarmPrimitiveTraj>();
+          std::memcpy(traj_ptr.get(), &(swarm_traj_ptr_[i].second), sizeof(traj_utils::msg::SwarmPrimitiveTraj));
           RecvBroadcastPrimitiveCallback(traj_ptr);
         }
 
       }
     }
-    // ros::Time t1 = rclcpp::Clock(RCL_ROS_TIME).now();
+    // ros::Time t1 = nh_->now();
 #endif
 
 
     // std::cout << "planPrimitive: " << odom_pos_ << std::endl;
-    start_time_ = rclcpp::Clock(RCL_ROS_TIME).now();
+    start_time_ = nh_->now();
     // build velocity frame {V}
     Eigen::Vector3d xV;
     // 0.05 not 0: because small value(0-0.05)'coordinate system is singular.
@@ -939,10 +945,10 @@ bool PPReplanFSM::planPrimitive(bool first_plan, double xV_offset /*= 0.0*/ )
     // start_q_ = odom_q_;
     // std::cout << "planPrimitive: " << RWV << std::endl;
 
-    // ros::Time t1 = rclcpp::Clock(RCL_ROS_TIME).now();
+    // ros::Time t1 = nh_->now();
     vector<int> select_path_id;
     bool plan_success = planner_manager_->trajReplan(start_pt_, start_v_, start_time_.seconds(), RWV, global_goal_, select_path_id);
-    // double duration = (rclcpp::Clock(RCL_ROS_TIME).now() - t1).seconds();
+    // double duration = (nh_->now() - t1).seconds();
     // static int countxx = 0;
     // countxx ++;
     // static double t_sum = 0.0;
@@ -962,7 +968,7 @@ bool PPReplanFSM::planPrimitive(bool first_plan, double xV_offset /*= 0.0*/ )
 
         // if ( have_log_files_ )
         // {
-        //   ros::Time end_time = rclcpp::Clock(RCL_ROS_TIME).now();
+        //   ros::Time end_time = nh_->now();
         //   std::vector<double> data;
         //   data.push_back((end_time - start_time_).seconds());
         //   std::string csv_data = computing_time_logger_.toCSV(start_time_, data);
@@ -977,8 +983,8 @@ bool PPReplanFSM::planPrimitive(bool first_plan, double xV_offset /*= 0.0*/ )
         myself_traj_.traj_pos = traj_pos;
 
 
-        // std_msgs::Int8MultiArray id_msg;
-        traj_utils::swarmPrimitiveTraj traj_msg;
+        // std_msgs::msg::Int8MultiArray id_msg;
+        traj_utils::msg::SwarmPrimitiveTraj traj_msg;
         traj_msg.drone_id = planner_manager_->drone_id;
         traj_msg.start_time = start_time_;
         traj_msg.start_p[0] =  start_pt_(0), traj_msg.start_p[1] =  start_pt_(1), traj_msg.start_p[2] =  start_pt_(2);
@@ -991,9 +997,9 @@ bool PPReplanFSM::planPrimitive(bool first_plan, double xV_offset /*= 0.0*/ )
 
         traj_msg.select_path_id = select_path_id[0];
 
-        path_id_pub_.publish(traj_msg);
+        path_id_pub_->publish(traj_msg);
 #if not USE_SHARED_MEMORY
-        broadcast_primitive_pub_.publish(traj_msg);
+        broadcast_primitive_pub_->publish(traj_msg);
 #else
         if (planner_manager_->drone_id >= 0 && planner_manager_->drone_id < TOTAL_DRONE_NUM_)
         {
@@ -1063,22 +1069,22 @@ bool PPReplanFSM::planPrimitive(bool first_plan, double xV_offset /*= 0.0*/ )
 
     // std::cout << "planPrimitive: " << plan_success << std::endl;
 
-    rclcpp::Time t2 = rclcpp::Clock(RCL_ROS_TIME).now();
+    rclcpp::Time t2 = nh_->now();
     printf("\033[44;97mID=%d, plan_time=%.2f ms \033[0m\n", planner_manager_->drone_id, (t2-t0).seconds() * 1000);
     return plan_success;
 }
 
 bool PPReplanFSM::callEmergencyStop(Eigen::Vector3d stop_pos)
 {
-    std_msgs::Float64MultiArray stop_msg;
+    std_msgs::msg::Float64MultiArray stop_msg;
     for(int i = 0; i < 3; i++)
         stop_msg.data.push_back(stop_pos(i));
-    stop_pub_.publish(stop_msg);
+    stop_pub_->publish(stop_msg);
 
     return true;
 }
 
-void PPReplanFSM::mandatoryStopCallback(const std_msgs::Empty &msg)
+void PPReplanFSM::mandatoryStopCallback(const std_msgs::msg::Empty &msg)
 {
     fprintf(stderr, "%s\n", "Received a mandatory stop command!");
     changeFSMExecState(EMERGENCY_STOP, "Mandatory Stop");
@@ -1101,13 +1107,13 @@ void PPReplanFSM::pubPolyTraj(const Eigen::Vector3d &start_p, const Eigen::Vecto
   B.row(3) = end_p.transpose();
   Eigen::Matrix<double, 3, 6, Eigen::RowMajor> coeff = (T.inverse() * B).transpose();
   
-  traj_utils::Polynomial poly_traj;
+  traj_utils::msg::Polynomial poly_traj;
   memcpy(&poly_traj.coeff_x, coeff.row(0).data(), 6 * 8);
   memcpy(&poly_traj.coeff_y, coeff.row(1).data(), 6 * 8);
   memcpy(&poly_traj.coeff_z, coeff.row(2).data(), 6 * 8);
-  poly_traj.start_time = rclcpp::Clock(RCL_ROS_TIME).now();
+  poly_traj.start_time = nh_->now();
   poly_traj.duration = t1;
-  poly_pub_.publish(poly_traj);
+  poly_pub_->publish(poly_traj);
 
   // for ( double t=0; t<1; t+=0.05 )
   // {

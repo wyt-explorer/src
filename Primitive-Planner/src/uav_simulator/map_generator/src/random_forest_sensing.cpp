@@ -1,3 +1,10 @@
+/*
+ * 文件作用：ROS 2 Jazzy 规划与仿真组件，保留原运动基元算法。
+ * 调用关系：由对应包的节点或库调用；输入输出见消息回调与发布接口。
+ * 输入：ROS 2 消息、参数及运动基元文件（SI 单位，world 坐标系）。
+ * 输出：规划轨迹、控制指令或可视化数据。
+ * 运行模式：ROS 2 仿真/实机；依赖 rclcpp 和对应包的消息类型。
+ */
 #include <thread>
 #include <chrono>
 #include <memory>
@@ -482,12 +489,7 @@ void clickCallback(const geometry_msgs::msg::PoseStamped &msg)
 int i = 0;
 void pubPoints()
 {
-  while (rclcpp::ok())
-  {
-    rclcpp::spin_some(n);
-    if (_map_ok)
-      break;
-  }
+  if (!_map_ok) return;
 
   pcl::toROSMsg(cloudMap, globalMap_pcd);
   globalMap_pcd.header.frame_id = "world";

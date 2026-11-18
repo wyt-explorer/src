@@ -1,3 +1,8 @@
+/*
+ * 文件作用：提供 ROS 2 节点消息回调；由包内可执行程序启动。
+ * 输入/输出：见 create_subscription/create_publisher 的消息及话题声明。
+ * 运行模式：ROS 2；位置单位为米，时间为秒；依赖 rclcpp 和对应消息包。
+ */
 #include <rclcpp/rclcpp.hpp>
 #include <rclcpp/serialization.hpp>
 #include <cstdint>
@@ -343,10 +348,10 @@ int main(int argc, char **argv)
   one_primitive_pub_ = node->create_publisher<traj_utils::msg::SwarmPrimitiveTraj>("/broadcast_primitive_to_planner", 100);
   goal_pub_ = node->create_publisher<quadrotor_msgs::msg::GoalSet>("/goal_brig2plner", 100);
   joy_pub_ = node->create_publisher<sensor_msgs::msg::Joy>("/joystick_from_bridge", 100);
-  other_odoms_sub_ = node->create_subscription<nav_msgs::msg::Odometry>("my_odom", 10, [](auto m){ odom_sub_udp_cb(m); });
-  one_primitive_sub_ = node->create_subscription<traj_utils::msg::SwarmPrimitiveTraj>("/broadcast_primitive_from_planner", 100, [](auto m){ one_primitive_sub_udp_cb(m); });
-  goal_sub_ = node->create_subscription<quadrotor_msgs::msg::GoalSet>("/goal_user2brig", 100, [](auto m){ goal_sub_udp_cb(m); });
-  joy_sub_ = node->create_subscription<sensor_msgs::msg::Joy>("/joystick_from_users", 100, [](auto m){ joy_sub_udp_cb(m); });
+  other_odoms_sub_ = node->create_subscription<nav_msgs::msg::Odometry>("my_odom", 10, [](nav_msgs::msg::Odometry::SharedPtr m){ odom_sub_udp_cb(m); });
+  one_primitive_sub_ = node->create_subscription<traj_utils::msg::SwarmPrimitiveTraj>("/broadcast_primitive_from_planner", 100, [](traj_utils::msg::SwarmPrimitiveTraj::SharedPtr m){ one_primitive_sub_udp_cb(m); });
+  goal_sub_ = node->create_subscription<quadrotor_msgs::msg::GoalSet>("/goal_user2brig", 100, [](quadrotor_msgs::msg::GoalSet::SharedPtr m){ goal_sub_udp_cb(m); });
+  joy_sub_ = node->create_subscription<sensor_msgs::msg::Joy>("/joystick_from_users", 100, [](sensor_msgs::msg::Joy::SharedPtr m){ joy_sub_udp_cb(m); });
   udp_send_fd_ = init_broadcast(udp_ip_.c_str(), UDP_PORT);
   std::thread udp_recv_thd(udp_recv_fun); udp_recv_thd.detach();
   rclcpp::spin(node);
