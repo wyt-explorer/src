@@ -1,0 +1,8 @@
+source;share/primitive_env/hook/cmake_prefix_path.ps1
+source;share/primitive_env/hook/cmake_prefix_path.dsv
+source;share/primitive_env/hook/cmake_prefix_path.sh
+source;share/primitive_env/local_setup.bash
+source;share/primitive_env/local_setup.dsv
+source;share/primitive_env/local_setup.ps1
+source;share/primitive_env/local_setup.sh
+source;share/primitive_env/local_setup.zsh

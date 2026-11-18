@@ -13,7 +13,7 @@ source install/setup.bash
 ros2 launch primitive_planner single_drone.launch.py
 ```
 
-等待 `WAIT_TARGET` 后，在另一个已加载同一环境的终端触发：
+启动后会自动打开 RViz2 并加载地图、起终点和里程计。等待 `WAIT_TARGET` 后，可以使用 Publish Point 点击地图触发；也可在另一个已加载同一环境的终端触发：
 
 ```bash
 ros2 topic pub --once /traj_start_trigger geometry_msgs/msg/PoseStamped '{header: {frame_id: world}, pose: {orientation: {w: 1.0}}}'

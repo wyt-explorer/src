@@ -1,0 +1,63 @@
+<!-- 启动自定义地图、起终点显示、单机规划仿真及 RViz 点击触发。 -->
+<launch>
+  <!-- 1. 自定义地图 -->
+  <arg name="map_file" default="$(find primitive_env)/map/map_01.yaml" />
+  <arg name="map_size_x" default="20.0" />
+  <arg name="map_size_y" default="20.0" />
+  <arg name="map_size_z" default="3.0" />
+
+  <!-- 起点、终点：与 map_01.yaml 保持一致 -->
+  <arg name="init_x" default="-8.0" />
+  <arg name="init_y" default="0.0" />
+  <arg name="init_z" default="1.5" />
+  <arg name="target_x" default="8.0" />
+  <arg name="target_y" default="0.0" />
+  <arg name="target_z" default="1.5" />
+
+  <!-- 无人机编号、里程计话题和规划速度上限。 -->
+  <arg name="drone_id" default="0" />
+  <arg name="odom_topic" default="visual_slam/odom" />
+  <arg name="max_vel" default="1.0" />
+
+  <!-- 发布自定义 PointCloud2 地图 -->
+  <node pkg="primitive_env" type="map_publisher.py"
+        name="custom_map_publisher" output="screen">
+    <param name="map_file" value="$(arg map_file)" />
+    <param name="cloud_topic" value="/map_generator/global_cloud" />
+  </node>
+
+  <!-- 显示起点和终点 -->
+  <node pkg="primitive_env" type="waypoint_publisher.py"
+        name="demo_waypoint_markers" output="screen">
+    <param name="map_file" value="$(arg map_file)" />
+  </node>
+
+  <!-- Primitive-Planner：规划器、仿真、局部感知和轨迹服务器 -->
+  <include file="$(find primitive_planner)/launch/run_in_sim.xml">
+    <arg name="drone_id" value="$(arg drone_id)" />
+    <arg name="max_vel" value="$(arg max_vel)" />
+    <arg name="map_size_x" value="$(arg map_size_x)" />
+    <arg name="map_size_y" value="$(arg map_size_y)" />
+    <arg name="map_size_z" value="$(arg map_size_z)" />
+    <arg name="init_x" value="$(arg init_x)" />
+    <arg name="init_y" value="$(arg init_y)" />
+    <arg name="init_z" value="$(arg init_z)" />
+    <arg name="odom_topic" value="$(arg odom_topic)" />
+    <!-- flight_type=2 使用预设航点；此处只配置一个固定目标。 -->
+    <arg name="flight_type" value="2" />
+    <arg name="point_num" value="1" />
+    <arg name="target0_x" value="$(arg target_x)" />
+    <arg name="target0_y" value="$(arg target_y)" />
+    <arg name="target0_z" value="$(arg target_z)" />
+  </include>
+
+  <!-- RViz 点击触发：rviz_click_trigger.py 订阅 /clicked_point -->
+  <node pkg="primitive_env" type="rviz_click_trigger.py"
+        name="rviz_click_trigger" output="screen" />
+
+  <!-- RViz：demo.rviz 需配置 rviz/PublishPoint，Topic=/clicked_point -->
+  <node pkg="rviz" type="rviz" name="rviz"
+        args="-d $(find primitive_env)/rviz/demo.rviz"
+        output="screen" />
+</launch>
+

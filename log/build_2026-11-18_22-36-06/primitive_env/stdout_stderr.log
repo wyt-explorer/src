@@ -1,0 +1,53 @@
+-- The C compiler identification is GNU 13.3.0
+-- The CXX compiler identification is GNU 13.3.0
+-- Detecting C compiler ABI info
+-- Detecting C compiler ABI info - done
+-- Check for working C compiler: /usr/bin/cc - skipped
+-- Detecting C compile features
+-- Detecting C compile features - done
+-- Detecting CXX compiler ABI info
+-- Detecting CXX compiler ABI info - done
+-- Check for working CXX compiler: /usr/bin/c++ - skipped
+-- Detecting CXX compile features
+-- Detecting CXX compile features - done
+-- Found ament_cmake: 2.5.6 (/opt/ros/jazzy/share/ament_cmake/cmake)
+-- Found Python3: /usr/bin/python3 (found version "3.12.3") found components: Interpreter 
+-- Found rclpy: 7.1.12 (/opt/ros/jazzy/share/rclpy/cmake)
+-- Found sensor_msgs: 5.3.8 (/opt/ros/jazzy/share/sensor_msgs/cmake)
+-- Found rosidl_generator_c: 4.6.9 (/opt/ros/jazzy/share/rosidl_generator_c/cmake)
+-- Found rosidl_generator_cpp: 4.6.9 (/opt/ros/jazzy/share/rosidl_generator_cpp/cmake)
+-- Using all available rosidl_typesupport_c: rosidl_typesupport_fastrtps_c;rosidl_typesupport_introspection_c
+-- Using all available rosidl_typesupport_cpp: rosidl_typesupport_fastrtps_cpp;rosidl_typesupport_introspection_cpp
+-- Found visualization_msgs: 5.3.8 (/opt/ros/jazzy/share/visualization_msgs/cmake)
+-- Configuring done (2.8s)
+-- Generating done (0.0s)
+-- Build files have been written to: /home/wyt/RC_planner/src/build/primitive_env
+-- Install configuration: "Release"
+-- Installing: /home/wyt/RC_planner/src/install/primitive_env/lib/primitive_env/map_publisher.py
+-- Installing: /home/wyt/RC_planner/src/install/primitive_env/lib/primitive_env/waypoint_publisher.py
+-- Installing: /home/wyt/RC_planner/src/install/primitive_env/lib/primitive_env/rviz_click_trigger.py
+-- Installing: /home/wyt/RC_planner/src/install/primitive_env/share/primitive_env/launch
+-- Installing: /home/wyt/RC_planner/src/install/primitive_env/share/primitive_env/launch/demo.launch
+-- Installing: /home/wyt/RC_planner/src/install/primitive_env/share/primitive_env/launch/demo.launch.py
+-- Installing: /home/wyt/RC_planner/src/install/primitive_env/share/primitive_env/launch/__pycache__
+-- Installing: /home/wyt/RC_planner/src/install/primitive_env/share/primitive_env/launch/__pycache__/demo.launch.cpython-38.pyc
+-- Installing: /home/wyt/RC_planner/src/install/primitive_env/share/primitive_env/launch/demo_env.launch
+-- Installing: /home/wyt/RC_planner/src/install/primitive_env/share/primitive_env/map
+-- Installing: /home/wyt/RC_planner/src/install/primitive_env/share/primitive_env/map/map_01.yaml
+-- Installing: /home/wyt/RC_planner/src/install/primitive_env/share/primitive_env/rviz
+-- Installing: /home/wyt/RC_planner/src/install/primitive_env/share/primitive_env/rviz/demo.rviz
+-- Installing: /home/wyt/RC_planner/src/install/primitive_env/share/ament_index/resource_index/package_run_dependencies/primitive_env
+-- Installing: /home/wyt/RC_planner/src/install/primitive_env/share/ament_index/resource_index/parent_prefix_path/primitive_env
+-- Installing: /home/wyt/RC_planner/src/install/primitive_env/share/primitive_env/environment/ament_prefix_path.sh
+-- Installing: /home/wyt/RC_planner/src/install/primitive_env/share/primitive_env/environment/ament_prefix_path.dsv
+-- Installing: /home/wyt/RC_planner/src/install/primitive_env/share/primitive_env/environment/path.sh
+-- Installing: /home/wyt/RC_planner/src/install/primitive_env/share/primitive_env/environment/path.dsv
+-- Installing: /home/wyt/RC_planner/src/install/primitive_env/share/primitive_env/local_setup.bash
+-- Installing: /home/wyt/RC_planner/src/install/primitive_env/share/primitive_env/local_setup.sh
+-- Installing: /home/wyt/RC_planner/src/install/primitive_env/share/primitive_env/local_setup.zsh
+-- Installing: /home/wyt/RC_planner/src/install/primitive_env/share/primitive_env/local_setup.dsv
+-- Installing: /home/wyt/RC_planner/src/install/primitive_env/share/primitive_env/package.dsv
+-- Installing: /home/wyt/RC_planner/src/install/primitive_env/share/ament_index/resource_index/packages/primitive_env
+-- Installing: /home/wyt/RC_planner/src/install/primitive_env/share/primitive_env/cmake/primitive_envConfig.cmake
+-- Installing: /home/wyt/RC_planner/src/install/primitive_env/share/primitive_env/cmake/primitive_envConfig-version.cmake
+-- Installing: /home/wyt/RC_planner/src/install/primitive_env/share/primitive_env/package.xml

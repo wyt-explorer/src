@@ -1,0 +1,70 @@
+# 配置三维障碍物地图、起终点及障碍物几何参数。
+map:
+  # 坐标系和点云采样间距；长度单位均为米。
+  frame_id: world
+  resolution: 0.1
+  # 地图范围元数据；点云生成不按此范围裁剪，规划范围需同步设置 demo.launch。
+  size:
+    x: 20.0
+    y: 20.0
+    z: 3.0
+
+# 起终点用于标记显示，需与 demo.launch 中的规划起终点保持一致。
+start:
+  x: -8.0
+  y: 0.0
+  z: 1.5
+
+goal:
+  x: 8.0
+  y: 0.0
+  z: 1.5
+
+# box/cylinder 的 position 为底面中心；ring 的 position 为圆环中心。
+obstacles:
+  # 长方体障碍物
+  - type: box
+    position: [-3.0, -2.0, 0.0]
+    # 长方体的 X/Y 方向边长与高度。
+    size: [1.5, 1.5, 2.5]
+
+
+  # 圆柱体障碍物
+  - type: cylinder
+    position: [-3.0, 0.0, 0.0]
+    radius: 0.7
+    height: 2.5
+
+  - type: cylinder
+    position: [3.0, 0.0, 0.0]
+    radius: 0.8
+    height: 3.0
+
+  # 第一个圆环
+  - type: ring
+    position: [-5.5, 0.0, 1.5]
+    # axis 为圆环平面的法向轴；radius 为中心线半径，tube_radius 为管截面半径。
+    axis: x
+    radius: 1.0
+    tube_radius: 0.15
+
+  # 第二个圆环
+  - type: ring
+    position: [0.0, 1.2, 1.1]
+    axis: x
+    radius: 1.0
+    tube_radius: 0.15
+
+  # 第三个圆环
+  - type: ring
+    position: [0.6, -0.5, 1.2]
+    axis: y
+    radius: 1.0
+    tube_radius: 0.15
+
+  # 第四个圆环
+  - type: ring
+    position: [1.6, 1.2, 1.1]
+    axis: x
+    radius: 1.0
+    tube_radius: 0.15

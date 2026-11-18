@@ -36,7 +36,7 @@ ros2 launch primitive_planner single_drone.launch.py map_file:=/absolute/path/ma
 ros2 topic pub --once /traj_start_trigger geometry_msgs/msg/PoseStamped '{header: {frame_id: world}, pose: {orientation: {w: 1.0}}}'
 ```
 
-启动命令不会自动打开 RViz。可以另开终端加载同一套环境并运行 `rviz2`，将 Fixed Frame 设为 `world`，添加 `/map_generator/global_cloud` 点云、`/my_primitive_demo/waypoint_markers` 标记，通过 Publish Point 工具触发。`ros2 launch primitive_env demo.launch.py` 只启动地图与标记，不启动规划闭环。
+启动命令默认自动打开 RViz2，并加载 `world` 坐标系、障碍物点云、起终点标记和模拟里程计显示。等待 `WAIT_TARGET` 后，通过 RViz 的 Publish Point 工具点击地图即可触发规划。无图形界面时可添加 `rviz:=false` 关闭窗口。`ros2 launch primitive_env demo.launch.py` 只启动地图与标记，不启动规划闭环。
 
 默认地图、起点和终点都来自 `Primitive_env/map/map_01.yaml`。普通构建会将配置复制到安装目录；修改源码目录中的地图后，重新构建 `primitive_env`，或直接指定源码文件：
 
@@ -119,3 +119,5 @@ memory.md                      完成项和待办记录
 - 2026-11-18：单机闭环所需 6 包（primitive_env、quadrotor_msgs、traj_utils、local_sensing_node、poscmd_2_odom、primitive_planner）在 Jazzy 下 Release 编译通过。
 - 单机基础运行通过：地图 map_01.yaml，从 (-8, 0, 1.5) 触发后移动至 (7.5212, 0.1044, 1.4947)，距离目标约 0.49 米时结束测试。观察到 88 帧局部点云、1666 条位置指令；这不等于完整动力学、多机避碰或实机验证。
 - 本次验证产物位于 `.jazzy-check/`（已忽略），可 `source .jazzy-check/install/setup.bash` 使用；标准构建命令见第 1 节。
+
+- 2026-11-18：单机启动默认打开 RViz2，自动加载 ROS 2 地图、起终点、里程计和点击触发工具；可用 `rviz:=false` 关闭。RViz 子进程会清理继承的 Snap GTK/GIO/Qt 插件路径，避免系统图形库冲突。修改启动文件后需重新构建 `primitive_env` 与 `primitive_planner` 并加载对应安装环境。

@@ -1,0 +1,19 @@
+{
+  "package_name": "quadrotor_msgs",
+  "non_idl_tuples": [
+    "/home/wyt/RC_planner/src/Primitive-Planner/src/Utils/quadrotor_msgs:msg/AuxCommand.msg",
+    "/home/wyt/RC_planner/src/Primitive-Planner/src/Utils/quadrotor_msgs:msg/Corrections.msg",
+    "/home/wyt/RC_planner/src/Primitive-Planner/src/Utils/quadrotor_msgs:msg/Gains.msg",
+    "/home/wyt/RC_planner/src/Primitive-Planner/src/Utils/quadrotor_msgs:msg/OutputData.msg",
+    "/home/wyt/RC_planner/src/Primitive-Planner/src/Utils/quadrotor_msgs:msg/PositionCommand.msg",
+    "/home/wyt/RC_planner/src/Primitive-Planner/src/Utils/quadrotor_msgs:msg/PPROutputData.msg",
+    "/home/wyt/RC_planner/src/Primitive-Planner/src/Utils/quadrotor_msgs:msg/Serial.msg",
+    "/home/wyt/RC_planner/src/Primitive-Planner/src/Utils/quadrotor_msgs:msg/SO3Command.msg",
+    "/home/wyt/RC_planner/src/Primitive-Planner/src/Utils/quadrotor_msgs:msg/StatusData.msg",
+    "/home/wyt/RC_planner/src/Primitive-Planner/src/Utils/quadrotor_msgs:msg/TRPYCommand.msg",
+    "/home/wyt/RC_planner/src/Primitive-Planner/src/Utils/quadrotor_msgs:msg/Odometry.msg",
+    "/home/wyt/RC_planner/src/Primitive-Planner/src/Utils/quadrotor_msgs:msg/PolynomialTrajectory.msg",
+    "/home/wyt/RC_planner/src/Primitive-Planner/src/Utils/quadrotor_msgs:msg/LQRTrajectory.msg",
+    "/home/wyt/RC_planner/src/Primitive-Planner/src/Utils/quadrotor_msgs:msg/GoalSet.msg"
+  ]
+}

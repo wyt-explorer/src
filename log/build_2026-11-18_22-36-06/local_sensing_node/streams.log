@@ -1,0 +1,130 @@
+[0.048s] Invoking command in '/home/wyt/RC_planner/src/build/local_sensing_node': AMENT_PREFIX_PATH=/home/wyt/RC_planner/src/install/quadrotor_msgs:${AMENT_PREFIX_PATH} CMAKE_PREFIX_PATH=/home/wyt/RC_planner/src/install/quadrotor_msgs:/opt/ros/jazzy/opt/gz_sim_vendor:/opt/ros/jazzy/opt/gz_sensors_vendor:/opt/ros/jazzy/opt/gz_physics_vendor:/opt/ros/jazzy/opt/sdformat_vendor:/opt/ros/jazzy/opt/gz_gui_vendor:/opt/ros/jazzy/opt/gz_transport_vendor:/opt/ros/jazzy/opt/gz_rendering_vendor:/opt/ros/jazzy/opt/gz_plugin_vendor:/opt/ros/jazzy/opt/gz_fuel_tools_vendor:/opt/ros/jazzy/opt/gz_msgs_vendor:/opt/ros/jazzy/opt/gz_common_vendor:/opt/ros/jazzy/opt/gz_math_vendor:/opt/ros/jazzy/opt/gz_utils_vendor:/opt/ros/jazzy/opt/gz_tools_vendor:/opt/ros/jazzy/opt/gz_ogre_next_vendor:/opt/ros/jazzy/opt/gz_dartsim_vendor:/opt/ros/jazzy/opt/gz_cmake_vendor:/opt/ros/jazzy DEBUGINFOD_URLS=https://debuginfod.ubuntu.com LD_LIBRARY_PATH=/home/wyt/RC_planner/src/install/quadrotor_msgs/lib:${LD_LIBRARY_PATH} PYTHONPATH=/home/wyt/RC_planner/src/install/quadrotor_msgs/lib/python3.12/site-packages:${PYTHONPATH} /usr/bin/cmake /home/wyt/RC_planner/src/Primitive-Planner/src/uav_simulator/local_sensing -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=/home/wyt/RC_planner/src/install/local_sensing_node
+[0.139s] -- The C compiler identification is GNU 13.3.0
+[0.237s] -- The CXX compiler identification is GNU 13.3.0
+[0.268s] -- Detecting C compiler ABI info
+[0.416s] -- Detecting C compiler ABI info - done
+[0.433s] -- Check for working C compiler: /usr/bin/cc - skipped
+[0.434s] -- Detecting C compile features
+[0.434s] -- Detecting C compile features - done
+[0.451s] -- Detecting CXX compiler ABI info
+[0.614s] -- Detecting CXX compiler ABI info - done
+[0.632s] -- Check for working CXX compiler: /usr/bin/c++ - skipped
+[0.632s] -- Detecting CXX compile features
+[0.633s] -- Detecting CXX compile features - done
+[0.639s] -- Found ament_cmake: 2.5.6 (/opt/ros/jazzy/share/ament_cmake/cmake)
+[0.897s] -- Found Python3: /usr/bin/python3 (found version "3.12.3") found components: Interpreter 
+[1.107s] -- Found rclcpp: 28.1.22 (/opt/ros/jazzy/share/rclcpp/cmake)
+[1.197s] -- Found rosidl_generator_c: 4.6.9 (/opt/ros/jazzy/share/rosidl_generator_c/cmake)
+[1.225s] -- Found rosidl_generator_cpp: 4.6.9 (/opt/ros/jazzy/share/rosidl_generator_cpp/cmake)
+[1.258s] -- Using all available rosidl_typesupport_c: rosidl_typesupport_fastrtps_c;rosidl_typesupport_introspection_c
+[1.293s] -- Using all available rosidl_typesupport_cpp: rosidl_typesupport_fastrtps_cpp;rosidl_typesupport_introspection_cpp
+[1.442s] -- Found rmw_implementation_cmake: 7.3.4 (/opt/ros/jazzy/share/rmw_implementation_cmake/cmake)
+[1.450s] -- Found rmw_fastrtps_cpp: 8.4.4 (/opt/ros/jazzy/share/rmw_fastrtps_cpp/cmake)
+[1.603s] -- Found OpenSSL: /usr/lib/x86_64-linux-gnu/libcrypto.so (found version "3.0.13")  
+[1.638s] -- Found FastRTPS: /opt/ros/jazzy/include (Required is at least version "2.13") 
+[1.683s] -- Using RMW implementation 'rmw_fastrtps_cpp' as default
+[1.836s] -- Found sensor_msgs: 5.3.8 (/opt/ros/jazzy/share/sensor_msgs/cmake)
+[1.944s] -- Found nav_msgs: 5.3.8 (/opt/ros/jazzy/share/nav_msgs/cmake)
+[1.989s] -- Found quadrotor_msgs: 0.1.0 (/home/wyt/RC_planner/src/install/quadrotor_msgs/share/quadrotor_msgs/cmake)
+[2.038s] -- Found pcl_conversions: 2.6.5 (/opt/ros/jazzy/share/pcl_conversions/cmake)
+[2.189s] [33mCMake Warning (dev) at /usr/lib/x86_64-linux-gnu/cmake/pcl/Modules/FindFLANN.cmake:45 (find_package):
+[2.189s]   Policy CMP0144 is not set: find_package uses upper-case <PACKAGENAME>_ROOT
+[2.189s]   variables.  Run "cmake --help-policy CMP0144" for policy details.  Use the
+[2.189s]   cmake_policy command to set the policy and suppress this warning.
+[2.189s] 
+[2.190s]   CMake variable FLANN_ROOT is set to:
+[2.190s] 
+[2.190s]     /usr
+[2.190s] 
+[2.190s]   For compatibility, find_package is ignoring the variable, but code in a
+[2.190s]   .cmake module might still use it.
+[2.190s] Call Stack (most recent call first):
+[2.190s]   /usr/lib/x86_64-linux-gnu/cmake/pcl/PCLConfig.cmake:261 (find_package)
+[2.190s]   /usr/lib/x86_64-linux-gnu/cmake/pcl/PCLConfig.cmake:306 (find_flann)
+[2.190s]   /usr/lib/x86_64-linux-gnu/cmake/pcl/PCLConfig.cmake:570 (find_external_library)
+[2.190s]   /opt/ros/jazzy/share/pcl_conversions/cmake/ament_cmake_export_dependencies-extras.cmake:21 (find_package)
+[2.190s]   /opt/ros/jazzy/share/pcl_conversions/cmake/pcl_conversionsConfig.cmake:41 (include)
+[2.191s]   CMakeLists.txt:10 (find_package)
+[2.191s] This warning is for project developers.  Use -Wno-dev to suppress it.
+[2.191s] [0m
+[2.191s] -- Found flann version 1.9.2
+[2.698s] -- Found OpenMP_CXX: -fopenmp (found version "4.5") 
+[2.699s] -- Found OpenMP: TRUE (found version "4.5") found components: CXX 
+[4.936s] -- Checking for module 'libusb-1.0'
+[4.966s] --   Found libusb-1.0, version 1.0.27
+[5.031s] -- Found libusb: /usr/lib/x86_64-linux-gnu/libusb-1.0.so  
+[5.033s] -- OpenNI found (version: 1.5.4.0, include: /usr/include/ni, lib: /usr/lib/libOpenNI.so;libusb::libusb)
+[5.134s] -- OpenNI2 found (version: 2.2.0.33, include: /usr/include/openni2, lib: /usr/lib/x86_64-linux-gnu/libOpenNI2.so;libusb::libusb)
+[5.139s] -- Could NOT find Pcap (missing: PCAP_LIBRARIES PCAP_INCLUDE_DIRS) 
+[5.164s] -- Found ZLIB: /usr/lib/x86_64-linux-gnu/libz.so (found version "1.3")  
+[5.198s] -- Found PNG: /usr/lib/x86_64-linux-gnu/libpng.so (found version "1.6.43") 
+[5.915s] -- OpenNI found (version: 1.5.4.0, include: /usr/include/ni, lib: /usr/lib/libOpenNI.so;libusb::libusb)
+[5.926s] -- OpenNI2 found (version: 2.2.0.33, include: /usr/include/openni2, lib: /usr/lib/x86_64-linux-gnu/libOpenNI2.so;libusb::libusb)
+[6.619s] -- Found Qhull version 8.0.2
+[7.334s] -- OpenNI found (version: 1.5.4.0, include: /usr/include/ni, lib: /usr/lib/libOpenNI.so;libusb::libusb)
+[8.034s] -- Found PCL_COMMON: /usr/lib/x86_64-linux-gnu/libpcl_common.so  
+[8.036s] -- Found PCL_KDTREE: /usr/lib/x86_64-linux-gnu/libpcl_kdtree.so  
+[8.037s] -- Found PCL_OCTREE: /usr/lib/x86_64-linux-gnu/libpcl_octree.so  
+[8.039s] -- Found PCL_SEARCH: /usr/lib/x86_64-linux-gnu/libpcl_search.so  
+[8.041s] -- Found PCL_SAMPLE_CONSENSUS: /usr/lib/x86_64-linux-gnu/libpcl_sample_consensus.so  
+[8.043s] -- Found PCL_FILTERS: /usr/lib/x86_64-linux-gnu/libpcl_filters.so  
+[8.043s] -- Found PCL_2D: /usr/include/pcl-1.14  
+[8.044s] -- Found PCL_GEOMETRY: /usr/include/pcl-1.14  
+[8.046s] -- Found PCL_IO: /usr/lib/x86_64-linux-gnu/libpcl_io.so  
+[8.048s] -- Found PCL_FEATURES: /usr/lib/x86_64-linux-gnu/libpcl_features.so  
+[8.050s] -- Found PCL_ML: /usr/lib/x86_64-linux-gnu/libpcl_ml.so  
+[8.052s] -- Found PCL_SEGMENTATION: /usr/lib/x86_64-linux-gnu/libpcl_segmentation.so  
+[8.054s] -- Found PCL_VISUALIZATION: /usr/lib/x86_64-linux-gnu/libpcl_visualization.so  
+[8.056s] -- Found PCL_SURFACE: /usr/lib/x86_64-linux-gnu/libpcl_surface.so  
+[8.058s] -- Found PCL_REGISTRATION: /usr/lib/x86_64-linux-gnu/libpcl_registration.so  
+[8.060s] -- Found PCL_KEYPOINTS: /usr/lib/x86_64-linux-gnu/libpcl_keypoints.so  
+[8.062s] -- Found PCL_TRACKING: /usr/lib/x86_64-linux-gnu/libpcl_tracking.so  
+[8.064s] -- Found PCL_RECOGNITION: /usr/lib/x86_64-linux-gnu/libpcl_recognition.so  
+[8.066s] -- Found PCL_STEREO: /usr/lib/x86_64-linux-gnu/libpcl_stereo.so  
+[8.068s] -- Found PCL_APPS: /usr/lib/x86_64-linux-gnu/libpcl_apps.so  
+[8.069s] -- Found PCL_IN_HAND_SCANNER: /usr/include/pcl-1.14  
+[8.070s] -- Found PCL_MODELER: /usr/include/pcl-1.14  
+[8.071s] -- Found PCL_POINT_CLOUD_EDITOR: /usr/include/pcl-1.14  
+[8.073s] -- Found PCL_OUTOFCORE: /usr/lib/x86_64-linux-gnu/libpcl_outofcore.so  
+[8.075s] -- Found PCL_PEOPLE: /usr/lib/x86_64-linux-gnu/libpcl_people.so  
+[8.079s] [33mCMake Warning (dev) at CMakeLists.txt:11 (find_package):
+[8.079s]   Policy CMP0074 is not set: find_package uses <PackageName>_ROOT variables.
+[8.079s]   Run "cmake --help-policy CMP0074" for policy details.  Use the cmake_policy
+[8.079s]   command to set the policy and suppress this warning.
+[8.079s] 
+[8.079s]   CMake variable PCL_ROOT is set to:
+[8.079s] 
+[8.079s]     /usr
+[8.080s] 
+[8.080s]   For compatibility, CMake is ignoring the variable.
+[8.080s] This warning is for project developers.  Use -Wno-dev to suppress it.
+[8.080s] [0m
+[8.270s] -- Configuring done (8.2s)
+[8.326s] -- Generating done (0.0s)
+[8.335s] -- Build files have been written to: /home/wyt/RC_planner/src/build/local_sensing_node
+[8.361s] Invoked command in '/home/wyt/RC_planner/src/build/local_sensing_node' returned '0': AMENT_PREFIX_PATH=/home/wyt/RC_planner/src/install/quadrotor_msgs:${AMENT_PREFIX_PATH} CMAKE_PREFIX_PATH=/home/wyt/RC_planner/src/install/quadrotor_msgs:/opt/ros/jazzy/opt/gz_sim_vendor:/opt/ros/jazzy/opt/gz_sensors_vendor:/opt/ros/jazzy/opt/gz_physics_vendor:/opt/ros/jazzy/opt/sdformat_vendor:/opt/ros/jazzy/opt/gz_gui_vendor:/opt/ros/jazzy/opt/gz_transport_vendor:/opt/ros/jazzy/opt/gz_rendering_vendor:/opt/ros/jazzy/opt/gz_plugin_vendor:/opt/ros/jazzy/opt/gz_fuel_tools_vendor:/opt/ros/jazzy/opt/gz_msgs_vendor:/opt/ros/jazzy/opt/gz_common_vendor:/opt/ros/jazzy/opt/gz_math_vendor:/opt/ros/jazzy/opt/gz_utils_vendor:/opt/ros/jazzy/opt/gz_tools_vendor:/opt/ros/jazzy/opt/gz_ogre_next_vendor:/opt/ros/jazzy/opt/gz_dartsim_vendor:/opt/ros/jazzy/opt/gz_cmake_vendor:/opt/ros/jazzy DEBUGINFOD_URLS=https://debuginfod.ubuntu.com LD_LIBRARY_PATH=/home/wyt/RC_planner/src/install/quadrotor_msgs/lib:${LD_LIBRARY_PATH} PYTHONPATH=/home/wyt/RC_planner/src/install/quadrotor_msgs/lib/python3.12/site-packages:${PYTHONPATH} /usr/bin/cmake /home/wyt/RC_planner/src/Primitive-Planner/src/uav_simulator/local_sensing -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=/home/wyt/RC_planner/src/install/local_sensing_node
+[8.364s] Invoking command in '/home/wyt/RC_planner/src/build/local_sensing_node': AMENT_PREFIX_PATH=/home/wyt/RC_planner/src/install/quadrotor_msgs:${AMENT_PREFIX_PATH} CMAKE_PREFIX_PATH=/home/wyt/RC_planner/src/install/quadrotor_msgs:/opt/ros/jazzy/opt/gz_sim_vendor:/opt/ros/jazzy/opt/gz_sensors_vendor:/opt/ros/jazzy/opt/gz_physics_vendor:/opt/ros/jazzy/opt/sdformat_vendor:/opt/ros/jazzy/opt/gz_gui_vendor:/opt/ros/jazzy/opt/gz_transport_vendor:/opt/ros/jazzy/opt/gz_rendering_vendor:/opt/ros/jazzy/opt/gz_plugin_vendor:/opt/ros/jazzy/opt/gz_fuel_tools_vendor:/opt/ros/jazzy/opt/gz_msgs_vendor:/opt/ros/jazzy/opt/gz_common_vendor:/opt/ros/jazzy/opt/gz_math_vendor:/opt/ros/jazzy/opt/gz_utils_vendor:/opt/ros/jazzy/opt/gz_tools_vendor:/opt/ros/jazzy/opt/gz_ogre_next_vendor:/opt/ros/jazzy/opt/gz_dartsim_vendor:/opt/ros/jazzy/opt/gz_cmake_vendor:/opt/ros/jazzy DEBUGINFOD_URLS=https://debuginfod.ubuntu.com LD_LIBRARY_PATH=/home/wyt/RC_planner/src/install/quadrotor_msgs/lib:${LD_LIBRARY_PATH} PYTHONPATH=/home/wyt/RC_planner/src/install/quadrotor_msgs/lib/python3.12/site-packages:${PYTHONPATH} /usr/bin/cmake --build /home/wyt/RC_planner/src/build/local_sensing_node -- -j28 -l28
+[8.462s] [ 50%] [32mBuilding CXX object CMakeFiles/pcl_render_node.dir/src/pointcloud_render_node.cpp.o[0m
+[34.737s] [100%] [32m[1mLinking CXX executable pcl_render_node[0m
+[35.779s] [100%] Built target pcl_render_node
+[35.796s] Invoked command in '/home/wyt/RC_planner/src/build/local_sensing_node' returned '0': AMENT_PREFIX_PATH=/home/wyt/RC_planner/src/install/quadrotor_msgs:${AMENT_PREFIX_PATH} CMAKE_PREFIX_PATH=/home/wyt/RC_planner/src/install/quadrotor_msgs:/opt/ros/jazzy/opt/gz_sim_vendor:/opt/ros/jazzy/opt/gz_sensors_vendor:/opt/ros/jazzy/opt/gz_physics_vendor:/opt/ros/jazzy/opt/sdformat_vendor:/opt/ros/jazzy/opt/gz_gui_vendor:/opt/ros/jazzy/opt/gz_transport_vendor:/opt/ros/jazzy/opt/gz_rendering_vendor:/opt/ros/jazzy/opt/gz_plugin_vendor:/opt/ros/jazzy/opt/gz_fuel_tools_vendor:/opt/ros/jazzy/opt/gz_msgs_vendor:/opt/ros/jazzy/opt/gz_common_vendor:/opt/ros/jazzy/opt/gz_math_vendor:/opt/ros/jazzy/opt/gz_utils_vendor:/opt/ros/jazzy/opt/gz_tools_vendor:/opt/ros/jazzy/opt/gz_ogre_next_vendor:/opt/ros/jazzy/opt/gz_dartsim_vendor:/opt/ros/jazzy/opt/gz_cmake_vendor:/opt/ros/jazzy DEBUGINFOD_URLS=https://debuginfod.ubuntu.com LD_LIBRARY_PATH=/home/wyt/RC_planner/src/install/quadrotor_msgs/lib:${LD_LIBRARY_PATH} PYTHONPATH=/home/wyt/RC_planner/src/install/quadrotor_msgs/lib/python3.12/site-packages:${PYTHONPATH} /usr/bin/cmake --build /home/wyt/RC_planner/src/build/local_sensing_node -- -j28 -l28
+[35.799s] Invoking command in '/home/wyt/RC_planner/src/build/local_sensing_node': AMENT_PREFIX_PATH=/home/wyt/RC_planner/src/install/quadrotor_msgs:${AMENT_PREFIX_PATH} CMAKE_PREFIX_PATH=/home/wyt/RC_planner/src/install/quadrotor_msgs:/opt/ros/jazzy/opt/gz_sim_vendor:/opt/ros/jazzy/opt/gz_sensors_vendor:/opt/ros/jazzy/opt/gz_physics_vendor:/opt/ros/jazzy/opt/sdformat_vendor:/opt/ros/jazzy/opt/gz_gui_vendor:/opt/ros/jazzy/opt/gz_transport_vendor:/opt/ros/jazzy/opt/gz_rendering_vendor:/opt/ros/jazzy/opt/gz_plugin_vendor:/opt/ros/jazzy/opt/gz_fuel_tools_vendor:/opt/ros/jazzy/opt/gz_msgs_vendor:/opt/ros/jazzy/opt/gz_common_vendor:/opt/ros/jazzy/opt/gz_math_vendor:/opt/ros/jazzy/opt/gz_utils_vendor:/opt/ros/jazzy/opt/gz_tools_vendor:/opt/ros/jazzy/opt/gz_ogre_next_vendor:/opt/ros/jazzy/opt/gz_dartsim_vendor:/opt/ros/jazzy/opt/gz_cmake_vendor:/opt/ros/jazzy DEBUGINFOD_URLS=https://debuginfod.ubuntu.com LD_LIBRARY_PATH=/home/wyt/RC_planner/src/install/quadrotor_msgs/lib:${LD_LIBRARY_PATH} PYTHONPATH=/home/wyt/RC_planner/src/install/quadrotor_msgs/lib/python3.12/site-packages:${PYTHONPATH} /usr/bin/cmake --install /home/wyt/RC_planner/src/build/local_sensing_node
+[35.813s] -- Install configuration: "Release"
+[35.813s] -- Installing: /home/wyt/RC_planner/src/install/local_sensing_node/lib/local_sensing_node/pcl_render_node
+[35.815s] -- Set non-toolchain portion of runtime path of "/home/wyt/RC_planner/src/install/local_sensing_node/lib/local_sensing_node/pcl_render_node" to ""
+[35.816s] -- Installing: /home/wyt/RC_planner/src/install/local_sensing_node/share/ament_index/resource_index/package_run_dependencies/local_sensing_node
+[35.816s] -- Installing: /home/wyt/RC_planner/src/install/local_sensing_node/share/ament_index/resource_index/parent_prefix_path/local_sensing_node
+[35.816s] -- Installing: /home/wyt/RC_planner/src/install/local_sensing_node/share/local_sensing_node/environment/ament_prefix_path.sh
+[35.816s] -- Installing: /home/wyt/RC_planner/src/install/local_sensing_node/share/local_sensing_node/environment/ament_prefix_path.dsv
+[35.816s] -- Installing: /home/wyt/RC_planner/src/install/local_sensing_node/share/local_sensing_node/environment/path.sh
+[35.817s] -- Installing: /home/wyt/RC_planner/src/install/local_sensing_node/share/local_sensing_node/environment/path.dsv
+[35.817s] -- Installing: /home/wyt/RC_planner/src/install/local_sensing_node/share/local_sensing_node/local_setup.bash
+[35.817s] -- Installing: /home/wyt/RC_planner/src/install/local_sensing_node/share/local_sensing_node/local_setup.sh
+[35.817s] -- Installing: /home/wyt/RC_planner/src/install/local_sensing_node/share/local_sensing_node/local_setup.zsh
+[35.817s] -- Installing: /home/wyt/RC_planner/src/install/local_sensing_node/share/local_sensing_node/local_setup.dsv
+[35.818s] -- Installing: /home/wyt/RC_planner/src/install/local_sensing_node/share/local_sensing_node/package.dsv
+[35.818s] -- Installing: /home/wyt/RC_planner/src/install/local_sensing_node/share/ament_index/resource_index/packages/local_sensing_node
+[35.818s] -- Installing: /home/wyt/RC_planner/src/install/local_sensing_node/share/local_sensing_node/cmake/local_sensing_nodeConfig.cmake
+[35.818s] -- Installing: /home/wyt/RC_planner/src/install/local_sensing_node/share/local_sensing_node/cmake/local_sensing_nodeConfig-version.cmake
+[35.818s] -- Installing: /home/wyt/RC_planner/src/install/local_sensing_node/share/local_sensing_node/package.xml
+[35.820s] Invoked command in '/home/wyt/RC_planner/src/build/local_sensing_node' returned '0': AMENT_PREFIX_PATH=/home/wyt/RC_planner/src/install/quadrotor_msgs:${AMENT_PREFIX_PATH} CMAKE_PREFIX_PATH=/home/wyt/RC_planner/src/install/quadrotor_msgs:/opt/ros/jazzy/opt/gz_sim_vendor:/opt/ros/jazzy/opt/gz_sensors_vendor:/opt/ros/jazzy/opt/gz_physics_vendor:/opt/ros/jazzy/opt/sdformat_vendor:/opt/ros/jazzy/opt/gz_gui_vendor:/opt/ros/jazzy/opt/gz_transport_vendor:/opt/ros/jazzy/opt/gz_rendering_vendor:/opt/ros/jazzy/opt/gz_plugin_vendor:/opt/ros/jazzy/opt/gz_fuel_tools_vendor:/opt/ros/jazzy/opt/gz_msgs_vendor:/opt/ros/jazzy/opt/gz_common_vendor:/opt/ros/jazzy/opt/gz_math_vendor:/opt/ros/jazzy/opt/gz_utils_vendor:/opt/ros/jazzy/opt/gz_tools_vendor:/opt/ros/jazzy/opt/gz_ogre_next_vendor:/opt/ros/jazzy/opt/gz_dartsim_vendor:/opt/ros/jazzy/opt/gz_cmake_vendor:/opt/ros/jazzy DEBUGINFOD_URLS=https://debuginfod.ubuntu.com LD_LIBRARY_PATH=/home/wyt/RC_planner/src/install/quadrotor_msgs/lib:${LD_LIBRARY_PATH} PYTHONPATH=/home/wyt/RC_planner/src/install/quadrotor_msgs/lib/python3.12/site-packages:${PYTHONPATH} /usr/bin/cmake --install /home/wyt/RC_planner/src/build/local_sensing_node

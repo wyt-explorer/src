@@ -1,0 +1,59 @@
+[0.036s] Invoking command in '/home/wyt/RC_planner/src/build/primitive_env': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/jazzy DEBUGINFOD_URLS=https://debuginfod.ubuntu.com /usr/bin/cmake /home/wyt/RC_planner/src/Primitive_env -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=/home/wyt/RC_planner/src/install/primitive_env
+[0.188s] -- The C compiler identification is GNU 13.3.0
+[0.349s] -- The CXX compiler identification is GNU 13.3.0
+[0.404s] -- Detecting C compiler ABI info
+[0.639s] -- Detecting C compiler ABI info - done
+[0.665s] -- Check for working C compiler: /usr/bin/cc - skipped
+[0.665s] -- Detecting C compile features
+[0.667s] -- Detecting C compile features - done
+[0.698s] -- Detecting CXX compiler ABI info
+[0.994s] -- Detecting CXX compiler ABI info - done
+[1.022s] -- Check for working CXX compiler: /usr/bin/c++ - skipped
+[1.023s] -- Detecting CXX compile features
+[1.024s] -- Detecting CXX compile features - done
+[1.033s] -- Found ament_cmake: 2.5.6 (/opt/ros/jazzy/share/ament_cmake/cmake)
+[1.478s] -- Found Python3: /usr/bin/python3 (found version "3.12.3") found components: Interpreter 
+[1.845s] -- Found rclpy: 7.1.12 (/opt/ros/jazzy/share/rclpy/cmake)
+[1.854s] -- Found sensor_msgs: 5.3.8 (/opt/ros/jazzy/share/sensor_msgs/cmake)
+[2.010s] -- Found rosidl_generator_c: 4.6.9 (/opt/ros/jazzy/share/rosidl_generator_c/cmake)
+[2.063s] -- Found rosidl_generator_cpp: 4.6.9 (/opt/ros/jazzy/share/rosidl_generator_cpp/cmake)
+[2.122s] -- Using all available rosidl_typesupport_c: rosidl_typesupport_fastrtps_c;rosidl_typesupport_introspection_c
+[2.189s] -- Using all available rosidl_typesupport_cpp: rosidl_typesupport_fastrtps_cpp;rosidl_typesupport_introspection_cpp
+[2.489s] -- Found visualization_msgs: 5.3.8 (/opt/ros/jazzy/share/visualization_msgs/cmake)
+[2.867s] -- Configuring done (2.8s)
+[2.880s] -- Generating done (0.0s)
+[2.888s] -- Build files have been written to: /home/wyt/RC_planner/src/build/primitive_env
+[2.904s] Invoked command in '/home/wyt/RC_planner/src/build/primitive_env' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/jazzy DEBUGINFOD_URLS=https://debuginfod.ubuntu.com /usr/bin/cmake /home/wyt/RC_planner/src/Primitive_env -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=/home/wyt/RC_planner/src/install/primitive_env
+[2.908s] Invoking command in '/home/wyt/RC_planner/src/build/primitive_env': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/jazzy DEBUGINFOD_URLS=https://debuginfod.ubuntu.com /usr/bin/cmake --build /home/wyt/RC_planner/src/build/primitive_env -- -j28 -l28
+[3.024s] Invoked command in '/home/wyt/RC_planner/src/build/primitive_env' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/jazzy DEBUGINFOD_URLS=https://debuginfod.ubuntu.com /usr/bin/cmake --build /home/wyt/RC_planner/src/build/primitive_env -- -j28 -l28
+[3.049s] Invoking command in '/home/wyt/RC_planner/src/build/primitive_env': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/jazzy DEBUGINFOD_URLS=https://debuginfod.ubuntu.com /usr/bin/cmake --install /home/wyt/RC_planner/src/build/primitive_env
+[3.070s] -- Install configuration: "Release"
+[3.071s] -- Installing: /home/wyt/RC_planner/src/install/primitive_env/lib/primitive_env/map_publisher.py
+[3.071s] -- Installing: /home/wyt/RC_planner/src/install/primitive_env/lib/primitive_env/waypoint_publisher.py
+[3.071s] -- Installing: /home/wyt/RC_planner/src/install/primitive_env/lib/primitive_env/rviz_click_trigger.py
+[3.071s] -- Installing: /home/wyt/RC_planner/src/install/primitive_env/share/primitive_env/launch
+[3.072s] -- Installing: /home/wyt/RC_planner/src/install/primitive_env/share/primitive_env/launch/demo.launch
+[3.072s] -- Installing: /home/wyt/RC_planner/src/install/primitive_env/share/primitive_env/launch/demo.launch.py
+[3.072s] -- Installing: /home/wyt/RC_planner/src/install/primitive_env/share/primitive_env/launch/__pycache__
+[3.072s] -- Installing: /home/wyt/RC_planner/src/install/primitive_env/share/primitive_env/launch/__pycache__/demo.launch.cpython-38.pyc
+[3.073s] -- Installing: /home/wyt/RC_planner/src/install/primitive_env/share/primitive_env/launch/demo_env.launch
+[3.073s] -- Installing: /home/wyt/RC_planner/src/install/primitive_env/share/primitive_env/map
+[3.073s] -- Installing: /home/wyt/RC_planner/src/install/primitive_env/share/primitive_env/map/map_01.yaml
+[3.073s] -- Installing: /home/wyt/RC_planner/src/install/primitive_env/share/primitive_env/rviz
+[3.073s] -- Installing: /home/wyt/RC_planner/src/install/primitive_env/share/primitive_env/rviz/demo.rviz
+[3.074s] -- Installing: /home/wyt/RC_planner/src/install/primitive_env/share/ament_index/resource_index/package_run_dependencies/primitive_env
+[3.074s] -- Installing: /home/wyt/RC_planner/src/install/primitive_env/share/ament_index/resource_index/parent_prefix_path/primitive_env
+[3.074s] -- Installing: /home/wyt/RC_planner/src/install/primitive_env/share/primitive_env/environment/ament_prefix_path.sh
+[3.074s] -- Installing: /home/wyt/RC_planner/src/install/primitive_env/share/primitive_env/environment/ament_prefix_path.dsv
+[3.074s] -- Installing: /home/wyt/RC_planner/src/install/primitive_env/share/primitive_env/environment/path.sh
+[3.075s] -- Installing: /home/wyt/RC_planner/src/install/primitive_env/share/primitive_env/environment/path.dsv
+[3.075s] -- Installing: /home/wyt/RC_planner/src/install/primitive_env/share/primitive_env/local_setup.bash
+[3.075s] -- Installing: /home/wyt/RC_planner/src/install/primitive_env/share/primitive_env/local_setup.sh
+[3.075s] -- Installing: /home/wyt/RC_planner/src/install/primitive_env/share/primitive_env/local_setup.zsh
+[3.076s] -- Installing: /home/wyt/RC_planner/src/install/primitive_env/share/primitive_env/local_setup.dsv
+[3.076s] -- Installing: /home/wyt/RC_planner/src/install/primitive_env/share/primitive_env/package.dsv
+[3.076s] -- Installing: /home/wyt/RC_planner/src/install/primitive_env/share/ament_index/resource_index/packages/primitive_env
+[3.077s] -- Installing: /home/wyt/RC_planner/src/install/primitive_env/share/primitive_env/cmake/primitive_envConfig.cmake
+[3.077s] -- Installing: /home/wyt/RC_planner/src/install/primitive_env/share/primitive_env/cmake/primitive_envConfig-version.cmake
+[3.077s] -- Installing: /home/wyt/RC_planner/src/install/primitive_env/share/primitive_env/package.xml
+[3.081s] Invoked command in '/home/wyt/RC_planner/src/build/primitive_env' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/jazzy DEBUGINFOD_URLS=https://debuginfod.ubuntu.com /usr/bin/cmake --install /home/wyt/RC_planner/src/build/primitive_env

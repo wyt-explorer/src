@@ -26,7 +26,7 @@ ros2 launch primitive_env demo.launch.py
 
 ## 可视化和触发
 
-在另一个加载同一环境的终端运行 `rviz2`，设置：
+`single_drone.launch.py` 默认自动打开 RViz2，加载以下显示配置；仅启动环境时可另开终端运行 `rviz2 -d Primitive_env/rviz/demo.rviz`：
 
 - Fixed Frame：`world`。
 - PointCloud2：`/map_generator/global_cloud`。
@@ -74,7 +74,7 @@ ros2 launch primitive_env demo.launch.py map_file:=$PWD/Primitive_env/map/map_01
 | `src/rviz_click_trigger.py` | 将 `/clicked_point` 转成 `/traj_start_trigger` 的 `geometry_msgs/msg/PoseStamped`。 |
 | `launch/demo.launch.py` | 启动环境的三个节点。 |
 | `map/map_01.yaml` | 地图、障碍物、起点与终点。 |
-| `rviz/demo.rviz` | 保留的显示配置；本次验证使用上述手动添加的 ROS 2 显示项。 |
+| `rviz/demo.rviz` | ROS 2 显示配置，包含地图、起终点、模拟里程计和 Publish Point 工具，由单机启动文件自动加载。 |
 
 ## 验证状态
 

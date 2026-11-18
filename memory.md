@@ -48,3 +48,5 @@
 - 当前 SO3 ROS 2 模拟器仅发布固定状态；单机 demo 使用理想位置跟踪器。
 
 - 2026-11-18 文档同步：更新根目录、Primitive_env、Primitive-Planner 三份 README，统一 ROS 2 启动与触发命令、构建路径、地图复制行为和验证边界；原 ROS 1 用法明确标为历史记录。
+
+- 2026-11-18：按用户要求为 single_drone.launch.py 增加默认 RViz2 窗口及 rviz:=false 开关；迁移 demo.rviz 到 ROS 2 插件、话题配置，新增 rviz2 运行依赖，同步三份 README。相关两包重新构建通过；启动验证确认 RViz 加载地图并成功初始化 OpenGL。清理 RViz 子进程中继承的 Snap 图形插件路径，解决 libpthread 符号冲突。

@@ -1,0 +1,7 @@
+{
+  "package_name": "traj_utils",
+  "non_idl_tuples": [
+    "/home/wyt/RC_planner/src/Primitive-Planner/src/planner/traj_utils:msg/SwarmPrimitiveTraj.msg",
+    "/home/wyt/RC_planner/src/Primitive-Planner/src/planner/traj_utils:msg/Polynomial.msg"
+  ]
+}

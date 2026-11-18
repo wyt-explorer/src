@@ -1,0 +1,15 @@
+file(REMOVE_RECURSE
+  "CMakeFiles/traj_utils__rosidl_typesupport_cpp.dir/rosidl_typesupport_cpp/traj_utils/msg/polynomial__type_support.cpp.o"
+  "CMakeFiles/traj_utils__rosidl_typesupport_cpp.dir/rosidl_typesupport_cpp/traj_utils/msg/polynomial__type_support.cpp.o.d"
+  "CMakeFiles/traj_utils__rosidl_typesupport_cpp.dir/rosidl_typesupport_cpp/traj_utils/msg/swarm_primitive_traj__type_support.cpp.o"
+  "CMakeFiles/traj_utils__rosidl_typesupport_cpp.dir/rosidl_typesupport_cpp/traj_utils/msg/swarm_primitive_traj__type_support.cpp.o.d"
+  "libtraj_utils__rosidl_typesupport_cpp.pdb"
+  "libtraj_utils__rosidl_typesupport_cpp.so"
+  "rosidl_typesupport_cpp/traj_utils/msg/polynomial__type_support.cpp"
+  "rosidl_typesupport_cpp/traj_utils/msg/swarm_primitive_traj__type_support.cpp"
+)
+
+# Per-language clean rules from dependency scanning.
+foreach(lang CXX)
+  include(CMakeFiles/traj_utils__rosidl_typesupport_cpp.dir/cmake_clean_${lang}.cmake OPTIONAL)
+endforeach()
