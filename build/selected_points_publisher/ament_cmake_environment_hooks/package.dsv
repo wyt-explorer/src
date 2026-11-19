@@ -1,0 +1,4 @@
+source;share/selected_points_publisher/local_setup.bash
+source;share/selected_points_publisher/local_setup.dsv
+source;share/selected_points_publisher/local_setup.sh
+source;share/selected_points_publisher/local_setup.zsh

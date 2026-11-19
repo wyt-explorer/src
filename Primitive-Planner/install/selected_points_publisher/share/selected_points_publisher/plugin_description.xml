@@ -1,0 +1,7 @@
+<library path="selected_points_publisher">
+  <class name="selected_points_publisher/SelectedPointsPublisher"
+         type="rviz_plugin_selected_points_publisher::SelectedPointsPublisher"
+         base_class_type="rviz_common::Tool">
+    <description>RViz2 tool for selecting drones and publishing goals.</description>
+  </class>
+</library>

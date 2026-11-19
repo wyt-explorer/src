@@ -1,0 +1,1 @@
+rclcpp;std_msgs;geometry_msgs;nav_msgs;quadrotor_msgs;traj_utils;eigen;pcl_conversions;launch_ros;rviz2;ament_index_python;python3-yaml;primitive_env;poscmd_2_odom;local_sensing_node;map_generator;swarm_bridge;odom_visualization;rviz_plugins;selected_points_publisher;so3_control;so3_quadrotor_simulator;launch_xml

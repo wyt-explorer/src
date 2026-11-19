@@ -2,7 +2,7 @@
 """文件作用：生成上游圆周位置交换演示的 ROS 2 启动入口。
 调用关系：run_swarm.sh 或命令行调用，入口转交 swarm.launch.py 生成逐机节点。
 输入：命令行无人机数量；半径按上游 N/π 米计算。
-输出：plan_manage/launch/swarm.launch 与 swarm.launch.xml。
+输出：plan_manage/launch/swarm.launch（ROS 2 XML 入口，转交 swarm.launch.py）。
 运行模式：离线 Python 3，不启动 ROS 节点或修改 Primitive_env。
 主要依赖：pathlib、argparse、math。
 """
@@ -29,8 +29,6 @@ def generate_launch_file(start_num, end_num, total_num, radius, obs_density, out
 '''
     output = Path(output_file)
     output.write_text(content)
-    if output.suffix == '.launch':
-        output.with_suffix('.launch.xml').write_text(content)
 
 
 def main():

@@ -1,0 +1,50 @@
+[0.051s] Invoking command in '/home/wyt/RC_planner/src/build/pose_utils': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/jazzy DEBUGINFOD_URLS=https://debuginfod.ubuntu.com /usr/bin/cmake /home/wyt/RC_planner/src/Primitive-Planner/src/Utils/pose_utils -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=/home/wyt/RC_planner/src/install/pose_utils
+[0.189s] -- The C compiler identification is GNU 13.3.0
+[0.342s] -- The CXX compiler identification is GNU 13.3.0
+[0.396s] -- Detecting C compiler ABI info
+[0.624s] -- Detecting C compiler ABI info - done
+[0.647s] -- Check for working C compiler: /usr/bin/cc - skipped
+[0.648s] -- Detecting C compile features
+[0.649s] -- Detecting C compile features - done
+[0.673s] -- Detecting CXX compiler ABI info
+[0.907s] -- Detecting CXX compiler ABI info - done
+[0.929s] -- Check for working CXX compiler: /usr/bin/c++ - skipped
+[0.929s] -- Detecting CXX compile features
+[0.930s] -- Detecting CXX compile features - done
+[0.964s] -- Found ament_cmake: 2.5.6 (/opt/ros/jazzy/share/ament_cmake/cmake)
+[1.384s] -- Found Python3: /usr/bin/python3 (found version "3.12.3") found components: Interpreter 
+[1.903s] -- Found Armadillo: /usr/include (found version "12.6.7") 
+[2.250s] -- Configuring done (2.2s)
+[2.260s] -- Generating done (0.0s)
+[2.264s] -- Build files have been written to: /home/wyt/RC_planner/src/build/pose_utils
+[2.275s] Invoked command in '/home/wyt/RC_planner/src/build/pose_utils' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/jazzy DEBUGINFOD_URLS=https://debuginfod.ubuntu.com /usr/bin/cmake /home/wyt/RC_planner/src/Primitive-Planner/src/Utils/pose_utils -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=/home/wyt/RC_planner/src/install/pose_utils
+[2.277s] Invoking command in '/home/wyt/RC_planner/src/build/pose_utils': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/jazzy DEBUGINFOD_URLS=https://debuginfod.ubuntu.com /usr/bin/cmake --build /home/wyt/RC_planner/src/build/pose_utils -- -j28 -l28
+[2.395s] [ 50%] [32mBuilding CXX object CMakeFiles/pose_utils.dir/src/pose_utils.cpp.o[0m
+[16.913s] [100%] [32m[1mLinking CXX static library libpose_utils.a[0m
+[17.050s] [100%] Built target pose_utils
+[17.095s] Invoked command in '/home/wyt/RC_planner/src/build/pose_utils' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/jazzy DEBUGINFOD_URLS=https://debuginfod.ubuntu.com /usr/bin/cmake --build /home/wyt/RC_planner/src/build/pose_utils -- -j28 -l28
+[17.101s] Invoking command in '/home/wyt/RC_planner/src/build/pose_utils': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/jazzy DEBUGINFOD_URLS=https://debuginfod.ubuntu.com /usr/bin/cmake --install /home/wyt/RC_planner/src/build/pose_utils
+[17.130s] -- Install configuration: "Release"
+[17.131s] -- Installing: /home/wyt/RC_planner/src/install/pose_utils/lib/libpose_utils.a
+[17.131s] -- Installing: /home/wyt/RC_planner/src/install/pose_utils/include
+[17.132s] -- Installing: /home/wyt/RC_planner/src/install/pose_utils/include/pose_utils.h
+[17.133s] -- Installing: /home/wyt/RC_planner/src/install/pose_utils/share/pose_utils/environment/library_path.sh
+[17.134s] -- Installing: /home/wyt/RC_planner/src/install/pose_utils/share/pose_utils/environment/library_path.dsv
+[17.135s] -- Installing: /home/wyt/RC_planner/src/install/pose_utils/share/ament_index/resource_index/package_run_dependencies/pose_utils
+[17.136s] -- Installing: /home/wyt/RC_planner/src/install/pose_utils/share/ament_index/resource_index/parent_prefix_path/pose_utils
+[17.137s] -- Installing: /home/wyt/RC_planner/src/install/pose_utils/share/pose_utils/environment/ament_prefix_path.sh
+[17.137s] -- Installing: /home/wyt/RC_planner/src/install/pose_utils/share/pose_utils/environment/ament_prefix_path.dsv
+[17.138s] -- Installing: /home/wyt/RC_planner/src/install/pose_utils/share/pose_utils/environment/path.sh
+[17.138s] -- Installing: /home/wyt/RC_planner/src/install/pose_utils/share/pose_utils/environment/path.dsv
+[17.139s] -- Installing: /home/wyt/RC_planner/src/install/pose_utils/share/pose_utils/local_setup.bash
+[17.140s] -- Installing: /home/wyt/RC_planner/src/install/pose_utils/share/pose_utils/local_setup.sh
+[17.140s] -- Installing: /home/wyt/RC_planner/src/install/pose_utils/share/pose_utils/local_setup.zsh
+[17.141s] -- Installing: /home/wyt/RC_planner/src/install/pose_utils/share/pose_utils/local_setup.dsv
+[17.141s] -- Installing: /home/wyt/RC_planner/src/install/pose_utils/share/pose_utils/package.dsv
+[17.141s] -- Installing: /home/wyt/RC_planner/src/install/pose_utils/share/ament_index/resource_index/packages/pose_utils
+[17.142s] -- Installing: /home/wyt/RC_planner/src/install/pose_utils/share/pose_utils/cmake/ament_cmake_export_include_directories-extras.cmake
+[17.142s] -- Installing: /home/wyt/RC_planner/src/install/pose_utils/share/pose_utils/cmake/ament_cmake_export_libraries-extras.cmake
+[17.143s] -- Installing: /home/wyt/RC_planner/src/install/pose_utils/share/pose_utils/cmake/pose_utilsConfig.cmake
+[17.143s] -- Installing: /home/wyt/RC_planner/src/install/pose_utils/share/pose_utils/cmake/pose_utilsConfig-version.cmake
+[17.146s] -- Installing: /home/wyt/RC_planner/src/install/pose_utils/share/pose_utils/package.xml
+[17.150s] Invoked command in '/home/wyt/RC_planner/src/build/pose_utils' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/jazzy DEBUGINFOD_URLS=https://debuginfod.ubuntu.com /usr/bin/cmake --install /home/wyt/RC_planner/src/build/pose_utils

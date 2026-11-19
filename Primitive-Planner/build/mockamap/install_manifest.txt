@@ -1,0 +1,16 @@
+/home/wyt/RC_planner/src/Primitive-Planner/install/mockamap/lib/mockamap/mockamap_node
+/home/wyt/RC_planner/src/Primitive-Planner/install/mockamap/share/ament_index/resource_index/package_run_dependencies/mockamap
+/home/wyt/RC_planner/src/Primitive-Planner/install/mockamap/share/ament_index/resource_index/parent_prefix_path/mockamap
+/home/wyt/RC_planner/src/Primitive-Planner/install/mockamap/share/mockamap/environment/ament_prefix_path.sh
+/home/wyt/RC_planner/src/Primitive-Planner/install/mockamap/share/mockamap/environment/ament_prefix_path.dsv
+/home/wyt/RC_planner/src/Primitive-Planner/install/mockamap/share/mockamap/environment/path.sh
+/home/wyt/RC_planner/src/Primitive-Planner/install/mockamap/share/mockamap/environment/path.dsv
+/home/wyt/RC_planner/src/Primitive-Planner/install/mockamap/share/mockamap/local_setup.bash
+/home/wyt/RC_planner/src/Primitive-Planner/install/mockamap/share/mockamap/local_setup.sh
+/home/wyt/RC_planner/src/Primitive-Planner/install/mockamap/share/mockamap/local_setup.zsh
+/home/wyt/RC_planner/src/Primitive-Planner/install/mockamap/share/mockamap/local_setup.dsv
+/home/wyt/RC_planner/src/Primitive-Planner/install/mockamap/share/mockamap/package.dsv
+/home/wyt/RC_planner/src/Primitive-Planner/install/mockamap/share/ament_index/resource_index/packages/mockamap
+/home/wyt/RC_planner/src/Primitive-Planner/install/mockamap/share/mockamap/cmake/mockamapConfig.cmake
+/home/wyt/RC_planner/src/Primitive-Planner/install/mockamap/share/mockamap/cmake/mockamapConfig-version.cmake
+/home/wyt/RC_planner/src/Primitive-Planner/install/mockamap/share/mockamap/package.xml

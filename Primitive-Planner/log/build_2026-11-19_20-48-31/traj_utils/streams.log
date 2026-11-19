@@ -1,0 +1,292 @@
+[0.076s] Invoking command in '/home/wyt/RC_planner/src/Primitive-Planner/build/traj_utils': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/jazzy DEBUGINFOD_URLS=https://debuginfod.ubuntu.com /usr/bin/cmake /home/wyt/RC_planner/src/Primitive-Planner/src/planner/traj_utils -DCMAKE_INSTALL_PREFIX=/home/wyt/RC_planner/src/Primitive-Planner/install/traj_utils
+[0.297s] -- The C compiler identification is GNU 13.3.0
+[0.459s] -- The CXX compiler identification is GNU 13.3.0
+[0.501s] -- Detecting C compiler ABI info
+[0.741s] -- Detecting C compiler ABI info - done
+[0.769s] -- Check for working C compiler: /usr/bin/cc - skipped
+[0.770s] -- Detecting C compile features
+[0.770s] -- Detecting C compile features - done
+[0.798s] -- Detecting CXX compiler ABI info
+[1.061s] -- Detecting CXX compiler ABI info - done
+[1.097s] -- Check for working CXX compiler: /usr/bin/c++ - skipped
+[1.097s] -- Detecting CXX compile features
+[1.098s] -- Detecting CXX compile features - done
+[1.113s] -- Found ament_cmake: 2.5.6 (/opt/ros/jazzy/share/ament_cmake/cmake)
+[1.542s] -- Found Python3: /usr/bin/python3 (found version "3.12.3") found components: Interpreter 
+[1.993s] -- Found rosidl_default_generators: 1.6.1 (/opt/ros/jazzy/share/rosidl_default_generators/cmake)
+[2.055s] -- Using all available rosidl_typesupport_c: rosidl_typesupport_fastrtps_c;rosidl_typesupport_introspection_c
+[2.365s] -- Using all available rosidl_typesupport_cpp: rosidl_typesupport_fastrtps_cpp;rosidl_typesupport_introspection_cpp
+[2.685s] -- Found rosidl_adapter: 4.6.9 (/opt/ros/jazzy/share/rosidl_adapter/cmake)
+[2.712s] -- Found std_msgs: 5.3.8 (/opt/ros/jazzy/share/std_msgs/cmake)
+[2.826s] -- Found geometry_msgs: 5.3.8 (/opt/ros/jazzy/share/geometry_msgs/cmake)
+[2.869s] -- Found visualization_msgs: 5.3.8 (/opt/ros/jazzy/share/visualization_msgs/cmake)
+[3.051s] -- Found rclcpp: 28.1.22 (/opt/ros/jazzy/share/rclcpp/cmake)
+[3.272s] -- Found rmw_implementation_cmake: 7.3.4 (/opt/ros/jazzy/share/rmw_implementation_cmake/cmake)
+[3.292s] -- Found rmw_fastrtps_cpp: 8.4.4 (/opt/ros/jazzy/share/rmw_fastrtps_cpp/cmake)
+[3.559s] -- Found OpenSSL: /usr/lib/x86_64-linux-gnu/libcrypto.so (found version "3.0.13")  
+[3.627s] -- Found FastRTPS: /opt/ros/jazzy/include (Required is at least version "2.13") 
+[3.687s] -- Using RMW implementation 'rmw_fastrtps_cpp' as default
+[5.921s] -- Found ament_cmake_ros: 0.12.2 (/opt/ros/jazzy/share/ament_cmake_ros/cmake)
+[7.400s] -- Using all available rosidl_typesupport_c: rosidl_typesupport_fastrtps_c;rosidl_typesupport_introspection_c
+[9.806s] -- Using all available rosidl_typesupport_cpp: rosidl_typesupport_fastrtps_cpp;rosidl_typesupport_introspection_cpp
+[9.818s] -- Found python_cmake_module: 0.11.1 (/opt/ros/jazzy/share/python_cmake_module/cmake)
+[10.143s] -- Found PythonExtra: /usr/bin/python3  
+[11.424s] -- Found Python3: /usr/bin/python3 (found version "3.12.3") found components: Interpreter Development NumPy Development.Module Development.Embed 
+[12.005s] -- Found Python3: /usr/bin/python3 (found version "3.12.3") found components: Interpreter 
+[12.042s] -- Configuring done (11.9s)
+[12.190s] -- Generating done (0.1s)
+[12.225s] -- Build files have been written to: /home/wyt/RC_planner/src/Primitive-Planner/build/traj_utils
+[12.252s] Invoked command in '/home/wyt/RC_planner/src/Primitive-Planner/build/traj_utils' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/jazzy DEBUGINFOD_URLS=https://debuginfod.ubuntu.com /usr/bin/cmake /home/wyt/RC_planner/src/Primitive-Planner/src/planner/traj_utils -DCMAKE_INSTALL_PREFIX=/home/wyt/RC_planner/src/Primitive-Planner/install/traj_utils
+[12.255s] Invoking command in '/home/wyt/RC_planner/src/Primitive-Planner/build/traj_utils': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/jazzy DEBUGINFOD_URLS=https://debuginfod.ubuntu.com /usr/bin/cmake --build /home/wyt/RC_planner/src/Primitive-Planner/build/traj_utils -- -j28 -l28
+[12.404s] [  2%] [34m[1mGenerating Rust code for ROS interfaces[0m
+[12.415s] [  4%] [32mBuilding CXX object CMakeFiles/traj_visualization.dir/src/planning_visualization.cpp.o[0m
+[12.416s] [  6%] [34m[1mGenerating type hashes for ROS interfaces[0m
+[12.428s] [  6%] Built target ament_cmake_python_copy_traj_utils
+[13.026s] running egg_info
+[13.028s] creating traj_utils.egg-info
+[13.082s] writing traj_utils.egg-info/PKG-INFO
+[13.083s] writing dependency_links to traj_utils.egg-info/dependency_links.txt
+[13.084s] writing top-level names to traj_utils.egg-info/top_level.txt
+[13.084s] writing manifest file 'traj_utils.egg-info/SOURCES.txt'
+[13.139s] [  6%] Built target traj_utils__rosidl_generator_type_description
+[13.169s] [  8%] [34m[1mGenerating C code for ROS interfaces[0m
+[13.216s] [ 10%] [34m[1mGenerating C++ code for ROS interfaces[0m
+[13.242s] reading manifest file 'traj_utils.egg-info/SOURCES.txt'
+[13.243s] writing manifest file 'traj_utils.egg-info/SOURCES.txt'
+[13.289s] [ 10%] Built target traj_utils__rs
+[13.310s] [ 10%] Built target ament_cmake_python_build_traj_utils_egg
+[14.296s] [ 10%] Built target traj_utils__cpp
+[14.300s] [ 12%] [32mBuilding C object CMakeFiles/traj_utils__rosidl_generator_c.dir/rosidl_generator_c/traj_utils/msg/detail/swarm_primitive_traj__description.c.o[0m
+[14.301s] [ 17%] [32mBuilding C object CMakeFiles/traj_utils__rosidl_generator_c.dir/rosidl_generator_c/traj_utils/msg/detail/swarm_primitive_traj__functions.c.o[0m
+[14.301s] [ 17%] [32mBuilding C object CMakeFiles/traj_utils__rosidl_generator_c.dir/rosidl_generator_c/traj_utils/msg/detail/swarm_primitive_traj__type_support.c.o[0m
+[14.303s] [ 19%] [32mBuilding C object CMakeFiles/traj_utils__rosidl_generator_c.dir/rosidl_generator_c/traj_utils/msg/detail/polynomial__type_support.c.o[0m
+[14.303s] [ 21%] [32mBuilding C object CMakeFiles/traj_utils__rosidl_generator_c.dir/rosidl_generator_c/traj_utils/msg/detail/polynomial__functions.c.o[0m
+[14.309s] [ 23%] [32mBuilding C object CMakeFiles/traj_utils__rosidl_generator_c.dir/rosidl_generator_c/traj_utils/msg/detail/polynomial__description.c.o[0m
+[14.478s] [ 25%] [32m[1mLinking C shared library libtraj_utils__rosidl_generator_c.so[0m
+[14.597s] [ 25%] Built target traj_utils__rosidl_generator_c
+[14.634s] [ 27%] [34m[1mGenerating C++ introspection for ROS interfaces[0m
+[14.634s] [ 29%] [34m[1mGenerating C++ type support for eProsima Fast-RTPS[0m
+[14.637s] [ 34%] [34m[1mGenerating C type support for eProsima Fast-RTPS[0m
+[14.637s] [ 34%] [34m[1mGenerating C type support dispatch for ROS interfaces[0m
+[14.638s] [ 36%] [34m[1mGenerating C introspection for ROS interfaces[0m
+[14.640s] [ 38%] [34m[1mGenerating C++ type support dispatch for ROS interfaces[0m
+[15.486s] [ 40%] [32mBuilding CXX object CMakeFiles/traj_utils__rosidl_typesupport_introspection_cpp.dir/rosidl_typesupport_introspection_cpp/traj_utils/msg/detail/swarm_primitive_traj__type_support.cpp.o[0m
+[15.492s] [ 42%] [32mBuilding CXX object CMakeFiles/traj_utils__rosidl_typesupport_introspection_cpp.dir/rosidl_typesupport_introspection_cpp/traj_utils/msg/detail/polynomial__type_support.cpp.o[0m
+[15.533s] [ 44%] [32mBuilding CXX object CMakeFiles/traj_utils__rosidl_typesupport_fastrtps_cpp.dir/rosidl_typesupport_fastrtps_cpp/traj_utils/msg/detail/dds_fastrtps/swarm_primitive_traj__type_support.cpp.o[0m
+[15.539s] [ 46%] [32mBuilding CXX object CMakeFiles/traj_utils__rosidl_typesupport_fastrtps_cpp.dir/rosidl_typesupport_fastrtps_cpp/traj_utils/msg/detail/dds_fastrtps/polynomial__type_support.cpp.o[0m
+[15.582s] [ 48%] [32mBuilding CXX object CMakeFiles/traj_utils__rosidl_typesupport_c.dir/rosidl_typesupport_c/traj_utils/msg/swarm_primitive_traj__type_support.cpp.o[0m
+[15.583s] [ 51%] [32mBuilding CXX object CMakeFiles/traj_utils__rosidl_typesupport_c.dir/rosidl_typesupport_c/traj_utils/msg/polynomial__type_support.cpp.o[0m
+[15.584s] [ 53%] [32mBuilding CXX object CMakeFiles/traj_utils__rosidl_typesupport_fastrtps_c.dir/rosidl_typesupport_fastrtps_c/traj_utils/msg/detail/swarm_primitive_traj__type_support_c.cpp.o[0m
+[15.584s] [ 55%] [32mBuilding CXX object CMakeFiles/traj_utils__rosidl_typesupport_fastrtps_c.dir/rosidl_typesupport_fastrtps_c/traj_utils/msg/detail/polynomial__type_support_c.cpp.o[0m
+[15.610s] [ 57%] [32mBuilding CXX object CMakeFiles/traj_utils__rosidl_typesupport_cpp.dir/rosidl_typesupport_cpp/traj_utils/msg/swarm_primitive_traj__type_support.cpp.o[0m
+[15.618s] [ 59%] [32mBuilding CXX object CMakeFiles/traj_utils__rosidl_typesupport_cpp.dir/rosidl_typesupport_cpp/traj_utils/msg/polynomial__type_support.cpp.o[0m
+[15.687s] [ 61%] [32mBuilding C object CMakeFiles/traj_utils__rosidl_typesupport_introspection_c.dir/rosidl_typesupport_introspection_c/traj_utils/msg/detail/polynomial__type_support.c.o[0m
+[15.688s] [ 63%] [32mBuilding C object CMakeFiles/traj_utils__rosidl_typesupport_introspection_c.dir/rosidl_typesupport_introspection_c/traj_utils/msg/detail/swarm_primitive_traj__type_support.c.o[0m
+[15.747s] [ 65%] [32m[1mLinking CXX shared library libtraj_utils__rosidl_typesupport_c.so[0m
+[15.869s] [ 68%] [32m[1mLinking C shared library libtraj_utils__rosidl_typesupport_introspection_c.so[0m
+[15.924s] [ 68%] Built target traj_utils__rosidl_typesupport_c
+[16.010s] [ 68%] Built target traj_utils__rosidl_typesupport_introspection_c
+[16.758s] [ 70%] [32m[1mLinking CXX shared library libtraj_utils__rosidl_typesupport_cpp.so[0m
+[16.785s] [ 72%] [32m[1mLinking CXX shared library libtraj_utils__rosidl_typesupport_introspection_cpp.so[0m
+[16.987s] [ 72%] Built target traj_utils__rosidl_typesupport_cpp
+[17.177s] [ 72%] Built target traj_utils__rosidl_typesupport_introspection_cpp
+[17.448s] [ 74%] [32m[1mLinking CXX shared library libtraj_utils__rosidl_typesupport_fastrtps_c.so[0m
+[17.557s] [ 76%] [32m[1mLinking CXX shared library libtraj_utils__rosidl_typesupport_fastrtps_cpp.so[0m
+[17.647s] [ 76%] Built target traj_utils__rosidl_typesupport_fastrtps_c
+[17.764s] [ 76%] Built target traj_utils__rosidl_typesupport_fastrtps_cpp
+[17.821s] [ 76%] Built target traj_utils
+[17.896s] [ 78%] [34m[1mGenerating Python code for ROS interfaces[0m
+[19.329s] [ 78%] Built target traj_utils__py
+[19.388s] [ 80%] [32mBuilding C object CMakeFiles/traj_utils__rosidl_generator_py.dir/rosidl_generator_py/traj_utils/msg/_polynomial_s.c.o[0m
+[19.391s] [ 82%] [32mBuilding C object CMakeFiles/traj_utils__rosidl_generator_py.dir/rosidl_generator_py/traj_utils/msg/_swarm_primitive_traj_s.c.o[0m
+[19.858s] [ 85%] [32m[1mLinking C shared library libtraj_utils__rosidl_generator_py.so[0m
+[20.021s] [ 85%] Built target traj_utils__rosidl_generator_py
+[20.100s] [ 87%] [32mBuilding C object CMakeFiles/traj_utils_s__rosidl_typesupport_fastrtps_c.dir/rosidl_generator_py/traj_utils/_traj_utils_s.ep.rosidl_typesupport_fastrtps_c.c.o[0m
+[20.122s] [ 89%] [32mBuilding C object CMakeFiles/traj_utils_s__rosidl_typesupport_introspection_c.dir/rosidl_generator_py/traj_utils/_traj_utils_s.ep.rosidl_typesupport_introspection_c.c.o[0m
+[20.175s] [ 91%] [32mBuilding C object CMakeFiles/traj_utils_s__rosidl_typesupport_c.dir/rosidl_generator_py/traj_utils/_traj_utils_s.ep.rosidl_typesupport_c.c.o[0m
+[20.563s] [ 93%] [32m[1mLinking C shared module rosidl_generator_py/traj_utils/traj_utils_s__rosidl_typesupport_fastrtps_c.so[0m
+[20.654s] [ 95%] [32m[1mLinking C shared module rosidl_generator_py/traj_utils/traj_utils_s__rosidl_typesupport_c.so[0m
+[20.668s] [ 97%] [32m[1mLinking C shared module rosidl_generator_py/traj_utils/traj_utils_s__rosidl_typesupport_introspection_c.so[0m
+[20.722s] [ 97%] Built target traj_utils_s__rosidl_typesupport_fastrtps_c
+[20.915s] [ 97%] Built target traj_utils_s__rosidl_typesupport_c
+[21.013s] [ 97%] Built target traj_utils_s__rosidl_typesupport_introspection_c
+[31.332s] [100%] [32m[1mLinking CXX shared library libtraj_visualization.so[0m
+[31.861s] [100%] Built target traj_visualization
+[31.901s] Invoked command in '/home/wyt/RC_planner/src/Primitive-Planner/build/traj_utils' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/jazzy DEBUGINFOD_URLS=https://debuginfod.ubuntu.com /usr/bin/cmake --build /home/wyt/RC_planner/src/Primitive-Planner/build/traj_utils -- -j28 -l28
+[31.905s] Invoking command in '/home/wyt/RC_planner/src/Primitive-Planner/build/traj_utils': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/jazzy DEBUGINFOD_URLS=https://debuginfod.ubuntu.com /usr/bin/cmake --install /home/wyt/RC_planner/src/Primitive-Planner/build/traj_utils
+[31.932s] -- Install configuration: ""
+[31.933s] -- Installing: /home/wyt/RC_planner/src/Primitive-Planner/install/traj_utils/share/ament_index/resource_index/rosidl_interfaces/traj_utils
+[31.934s] -- Installing: /home/wyt/RC_planner/src/Primitive-Planner/install/traj_utils/share/traj_utils/msg/SwarmPrimitiveTraj.json
+[31.934s] -- Installing: /home/wyt/RC_planner/src/Primitive-Planner/install/traj_utils/share/traj_utils/msg/Polynomial.json
+[31.935s] -- Installing: /home/wyt/RC_planner/src/Primitive-Planner/install/traj_utils/include/traj_utils/traj_utils
+[31.935s] -- Installing: /home/wyt/RC_planner/src/Primitive-Planner/install/traj_utils/include/traj_utils/traj_utils/msg
+[31.936s] -- Installing: /home/wyt/RC_planner/src/Primitive-Planner/install/traj_utils/include/traj_utils/traj_utils/msg/swarm_primitive_traj.h
+[31.937s] -- Installing: /home/wyt/RC_planner/src/Primitive-Planner/install/traj_utils/include/traj_utils/traj_utils/msg/rosidl_generator_c__visibility_control.h
+[31.937s] -- Installing: /home/wyt/RC_planner/src/Primitive-Planner/install/traj_utils/include/traj_utils/traj_utils/msg/detail
+[31.938s] -- Installing: /home/wyt/RC_planner/src/Primitive-Planner/install/traj_utils/include/traj_utils/traj_utils/msg/detail/polynomial__type_support.c
+[31.938s] -- Installing: /home/wyt/RC_planner/src/Primitive-Planner/install/traj_utils/include/traj_utils/traj_utils/msg/detail/swarm_primitive_traj__struct.h
+[31.938s] -- Installing: /home/wyt/RC_planner/src/Primitive-Planner/install/traj_utils/include/traj_utils/traj_utils/msg/detail/swarm_primitive_traj__type_support.h
+[31.939s] -- Installing: /home/wyt/RC_planner/src/Primitive-Planner/install/traj_utils/include/traj_utils/traj_utils/msg/detail/swarm_primitive_traj__type_support.c
+[31.939s] -- Installing: /home/wyt/RC_planner/src/Primitive-Planner/install/traj_utils/include/traj_utils/traj_utils/msg/detail/swarm_primitive_traj__description.c
+[31.939s] -- Installing: /home/wyt/RC_planner/src/Primitive-Planner/install/traj_utils/include/traj_utils/traj_utils/msg/detail/polynomial__functions.h
+[31.940s] -- Installing: /home/wyt/RC_planner/src/Primitive-Planner/install/traj_utils/include/traj_utils/traj_utils/msg/detail/polynomial__type_support.h
+[31.940s] -- Installing: /home/wyt/RC_planner/src/Primitive-Planner/install/traj_utils/include/traj_utils/traj_utils/msg/detail/polynomial__functions.c
+[31.940s] -- Installing: /home/wyt/RC_planner/src/Primitive-Planner/install/traj_utils/include/traj_utils/traj_utils/msg/detail/polynomial__struct.h
+[31.941s] -- Installing: /home/wyt/RC_planner/src/Primitive-Planner/install/traj_utils/include/traj_utils/traj_utils/msg/detail/swarm_primitive_traj__functions.h
+[31.941s] -- Installing: /home/wyt/RC_planner/src/Primitive-Planner/install/traj_utils/include/traj_utils/traj_utils/msg/detail/swarm_primitive_traj__functions.c
+[31.941s] -- Installing: /home/wyt/RC_planner/src/Primitive-Planner/install/traj_utils/include/traj_utils/traj_utils/msg/detail/polynomial__description.c
+[31.942s] -- Installing: /home/wyt/RC_planner/src/Primitive-Planner/install/traj_utils/include/traj_utils/traj_utils/msg/polynomial.h
+[31.942s] -- Installing: /home/wyt/RC_planner/src/Primitive-Planner/install/traj_utils/share/traj_utils/environment/library_path.sh
+[31.942s] -- Installing: /home/wyt/RC_planner/src/Primitive-Planner/install/traj_utils/share/traj_utils/environment/library_path.dsv
+[31.943s] -- Installing: /home/wyt/RC_planner/src/Primitive-Planner/install/traj_utils/lib/libtraj_utils__rosidl_generator_c.so
+[31.945s] -- Set non-toolchain portion of runtime path of "/home/wyt/RC_planner/src/Primitive-Planner/install/traj_utils/lib/libtraj_utils__rosidl_generator_c.so" to ""
+[31.945s] -- Up-to-date: /home/wyt/RC_planner/src/Primitive-Planner/install/traj_utils/include/traj_utils/traj_utils
+[31.945s] -- Up-to-date: /home/wyt/RC_planner/src/Primitive-Planner/install/traj_utils/include/traj_utils/traj_utils/msg
+[31.946s] -- Up-to-date: /home/wyt/RC_planner/src/Primitive-Planner/install/traj_utils/include/traj_utils/traj_utils/msg/detail
+[31.946s] -- Installing: /home/wyt/RC_planner/src/Primitive-Planner/install/traj_utils/include/traj_utils/traj_utils/msg/detail/polynomial__rosidl_typesupport_fastrtps_c.h
+[31.946s] -- Installing: /home/wyt/RC_planner/src/Primitive-Planner/install/traj_utils/include/traj_utils/traj_utils/msg/detail/swarm_primitive_traj__rosidl_typesupport_fastrtps_c.h
+[31.947s] -- Installing: /home/wyt/RC_planner/src/Primitive-Planner/install/traj_utils/include/traj_utils/traj_utils/msg/rosidl_typesupport_fastrtps_c__visibility_control.h
+[31.947s] -- Installing: /home/wyt/RC_planner/src/Primitive-Planner/install/traj_utils/lib/libtraj_utils__rosidl_typesupport_fastrtps_c.so
+[31.948s] -- Set non-toolchain portion of runtime path of "/home/wyt/RC_planner/src/Primitive-Planner/install/traj_utils/lib/libtraj_utils__rosidl_typesupport_fastrtps_c.so" to ""
+[31.948s] -- Up-to-date: /home/wyt/RC_planner/src/Primitive-Planner/install/traj_utils/include/traj_utils/traj_utils
+[31.949s] -- Up-to-date: /home/wyt/RC_planner/src/Primitive-Planner/install/traj_utils/include/traj_utils/traj_utils/msg
+[31.949s] -- Up-to-date: /home/wyt/RC_planner/src/Primitive-Planner/install/traj_utils/include/traj_utils/traj_utils/msg/detail
+[31.949s] -- Installing: /home/wyt/RC_planner/src/Primitive-Planner/install/traj_utils/include/traj_utils/traj_utils/msg/detail/polynomial__type_support.c
+[31.950s] -- Installing: /home/wyt/RC_planner/src/Primitive-Planner/install/traj_utils/include/traj_utils/traj_utils/msg/detail/swarm_primitive_traj__type_support.c
+[31.950s] -- Installing: /home/wyt/RC_planner/src/Primitive-Planner/install/traj_utils/include/traj_utils/traj_utils/msg/detail/polynomial__rosidl_typesupport_introspection_c.h
+[31.950s] -- Installing: /home/wyt/RC_planner/src/Primitive-Planner/install/traj_utils/include/traj_utils/traj_utils/msg/detail/swarm_primitive_traj__rosidl_typesupport_introspection_c.h
+[31.951s] -- Installing: /home/wyt/RC_planner/src/Primitive-Planner/install/traj_utils/include/traj_utils/traj_utils/msg/rosidl_typesupport_introspection_c__visibility_control.h
+[31.951s] -- Installing: /home/wyt/RC_planner/src/Primitive-Planner/install/traj_utils/lib/libtraj_utils__rosidl_typesupport_introspection_c.so
+[31.952s] -- Set non-toolchain portion of runtime path of "/home/wyt/RC_planner/src/Primitive-Planner/install/traj_utils/lib/libtraj_utils__rosidl_typesupport_introspection_c.so" to ""
+[31.952s] -- Installing: /home/wyt/RC_planner/src/Primitive-Planner/install/traj_utils/lib/libtraj_utils__rosidl_typesupport_c.so
+[31.953s] -- Set non-toolchain portion of runtime path of "/home/wyt/RC_planner/src/Primitive-Planner/install/traj_utils/lib/libtraj_utils__rosidl_typesupport_c.so" to ""
+[31.953s] -- Up-to-date: /home/wyt/RC_planner/src/Primitive-Planner/install/traj_utils/include/traj_utils/traj_utils
+[31.954s] -- Up-to-date: /home/wyt/RC_planner/src/Primitive-Planner/install/traj_utils/include/traj_utils/traj_utils/msg
+[31.954s] -- Installing: /home/wyt/RC_planner/src/Primitive-Planner/install/traj_utils/include/traj_utils/traj_utils/msg/polynomial.hpp
+[31.955s] -- Installing: /home/wyt/RC_planner/src/Primitive-Planner/install/traj_utils/include/traj_utils/traj_utils/msg/rosidl_generator_cpp__visibility_control.hpp
+[31.955s] -- Up-to-date: /home/wyt/RC_planner/src/Primitive-Planner/install/traj_utils/include/traj_utils/traj_utils/msg/detail
+[31.956s] -- Installing: /home/wyt/RC_planner/src/Primitive-Planner/install/traj_utils/include/traj_utils/traj_utils/msg/detail/swarm_primitive_traj__struct.hpp
+[31.956s] -- Installing: /home/wyt/RC_planner/src/Primitive-Planner/install/traj_utils/include/traj_utils/traj_utils/msg/detail/polynomial__type_support.hpp
+[31.956s] -- Installing: /home/wyt/RC_planner/src/Primitive-Planner/install/traj_utils/include/traj_utils/traj_utils/msg/detail/polynomial__traits.hpp
+[31.957s] -- Installing: /home/wyt/RC_planner/src/Primitive-Planner/install/traj_utils/include/traj_utils/traj_utils/msg/detail/polynomial__builder.hpp
+[31.957s] -- Installing: /home/wyt/RC_planner/src/Primitive-Planner/install/traj_utils/include/traj_utils/traj_utils/msg/detail/swarm_primitive_traj__type_support.hpp
+[31.957s] -- Installing: /home/wyt/RC_planner/src/Primitive-Planner/install/traj_utils/include/traj_utils/traj_utils/msg/detail/swarm_primitive_traj__traits.hpp
+[31.958s] -- Installing: /home/wyt/RC_planner/src/Primitive-Planner/install/traj_utils/include/traj_utils/traj_utils/msg/detail/swarm_primitive_traj__builder.hpp
+[31.958s] -- Installing: /home/wyt/RC_planner/src/Primitive-Planner/install/traj_utils/include/traj_utils/traj_utils/msg/detail/polynomial__struct.hpp
+[31.959s] -- Installing: /home/wyt/RC_planner/src/Primitive-Planner/install/traj_utils/include/traj_utils/traj_utils/msg/swarm_primitive_traj.hpp
+[31.959s] -- Up-to-date: /home/wyt/RC_planner/src/Primitive-Planner/install/traj_utils/include/traj_utils/traj_utils
+[31.959s] -- Up-to-date: /home/wyt/RC_planner/src/Primitive-Planner/install/traj_utils/include/traj_utils/traj_utils/msg
+[31.960s] -- Installing: /home/wyt/RC_planner/src/Primitive-Planner/install/traj_utils/include/traj_utils/traj_utils/msg/rosidl_typesupport_fastrtps_cpp__visibility_control.h
+[31.960s] -- Up-to-date: /home/wyt/RC_planner/src/Primitive-Planner/install/traj_utils/include/traj_utils/traj_utils/msg/detail
+[31.960s] -- Installing: /home/wyt/RC_planner/src/Primitive-Planner/install/traj_utils/include/traj_utils/traj_utils/msg/detail/dds_fastrtps
+[31.961s] -- Installing: /home/wyt/RC_planner/src/Primitive-Planner/install/traj_utils/include/traj_utils/traj_utils/msg/detail/polynomial__rosidl_typesupport_fastrtps_cpp.hpp
+[31.961s] -- Installing: /home/wyt/RC_planner/src/Primitive-Planner/install/traj_utils/include/traj_utils/traj_utils/msg/detail/swarm_primitive_traj__rosidl_typesupport_fastrtps_cpp.hpp
+[31.961s] -- Installing: /home/wyt/RC_planner/src/Primitive-Planner/install/traj_utils/lib/libtraj_utils__rosidl_typesupport_fastrtps_cpp.so
+[31.962s] -- Set non-toolchain portion of runtime path of "/home/wyt/RC_planner/src/Primitive-Planner/install/traj_utils/lib/libtraj_utils__rosidl_typesupport_fastrtps_cpp.so" to ""
+[31.962s] -- Up-to-date: /home/wyt/RC_planner/src/Primitive-Planner/install/traj_utils/include/traj_utils/traj_utils
+[31.963s] -- Up-to-date: /home/wyt/RC_planner/src/Primitive-Planner/install/traj_utils/include/traj_utils/traj_utils/msg
+[31.963s] -- Up-to-date: /home/wyt/RC_planner/src/Primitive-Planner/install/traj_utils/include/traj_utils/traj_utils/msg/detail
+[31.963s] -- Installing: /home/wyt/RC_planner/src/Primitive-Planner/install/traj_utils/include/traj_utils/traj_utils/msg/detail/polynomial__rosidl_typesupport_introspection_cpp.hpp
+[31.964s] -- Installing: /home/wyt/RC_planner/src/Primitive-Planner/install/traj_utils/include/traj_utils/traj_utils/msg/detail/swarm_primitive_traj__type_support.cpp
+[31.964s] -- Installing: /home/wyt/RC_planner/src/Primitive-Planner/install/traj_utils/include/traj_utils/traj_utils/msg/detail/swarm_primitive_traj__rosidl_typesupport_introspection_cpp.hpp
+[31.964s] -- Installing: /home/wyt/RC_planner/src/Primitive-Planner/install/traj_utils/include/traj_utils/traj_utils/msg/detail/polynomial__type_support.cpp
+[31.965s] -- Installing: /home/wyt/RC_planner/src/Primitive-Planner/install/traj_utils/lib/libtraj_utils__rosidl_typesupport_introspection_cpp.so
+[31.966s] -- Set non-toolchain portion of runtime path of "/home/wyt/RC_planner/src/Primitive-Planner/install/traj_utils/lib/libtraj_utils__rosidl_typesupport_introspection_cpp.so" to ""
+[31.966s] -- Installing: /home/wyt/RC_planner/src/Primitive-Planner/install/traj_utils/lib/libtraj_utils__rosidl_typesupport_cpp.so
+[31.967s] -- Set non-toolchain portion of runtime path of "/home/wyt/RC_planner/src/Primitive-Planner/install/traj_utils/lib/libtraj_utils__rosidl_typesupport_cpp.so" to ""
+[31.967s] -- Installing: /home/wyt/RC_planner/src/Primitive-Planner/install/traj_utils/share/traj_utils/environment/pythonpath.sh
+[31.968s] -- Installing: /home/wyt/RC_planner/src/Primitive-Planner/install/traj_utils/share/traj_utils/environment/pythonpath.dsv
+[31.968s] -- Installing: /home/wyt/RC_planner/src/Primitive-Planner/install/traj_utils/lib/python3.12/site-packages/traj_utils-0.1.0-py3.12.egg-info
+[31.968s] -- Installing: /home/wyt/RC_planner/src/Primitive-Planner/install/traj_utils/lib/python3.12/site-packages/traj_utils-0.1.0-py3.12.egg-info/SOURCES.txt
+[31.969s] -- Installing: /home/wyt/RC_planner/src/Primitive-Planner/install/traj_utils/lib/python3.12/site-packages/traj_utils-0.1.0-py3.12.egg-info/dependency_links.txt
+[31.969s] -- Installing: /home/wyt/RC_planner/src/Primitive-Planner/install/traj_utils/lib/python3.12/site-packages/traj_utils-0.1.0-py3.12.egg-info/PKG-INFO
+[31.969s] -- Installing: /home/wyt/RC_planner/src/Primitive-Planner/install/traj_utils/lib/python3.12/site-packages/traj_utils-0.1.0-py3.12.egg-info/top_level.txt
+[31.970s] -- Installing: /home/wyt/RC_planner/src/Primitive-Planner/install/traj_utils/lib/python3.12/site-packages/traj_utils
+[31.970s] -- Installing: /home/wyt/RC_planner/src/Primitive-Planner/install/traj_utils/lib/python3.12/site-packages/traj_utils/__init__.py
+[31.971s] -- Installing: /home/wyt/RC_planner/src/Primitive-Planner/install/traj_utils/lib/python3.12/site-packages/traj_utils/traj_utils_s__rosidl_typesupport_c.so
+[31.971s] -- Installing: /home/wyt/RC_planner/src/Primitive-Planner/install/traj_utils/lib/python3.12/site-packages/traj_utils/_traj_utils_s.ep.rosidl_typesupport_introspection_c.c
+[31.972s] -- Installing: /home/wyt/RC_planner/src/Primitive-Planner/install/traj_utils/lib/python3.12/site-packages/traj_utils/_traj_utils_s.ep.rosidl_typesupport_fastrtps_c.c
+[31.973s] -- Installing: /home/wyt/RC_planner/src/Primitive-Planner/install/traj_utils/lib/python3.12/site-packages/traj_utils/traj_utils_s__rosidl_typesupport_introspection_c.so
+[31.973s] -- Installing: /home/wyt/RC_planner/src/Primitive-Planner/install/traj_utils/lib/python3.12/site-packages/traj_utils/_traj_utils_s.ep.rosidl_typesupport_c.c
+[31.974s] -- Installing: /home/wyt/RC_planner/src/Primitive-Planner/install/traj_utils/lib/python3.12/site-packages/traj_utils/msg
+[31.974s] -- Installing: /home/wyt/RC_planner/src/Primitive-Planner/install/traj_utils/lib/python3.12/site-packages/traj_utils/msg/__init__.py
+[31.974s] -- Installing: /home/wyt/RC_planner/src/Primitive-Planner/install/traj_utils/lib/python3.12/site-packages/traj_utils/msg/_swarm_primitive_traj_s.c
+[31.975s] -- Installing: /home/wyt/RC_planner/src/Primitive-Planner/install/traj_utils/lib/python3.12/site-packages/traj_utils/msg/_swarm_primitive_traj.py
+[31.975s] -- Installing: /home/wyt/RC_planner/src/Primitive-Planner/install/traj_utils/lib/python3.12/site-packages/traj_utils/msg/_polynomial_s.c
+[31.975s] -- Installing: /home/wyt/RC_planner/src/Primitive-Planner/install/traj_utils/lib/python3.12/site-packages/traj_utils/msg/_polynomial.py
+[31.976s] -- Installing: /home/wyt/RC_planner/src/Primitive-Planner/install/traj_utils/lib/python3.12/site-packages/traj_utils/traj_utils_s__rosidl_typesupport_fastrtps_c.so
+[32.111s] Listing '/home/wyt/RC_planner/src/Primitive-Planner/install/traj_utils/lib/python3.12/site-packages/traj_utils'...
+[32.111s] Compiling '/home/wyt/RC_planner/src/Primitive-Planner/install/traj_utils/lib/python3.12/site-packages/traj_utils/__init__.py'...
+[32.111s] Listing '/home/wyt/RC_planner/src/Primitive-Planner/install/traj_utils/lib/python3.12/site-packages/traj_utils/msg'...
+[32.112s] Compiling '/home/wyt/RC_planner/src/Primitive-Planner/install/traj_utils/lib/python3.12/site-packages/traj_utils/msg/__init__.py'...
+[32.112s] Compiling '/home/wyt/RC_planner/src/Primitive-Planner/install/traj_utils/lib/python3.12/site-packages/traj_utils/msg/_polynomial.py'...
+[32.112s] Compiling '/home/wyt/RC_planner/src/Primitive-Planner/install/traj_utils/lib/python3.12/site-packages/traj_utils/msg/_swarm_primitive_traj.py'...
+[32.127s] -- Installing: /home/wyt/RC_planner/src/Primitive-Planner/install/traj_utils/lib/python3.12/site-packages/traj_utils/traj_utils_s__rosidl_typesupport_fastrtps_c.so
+[32.128s] -- Set non-toolchain portion of runtime path of "/home/wyt/RC_planner/src/Primitive-Planner/install/traj_utils/lib/python3.12/site-packages/traj_utils/traj_utils_s__rosidl_typesupport_fastrtps_c.so" to ""
+[32.129s] -- Installing: /home/wyt/RC_planner/src/Primitive-Planner/install/traj_utils/lib/python3.12/site-packages/traj_utils/traj_utils_s__rosidl_typesupport_introspection_c.so
+[32.130s] -- Set non-toolchain portion of runtime path of "/home/wyt/RC_planner/src/Primitive-Planner/install/traj_utils/lib/python3.12/site-packages/traj_utils/traj_utils_s__rosidl_typesupport_introspection_c.so" to ""
+[32.131s] -- Installing: /home/wyt/RC_planner/src/Primitive-Planner/install/traj_utils/lib/python3.12/site-packages/traj_utils/traj_utils_s__rosidl_typesupport_c.so
+[32.132s] -- Set non-toolchain portion of runtime path of "/home/wyt/RC_planner/src/Primitive-Planner/install/traj_utils/lib/python3.12/site-packages/traj_utils/traj_utils_s__rosidl_typesupport_c.so" to ""
+[32.133s] -- Installing: /home/wyt/RC_planner/src/Primitive-Planner/install/traj_utils/lib/libtraj_utils__rosidl_generator_py.so
+[32.133s] -- Set non-toolchain portion of runtime path of "/home/wyt/RC_planner/src/Primitive-Planner/install/traj_utils/lib/libtraj_utils__rosidl_generator_py.so" to ""
+[32.134s] -- Installing: /home/wyt/RC_planner/src/Primitive-Planner/install/traj_utils/share/traj_utils/rust
+[32.134s] -- Installing: /home/wyt/RC_planner/src/Primitive-Planner/install/traj_utils/share/traj_utils/rust/Cargo.toml
+[32.135s] -- Installing: /home/wyt/RC_planner/src/Primitive-Planner/install/traj_utils/share/traj_utils/rust/build.rs
+[32.135s] -- Installing: /home/wyt/RC_planner/src/Primitive-Planner/install/traj_utils/share/traj_utils/rust/src
+[32.135s] -- Installing: /home/wyt/RC_planner/src/Primitive-Planner/install/traj_utils/share/traj_utils/rust/src/lib.rs
+[32.136s] -- Installing: /home/wyt/RC_planner/src/Primitive-Planner/install/traj_utils/share/traj_utils/rust/src/msg
+[32.136s] -- Installing: /home/wyt/RC_planner/src/Primitive-Planner/install/traj_utils/share/traj_utils/rust/src/msg/rmw.rs
+[32.136s] -- Installing: /home/wyt/RC_planner/src/Primitive-Planner/install/traj_utils/share/traj_utils/rust/src/msg.rs
+[32.137s] -- Installing: /home/wyt/RC_planner/src/Primitive-Planner/install/traj_utils/share/traj_utils/msg/SwarmPrimitiveTraj.idl
+[32.137s] -- Installing: /home/wyt/RC_planner/src/Primitive-Planner/install/traj_utils/share/traj_utils/msg/Polynomial.idl
+[32.138s] -- Installing: /home/wyt/RC_planner/src/Primitive-Planner/install/traj_utils/share/traj_utils/msg/SwarmPrimitiveTraj.msg
+[32.138s] -- Installing: /home/wyt/RC_planner/src/Primitive-Planner/install/traj_utils/share/traj_utils/msg/Polynomial.msg
+[32.138s] -- Installing: /home/wyt/RC_planner/src/Primitive-Planner/install/traj_utils/lib/libtraj_visualization.so
+[32.144s] -- Set non-toolchain portion of runtime path of "/home/wyt/RC_planner/src/Primitive-Planner/install/traj_utils/lib/libtraj_visualization.so" to ""
+[32.145s] -- Up-to-date: /home/wyt/RC_planner/src/Primitive-Planner/install/traj_utils/include/traj_utils
+[32.145s] -- Up-to-date: /home/wyt/RC_planner/src/Primitive-Planner/install/traj_utils/include/traj_utils/traj_utils
+[32.145s] -- Installing: /home/wyt/RC_planner/src/Primitive-Planner/install/traj_utils/include/traj_utils/traj_utils/plan_container.hpp
+[32.146s] -- Installing: /home/wyt/RC_planner/src/Primitive-Planner/install/traj_utils/include/traj_utils/traj_utils/planning_visualization.h
+[32.146s] -- Installing: /home/wyt/RC_planner/src/Primitive-Planner/install/traj_utils/share/ament_index/resource_index/package_run_dependencies/traj_utils
+[32.147s] -- Installing: /home/wyt/RC_planner/src/Primitive-Planner/install/traj_utils/share/ament_index/resource_index/parent_prefix_path/traj_utils
+[32.147s] -- Installing: /home/wyt/RC_planner/src/Primitive-Planner/install/traj_utils/share/traj_utils/environment/ament_prefix_path.sh
+[32.148s] -- Installing: /home/wyt/RC_planner/src/Primitive-Planner/install/traj_utils/share/traj_utils/environment/ament_prefix_path.dsv
+[32.148s] -- Installing: /home/wyt/RC_planner/src/Primitive-Planner/install/traj_utils/share/traj_utils/environment/path.sh
+[32.149s] -- Installing: /home/wyt/RC_planner/src/Primitive-Planner/install/traj_utils/share/traj_utils/environment/path.dsv
+[32.149s] -- Installing: /home/wyt/RC_planner/src/Primitive-Planner/install/traj_utils/share/traj_utils/local_setup.bash
+[32.150s] -- Installing: /home/wyt/RC_planner/src/Primitive-Planner/install/traj_utils/share/traj_utils/local_setup.sh
+[32.150s] -- Installing: /home/wyt/RC_planner/src/Primitive-Planner/install/traj_utils/share/traj_utils/local_setup.zsh
+[32.151s] -- Installing: /home/wyt/RC_planner/src/Primitive-Planner/install/traj_utils/share/traj_utils/local_setup.dsv
+[32.151s] -- Installing: /home/wyt/RC_planner/src/Primitive-Planner/install/traj_utils/share/traj_utils/package.dsv
+[32.151s] -- Installing: /home/wyt/RC_planner/src/Primitive-Planner/install/traj_utils/share/ament_index/resource_index/packages/traj_utils
+[32.151s] -- Installing: /home/wyt/RC_planner/src/Primitive-Planner/install/traj_utils/share/traj_utils/cmake/export_traj_utils__rosidl_generator_cExport.cmake
+[32.152s] -- Installing: /home/wyt/RC_planner/src/Primitive-Planner/install/traj_utils/share/traj_utils/cmake/export_traj_utils__rosidl_generator_cExport-noconfig.cmake
+[32.152s] -- Installing: /home/wyt/RC_planner/src/Primitive-Planner/install/traj_utils/share/traj_utils/cmake/export_traj_utils__rosidl_typesupport_fastrtps_cExport.cmake
+[32.153s] -- Installing: /home/wyt/RC_planner/src/Primitive-Planner/install/traj_utils/share/traj_utils/cmake/export_traj_utils__rosidl_typesupport_fastrtps_cExport-noconfig.cmake
+[32.153s] -- Installing: /home/wyt/RC_planner/src/Primitive-Planner/install/traj_utils/share/traj_utils/cmake/traj_utils__rosidl_typesupport_introspection_cExport.cmake
+[32.154s] -- Installing: /home/wyt/RC_planner/src/Primitive-Planner/install/traj_utils/share/traj_utils/cmake/traj_utils__rosidl_typesupport_introspection_cExport-noconfig.cmake
+[32.154s] -- Installing: /home/wyt/RC_planner/src/Primitive-Planner/install/traj_utils/share/traj_utils/cmake/traj_utils__rosidl_typesupport_cExport.cmake
+[32.155s] -- Installing: /home/wyt/RC_planner/src/Primitive-Planner/install/traj_utils/share/traj_utils/cmake/traj_utils__rosidl_typesupport_cExport-noconfig.cmake
+[32.155s] -- Installing: /home/wyt/RC_planner/src/Primitive-Planner/install/traj_utils/share/traj_utils/cmake/export_traj_utils__rosidl_generator_cppExport.cmake
+[32.156s] -- Installing: /home/wyt/RC_planner/src/Primitive-Planner/install/traj_utils/share/traj_utils/cmake/export_traj_utils__rosidl_typesupport_fastrtps_cppExport.cmake
+[32.156s] -- Installing: /home/wyt/RC_planner/src/Primitive-Planner/install/traj_utils/share/traj_utils/cmake/export_traj_utils__rosidl_typesupport_fastrtps_cppExport-noconfig.cmake
+[32.157s] -- Installing: /home/wyt/RC_planner/src/Primitive-Planner/install/traj_utils/share/traj_utils/cmake/traj_utils__rosidl_typesupport_introspection_cppExport.cmake
+[32.157s] -- Installing: /home/wyt/RC_planner/src/Primitive-Planner/install/traj_utils/share/traj_utils/cmake/traj_utils__rosidl_typesupport_introspection_cppExport-noconfig.cmake
+[32.158s] -- Installing: /home/wyt/RC_planner/src/Primitive-Planner/install/traj_utils/share/traj_utils/cmake/traj_utils__rosidl_typesupport_cppExport.cmake
+[32.158s] -- Installing: /home/wyt/RC_planner/src/Primitive-Planner/install/traj_utils/share/traj_utils/cmake/traj_utils__rosidl_typesupport_cppExport-noconfig.cmake
+[32.158s] -- Installing: /home/wyt/RC_planner/src/Primitive-Planner/install/traj_utils/share/traj_utils/cmake/export_traj_utils__rosidl_generator_pyExport.cmake
+[32.159s] -- Installing: /home/wyt/RC_planner/src/Primitive-Planner/install/traj_utils/share/traj_utils/cmake/export_traj_utils__rosidl_generator_pyExport-noconfig.cmake
+[32.160s] -- Installing: /home/wyt/RC_planner/src/Primitive-Planner/install/traj_utils/share/traj_utils/cmake/export_traj_visualizationExport.cmake
+[32.160s] -- Installing: /home/wyt/RC_planner/src/Primitive-Planner/install/traj_utils/share/traj_utils/cmake/export_traj_visualizationExport-noconfig.cmake
+[32.161s] -- Installing: /home/wyt/RC_planner/src/Primitive-Planner/install/traj_utils/share/traj_utils/cmake/rosidl_cmake-extras.cmake
+[32.161s] -- Installing: /home/wyt/RC_planner/src/Primitive-Planner/install/traj_utils/share/traj_utils/cmake/ament_cmake_export_dependencies-extras.cmake
+[32.162s] -- Installing: /home/wyt/RC_planner/src/Primitive-Planner/install/traj_utils/share/traj_utils/cmake/ament_cmake_export_include_directories-extras.cmake
+[32.162s] -- Installing: /home/wyt/RC_planner/src/Primitive-Planner/install/traj_utils/share/traj_utils/cmake/ament_cmake_export_libraries-extras.cmake
+[32.163s] -- Installing: /home/wyt/RC_planner/src/Primitive-Planner/install/traj_utils/share/traj_utils/cmake/ament_cmake_export_targets-extras.cmake
+[32.163s] -- Installing: /home/wyt/RC_planner/src/Primitive-Planner/install/traj_utils/share/traj_utils/cmake/rosidl_cmake_export_typesupport_targets-extras.cmake
+[32.164s] -- Installing: /home/wyt/RC_planner/src/Primitive-Planner/install/traj_utils/share/traj_utils/cmake/rosidl_cmake_export_typesupport_libraries-extras.cmake
+[32.164s] -- Installing: /home/wyt/RC_planner/src/Primitive-Planner/install/traj_utils/share/traj_utils/cmake/rosidl_cmake_aggregate_target-extras.cmake
+[32.165s] -- Installing: /home/wyt/RC_planner/src/Primitive-Planner/install/traj_utils/share/traj_utils/cmake/traj_utilsConfig.cmake
+[32.165s] -- Installing: /home/wyt/RC_planner/src/Primitive-Planner/install/traj_utils/share/traj_utils/cmake/traj_utilsConfig-version.cmake
+[32.165s] -- Installing: /home/wyt/RC_planner/src/Primitive-Planner/install/traj_utils/share/traj_utils/package.xml
+[32.173s] Invoked command in '/home/wyt/RC_planner/src/Primitive-Planner/build/traj_utils' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/jazzy DEBUGINFOD_URLS=https://debuginfod.ubuntu.com /usr/bin/cmake --install /home/wyt/RC_planner/src/Primitive-Planner/build/traj_utils

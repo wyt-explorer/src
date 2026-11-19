@@ -1,0 +1,9 @@
+[01m[K/home/wyt/RC_planner/src/Primitive-Planner/src/uav_simulator/so3_control/src/so3_control_ros2.cpp:[m[K In member function ‘[01m[Kvoid SO3ControlNode::[01;32m[KpublishSO3Command[m[K()[m[K’:
+[01m[K/home/wyt/RC_planner/src/Primitive-Planner/src/uav_simulator/so3_control/src/so3_control_ros2.cpp:83:51:[m[K [01;35m[Kwarning: [m[K‘[01m[Kquadrotor_msgs::msg::SO3Command_<std::allocator<void> >::Ptr[m[K’ is deprecated [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wdeprecated-declarations-Wdeprecated-declarations]8;;[m[K]
+   83 |   quadrotor_msgs::msg::SO3Command::Ptr so3_command[01;35m[K([m[K
+      |                                                   [01;35m[K^[m[K
+In file included from [01m[K/home/wyt/RC_planner/src/install/quadrotor_msgs/include/quadrotor_msgs/quadrotor_msgs/msg/so3_command.hpp:7[m[K,
+                 from [01m[K/home/wyt/RC_planner/src/Primitive-Planner/src/uav_simulator/so3_control/src/so3_control_ros2.cpp:15[m[K:
+[01m[K/home/wyt/RC_planner/src/install/quadrotor_msgs/include/quadrotor_msgs/quadrotor_msgs/msg/detail/so3_command__struct.hpp:172:5:[m[K [01;36m[Knote: [m[Kdeclared here
+  172 |     [01;36m[KPtr[m[K;
+      |     [01;36m[K^~~[m[K

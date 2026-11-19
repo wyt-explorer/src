@@ -1,0 +1,97 @@
+{
+	"configurations" : 
+	[
+		{
+			"directories" : 
+			[
+				{
+					"build" : ".",
+					"hasInstallRule" : true,
+					"jsonFile" : "directory-.-77ee4a3e20a56c870688.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.15"
+					},
+					"projectIndex" : 0,
+					"source" : ".",
+					"targetIndexes" : 
+					[
+						0,
+						1,
+						2,
+						3,
+						4
+					]
+				}
+			],
+			"name" : "",
+			"projects" : 
+			[
+				{
+					"directoryIndexes" : 
+					[
+						0
+					],
+					"name" : "selected_points_publisher",
+					"targetIndexes" : 
+					[
+						0,
+						1,
+						2,
+						3,
+						4
+					]
+				}
+			],
+			"targets" : 
+			[
+				{
+					"directoryIndex" : 0,
+					"id" : "selected_points_publisher::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-selected_points_publisher-1d8681ddd636123708d6.json",
+					"name" : "selected_points_publisher",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "selected_points_publisher_autogen::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-selected_points_publisher_autogen-04b362d0045544424710.json",
+					"name" : "selected_points_publisher_autogen",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "selected_points_publisher_autogen_timestamp_deps::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-selected_points_publisher_autogen_timestamp_deps-94c1ee202a97ca42a89e.json",
+					"name" : "selected_points_publisher_autogen_timestamp_deps",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "selected_points_publisher_uninstall::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-selected_points_publisher_uninstall-34ffe0720f3d4719eed4.json",
+					"name" : "selected_points_publisher_uninstall",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "uninstall::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-uninstall-b03fad45f7aba4202840.json",
+					"name" : "uninstall",
+					"projectIndex" : 0
+				}
+			]
+		}
+	],
+	"kind" : "codemodel",
+	"paths" : 
+	{
+		"build" : "/home/wyt/RC_planner/src/Primitive-Planner/build/selected_points_publisher",
+		"source" : "/home/wyt/RC_planner/src/Primitive-Planner/src/Utils/selected_points_publisher"
+	},
+	"version" : 
+	{
+		"major" : 2,
+		"minor" : 6
+	}
+}

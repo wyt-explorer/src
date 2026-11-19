@@ -1,0 +1,16 @@
+/home/wyt/RC_planner/src/Primitive-Planner/install/assign_goals/lib/assign_goals/assign_goals_node
+/home/wyt/RC_planner/src/Primitive-Planner/install/assign_goals/share/ament_index/resource_index/package_run_dependencies/assign_goals
+/home/wyt/RC_planner/src/Primitive-Planner/install/assign_goals/share/ament_index/resource_index/parent_prefix_path/assign_goals
+/home/wyt/RC_planner/src/Primitive-Planner/install/assign_goals/share/assign_goals/environment/ament_prefix_path.sh
+/home/wyt/RC_planner/src/Primitive-Planner/install/assign_goals/share/assign_goals/environment/ament_prefix_path.dsv
+/home/wyt/RC_planner/src/Primitive-Planner/install/assign_goals/share/assign_goals/environment/path.sh
+/home/wyt/RC_planner/src/Primitive-Planner/install/assign_goals/share/assign_goals/environment/path.dsv
+/home/wyt/RC_planner/src/Primitive-Planner/install/assign_goals/share/assign_goals/local_setup.bash
+/home/wyt/RC_planner/src/Primitive-Planner/install/assign_goals/share/assign_goals/local_setup.sh
+/home/wyt/RC_planner/src/Primitive-Planner/install/assign_goals/share/assign_goals/local_setup.zsh
+/home/wyt/RC_planner/src/Primitive-Planner/install/assign_goals/share/assign_goals/local_setup.dsv
+/home/wyt/RC_planner/src/Primitive-Planner/install/assign_goals/share/assign_goals/package.dsv
+/home/wyt/RC_planner/src/Primitive-Planner/install/assign_goals/share/ament_index/resource_index/packages/assign_goals
+/home/wyt/RC_planner/src/Primitive-Planner/install/assign_goals/share/assign_goals/cmake/assign_goalsConfig.cmake
+/home/wyt/RC_planner/src/Primitive-Planner/install/assign_goals/share/assign_goals/cmake/assign_goalsConfig-version.cmake
+/home/wyt/RC_planner/src/Primitive-Planner/install/assign_goals/share/assign_goals/package.xml

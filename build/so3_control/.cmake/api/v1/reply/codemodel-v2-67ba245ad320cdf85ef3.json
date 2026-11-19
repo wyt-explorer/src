@@ -1,0 +1,97 @@
+{
+	"configurations" : 
+	[
+		{
+			"directories" : 
+			[
+				{
+					"build" : ".",
+					"hasInstallRule" : true,
+					"jsonFile" : "directory-.-Release-03318d7fd45d030086ae.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.15"
+					},
+					"projectIndex" : 0,
+					"source" : ".",
+					"targetIndexes" : 
+					[
+						0,
+						1,
+						2,
+						3,
+						4
+					]
+				}
+			],
+			"name" : "Release",
+			"projects" : 
+			[
+				{
+					"directoryIndexes" : 
+					[
+						0
+					],
+					"name" : "so3_control",
+					"targetIndexes" : 
+					[
+						0,
+						1,
+						2,
+						3,
+						4
+					]
+				}
+			],
+			"targets" : 
+			[
+				{
+					"directoryIndex" : 0,
+					"id" : "SO3Control::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-SO3Control-Release-cbd976da1f0e5551d51a.json",
+					"name" : "SO3Control",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "control_example::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-control_example-Release-6ac449893f26553efa85.json",
+					"name" : "control_example",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "so3_control_ros2::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-so3_control_ros2-Release-ea6cdd9246373280cd67.json",
+					"name" : "so3_control_ros2",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "so3_control_uninstall::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-so3_control_uninstall-Release-3f1dac921e5156e47f36.json",
+					"name" : "so3_control_uninstall",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "uninstall::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-uninstall-Release-8df7d2c1f82d93ff5c40.json",
+					"name" : "uninstall",
+					"projectIndex" : 0
+				}
+			]
+		}
+	],
+	"kind" : "codemodel",
+	"paths" : 
+	{
+		"build" : "/home/wyt/RC_planner/src/build/so3_control",
+		"source" : "/home/wyt/RC_planner/src/Primitive-Planner/src/uav_simulator/so3_control"
+	},
+	"version" : 
+	{
+		"major" : 2,
+		"minor" : 6
+	}
+}

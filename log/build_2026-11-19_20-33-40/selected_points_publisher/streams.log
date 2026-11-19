@@ -1,0 +1,99 @@
+[0.036s] Invoking command in '/home/wyt/RC_planner/src/build/selected_points_publisher': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/jazzy DEBUGINFOD_URLS=https://debuginfod.ubuntu.com /usr/bin/cmake /home/wyt/RC_planner/src/Primitive-Planner/src/Utils/selected_points_publisher -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=/home/wyt/RC_planner/src/install/selected_points_publisher
+[0.162s] -- The C compiler identification is GNU 13.3.0
+[0.320s] -- The CXX compiler identification is GNU 13.3.0
+[0.371s] -- Detecting C compiler ABI info
+[0.622s] -- Detecting C compiler ABI info - done
+[0.651s] -- Check for working C compiler: /usr/bin/cc - skipped
+[0.652s] -- Detecting C compile features
+[0.653s] -- Detecting C compile features - done
+[0.677s] -- Detecting CXX compiler ABI info
+[0.900s] -- Detecting CXX compiler ABI info - done
+[0.923s] -- Check for working CXX compiler: /usr/bin/c++ - skipped
+[0.924s] -- Detecting CXX compile features
+[0.925s] -- Detecting CXX compile features - done
+[0.939s] -- Found ament_cmake: 2.5.6 (/opt/ros/jazzy/share/ament_cmake/cmake)
+[1.363s] -- Found Python3: /usr/bin/python3 (found version "3.12.3") found components: Interpreter 
+[1.798s] -- Found rclcpp: 28.1.22 (/opt/ros/jazzy/share/rclcpp/cmake)
+[2.020s] -- Found rosidl_generator_c: 4.6.9 (/opt/ros/jazzy/share/rosidl_generator_c/cmake)
+[2.094s] -- Found rosidl_generator_cpp: 4.6.9 (/opt/ros/jazzy/share/rosidl_generator_cpp/cmake)
+[2.158s] -- Using all available rosidl_typesupport_c: rosidl_typesupport_fastrtps_c;rosidl_typesupport_introspection_c
+[2.226s] -- Using all available rosidl_typesupport_cpp: rosidl_typesupport_fastrtps_cpp;rosidl_typesupport_introspection_cpp
+[2.476s] -- Found rmw_implementation_cmake: 7.3.4 (/opt/ros/jazzy/share/rmw_implementation_cmake/cmake)
+[2.487s] -- Found rmw_fastrtps_cpp: 8.4.4 (/opt/ros/jazzy/share/rmw_fastrtps_cpp/cmake)
+[2.753s] -- Found OpenSSL: /usr/lib/x86_64-linux-gnu/libcrypto.so (found version "3.0.13")  
+[2.822s] -- Found FastRTPS: /opt/ros/jazzy/include (Required is at least version "2.13") 
+[2.909s] -- Using RMW implementation 'rmw_fastrtps_cpp' as default
+[3.346s] -- Found rviz_common: 14.1.24 (/opt/ros/jazzy/share/rviz_common/cmake)
+[3.628s] -- Setting OGRE_DIR to: '/opt/ros/jazzy/share/rviz_ogre_vendor/cmake/../../../opt/rviz_ogre_vendor/lib/OGRE/cmake'
+[3.635s] -- Found OGRE
+[3.635s] --   static     : OFF
+[3.635s] --   components : MeshLodGenerator;Overlay;Paging;Property;RTShaderSystem;Terrain;Volume
+[3.636s] --   plugins    : Plugin_BSPSceneManager;Plugin_OctreeSceneManager;Plugin_PCZSceneManager;Plugin_ParticleFX;RenderSystem_GL;RenderSystem_GL3Plus;Codec_STBI
+[3.636s] --   media      : /opt/ros/jazzy/opt/rviz_ogre_vendor/share/OGRE/Media
+[3.636s] -- OGRE_LIBRARIES: OgreMeshLodGenerator;OgreOverlay;OgrePaging;OgreProperty;OgreRTShaderSystem;OgreTerrain;OgreVolume;OgreMain
+[3.637s] -- OGRE_LIBRARY_DIRS: /opt/ros/jazzy/opt/rviz_ogre_vendor/lib
+[3.637s] -- OGRE_PLUGINS: Plugin_BSPSceneManager;Plugin_OctreeSceneManager;Plugin_PCZSceneManager;Plugin_ParticleFX;RenderSystem_GL;RenderSystem_GL3Plus;Codec_STBI
+[3.637s] -- OGRE_PLUGIN_DIR: /opt/ros/jazzy/opt/rviz_ogre_vendor/lib/OGRE
+[3.638s] -- rviz_ogre_vendor::OgreOverlay for IMPORTED_LOCATION_RELEASE: /opt/ros/jazzy/opt/rviz_ogre_vendor/lib/libOgreOverlay.so
+[3.638s] -- rviz_ogre_vendor::OgreOverlay for IMPORTED_LOCATION_DEBUG: /opt/ros/jazzy/opt/rviz_ogre_vendor/lib/libOgreOverlay.so
+[3.638s] -- rviz_ogre_vendor::OgreMain for IMPORTED_LOCATION_RELEASE: /opt/ros/jazzy/opt/rviz_ogre_vendor/lib/libOgreMain.so
+[3.638s] -- rviz_ogre_vendor::OgreMain for IMPORTED_LOCATION_DEBUG: /opt/ros/jazzy/opt/rviz_ogre_vendor/lib/libOgreMain.so
+[3.757s] -- Found ZLIB: /usr/lib/x86_64-linux-gnu/libz.so (found version "1.3")  
+[3.786s] -- Found OpenGL: /usr/lib/x86_64-linux-gnu/libOpenGL.so   
+[4.262s] -- Found X11: /usr/include   
+[4.264s] -- Looking for XOpenDisplay in /usr/lib/x86_64-linux-gnu/libX11.so;/usr/lib/x86_64-linux-gnu/libXext.so
+[4.511s] -- Looking for XOpenDisplay in /usr/lib/x86_64-linux-gnu/libX11.so;/usr/lib/x86_64-linux-gnu/libXext.so - found
+[4.511s] -- Looking for gethostbyname
+[4.762s] -- Looking for gethostbyname - found
+[4.762s] -- Looking for connect
+[4.991s] -- Looking for connect - found
+[4.991s] -- Looking for remove
+[5.223s] -- Looking for remove - found
+[5.223s] -- Looking for shmat
+[5.457s] -- Looking for shmat - found
+[5.457s] -- Looking for IceConnectionNumber in ICE
+[5.683s] -- Looking for IceConnectionNumber in ICE - found
+[6.556s] -- Setting yaml-cpp_DIR to: '/opt/ros/jazzy/share/yaml_cpp_vendor/cmake/../../../opt/yaml_cpp_vendor/share/cmake/yaml-cpp'
+[6.605s] -- Found rviz_default_plugins: 14.1.24 (/opt/ros/jazzy/share/rviz_default_plugins/cmake)
+[7.351s] -- Found eigen3_cmake_module: 0.3.1 (/opt/ros/jazzy/share/eigen3_cmake_module/cmake)
+[7.356s] -- Found Eigen3: TRUE (found version "3.4.0") 
+[7.356s] -- Ensuring Eigen3 include directory is part of orocos-kdl CMake target
+[7.766s] -- Configuring done (7.7s)
+[7.896s] -- Generating done (0.1s)
+[7.916s] -- Build files have been written to: /home/wyt/RC_planner/src/build/selected_points_publisher
+[7.954s] Invoked command in '/home/wyt/RC_planner/src/build/selected_points_publisher' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/jazzy DEBUGINFOD_URLS=https://debuginfod.ubuntu.com /usr/bin/cmake /home/wyt/RC_planner/src/Primitive-Planner/src/Utils/selected_points_publisher -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=/home/wyt/RC_planner/src/install/selected_points_publisher
+[7.959s] Invoking command in '/home/wyt/RC_planner/src/build/selected_points_publisher': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/jazzy DEBUGINFOD_URLS=https://debuginfod.ubuntu.com /usr/bin/cmake --build /home/wyt/RC_planner/src/build/selected_points_publisher -- -j28 -l28
+[8.135s] [  0%] Built target selected_points_publisher_autogen_timestamp_deps
+[8.196s] [ 20%] [34m[1mAutomatic MOC for target selected_points_publisher[0m
+[9.453s] [ 20%] Built target selected_points_publisher_autogen
+[9.603s] [ 60%] [32mBuilding CXX object CMakeFiles/selected_points_publisher.dir/selected_points_publisher_autogen/mocs_compilation.cpp.o[0m
+[9.604s] [ 60%] [32mBuilding CXX object CMakeFiles/selected_points_publisher.dir/src/selected_points_publisher.cpp.o[0m
+[44.446s] [ 80%] [32m[1mLinking CXX shared library libselected_points_publisher.so[0m
+[46.974s] [100%] Built target selected_points_publisher
+[47.036s] Invoked command in '/home/wyt/RC_planner/src/build/selected_points_publisher' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/jazzy DEBUGINFOD_URLS=https://debuginfod.ubuntu.com /usr/bin/cmake --build /home/wyt/RC_planner/src/build/selected_points_publisher -- -j28 -l28
+[47.041s] Invoking command in '/home/wyt/RC_planner/src/build/selected_points_publisher': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/jazzy DEBUGINFOD_URLS=https://debuginfod.ubuntu.com /usr/bin/cmake --install /home/wyt/RC_planner/src/build/selected_points_publisher
+[47.061s] -- Install configuration: "Release"
+[47.062s] -- Installing: /home/wyt/RC_planner/src/install/selected_points_publisher/share/selected_points_publisher/plugin_description.xml
+[47.062s] -- Installing: /home/wyt/RC_planner/src/install/selected_points_publisher/lib/libselected_points_publisher.so
+[47.064s] -- Set non-toolchain portion of runtime path of "/home/wyt/RC_planner/src/install/selected_points_publisher/lib/libselected_points_publisher.so" to ""
+[47.064s] -- Installing: /home/wyt/RC_planner/src/install/selected_points_publisher/include
+[47.064s] -- Installing: /home/wyt/RC_planner/src/install/selected_points_publisher/include/selected_points_publisher
+[47.065s] -- Installing: /home/wyt/RC_planner/src/install/selected_points_publisher/include/selected_points_publisher/selected_points_publisher.hpp
+[47.066s] -- Up-to-date: /home/wyt/RC_planner/src/install/selected_points_publisher/share/selected_points_publisher/plugin_description.xml
+[47.066s] -- Installing: /home/wyt/RC_planner/src/install/selected_points_publisher/share/ament_index/resource_index/package_run_dependencies/selected_points_publisher
+[47.066s] -- Installing: /home/wyt/RC_planner/src/install/selected_points_publisher/share/ament_index/resource_index/parent_prefix_path/selected_points_publisher
+[47.067s] -- Installing: /home/wyt/RC_planner/src/install/selected_points_publisher/share/selected_points_publisher/environment/ament_prefix_path.sh
+[47.067s] -- Installing: /home/wyt/RC_planner/src/install/selected_points_publisher/share/selected_points_publisher/environment/ament_prefix_path.dsv
+[47.068s] -- Installing: /home/wyt/RC_planner/src/install/selected_points_publisher/share/selected_points_publisher/environment/path.sh
+[47.068s] -- Installing: /home/wyt/RC_planner/src/install/selected_points_publisher/share/selected_points_publisher/environment/path.dsv
+[47.069s] -- Installing: /home/wyt/RC_planner/src/install/selected_points_publisher/share/selected_points_publisher/local_setup.bash
+[47.069s] -- Installing: /home/wyt/RC_planner/src/install/selected_points_publisher/share/selected_points_publisher/local_setup.sh
+[47.069s] -- Installing: /home/wyt/RC_planner/src/install/selected_points_publisher/share/selected_points_publisher/local_setup.zsh
+[47.069s] -- Installing: /home/wyt/RC_planner/src/install/selected_points_publisher/share/selected_points_publisher/local_setup.dsv
+[47.070s] -- Installing: /home/wyt/RC_planner/src/install/selected_points_publisher/share/selected_points_publisher/package.dsv
+[47.070s] -- Installing: /home/wyt/RC_planner/src/install/selected_points_publisher/share/ament_index/resource_index/packages/selected_points_publisher
+[47.070s] -- Installing: /home/wyt/RC_planner/src/install/selected_points_publisher/share/ament_index/resource_index/rviz_common__pluginlib__plugin/selected_points_publisher
+[47.071s] -- Installing: /home/wyt/RC_planner/src/install/selected_points_publisher/share/selected_points_publisher/cmake/selected_points_publisherConfig.cmake
+[47.071s] -- Installing: /home/wyt/RC_planner/src/install/selected_points_publisher/share/selected_points_publisher/cmake/selected_points_publisherConfig-version.cmake
+[47.072s] -- Installing: /home/wyt/RC_planner/src/install/selected_points_publisher/share/selected_points_publisher/package.xml
+[47.078s] Invoked command in '/home/wyt/RC_planner/src/build/selected_points_publisher' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/jazzy DEBUGINFOD_URLS=https://debuginfod.ubuntu.com /usr/bin/cmake --install /home/wyt/RC_planner/src/build/selected_points_publisher

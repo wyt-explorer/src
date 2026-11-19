@@ -1,0 +1,97 @@
+{
+	"configurations" : 
+	[
+		{
+			"directories" : 
+			[
+				{
+					"build" : ".",
+					"hasInstallRule" : true,
+					"jsonFile" : "directory-.-94315272b3f3c6a14fb0.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.15"
+					},
+					"projectIndex" : 0,
+					"source" : ".",
+					"targetIndexes" : 
+					[
+						0,
+						1,
+						2,
+						3,
+						4
+					]
+				}
+			],
+			"name" : "",
+			"projects" : 
+			[
+				{
+					"directoryIndexes" : 
+					[
+						0
+					],
+					"name" : "so3_control",
+					"targetIndexes" : 
+					[
+						0,
+						1,
+						2,
+						3,
+						4
+					]
+				}
+			],
+			"targets" : 
+			[
+				{
+					"directoryIndex" : 0,
+					"id" : "SO3Control::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-SO3Control-53386ab375e1f5d27a3e.json",
+					"name" : "SO3Control",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "control_example::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-control_example-69365804e82c335d18ba.json",
+					"name" : "control_example",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "so3_control_ros2::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-so3_control_ros2-8f19d4f1db4270fb8ce2.json",
+					"name" : "so3_control_ros2",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "so3_control_uninstall::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-so3_control_uninstall-9e6704d4d9c0cf480eff.json",
+					"name" : "so3_control_uninstall",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "uninstall::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-uninstall-8df7d2c1f82d93ff5c40.json",
+					"name" : "uninstall",
+					"projectIndex" : 0
+				}
+			]
+		}
+	],
+	"kind" : "codemodel",
+	"paths" : 
+	{
+		"build" : "/home/wyt/RC_planner/src/Primitive-Planner/build/so3_control",
+		"source" : "/home/wyt/RC_planner/src/Primitive-Planner/src/uav_simulator/so3_control"
+	},
+	"version" : 
+	{
+		"major" : 2,
+		"minor" : 6
+	}
+}

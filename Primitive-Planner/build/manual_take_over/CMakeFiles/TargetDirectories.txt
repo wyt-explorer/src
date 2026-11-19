@@ -1,0 +1,11 @@
+/home/wyt/RC_planner/src/Primitive-Planner/build/manual_take_over/CMakeFiles/uninstall.dir
+/home/wyt/RC_planner/src/Primitive-Planner/build/manual_take_over/CMakeFiles/manual_take_over_uninstall.dir
+/home/wyt/RC_planner/src/Primitive-Planner/build/manual_take_over/CMakeFiles/manual_take_over.dir
+/home/wyt/RC_planner/src/Primitive-Planner/build/manual_take_over/CMakeFiles/manual_take_over_ground_station.dir
+/home/wyt/RC_planner/src/Primitive-Planner/build/manual_take_over/CMakeFiles/test.dir
+/home/wyt/RC_planner/src/Primitive-Planner/build/manual_take_over/CMakeFiles/edit_cache.dir
+/home/wyt/RC_planner/src/Primitive-Planner/build/manual_take_over/CMakeFiles/rebuild_cache.dir
+/home/wyt/RC_planner/src/Primitive-Planner/build/manual_take_over/CMakeFiles/list_install_components.dir
+/home/wyt/RC_planner/src/Primitive-Planner/build/manual_take_over/CMakeFiles/install.dir
+/home/wyt/RC_planner/src/Primitive-Planner/build/manual_take_over/CMakeFiles/install/local.dir
+/home/wyt/RC_planner/src/Primitive-Planner/build/manual_take_over/CMakeFiles/install/strip.dir

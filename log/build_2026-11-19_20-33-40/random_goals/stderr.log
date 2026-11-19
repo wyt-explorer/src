@@ -1,0 +1,5 @@
+[01m[K/home/wyt/RC_planner/src/Primitive-Planner/src/Utils/random_goals/src/random_goals_node.cpp:[m[K In function ‘[01m[Kint[01;32m[K main[m[K(int, char**)[m[K’:
+[01m[K/home/wyt/RC_planner/src/Primitive-Planner/src/Utils/random_goals/src/random_goals_node.cpp:99:54:[m[K [01;35m[Kwarning: [m[Kconverting to ‘[01m[Kconst rcl_interfaces::msg::ParameterDescriptor[m[K’ {aka ‘[01m[Kconst rcl_interfaces::msg::ParameterDescriptor_<std::allocator<void> >[m[K’} from initializer list would use explicit constructor ‘[01m[Krcl_interfaces::msg::ParameterDescriptor_<ContainerAllocator>::[01;32m[KParameterDescriptor_[m[K(rosidl_runtime_cpp::MessageInitialization) [35m[K[with ContainerAllocator = std::allocator<void>][m[K[m[K’
+   99 |     pt = [01;35m[Knode->declare_parameter<std::vector<double>>("goal" + to_string(i), {})[m[K;
+      |          [01;35m[K~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~[m[K
+[01m[K/home/wyt/RC_planner/src/Primitive-Planner/src/Utils/random_goals/src/random_goals_node.cpp:99:54:[m[K [01;36m[Knote: [m[Kin C++11 and above a default constructor can be explicit

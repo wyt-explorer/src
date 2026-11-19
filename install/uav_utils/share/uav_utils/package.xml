@@ -1,0 +1,10 @@
+<?xml version="1.0"?>
+<package format="3">
+  <name>uav_utils</name><version>0.1.0</version>
+  <description>Utilities for quadrotor ROS 2 nodes.</description>
+  <maintainer email="liutianbocn@gmail.com">LIU Tianbo</maintainer>
+  <license>LGPLv3</license>
+  <buildtool_depend>ament_cmake</buildtool_depend>
+  <depend>rclpy</depend><depend>nav_msgs</depend><depend>geometry_msgs</depend><depend>tf2_ros</depend>
+<depend>sensor_msgs</depend><depend>eigen</depend><export><build_type>ament_cmake</build_type></export>
+</package>

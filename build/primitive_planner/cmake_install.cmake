@@ -98,6 +98,14 @@ if(CMAKE_INSTALL_COMPONENT STREQUAL "Unspecified" OR NOT CMAKE_INSTALL_COMPONENT
 endif()
 
 if(CMAKE_INSTALL_COMPONENT STREQUAL "Unspecified" OR NOT CMAKE_INSTALL_COMPONENT)
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/lib/primitive_planner" TYPE PROGRAM FILES
+    "/home/wyt/RC_planner/src/Primitive-Planner/src/planner/plan_manage/../../scripts/gen_position_swap.py"
+    "/home/wyt/RC_planner/src/Primitive-Planner/src/planner/plan_manage/../../scripts/pub_trigger.sh"
+    "/home/wyt/RC_planner/src/Primitive-Planner/src/planner/plan_manage/../../scripts/run_swarm.sh"
+    )
+endif()
+
+if(CMAKE_INSTALL_COMPONENT STREQUAL "Unspecified" OR NOT CMAKE_INSTALL_COMPONENT)
   file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/ament_index/resource_index/package_run_dependencies" TYPE FILE FILES "/home/wyt/RC_planner/src/build/primitive_planner/ament_cmake_index/share/ament_index/resource_index/package_run_dependencies/primitive_planner")
 endif()
 

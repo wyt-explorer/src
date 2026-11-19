@@ -1,0 +1,5 @@
+<library path="rviz_plugins">
+  <class name="rviz_plugins/Goal3DTool" type="primitive_rviz::Goal3DTool" base_class_type="rviz_common::Tool">
+    <description>Three-dimensional position, height and yaw goal tool.</description>
+  </class>
+</library>

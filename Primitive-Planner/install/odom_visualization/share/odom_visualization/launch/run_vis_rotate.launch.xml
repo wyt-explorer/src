@@ -1,0 +1,4 @@
+<launch>
+  <!-- ROS 2 equivalent of the upstream rotating visualization frame. -->
+  <node pkg="odom_visualization" exec="rotate_tf_for_vis.py" name="rotate_tf_for_vis" output="screen"/>
+</launch>

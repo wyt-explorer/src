@@ -1,0 +1,18 @@
+In file included from [01m[K/home/wyt/RC_planner/src/Primitive-Planner/src/Utils/rviz_plugins/src/pose_tool.h:42[m[K,
+                 from [01m[K/home/wyt/RC_planner/src/Primitive-Planner/src/Utils/rviz_plugins/src/pose_tool.cpp:51[m[K:
+[01m[K/opt/ros/jazzy/opt/rviz_ogre_vendor/include/OGRE/OgreVector3.h:2:62:[m[K [01;36m[Knote: [m[K‘[01m[K#pragma message: /opt/ros/jazzy/opt/rviz_ogre_vendor/include/OGRE/OgreVector3.h is deprecated, migrate to Ogre.h[m[K’
+    2 | #pragma message( __FILE__ " is deprecated, migrate to Ogre.h"[01;36m[K)[m[K
+      |                                                              [01;36m[K^[m[K
+In file included from [01m[K/home/wyt/RC_planner/src/build/rviz_plugins/rviz_plugins_autogen/UVLADIE3JM/../../../../Primitive-Planner/src/Utils/rviz_plugins/src/pose_tool.h:42[m[K,
+                 from [01m[K/home/wyt/RC_planner/src/build/rviz_plugins/rviz_plugins_autogen/UVLADIE3JM/../../../../Primitive-Planner/src/Utils/rviz_plugins/src/goal_tool.h:47[m[K,
+                 from [01m[K/home/wyt/RC_planner/src/build/rviz_plugins/rviz_plugins_autogen/UVLADIE3JM/moc_goal_tool.cpp:10[m[K,
+                 from [01m[K/home/wyt/RC_planner/src/build/rviz_plugins/rviz_plugins_autogen/mocs_compilation.cpp:2[m[K:
+[01m[K/opt/ros/jazzy/opt/rviz_ogre_vendor/include/OGRE/OgreVector3.h:2:62:[m[K [01;36m[Knote: [m[K‘[01m[K#pragma message: /opt/ros/jazzy/opt/rviz_ogre_vendor/include/OGRE/OgreVector3.h is deprecated, migrate to Ogre.h[m[K’
+    2 | #pragma message( __FILE__ " is deprecated, migrate to Ogre.h"[01;36m[K)[m[K
+      |                                                              [01;36m[K^[m[K
+In file included from [01m[K/home/wyt/RC_planner/src/Primitive-Planner/src/Utils/rviz_plugins/src/pose_tool.h:42[m[K,
+                 from [01m[K/home/wyt/RC_planner/src/Primitive-Planner/src/Utils/rviz_plugins/src/goal_tool.h:47[m[K,
+                 from [01m[K/home/wyt/RC_planner/src/Primitive-Planner/src/Utils/rviz_plugins/src/goal_tool.cpp:49[m[K:
+[01m[K/opt/ros/jazzy/opt/rviz_ogre_vendor/include/OGRE/OgreVector3.h:2:62:[m[K [01;36m[Knote: [m[K‘[01m[K#pragma message: /opt/ros/jazzy/opt/rviz_ogre_vendor/include/OGRE/OgreVector3.h is deprecated, migrate to Ogre.h[m[K’
+    2 | #pragma message( __FILE__ " is deprecated, migrate to Ogre.h"[01;36m[K)[m[K
+      |                                                              [01;36m[K^[m[K

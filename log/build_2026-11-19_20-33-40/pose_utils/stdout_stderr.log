@@ -1,0 +1,44 @@
+-- The C compiler identification is GNU 13.3.0
+-- The CXX compiler identification is GNU 13.3.0
+-- Detecting C compiler ABI info
+-- Detecting C compiler ABI info - done
+-- Check for working C compiler: /usr/bin/cc - skipped
+-- Detecting C compile features
+-- Detecting C compile features - done
+-- Detecting CXX compiler ABI info
+-- Detecting CXX compiler ABI info - done
+-- Check for working CXX compiler: /usr/bin/c++ - skipped
+-- Detecting CXX compile features
+-- Detecting CXX compile features - done
+-- Found ament_cmake: 2.5.6 (/opt/ros/jazzy/share/ament_cmake/cmake)
+-- Found Python3: /usr/bin/python3 (found version "3.12.3") found components: Interpreter 
+-- Found Armadillo: /usr/include (found version "12.6.7") 
+-- Configuring done (2.2s)
+-- Generating done (0.0s)
+-- Build files have been written to: /home/wyt/RC_planner/src/build/pose_utils
+[ 50%] [32mBuilding CXX object CMakeFiles/pose_utils.dir/src/pose_utils.cpp.o[0m
+[100%] [32m[1mLinking CXX static library libpose_utils.a[0m
+[100%] Built target pose_utils
+-- Install configuration: "Release"
+-- Installing: /home/wyt/RC_planner/src/install/pose_utils/lib/libpose_utils.a
+-- Installing: /home/wyt/RC_planner/src/install/pose_utils/include
+-- Installing: /home/wyt/RC_planner/src/install/pose_utils/include/pose_utils.h
+-- Installing: /home/wyt/RC_planner/src/install/pose_utils/share/pose_utils/environment/library_path.sh
+-- Installing: /home/wyt/RC_planner/src/install/pose_utils/share/pose_utils/environment/library_path.dsv
+-- Installing: /home/wyt/RC_planner/src/install/pose_utils/share/ament_index/resource_index/package_run_dependencies/pose_utils
+-- Installing: /home/wyt/RC_planner/src/install/pose_utils/share/ament_index/resource_index/parent_prefix_path/pose_utils
+-- Installing: /home/wyt/RC_planner/src/install/pose_utils/share/pose_utils/environment/ament_prefix_path.sh
+-- Installing: /home/wyt/RC_planner/src/install/pose_utils/share/pose_utils/environment/ament_prefix_path.dsv
+-- Installing: /home/wyt/RC_planner/src/install/pose_utils/share/pose_utils/environment/path.sh
+-- Installing: /home/wyt/RC_planner/src/install/pose_utils/share/pose_utils/environment/path.dsv
+-- Installing: /home/wyt/RC_planner/src/install/pose_utils/share/pose_utils/local_setup.bash
+-- Installing: /home/wyt/RC_planner/src/install/pose_utils/share/pose_utils/local_setup.sh
+-- Installing: /home/wyt/RC_planner/src/install/pose_utils/share/pose_utils/local_setup.zsh
+-- Installing: /home/wyt/RC_planner/src/install/pose_utils/share/pose_utils/local_setup.dsv
+-- Installing: /home/wyt/RC_planner/src/install/pose_utils/share/pose_utils/package.dsv
+-- Installing: /home/wyt/RC_planner/src/install/pose_utils/share/ament_index/resource_index/packages/pose_utils
+-- Installing: /home/wyt/RC_planner/src/install/pose_utils/share/pose_utils/cmake/ament_cmake_export_include_directories-extras.cmake
+-- Installing: /home/wyt/RC_planner/src/install/pose_utils/share/pose_utils/cmake/ament_cmake_export_libraries-extras.cmake
+-- Installing: /home/wyt/RC_planner/src/install/pose_utils/share/pose_utils/cmake/pose_utilsConfig.cmake
+-- Installing: /home/wyt/RC_planner/src/install/pose_utils/share/pose_utils/cmake/pose_utilsConfig-version.cmake
+-- Installing: /home/wyt/RC_planner/src/install/pose_utils/share/pose_utils/package.xml

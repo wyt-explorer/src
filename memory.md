@@ -71,3 +71,16 @@
 - 退出异常已修复：循环复用执行器，进程结束前释放全局发布器/订阅器，防止晚于 DDS 上下文析构。复编和回归通过。
 - `Primitive_env` 文件 SHA-256 校验与本轮开始时完全一致；本轮未修改该目录。详情见 Primitive-Planner/UPSTREAM_PARITY.md；本机结果见 .parity-check/verification-summary.json。
 - 验证边界：未做 ROS 1/ROS 2 逐帧对跑、真实飞行或大规模长期稳定性测试；历史 TCP/MINCO 和 CUDA/EuRoC 不在上游默认演示链内。
+
+- 2026-11-19：补齐根目录和 Primitive-Planner 两份 README 的 ROS 2 离线基元生成步骤，说明依赖、参数位置、清空输出目录、绘图、构建安装及 primitive_folder 加载方式；已有匹配完整库可复用。本次仅修改文档，未执行生成器或修改 Primitive_env。
+- 2026-11-19：修复 swarm.launch.py 的 RViz2 配置：Marker Topic 改为 Topic，增加 Displays/Views/Tool Properties 面板、窗口布局及覆盖圆周的 Orbit 视角。primitive_planner 隔离构建通过；实际四机 RViz2 启动确认订阅地图及全部 12 个模型/目标/轨迹话题，探针收到非空地图及四机模型。检查在规划器仍加载基元时主动停止，退出出现 context invalid，未宣称本次完整规划或正常退出验证通过。Primitive_env 未修改。
+
+## 结构对齐与清理（2026-11-20，已完成）
+
+- 用户要求：以 ZJU-FAST-Lab/Primitive-Planner 为基准严格对齐目录结构、类/函数与调用关系，仅做 ROS 1 → ROS 2 Jazzy 转换；先不动 Primitive_env；同步 md；保持文件头注释。
+- 确认的 4 项决定：①在现有代码基础上严格对齐 + 修复；②消息命名维持 ROS 2 CamelCase（SwarmPrimitiveTraj）；③沿用上游脚本名、内部换 colcon/ros2；④删除非上游文件。
+- 删除：tests/、UPSTREAM_PARITY.md、single_drone.launch.py、swarm.launch.xml、quadrotor_simulator_ros2.cpp、build.catkin.bak/、devel.catkin.bak/、.catkin_workspace；gen_position_swap.py 去掉 swarm.launch.xml 的生成。
+- 保留 ros2_launch_xml.py：它是 gen_primitive_planner_launch.py / gen_random_goal_flight.py / gen_run_odom_vis.py 共用的 ROS 1→ROS 2 launch XML 转换助手，属必要转换基础设施（曾误删，已从 git 恢复）。
+- 编译：18 包 colcon build 全绿。swarm_bridge 仅编译 bridge_node_udp，与上游 ENABLE_TCP=false 一致，原 toSec 错误已不存在（bridge_node_tcp.cpp / traj2odom_node.cpp 仍为上游禁用分支，未编译）。
+- 运行：8 机 swarm 冒烟测试（rviz:=false）验证 FSM 全链 INIT→WAIT_TARGET→GEN_NEW_TRAJ→EXEC_TRAJ→REPLAN→APPROACH_GOAL→WAIT_TARGET，6/8 机到达目标。drone_num≤3 时地图为空导致 pcl_render_node 段错误，属上游边界情况，非本次改动引入。
+- 文档：同步根 README、Primitive-Planner/README 与 memory.md。

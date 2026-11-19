@@ -1,0 +1,14 @@
+/home/wyt/RC_planner/src/Primitive-Planner/build/quadrotor_msgs/rosidl_adapter/quadrotor_msgs:msg/AuxCommand.idl
+/home/wyt/RC_planner/src/Primitive-Planner/build/quadrotor_msgs/rosidl_adapter/quadrotor_msgs:msg/Corrections.idl
+/home/wyt/RC_planner/src/Primitive-Planner/build/quadrotor_msgs/rosidl_adapter/quadrotor_msgs:msg/Gains.idl
+/home/wyt/RC_planner/src/Primitive-Planner/build/quadrotor_msgs/rosidl_adapter/quadrotor_msgs:msg/OutputData.idl
+/home/wyt/RC_planner/src/Primitive-Planner/build/quadrotor_msgs/rosidl_adapter/quadrotor_msgs:msg/PositionCommand.idl
+/home/wyt/RC_planner/src/Primitive-Planner/build/quadrotor_msgs/rosidl_adapter/quadrotor_msgs:msg/PPROutputData.idl
+/home/wyt/RC_planner/src/Primitive-Planner/build/quadrotor_msgs/rosidl_adapter/quadrotor_msgs:msg/Serial.idl
+/home/wyt/RC_planner/src/Primitive-Planner/build/quadrotor_msgs/rosidl_adapter/quadrotor_msgs:msg/SO3Command.idl
+/home/wyt/RC_planner/src/Primitive-Planner/build/quadrotor_msgs/rosidl_adapter/quadrotor_msgs:msg/StatusData.idl
+/home/wyt/RC_planner/src/Primitive-Planner/build/quadrotor_msgs/rosidl_adapter/quadrotor_msgs:msg/TRPYCommand.idl
+/home/wyt/RC_planner/src/Primitive-Planner/build/quadrotor_msgs/rosidl_adapter/quadrotor_msgs:msg/Odometry.idl
+/home/wyt/RC_planner/src/Primitive-Planner/build/quadrotor_msgs/rosidl_adapter/quadrotor_msgs:msg/PolynomialTrajectory.idl
+/home/wyt/RC_planner/src/Primitive-Planner/build/quadrotor_msgs/rosidl_adapter/quadrotor_msgs:msg/LQRTrajectory.idl
+/home/wyt/RC_planner/src/Primitive-Planner/build/quadrotor_msgs/rosidl_adapter/quadrotor_msgs:msg/GoalSet.idl

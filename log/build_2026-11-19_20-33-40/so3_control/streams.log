@@ -1,0 +1,77 @@
+[0.072s] Invoking command in '/home/wyt/RC_planner/src/build/so3_control': AMENT_PREFIX_PATH=/home/wyt/RC_planner/src/install/uav_utils:/home/wyt/RC_planner/src/install/quadrotor_msgs:${AMENT_PREFIX_PATH} CMAKE_PREFIX_PATH=/home/wyt/RC_planner/src/install/uav_utils:/home/wyt/RC_planner/src/install/quadrotor_msgs:/opt/ros/jazzy/opt/gz_sim_vendor:/opt/ros/jazzy/opt/gz_sensors_vendor:/opt/ros/jazzy/opt/gz_physics_vendor:/opt/ros/jazzy/opt/sdformat_vendor:/opt/ros/jazzy/opt/gz_gui_vendor:/opt/ros/jazzy/opt/gz_transport_vendor:/opt/ros/jazzy/opt/gz_rendering_vendor:/opt/ros/jazzy/opt/gz_plugin_vendor:/opt/ros/jazzy/opt/gz_fuel_tools_vendor:/opt/ros/jazzy/opt/gz_msgs_vendor:/opt/ros/jazzy/opt/gz_common_vendor:/opt/ros/jazzy/opt/gz_math_vendor:/opt/ros/jazzy/opt/gz_utils_vendor:/opt/ros/jazzy/opt/gz_tools_vendor:/opt/ros/jazzy/opt/gz_ogre_next_vendor:/opt/ros/jazzy/opt/gz_dartsim_vendor:/opt/ros/jazzy/opt/gz_cmake_vendor:/opt/ros/jazzy DEBUGINFOD_URLS=https://debuginfod.ubuntu.com LD_LIBRARY_PATH=/home/wyt/RC_planner/src/install/quadrotor_msgs/lib:${LD_LIBRARY_PATH} PYTHONPATH=/home/wyt/RC_planner/src/install/quadrotor_msgs/lib/python3.12/site-packages:${PYTHONPATH} /usr/bin/cmake /home/wyt/RC_planner/src/Primitive-Planner/src/uav_simulator/so3_control -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=/home/wyt/RC_planner/src/install/so3_control
+[0.238s] -- The C compiler identification is GNU 13.3.0
+[0.409s] -- The CXX compiler identification is GNU 13.3.0
+[0.461s] -- Detecting C compiler ABI info
+[0.688s] -- Detecting C compiler ABI info - done
+[0.715s] -- Check for working C compiler: /usr/bin/cc - skipped
+[0.715s] -- Detecting C compile features
+[0.717s] -- Detecting C compile features - done
+[0.743s] -- Detecting CXX compiler ABI info
+[0.995s] -- Detecting CXX compiler ABI info - done
+[1.033s] -- Check for working CXX compiler: /usr/bin/c++ - skipped
+[1.034s] -- Detecting CXX compile features
+[1.036s] -- Detecting CXX compile features - done
+[1.051s] -- Found ament_cmake: 2.5.6 (/opt/ros/jazzy/share/ament_cmake/cmake)
+[1.554s] -- Found Python3: /usr/bin/python3 (found version "3.12.3") found components: Interpreter 
+[1.947s] -- Found std_msgs: 5.3.8 (/opt/ros/jazzy/share/std_msgs/cmake)
+[2.110s] -- Found rosidl_generator_c: 4.6.9 (/opt/ros/jazzy/share/rosidl_generator_c/cmake)
+[2.162s] -- Found rosidl_generator_cpp: 4.6.9 (/opt/ros/jazzy/share/rosidl_generator_cpp/cmake)
+[2.222s] -- Using all available rosidl_typesupport_c: rosidl_typesupport_fastrtps_c;rosidl_typesupport_introspection_c
+[2.290s] -- Using all available rosidl_typesupport_cpp: rosidl_typesupport_fastrtps_cpp;rosidl_typesupport_introspection_cpp
+[2.412s] -- Found sensor_msgs: 5.3.8 (/opt/ros/jazzy/share/sensor_msgs/cmake)
+[2.626s] -- Found uav_utils: 0.1.0 (/home/wyt/RC_planner/src/install/uav_utils/share/uav_utils/cmake)
+[2.639s] -- Found rclcpp: 28.1.22 (/opt/ros/jazzy/share/rclcpp/cmake)
+[2.842s] -- Found rmw_implementation_cmake: 7.3.4 (/opt/ros/jazzy/share/rmw_implementation_cmake/cmake)
+[2.857s] -- Found rmw_fastrtps_cpp: 8.4.4 (/opt/ros/jazzy/share/rmw_fastrtps_cpp/cmake)
+[3.165s] -- Found OpenSSL: /usr/lib/x86_64-linux-gnu/libcrypto.so (found version "3.0.13")  
+[3.239s] -- Found FastRTPS: /opt/ros/jazzy/include (Required is at least version "2.13") 
+[3.319s] -- Using RMW implementation 'rmw_fastrtps_cpp' as default
+[3.642s] -- Found nav_msgs: 5.3.8 (/opt/ros/jazzy/share/nav_msgs/cmake)
+[3.738s] -- Found quadrotor_msgs: 0.1.0 (/home/wyt/RC_planner/src/install/quadrotor_msgs/share/quadrotor_msgs/cmake)
+[4.231s] -- Configuring done (4.1s)
+[4.304s] -- Generating done (0.0s)
+[4.322s] -- Build files have been written to: /home/wyt/RC_planner/src/build/so3_control
+[4.346s] Invoked command in '/home/wyt/RC_planner/src/build/so3_control' returned '0': AMENT_PREFIX_PATH=/home/wyt/RC_planner/src/install/uav_utils:/home/wyt/RC_planner/src/install/quadrotor_msgs:${AMENT_PREFIX_PATH} CMAKE_PREFIX_PATH=/home/wyt/RC_planner/src/install/uav_utils:/home/wyt/RC_planner/src/install/quadrotor_msgs:/opt/ros/jazzy/opt/gz_sim_vendor:/opt/ros/jazzy/opt/gz_sensors_vendor:/opt/ros/jazzy/opt/gz_physics_vendor:/opt/ros/jazzy/opt/sdformat_vendor:/opt/ros/jazzy/opt/gz_gui_vendor:/opt/ros/jazzy/opt/gz_transport_vendor:/opt/ros/jazzy/opt/gz_rendering_vendor:/opt/ros/jazzy/opt/gz_plugin_vendor:/opt/ros/jazzy/opt/gz_fuel_tools_vendor:/opt/ros/jazzy/opt/gz_msgs_vendor:/opt/ros/jazzy/opt/gz_common_vendor:/opt/ros/jazzy/opt/gz_math_vendor:/opt/ros/jazzy/opt/gz_utils_vendor:/opt/ros/jazzy/opt/gz_tools_vendor:/opt/ros/jazzy/opt/gz_ogre_next_vendor:/opt/ros/jazzy/opt/gz_dartsim_vendor:/opt/ros/jazzy/opt/gz_cmake_vendor:/opt/ros/jazzy DEBUGINFOD_URLS=https://debuginfod.ubuntu.com LD_LIBRARY_PATH=/home/wyt/RC_planner/src/install/quadrotor_msgs/lib:${LD_LIBRARY_PATH} PYTHONPATH=/home/wyt/RC_planner/src/install/quadrotor_msgs/lib/python3.12/site-packages:${PYTHONPATH} /usr/bin/cmake /home/wyt/RC_planner/src/Primitive-Planner/src/uav_simulator/so3_control -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=/home/wyt/RC_planner/src/install/so3_control
+[4.350s] Invoking command in '/home/wyt/RC_planner/src/build/so3_control': AMENT_PREFIX_PATH=/home/wyt/RC_planner/src/install/uav_utils:/home/wyt/RC_planner/src/install/quadrotor_msgs:${AMENT_PREFIX_PATH} CMAKE_PREFIX_PATH=/home/wyt/RC_planner/src/install/uav_utils:/home/wyt/RC_planner/src/install/quadrotor_msgs:/opt/ros/jazzy/opt/gz_sim_vendor:/opt/ros/jazzy/opt/gz_sensors_vendor:/opt/ros/jazzy/opt/gz_physics_vendor:/opt/ros/jazzy/opt/sdformat_vendor:/opt/ros/jazzy/opt/gz_gui_vendor:/opt/ros/jazzy/opt/gz_transport_vendor:/opt/ros/jazzy/opt/gz_rendering_vendor:/opt/ros/jazzy/opt/gz_plugin_vendor:/opt/ros/jazzy/opt/gz_fuel_tools_vendor:/opt/ros/jazzy/opt/gz_msgs_vendor:/opt/ros/jazzy/opt/gz_common_vendor:/opt/ros/jazzy/opt/gz_math_vendor:/opt/ros/jazzy/opt/gz_utils_vendor:/opt/ros/jazzy/opt/gz_tools_vendor:/opt/ros/jazzy/opt/gz_ogre_next_vendor:/opt/ros/jazzy/opt/gz_dartsim_vendor:/opt/ros/jazzy/opt/gz_cmake_vendor:/opt/ros/jazzy DEBUGINFOD_URLS=https://debuginfod.ubuntu.com LD_LIBRARY_PATH=/home/wyt/RC_planner/src/install/quadrotor_msgs/lib:${LD_LIBRARY_PATH} PYTHONPATH=/home/wyt/RC_planner/src/install/quadrotor_msgs/lib/python3.12/site-packages:${PYTHONPATH} /usr/bin/cmake --build /home/wyt/RC_planner/src/build/so3_control -- -j28 -l28
+[4.522s] [ 16%] [32mBuilding CXX object CMakeFiles/SO3Control.dir/src/SO3Control.cpp.o[0m
+[8.714s] [ 33%] [32m[1mLinking CXX static library libSO3Control.a[0m
+[8.806s] [ 33%] Built target SO3Control
+[8.876s] [ 50%] [32mBuilding CXX object CMakeFiles/so3_control_ros2.dir/src/so3_control_ros2.cpp.o[0m
+[8.876s] [ 66%] [32mBuilding CXX object CMakeFiles/control_example.dir/src/control_example.cpp.o[0m
+[18.133s] [01m[K/home/wyt/RC_planner/src/Primitive-Planner/src/uav_simulator/so3_control/src/so3_control_ros2.cpp:[m[K In member function ‘[01m[Kvoid SO3ControlNode::[01;32m[KpublishSO3Command[m[K()[m[K’:
+[18.133s] [01m[K/home/wyt/RC_planner/src/Primitive-Planner/src/uav_simulator/so3_control/src/so3_control_ros2.cpp:83:51:[m[K [01;35m[Kwarning: [m[K‘[01m[Kquadrotor_msgs::msg::SO3Command_<std::allocator<void> >::Ptr[m[K’ is deprecated [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wdeprecated-declarations-Wdeprecated-declarations]8;;[m[K]
+[18.133s]    83 |   quadrotor_msgs::msg::SO3Command::Ptr so3_command[01;35m[K([m[K
+[18.134s]       |                                                   [01;35m[K^[m[K
+[18.134s] In file included from [01m[K/home/wyt/RC_planner/src/install/quadrotor_msgs/include/quadrotor_msgs/quadrotor_msgs/msg/so3_command.hpp:7[m[K,
+[18.134s]                  from [01m[K/home/wyt/RC_planner/src/Primitive-Planner/src/uav_simulator/so3_control/src/so3_control_ros2.cpp:15[m[K:
+[18.134s] [01m[K/home/wyt/RC_planner/src/install/quadrotor_msgs/include/quadrotor_msgs/quadrotor_msgs/msg/detail/so3_command__struct.hpp:172:5:[m[K [01;36m[Knote: [m[Kdeclared here
+[18.134s]   172 |     [01;36m[KPtr[m[K;
+[18.135s]       |     [01;36m[K^~~[m[K
+[28.327s] [ 83%] [32m[1mLinking CXX executable control_example[0m
+[28.821s] [ 83%] Built target control_example
+[74.601s] [100%] [32m[1mLinking CXX executable so3_control_ros2[0m
+[75.178s] [100%] Built target so3_control_ros2
+[75.226s] Invoked command in '/home/wyt/RC_planner/src/build/so3_control' returned '0': AMENT_PREFIX_PATH=/home/wyt/RC_planner/src/install/uav_utils:/home/wyt/RC_planner/src/install/quadrotor_msgs:${AMENT_PREFIX_PATH} CMAKE_PREFIX_PATH=/home/wyt/RC_planner/src/install/uav_utils:/home/wyt/RC_planner/src/install/quadrotor_msgs:/opt/ros/jazzy/opt/gz_sim_vendor:/opt/ros/jazzy/opt/gz_sensors_vendor:/opt/ros/jazzy/opt/gz_physics_vendor:/opt/ros/jazzy/opt/sdformat_vendor:/opt/ros/jazzy/opt/gz_gui_vendor:/opt/ros/jazzy/opt/gz_transport_vendor:/opt/ros/jazzy/opt/gz_rendering_vendor:/opt/ros/jazzy/opt/gz_plugin_vendor:/opt/ros/jazzy/opt/gz_fuel_tools_vendor:/opt/ros/jazzy/opt/gz_msgs_vendor:/opt/ros/jazzy/opt/gz_common_vendor:/opt/ros/jazzy/opt/gz_math_vendor:/opt/ros/jazzy/opt/gz_utils_vendor:/opt/ros/jazzy/opt/gz_tools_vendor:/opt/ros/jazzy/opt/gz_ogre_next_vendor:/opt/ros/jazzy/opt/gz_dartsim_vendor:/opt/ros/jazzy/opt/gz_cmake_vendor:/opt/ros/jazzy DEBUGINFOD_URLS=https://debuginfod.ubuntu.com LD_LIBRARY_PATH=/home/wyt/RC_planner/src/install/quadrotor_msgs/lib:${LD_LIBRARY_PATH} PYTHONPATH=/home/wyt/RC_planner/src/install/quadrotor_msgs/lib/python3.12/site-packages:${PYTHONPATH} /usr/bin/cmake --build /home/wyt/RC_planner/src/build/so3_control -- -j28 -l28
+[75.230s] Invoking command in '/home/wyt/RC_planner/src/build/so3_control': AMENT_PREFIX_PATH=/home/wyt/RC_planner/src/install/uav_utils:/home/wyt/RC_planner/src/install/quadrotor_msgs:${AMENT_PREFIX_PATH} CMAKE_PREFIX_PATH=/home/wyt/RC_planner/src/install/uav_utils:/home/wyt/RC_planner/src/install/quadrotor_msgs:/opt/ros/jazzy/opt/gz_sim_vendor:/opt/ros/jazzy/opt/gz_sensors_vendor:/opt/ros/jazzy/opt/gz_physics_vendor:/opt/ros/jazzy/opt/sdformat_vendor:/opt/ros/jazzy/opt/gz_gui_vendor:/opt/ros/jazzy/opt/gz_transport_vendor:/opt/ros/jazzy/opt/gz_rendering_vendor:/opt/ros/jazzy/opt/gz_plugin_vendor:/opt/ros/jazzy/opt/gz_fuel_tools_vendor:/opt/ros/jazzy/opt/gz_msgs_vendor:/opt/ros/jazzy/opt/gz_common_vendor:/opt/ros/jazzy/opt/gz_math_vendor:/opt/ros/jazzy/opt/gz_utils_vendor:/opt/ros/jazzy/opt/gz_tools_vendor:/opt/ros/jazzy/opt/gz_ogre_next_vendor:/opt/ros/jazzy/opt/gz_dartsim_vendor:/opt/ros/jazzy/opt/gz_cmake_vendor:/opt/ros/jazzy DEBUGINFOD_URLS=https://debuginfod.ubuntu.com LD_LIBRARY_PATH=/home/wyt/RC_planner/src/install/quadrotor_msgs/lib:${LD_LIBRARY_PATH} PYTHONPATH=/home/wyt/RC_planner/src/install/quadrotor_msgs/lib/python3.12/site-packages:${PYTHONPATH} /usr/bin/cmake --install /home/wyt/RC_planner/src/build/so3_control
+[75.252s] -- Install configuration: "Release"
+[75.253s] -- Installing: /home/wyt/RC_planner/src/install/so3_control/lib/libSO3Control.a
+[75.253s] -- Installing: /home/wyt/RC_planner/src/install/so3_control/lib/so3_control/control_example
+[75.254s] -- Set non-toolchain portion of runtime path of "/home/wyt/RC_planner/src/install/so3_control/lib/so3_control/control_example" to ""
+[75.254s] -- Installing: /home/wyt/RC_planner/src/install/so3_control/lib/so3_control/so3_control_ros2
+[75.259s] -- Set non-toolchain portion of runtime path of "/home/wyt/RC_planner/src/install/so3_control/lib/so3_control/so3_control_ros2" to ""
+[75.260s] -- Installing: /home/wyt/RC_planner/src/install/so3_control/share/ament_index/resource_index/package_run_dependencies/so3_control
+[75.261s] -- Installing: /home/wyt/RC_planner/src/install/so3_control/share/ament_index/resource_index/parent_prefix_path/so3_control
+[75.261s] -- Installing: /home/wyt/RC_planner/src/install/so3_control/share/so3_control/environment/ament_prefix_path.sh
+[75.261s] -- Installing: /home/wyt/RC_planner/src/install/so3_control/share/so3_control/environment/ament_prefix_path.dsv
+[75.262s] -- Installing: /home/wyt/RC_planner/src/install/so3_control/share/so3_control/environment/path.sh
+[75.262s] -- Installing: /home/wyt/RC_planner/src/install/so3_control/share/so3_control/environment/path.dsv
+[75.262s] -- Installing: /home/wyt/RC_planner/src/install/so3_control/share/so3_control/local_setup.bash
+[75.263s] -- Installing: /home/wyt/RC_planner/src/install/so3_control/share/so3_control/local_setup.sh
+[75.263s] -- Installing: /home/wyt/RC_planner/src/install/so3_control/share/so3_control/local_setup.zsh
+[75.263s] -- Installing: /home/wyt/RC_planner/src/install/so3_control/share/so3_control/local_setup.dsv
+[75.264s] -- Installing: /home/wyt/RC_planner/src/install/so3_control/share/so3_control/package.dsv
+[75.264s] -- Installing: /home/wyt/RC_planner/src/install/so3_control/share/ament_index/resource_index/packages/so3_control
+[75.264s] -- Installing: /home/wyt/RC_planner/src/install/so3_control/share/so3_control/cmake/so3_controlConfig.cmake
+[75.265s] -- Installing: /home/wyt/RC_planner/src/install/so3_control/share/so3_control/cmake/so3_controlConfig-version.cmake
+[75.265s] -- Installing: /home/wyt/RC_planner/src/install/so3_control/share/so3_control/package.xml
+[75.270s] Invoked command in '/home/wyt/RC_planner/src/build/so3_control' returned '0': AMENT_PREFIX_PATH=/home/wyt/RC_planner/src/install/uav_utils:/home/wyt/RC_planner/src/install/quadrotor_msgs:${AMENT_PREFIX_PATH} CMAKE_PREFIX_PATH=/home/wyt/RC_planner/src/install/uav_utils:/home/wyt/RC_planner/src/install/quadrotor_msgs:/opt/ros/jazzy/opt/gz_sim_vendor:/opt/ros/jazzy/opt/gz_sensors_vendor:/opt/ros/jazzy/opt/gz_physics_vendor:/opt/ros/jazzy/opt/sdformat_vendor:/opt/ros/jazzy/opt/gz_gui_vendor:/opt/ros/jazzy/opt/gz_transport_vendor:/opt/ros/jazzy/opt/gz_rendering_vendor:/opt/ros/jazzy/opt/gz_plugin_vendor:/opt/ros/jazzy/opt/gz_fuel_tools_vendor:/opt/ros/jazzy/opt/gz_msgs_vendor:/opt/ros/jazzy/opt/gz_common_vendor:/opt/ros/jazzy/opt/gz_math_vendor:/opt/ros/jazzy/opt/gz_utils_vendor:/opt/ros/jazzy/opt/gz_tools_vendor:/opt/ros/jazzy/opt/gz_ogre_next_vendor:/opt/ros/jazzy/opt/gz_dartsim_vendor:/opt/ros/jazzy/opt/gz_cmake_vendor:/opt/ros/jazzy DEBUGINFOD_URLS=https://debuginfod.ubuntu.com LD_LIBRARY_PATH=/home/wyt/RC_planner/src/install/quadrotor_msgs/lib:${LD_LIBRARY_PATH} PYTHONPATH=/home/wyt/RC_planner/src/install/quadrotor_msgs/lib/python3.12/site-packages:${PYTHONPATH} /usr/bin/cmake --install /home/wyt/RC_planner/src/build/so3_control

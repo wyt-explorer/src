@@ -1,0 +1,23 @@
+[100%] Built target bridge_node_udp
+-- Install configuration: "Release"
+-- Up-to-date: /home/wyt/RC_planner/src/install/swarm_bridge/lib/swarm_bridge/bridge_node_udp
+-- Up-to-date: /home/wyt/RC_planner/src/install/swarm_bridge/share/swarm_bridge/launch
+-- Up-to-date: /home/wyt/RC_planner/src/install/swarm_bridge/share/swarm_bridge/launch/bridge_tcp_station.launch
+-- Up-to-date: /home/wyt/RC_planner/src/install/swarm_bridge/share/swarm_bridge/launch/bridge_udp.launch
+-- Up-to-date: /home/wyt/RC_planner/src/install/swarm_bridge/share/swarm_bridge/launch/bridge_udp.launch.py
+-- Up-to-date: /home/wyt/RC_planner/src/install/swarm_bridge/share/swarm_bridge/launch/bridge_tcp_drone.launch
+-- Up-to-date: /home/wyt/RC_planner/src/install/swarm_bridge/share/ament_index/resource_index/package_run_dependencies/swarm_bridge
+-- Up-to-date: /home/wyt/RC_planner/src/install/swarm_bridge/share/ament_index/resource_index/parent_prefix_path/swarm_bridge
+-- Up-to-date: /home/wyt/RC_planner/src/install/swarm_bridge/share/swarm_bridge/environment/ament_prefix_path.sh
+-- Up-to-date: /home/wyt/RC_planner/src/install/swarm_bridge/share/swarm_bridge/environment/ament_prefix_path.dsv
+-- Up-to-date: /home/wyt/RC_planner/src/install/swarm_bridge/share/swarm_bridge/environment/path.sh
+-- Up-to-date: /home/wyt/RC_planner/src/install/swarm_bridge/share/swarm_bridge/environment/path.dsv
+-- Up-to-date: /home/wyt/RC_planner/src/install/swarm_bridge/share/swarm_bridge/local_setup.bash
+-- Up-to-date: /home/wyt/RC_planner/src/install/swarm_bridge/share/swarm_bridge/local_setup.sh
+-- Up-to-date: /home/wyt/RC_planner/src/install/swarm_bridge/share/swarm_bridge/local_setup.zsh
+-- Up-to-date: /home/wyt/RC_planner/src/install/swarm_bridge/share/swarm_bridge/local_setup.dsv
+-- Installing: /home/wyt/RC_planner/src/install/swarm_bridge/share/swarm_bridge/package.dsv
+-- Up-to-date: /home/wyt/RC_planner/src/install/swarm_bridge/share/ament_index/resource_index/packages/swarm_bridge
+-- Up-to-date: /home/wyt/RC_planner/src/install/swarm_bridge/share/swarm_bridge/cmake/swarm_bridgeConfig.cmake
+-- Up-to-date: /home/wyt/RC_planner/src/install/swarm_bridge/share/swarm_bridge/cmake/swarm_bridgeConfig-version.cmake
+-- Up-to-date: /home/wyt/RC_planner/src/install/swarm_bridge/share/swarm_bridge/package.xml

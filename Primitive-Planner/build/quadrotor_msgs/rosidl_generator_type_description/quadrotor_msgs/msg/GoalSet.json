@@ -1,0 +1,36 @@
+{
+  "type_description_msg": {
+    "type_description": {
+      "type_name": "quadrotor_msgs/msg/GoalSet",
+      "fields": [
+        {
+          "name": "drone_id",
+          "type": {
+            "type_id": 4,
+            "capacity": 0,
+            "string_capacity": 0,
+            "nested_type_name": ""
+          },
+          "default_value": ""
+        },
+        {
+          "name": "goal",
+          "type": {
+            "type_id": 58,
+            "capacity": 3,
+            "string_capacity": 0,
+            "nested_type_name": ""
+          },
+          "default_value": ""
+        }
+      ]
+    },
+    "referenced_type_descriptions": []
+  },
+  "type_hashes": [
+    {
+      "type_name": "quadrotor_msgs/msg/GoalSet",
+      "hash_string": "RIHS01_cb0456514a10f794407cb4c7daff03ad11b9b2387cd44f2e5eb82077c24993df"
+    }
+  ]
+}

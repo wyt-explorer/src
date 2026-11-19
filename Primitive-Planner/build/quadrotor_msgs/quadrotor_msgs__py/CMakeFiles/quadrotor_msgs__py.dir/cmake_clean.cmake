@@ -1,0 +1,40 @@
+file(REMOVE_RECURSE
+  "/home/wyt/RC_planner/src/Primitive-Planner/build/quadrotor_msgs/rosidl_generator_py/quadrotor_msgs/_quadrotor_msgs_s.ep.rosidl_typesupport_c.c"
+  "/home/wyt/RC_planner/src/Primitive-Planner/build/quadrotor_msgs/rosidl_generator_py/quadrotor_msgs/_quadrotor_msgs_s.ep.rosidl_typesupport_fastrtps_c.c"
+  "/home/wyt/RC_planner/src/Primitive-Planner/build/quadrotor_msgs/rosidl_generator_py/quadrotor_msgs/_quadrotor_msgs_s.ep.rosidl_typesupport_introspection_c.c"
+  "/home/wyt/RC_planner/src/Primitive-Planner/build/quadrotor_msgs/rosidl_generator_py/quadrotor_msgs/msg/__init__.py"
+  "/home/wyt/RC_planner/src/Primitive-Planner/build/quadrotor_msgs/rosidl_generator_py/quadrotor_msgs/msg/_aux_command.py"
+  "/home/wyt/RC_planner/src/Primitive-Planner/build/quadrotor_msgs/rosidl_generator_py/quadrotor_msgs/msg/_aux_command_s.c"
+  "/home/wyt/RC_planner/src/Primitive-Planner/build/quadrotor_msgs/rosidl_generator_py/quadrotor_msgs/msg/_corrections.py"
+  "/home/wyt/RC_planner/src/Primitive-Planner/build/quadrotor_msgs/rosidl_generator_py/quadrotor_msgs/msg/_corrections_s.c"
+  "/home/wyt/RC_planner/src/Primitive-Planner/build/quadrotor_msgs/rosidl_generator_py/quadrotor_msgs/msg/_gains.py"
+  "/home/wyt/RC_planner/src/Primitive-Planner/build/quadrotor_msgs/rosidl_generator_py/quadrotor_msgs/msg/_gains_s.c"
+  "/home/wyt/RC_planner/src/Primitive-Planner/build/quadrotor_msgs/rosidl_generator_py/quadrotor_msgs/msg/_goal_set.py"
+  "/home/wyt/RC_planner/src/Primitive-Planner/build/quadrotor_msgs/rosidl_generator_py/quadrotor_msgs/msg/_goal_set_s.c"
+  "/home/wyt/RC_planner/src/Primitive-Planner/build/quadrotor_msgs/rosidl_generator_py/quadrotor_msgs/msg/_lqr_trajectory.py"
+  "/home/wyt/RC_planner/src/Primitive-Planner/build/quadrotor_msgs/rosidl_generator_py/quadrotor_msgs/msg/_lqr_trajectory_s.c"
+  "/home/wyt/RC_planner/src/Primitive-Planner/build/quadrotor_msgs/rosidl_generator_py/quadrotor_msgs/msg/_odometry.py"
+  "/home/wyt/RC_planner/src/Primitive-Planner/build/quadrotor_msgs/rosidl_generator_py/quadrotor_msgs/msg/_odometry_s.c"
+  "/home/wyt/RC_planner/src/Primitive-Planner/build/quadrotor_msgs/rosidl_generator_py/quadrotor_msgs/msg/_output_data.py"
+  "/home/wyt/RC_planner/src/Primitive-Planner/build/quadrotor_msgs/rosidl_generator_py/quadrotor_msgs/msg/_output_data_s.c"
+  "/home/wyt/RC_planner/src/Primitive-Planner/build/quadrotor_msgs/rosidl_generator_py/quadrotor_msgs/msg/_polynomial_trajectory.py"
+  "/home/wyt/RC_planner/src/Primitive-Planner/build/quadrotor_msgs/rosidl_generator_py/quadrotor_msgs/msg/_polynomial_trajectory_s.c"
+  "/home/wyt/RC_planner/src/Primitive-Planner/build/quadrotor_msgs/rosidl_generator_py/quadrotor_msgs/msg/_position_command.py"
+  "/home/wyt/RC_planner/src/Primitive-Planner/build/quadrotor_msgs/rosidl_generator_py/quadrotor_msgs/msg/_position_command_s.c"
+  "/home/wyt/RC_planner/src/Primitive-Planner/build/quadrotor_msgs/rosidl_generator_py/quadrotor_msgs/msg/_ppr_output_data.py"
+  "/home/wyt/RC_planner/src/Primitive-Planner/build/quadrotor_msgs/rosidl_generator_py/quadrotor_msgs/msg/_ppr_output_data_s.c"
+  "/home/wyt/RC_planner/src/Primitive-Planner/build/quadrotor_msgs/rosidl_generator_py/quadrotor_msgs/msg/_serial.py"
+  "/home/wyt/RC_planner/src/Primitive-Planner/build/quadrotor_msgs/rosidl_generator_py/quadrotor_msgs/msg/_serial_s.c"
+  "/home/wyt/RC_planner/src/Primitive-Planner/build/quadrotor_msgs/rosidl_generator_py/quadrotor_msgs/msg/_so3_command.py"
+  "/home/wyt/RC_planner/src/Primitive-Planner/build/quadrotor_msgs/rosidl_generator_py/quadrotor_msgs/msg/_so3_command_s.c"
+  "/home/wyt/RC_planner/src/Primitive-Planner/build/quadrotor_msgs/rosidl_generator_py/quadrotor_msgs/msg/_status_data.py"
+  "/home/wyt/RC_planner/src/Primitive-Planner/build/quadrotor_msgs/rosidl_generator_py/quadrotor_msgs/msg/_status_data_s.c"
+  "/home/wyt/RC_planner/src/Primitive-Planner/build/quadrotor_msgs/rosidl_generator_py/quadrotor_msgs/msg/_trpy_command.py"
+  "/home/wyt/RC_planner/src/Primitive-Planner/build/quadrotor_msgs/rosidl_generator_py/quadrotor_msgs/msg/_trpy_command_s.c"
+  "CMakeFiles/quadrotor_msgs__py"
+)
+
+# Per-language clean rules from dependency scanning.
+foreach(lang )
+  include(CMakeFiles/quadrotor_msgs__py.dir/cmake_clean_${lang}.cmake OPTIONAL)
+endforeach()

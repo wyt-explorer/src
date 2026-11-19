@@ -1,11 +1,15 @@
 /home/wyt/RC_planner/src/install/primitive_planner/lib/primitive_planner/primitive_planner_node
 /home/wyt/RC_planner/src/install/primitive_planner/lib/primitive_planner/traj_server
+/home/wyt/RC_planner/src/install/primitive_planner/share/primitive_planner/launch/run_in_sim.launch.py
 /home/wyt/RC_planner/src/install/primitive_planner/share/primitive_planner/launch/swarm.launch
 /home/wyt/RC_planner/src/install/primitive_planner/share/primitive_planner/launch/drone_1000.rviz
 /home/wyt/RC_planner/src/install/primitive_planner/share/primitive_planner/launch/run_in_sim.xml
+/home/wyt/RC_planner/src/install/primitive_planner/share/primitive_planner/launch/swarm.launch.py
+/home/wyt/RC_planner/src/install/primitive_planner/share/primitive_planner/launch/__pycache__/swarm.launch.cpython-312.pyc
 /home/wyt/RC_planner/src/install/primitive_planner/share/primitive_planner/launch/advanced_param.xml
 /home/wyt/RC_planner/src/install/primitive_planner/share/primitive_planner/launch/simulator.xml
-/home/wyt/RC_planner/src/install/primitive_planner/share/primitive_planner/launch/single_drone.launch.py
+/home/wyt/RC_planner/src/install/primitive_planner/share/primitive_planner/launch/advanced_param.launch.py
+/home/wyt/RC_planner/src/install/primitive_planner/share/primitive_planner/launch/simulator.launch.py
 /home/wyt/RC_planner/src/install/primitive_planner/share/primitive_planner/launch/verbose.rviz
 /home/wyt/RC_planner/src/install/primitive_planner/share/primitive_planner/primitive_library/trajectory/9/114_trajectory.ply
 /home/wyt/RC_planner/src/install/primitive_planner/share/primitive_planner/primitive_library/trajectory/9/55_trajectory.ply
@@ -3846,6 +3850,9 @@
 /home/wyt/RC_planner/src/install/primitive_planner/share/primitive_planner/primitive_library/trajectory_pos/8/72_trajectory.ply
 /home/wyt/RC_planner/src/install/primitive_planner/share/primitive_planner/primitive_library/trajectory_pos/8/90_trajectory.ply
 /home/wyt/RC_planner/src/install/primitive_planner/share/primitive_planner/primitive_library/trajectory_pos/8/138_trajectory.ply
+/home/wyt/RC_planner/src/install/primitive_planner/lib/primitive_planner/gen_position_swap.py
+/home/wyt/RC_planner/src/install/primitive_planner/lib/primitive_planner/pub_trigger.sh
+/home/wyt/RC_planner/src/install/primitive_planner/lib/primitive_planner/run_swarm.sh
 /home/wyt/RC_planner/src/install/primitive_planner/share/ament_index/resource_index/package_run_dependencies/primitive_planner
 /home/wyt/RC_planner/src/install/primitive_planner/share/ament_index/resource_index/parent_prefix_path/primitive_planner
 /home/wyt/RC_planner/src/install/primitive_planner/share/primitive_planner/environment/ament_prefix_path.sh

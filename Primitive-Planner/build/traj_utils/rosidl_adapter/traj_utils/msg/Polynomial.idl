@@ -1,0 +1,22 @@
+// generated from rosidl_adapter/resource/msg.idl.em
+// with input from traj_utils/msg/Polynomial.msg
+// generated code does not contain a copyright notice
+
+#include "builtin_interfaces/msg/Time.idl"
+
+module traj_utils {
+  module msg {
+    typedef double double__6[6];
+    struct Polynomial {
+      builtin_interfaces::msg::Time start_time;
+
+      double__6 coeff_x;
+
+      double__6 coeff_y;
+
+      double__6 coeff_z;
+
+      double duration;
+    };
+  };
+};

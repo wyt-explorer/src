@@ -1,0 +1,9 @@
+<launch>
+  <!-- ROS 2 equivalent of upstream circular position-swap demo. -->
+  <arg name="drone_num" default="20"/>
+  <arg name="rviz" default="true"/>
+  <include file="$(find-pkg-share primitive_planner)/launch/swarm.launch.py">
+    <arg name="drone_num" value="$(var drone_num)"/>
+    <arg name="rviz" value="$(var rviz)"/>
+  </include>
+</launch>

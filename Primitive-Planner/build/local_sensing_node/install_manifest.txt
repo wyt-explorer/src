@@ -1,0 +1,16 @@
+/home/wyt/RC_planner/src/Primitive-Planner/install/local_sensing_node/lib/local_sensing_node/pcl_render_node
+/home/wyt/RC_planner/src/Primitive-Planner/install/local_sensing_node/share/ament_index/resource_index/package_run_dependencies/local_sensing_node
+/home/wyt/RC_planner/src/Primitive-Planner/install/local_sensing_node/share/ament_index/resource_index/parent_prefix_path/local_sensing_node
+/home/wyt/RC_planner/src/Primitive-Planner/install/local_sensing_node/share/local_sensing_node/environment/ament_prefix_path.sh
+/home/wyt/RC_planner/src/Primitive-Planner/install/local_sensing_node/share/local_sensing_node/environment/ament_prefix_path.dsv
+/home/wyt/RC_planner/src/Primitive-Planner/install/local_sensing_node/share/local_sensing_node/environment/path.sh
+/home/wyt/RC_planner/src/Primitive-Planner/install/local_sensing_node/share/local_sensing_node/environment/path.dsv
+/home/wyt/RC_planner/src/Primitive-Planner/install/local_sensing_node/share/local_sensing_node/local_setup.bash
+/home/wyt/RC_planner/src/Primitive-Planner/install/local_sensing_node/share/local_sensing_node/local_setup.sh
+/home/wyt/RC_planner/src/Primitive-Planner/install/local_sensing_node/share/local_sensing_node/local_setup.zsh
+/home/wyt/RC_planner/src/Primitive-Planner/install/local_sensing_node/share/local_sensing_node/local_setup.dsv
+/home/wyt/RC_planner/src/Primitive-Planner/install/local_sensing_node/share/local_sensing_node/package.dsv
+/home/wyt/RC_planner/src/Primitive-Planner/install/local_sensing_node/share/ament_index/resource_index/packages/local_sensing_node
+/home/wyt/RC_planner/src/Primitive-Planner/install/local_sensing_node/share/local_sensing_node/cmake/local_sensing_nodeConfig.cmake
+/home/wyt/RC_planner/src/Primitive-Planner/install/local_sensing_node/share/local_sensing_node/cmake/local_sensing_nodeConfig-version.cmake
+/home/wyt/RC_planner/src/Primitive-Planner/install/local_sensing_node/share/local_sensing_node/package.xml

@@ -1,0 +1,22 @@
+[0.066s] Invoking command in '/home/wyt/RC_planner/src/build/mockamap': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/jazzy DEBUGINFOD_URLS=https://debuginfod.ubuntu.com /usr/bin/cmake --build /home/wyt/RC_planner/src/build/mockamap -- -j28 -l28
+[0.312s] [100%] Built target mockamap_node
+[0.328s] Invoked command in '/home/wyt/RC_planner/src/build/mockamap' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/jazzy DEBUGINFOD_URLS=https://debuginfod.ubuntu.com /usr/bin/cmake --build /home/wyt/RC_planner/src/build/mockamap -- -j28 -l28
+[0.336s] Invoking command in '/home/wyt/RC_planner/src/build/mockamap': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/jazzy DEBUGINFOD_URLS=https://debuginfod.ubuntu.com /usr/bin/cmake --install /home/wyt/RC_planner/src/build/mockamap
+[0.407s] -- Install configuration: "Release"
+[0.408s] -- Up-to-date: /home/wyt/RC_planner/src/install/mockamap/lib/mockamap/mockamap_node
+[0.408s] -- Up-to-date: /home/wyt/RC_planner/src/install/mockamap/share/ament_index/resource_index/package_run_dependencies/mockamap
+[0.409s] -- Up-to-date: /home/wyt/RC_planner/src/install/mockamap/share/ament_index/resource_index/parent_prefix_path/mockamap
+[0.409s] -- Up-to-date: /home/wyt/RC_planner/src/install/mockamap/share/mockamap/environment/ament_prefix_path.sh
+[0.411s] -- Up-to-date: /home/wyt/RC_planner/src/install/mockamap/share/mockamap/environment/ament_prefix_path.dsv
+[0.411s] -- Up-to-date: /home/wyt/RC_planner/src/install/mockamap/share/mockamap/environment/path.sh
+[0.412s] -- Up-to-date: /home/wyt/RC_planner/src/install/mockamap/share/mockamap/environment/path.dsv
+[0.413s] -- Up-to-date: /home/wyt/RC_planner/src/install/mockamap/share/mockamap/local_setup.bash
+[0.413s] -- Up-to-date: /home/wyt/RC_planner/src/install/mockamap/share/mockamap/local_setup.sh
+[0.413s] -- Up-to-date: /home/wyt/RC_planner/src/install/mockamap/share/mockamap/local_setup.zsh
+[0.413s] -- Up-to-date: /home/wyt/RC_planner/src/install/mockamap/share/mockamap/local_setup.dsv
+[0.413s] -- Installing: /home/wyt/RC_planner/src/install/mockamap/share/mockamap/package.dsv
+[0.413s] -- Up-to-date: /home/wyt/RC_planner/src/install/mockamap/share/ament_index/resource_index/packages/mockamap
+[0.414s] -- Up-to-date: /home/wyt/RC_planner/src/install/mockamap/share/mockamap/cmake/mockamapConfig.cmake
+[0.414s] -- Up-to-date: /home/wyt/RC_planner/src/install/mockamap/share/mockamap/cmake/mockamapConfig-version.cmake
+[0.414s] -- Up-to-date: /home/wyt/RC_planner/src/install/mockamap/share/mockamap/package.xml
+[0.419s] Invoked command in '/home/wyt/RC_planner/src/build/mockamap' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/jazzy DEBUGINFOD_URLS=https://debuginfod.ubuntu.com /usr/bin/cmake --install /home/wyt/RC_planner/src/build/mockamap

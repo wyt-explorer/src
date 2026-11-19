@@ -1,8 +1,0 @@
-prefix=/home/wyt/RC_planner/src/Primitive-Planner/devel
-
-Name: pose_utils
-Description: Description of pose_utils
-Version: 0.0.0
-Cflags: -I/home/wyt/RC_planner/src/Primitive-Planner/src/Utils/pose_utils/include
-Libs: -L${prefix}/lib -lpose_utils
-Requires: 

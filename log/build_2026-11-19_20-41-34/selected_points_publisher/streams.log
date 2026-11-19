@@ -1,0 +1,30 @@
+[0.060s] Invoking command in '/home/wyt/RC_planner/src/build/selected_points_publisher': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/jazzy DEBUGINFOD_URLS=https://debuginfod.ubuntu.com /usr/bin/cmake --build /home/wyt/RC_planner/src/build/selected_points_publisher -- -j28 -l28
+[0.193s] [  0%] Built target selected_points_publisher_autogen_timestamp_deps
+[0.337s] [ 20%] Built target selected_points_publisher_autogen
+[0.485s] [100%] Built target selected_points_publisher
+[0.510s] Invoked command in '/home/wyt/RC_planner/src/build/selected_points_publisher' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/jazzy DEBUGINFOD_URLS=https://debuginfod.ubuntu.com /usr/bin/cmake --build /home/wyt/RC_planner/src/build/selected_points_publisher -- -j28 -l28
+[0.514s] Invoking command in '/home/wyt/RC_planner/src/build/selected_points_publisher': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/jazzy DEBUGINFOD_URLS=https://debuginfod.ubuntu.com /usr/bin/cmake --install /home/wyt/RC_planner/src/build/selected_points_publisher
+[0.530s] -- Install configuration: "Release"
+[0.531s] -- Up-to-date: /home/wyt/RC_planner/src/install/selected_points_publisher/share/selected_points_publisher/plugin_description.xml
+[0.531s] -- Up-to-date: /home/wyt/RC_planner/src/install/selected_points_publisher/lib/libselected_points_publisher.so
+[0.532s] -- Up-to-date: /home/wyt/RC_planner/src/install/selected_points_publisher/include
+[0.532s] -- Up-to-date: /home/wyt/RC_planner/src/install/selected_points_publisher/include/selected_points_publisher
+[0.533s] -- Up-to-date: /home/wyt/RC_planner/src/install/selected_points_publisher/include/selected_points_publisher/selected_points_publisher.hpp
+[0.533s] -- Up-to-date: /home/wyt/RC_planner/src/install/selected_points_publisher/share/selected_points_publisher/plugin_description.xml
+[0.534s] -- Up-to-date: /home/wyt/RC_planner/src/install/selected_points_publisher/share/ament_index/resource_index/package_run_dependencies/selected_points_publisher
+[0.534s] -- Up-to-date: /home/wyt/RC_planner/src/install/selected_points_publisher/share/ament_index/resource_index/parent_prefix_path/selected_points_publisher
+[0.535s] -- Up-to-date: /home/wyt/RC_planner/src/install/selected_points_publisher/share/selected_points_publisher/environment/ament_prefix_path.sh
+[0.535s] -- Up-to-date: /home/wyt/RC_planner/src/install/selected_points_publisher/share/selected_points_publisher/environment/ament_prefix_path.dsv
+[0.535s] -- Up-to-date: /home/wyt/RC_planner/src/install/selected_points_publisher/share/selected_points_publisher/environment/path.sh
+[0.535s] -- Up-to-date: /home/wyt/RC_planner/src/install/selected_points_publisher/share/selected_points_publisher/environment/path.dsv
+[0.535s] -- Up-to-date: /home/wyt/RC_planner/src/install/selected_points_publisher/share/selected_points_publisher/local_setup.bash
+[0.535s] -- Up-to-date: /home/wyt/RC_planner/src/install/selected_points_publisher/share/selected_points_publisher/local_setup.sh
+[0.536s] -- Up-to-date: /home/wyt/RC_planner/src/install/selected_points_publisher/share/selected_points_publisher/local_setup.zsh
+[0.536s] -- Up-to-date: /home/wyt/RC_planner/src/install/selected_points_publisher/share/selected_points_publisher/local_setup.dsv
+[0.536s] -- Installing: /home/wyt/RC_planner/src/install/selected_points_publisher/share/selected_points_publisher/package.dsv
+[0.536s] -- Up-to-date: /home/wyt/RC_planner/src/install/selected_points_publisher/share/ament_index/resource_index/packages/selected_points_publisher
+[0.536s] -- Up-to-date: /home/wyt/RC_planner/src/install/selected_points_publisher/share/ament_index/resource_index/rviz_common__pluginlib__plugin/selected_points_publisher
+[0.536s] -- Up-to-date: /home/wyt/RC_planner/src/install/selected_points_publisher/share/selected_points_publisher/cmake/selected_points_publisherConfig.cmake
+[0.537s] -- Up-to-date: /home/wyt/RC_planner/src/install/selected_points_publisher/share/selected_points_publisher/cmake/selected_points_publisherConfig-version.cmake
+[0.537s] -- Up-to-date: /home/wyt/RC_planner/src/install/selected_points_publisher/share/selected_points_publisher/package.xml
+[0.540s] Invoked command in '/home/wyt/RC_planner/src/build/selected_points_publisher' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/jazzy DEBUGINFOD_URLS=https://debuginfod.ubuntu.com /usr/bin/cmake --install /home/wyt/RC_planner/src/build/selected_points_publisher

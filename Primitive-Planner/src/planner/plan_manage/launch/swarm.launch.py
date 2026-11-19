@@ -1,7 +1,7 @@
 """文件作用：恢复上游随机森林中圆周起点到对径目标的多机演示。
 调用关系：创建地图和 UDP 桥，逐机包含 run_in_sim.launch.py，可启动 RViz2。
 输入：drone_num、radius、obs_density、primitive_folder 等参数；米、秒制 world 坐标。
-输出：隔离的逐机规划闭环、公共地图及群体基元通信。
+输出：隔离的逐机规划闭环、公共地图、群体基元通信及 RViz2 显示配置。
 运行模式：ROS 2；不依赖 Primitive_env，默认沿用上游理想跟踪器。
 主要依赖：launch_ros、map_generator、swarm_bridge、primitive_planner、RViz2。
 """
@@ -71,8 +71,20 @@ def swarm_nodes(context):
                                  ('Goal', f'/drone_{i}_primitive_planner_node/goal_point'),
                                  ('Trajectory', f'/drone_{i}_primitive_planner_node/optimal_list')]:
                 displays.append({'Class': 'rviz_default_plugins/Marker', 'Name': f'{title} {i}',
-                                 'Enabled': True, 'Marker Topic': {'Value': topic}})
-        config = {'Visualization Manager': {'Global Options': {'Fixed Frame': 'world'}, 'Displays': displays,
+                                 'Enabled': True, 'Topic': {'Value': topic}})
+        # 使用 RViz2 属性名，并使初始视角覆盖圆周起点及森林地图。
+        config = {'Panels': [{'Class': 'rviz_common/Displays', 'Name': 'Displays'},
+                             {'Class': 'rviz_common/Views', 'Name': 'Views'},
+                             {'Class': 'rviz_common/Tool Properties', 'Name': 'Tool Properties'}],
+                  'Window Geometry': {'Width': 1280, 'Height': 800,
+                                      'Hide Left Dock': False, 'Hide Right Dock': False},
+                  'Visualization Manager': {'Enabled': True,
+                  'Global Options': {'Fixed Frame': 'world', 'Background Color': '48; 48; 48'},
+                  'Displays': displays,
+                  'Views': {'Current': {'Class': 'rviz_default_plugins/Orbit',
+                                        'Distance': max(15.0, radius * 3.0),
+                                        'Focal Point': {'X': 0.0, 'Y': 0.0, 'Z': 0.5},
+                                        'Pitch': 0.8, 'Yaw': 0.8}},
                   'Tools': [{'Class': 'rviz_default_plugins/Interact'}, {'Class': 'rviz_default_plugins/MoveCamera'},
                             {'Class': 'rviz_default_plugins/Select'}, {'Class': 'rviz_default_plugins/PublishPoint'},
                             {'Class': 'rviz_plugins/Goal3DTool'},

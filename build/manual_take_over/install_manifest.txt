@@ -1,0 +1,17 @@
+/home/wyt/RC_planner/src/install/manual_take_over/lib/manual_take_over/manual_take_over
+/home/wyt/RC_planner/src/install/manual_take_over/lib/manual_take_over/manual_take_over_ground_station
+/home/wyt/RC_planner/src/install/manual_take_over/share/ament_index/resource_index/package_run_dependencies/manual_take_over
+/home/wyt/RC_planner/src/install/manual_take_over/share/ament_index/resource_index/parent_prefix_path/manual_take_over
+/home/wyt/RC_planner/src/install/manual_take_over/share/manual_take_over/environment/ament_prefix_path.sh
+/home/wyt/RC_planner/src/install/manual_take_over/share/manual_take_over/environment/ament_prefix_path.dsv
+/home/wyt/RC_planner/src/install/manual_take_over/share/manual_take_over/environment/path.sh
+/home/wyt/RC_planner/src/install/manual_take_over/share/manual_take_over/environment/path.dsv
+/home/wyt/RC_planner/src/install/manual_take_over/share/manual_take_over/local_setup.bash
+/home/wyt/RC_planner/src/install/manual_take_over/share/manual_take_over/local_setup.sh
+/home/wyt/RC_planner/src/install/manual_take_over/share/manual_take_over/local_setup.zsh
+/home/wyt/RC_planner/src/install/manual_take_over/share/manual_take_over/local_setup.dsv
+/home/wyt/RC_planner/src/install/manual_take_over/share/manual_take_over/package.dsv
+/home/wyt/RC_planner/src/install/manual_take_over/share/ament_index/resource_index/packages/manual_take_over
+/home/wyt/RC_planner/src/install/manual_take_over/share/manual_take_over/cmake/manual_take_overConfig.cmake
+/home/wyt/RC_planner/src/install/manual_take_over/share/manual_take_over/cmake/manual_take_overConfig-version.cmake
+/home/wyt/RC_planner/src/install/manual_take_over/share/manual_take_over/package.xml

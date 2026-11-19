@@ -1,0 +1,29 @@
+[0.067s] Invoking command in '/home/wyt/RC_planner/src/build/uav_utils': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/jazzy DEBUGINFOD_URLS=https://debuginfod.ubuntu.com /usr/bin/cmake --build /home/wyt/RC_planner/src/build/uav_utils -- -j28 -l28
+[0.167s] Invoked command in '/home/wyt/RC_planner/src/build/uav_utils' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/jazzy DEBUGINFOD_URLS=https://debuginfod.ubuntu.com /usr/bin/cmake --build /home/wyt/RC_planner/src/build/uav_utils -- -j28 -l28
+[0.190s] Invoking command in '/home/wyt/RC_planner/src/build/uav_utils': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/jazzy DEBUGINFOD_URLS=https://debuginfod.ubuntu.com /usr/bin/cmake --install /home/wyt/RC_planner/src/build/uav_utils
+[0.212s] -- Install configuration: "Release"
+[0.212s] -- Up-to-date: /home/wyt/RC_planner/src/install/uav_utils/include/uav_utils
+[0.212s] -- Up-to-date: /home/wyt/RC_planner/src/install/uav_utils/include/uav_utils/utils.h
+[0.213s] -- Up-to-date: /home/wyt/RC_planner/src/install/uav_utils/include/uav_utils/geometry_utils.h
+[0.213s] -- Up-to-date: /home/wyt/RC_planner/src/install/uav_utils/include/uav_utils/converters.h
+[0.213s] -- Up-to-date: /home/wyt/RC_planner/src/install/uav_utils/lib/uav_utils/odom_to_euler.py
+[0.214s] -- Up-to-date: /home/wyt/RC_planner/src/install/uav_utils/lib/uav_utils/tf_assist.py
+[0.214s] -- Up-to-date: /home/wyt/RC_planner/src/install/uav_utils/lib/uav_utils/send_odom.py
+[0.214s] -- Up-to-date: /home/wyt/RC_planner/src/install/uav_utils/lib/uav_utils/topic_statistics.py
+[0.214s] -- Up-to-date: /home/wyt/RC_planner/src/install/uav_utils/share/ament_index/resource_index/package_run_dependencies/uav_utils
+[0.215s] -- Up-to-date: /home/wyt/RC_planner/src/install/uav_utils/share/ament_index/resource_index/parent_prefix_path/uav_utils
+[0.215s] -- Up-to-date: /home/wyt/RC_planner/src/install/uav_utils/share/uav_utils/environment/ament_prefix_path.sh
+[0.215s] -- Up-to-date: /home/wyt/RC_planner/src/install/uav_utils/share/uav_utils/environment/ament_prefix_path.dsv
+[0.216s] -- Up-to-date: /home/wyt/RC_planner/src/install/uav_utils/share/uav_utils/environment/path.sh
+[0.217s] -- Up-to-date: /home/wyt/RC_planner/src/install/uav_utils/share/uav_utils/environment/path.dsv
+[0.217s] -- Up-to-date: /home/wyt/RC_planner/src/install/uav_utils/share/uav_utils/local_setup.bash
+[0.217s] -- Up-to-date: /home/wyt/RC_planner/src/install/uav_utils/share/uav_utils/local_setup.sh
+[0.217s] -- Up-to-date: /home/wyt/RC_planner/src/install/uav_utils/share/uav_utils/local_setup.zsh
+[0.217s] -- Up-to-date: /home/wyt/RC_planner/src/install/uav_utils/share/uav_utils/local_setup.dsv
+[0.217s] -- Up-to-date: /home/wyt/RC_planner/src/install/uav_utils/share/uav_utils/package.dsv
+[0.217s] -- Up-to-date: /home/wyt/RC_planner/src/install/uav_utils/share/ament_index/resource_index/packages/uav_utils
+[0.218s] -- Up-to-date: /home/wyt/RC_planner/src/install/uav_utils/share/uav_utils/cmake/ament_cmake_export_include_directories-extras.cmake
+[0.218s] -- Up-to-date: /home/wyt/RC_planner/src/install/uav_utils/share/uav_utils/cmake/uav_utilsConfig.cmake
+[0.218s] -- Up-to-date: /home/wyt/RC_planner/src/install/uav_utils/share/uav_utils/cmake/uav_utilsConfig-version.cmake
+[0.218s] -- Up-to-date: /home/wyt/RC_planner/src/install/uav_utils/share/uav_utils/package.xml
+[0.220s] Invoked command in '/home/wyt/RC_planner/src/build/uav_utils' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/jazzy DEBUGINFOD_URLS=https://debuginfod.ubuntu.com /usr/bin/cmake --install /home/wyt/RC_planner/src/build/uav_utils

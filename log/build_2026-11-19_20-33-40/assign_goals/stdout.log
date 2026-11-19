@@ -1,0 +1,52 @@
+-- The C compiler identification is GNU 13.3.0
+-- The CXX compiler identification is GNU 13.3.0
+-- Detecting C compiler ABI info
+-- Detecting C compiler ABI info - done
+-- Check for working C compiler: /usr/bin/cc - skipped
+-- Detecting C compile features
+-- Detecting C compile features - done
+-- Detecting CXX compiler ABI info
+-- Detecting CXX compiler ABI info - done
+-- Check for working CXX compiler: /usr/bin/c++ - skipped
+-- Detecting CXX compile features
+-- Detecting CXX compile features - done
+-- Found ament_cmake: 2.5.6 (/opt/ros/jazzy/share/ament_cmake/cmake)
+-- Found Python3: /usr/bin/python3 (found version "3.12.3") found components: Interpreter 
+-- Found uav_utils: 0.1.0 (/home/wyt/RC_planner/src/install/uav_utils/share/uav_utils/cmake)
+-- Found rclcpp: 28.1.22 (/opt/ros/jazzy/share/rclcpp/cmake)
+-- Found rosidl_generator_c: 4.6.9 (/opt/ros/jazzy/share/rosidl_generator_c/cmake)
+-- Found rosidl_generator_cpp: 4.6.9 (/opt/ros/jazzy/share/rosidl_generator_cpp/cmake)
+-- Using all available rosidl_typesupport_c: rosidl_typesupport_fastrtps_c;rosidl_typesupport_introspection_c
+-- Using all available rosidl_typesupport_cpp: rosidl_typesupport_fastrtps_cpp;rosidl_typesupport_introspection_cpp
+-- Found rmw_implementation_cmake: 7.3.4 (/opt/ros/jazzy/share/rmw_implementation_cmake/cmake)
+-- Found rmw_fastrtps_cpp: 8.4.4 (/opt/ros/jazzy/share/rmw_fastrtps_cpp/cmake)
+-- Found OpenSSL: /usr/lib/x86_64-linux-gnu/libcrypto.so (found version "3.0.13")  
+-- Found FastRTPS: /opt/ros/jazzy/include (Required is at least version "2.13") 
+-- Using RMW implementation 'rmw_fastrtps_cpp' as default
+-- Found geometry_msgs: 5.3.8 (/opt/ros/jazzy/share/geometry_msgs/cmake)
+-- Found visualization_msgs: 5.3.8 (/opt/ros/jazzy/share/visualization_msgs/cmake)
+-- Found quadrotor_msgs: 0.1.0 (/home/wyt/RC_planner/src/install/quadrotor_msgs/share/quadrotor_msgs/cmake)
+-- Configuring done (4.6s)
+-- Generating done (0.0s)
+-- Build files have been written to: /home/wyt/RC_planner/src/build/assign_goals
+[ 50%] [32mBuilding CXX object CMakeFiles/assign_goals_node.dir/src/assign_goals_node.cpp.o[0m
+[100%] [32m[1mLinking CXX executable assign_goals_node[0m
+[100%] Built target assign_goals_node
+-- Install configuration: "Release"
+-- Installing: /home/wyt/RC_planner/src/install/assign_goals/lib/assign_goals/assign_goals_node
+-- Set non-toolchain portion of runtime path of "/home/wyt/RC_planner/src/install/assign_goals/lib/assign_goals/assign_goals_node" to ""
+-- Installing: /home/wyt/RC_planner/src/install/assign_goals/share/ament_index/resource_index/package_run_dependencies/assign_goals
+-- Installing: /home/wyt/RC_planner/src/install/assign_goals/share/ament_index/resource_index/parent_prefix_path/assign_goals
+-- Installing: /home/wyt/RC_planner/src/install/assign_goals/share/assign_goals/environment/ament_prefix_path.sh
+-- Installing: /home/wyt/RC_planner/src/install/assign_goals/share/assign_goals/environment/ament_prefix_path.dsv
+-- Installing: /home/wyt/RC_planner/src/install/assign_goals/share/assign_goals/environment/path.sh
+-- Installing: /home/wyt/RC_planner/src/install/assign_goals/share/assign_goals/environment/path.dsv
+-- Installing: /home/wyt/RC_planner/src/install/assign_goals/share/assign_goals/local_setup.bash
+-- Installing: /home/wyt/RC_planner/src/install/assign_goals/share/assign_goals/local_setup.sh
+-- Installing: /home/wyt/RC_planner/src/install/assign_goals/share/assign_goals/local_setup.zsh
+-- Installing: /home/wyt/RC_planner/src/install/assign_goals/share/assign_goals/local_setup.dsv
+-- Installing: /home/wyt/RC_planner/src/install/assign_goals/share/assign_goals/package.dsv
+-- Installing: /home/wyt/RC_planner/src/install/assign_goals/share/ament_index/resource_index/packages/assign_goals
+-- Installing: /home/wyt/RC_planner/src/install/assign_goals/share/assign_goals/cmake/assign_goalsConfig.cmake
+-- Installing: /home/wyt/RC_planner/src/install/assign_goals/share/assign_goals/cmake/assign_goalsConfig-version.cmake
+-- Installing: /home/wyt/RC_planner/src/install/assign_goals/share/assign_goals/package.xml

@@ -1,0 +1,20 @@
+[ 50%] Built target manual_take_over
+[100%] Built target manual_take_over_ground_station
+-- Install configuration: "Release"
+-- Up-to-date: /home/wyt/RC_planner/src/install/manual_take_over/lib/manual_take_over/manual_take_over
+-- Up-to-date: /home/wyt/RC_planner/src/install/manual_take_over/lib/manual_take_over/manual_take_over_ground_station
+-- Up-to-date: /home/wyt/RC_planner/src/install/manual_take_over/share/ament_index/resource_index/package_run_dependencies/manual_take_over
+-- Up-to-date: /home/wyt/RC_planner/src/install/manual_take_over/share/ament_index/resource_index/parent_prefix_path/manual_take_over
+-- Up-to-date: /home/wyt/RC_planner/src/install/manual_take_over/share/manual_take_over/environment/ament_prefix_path.sh
+-- Up-to-date: /home/wyt/RC_planner/src/install/manual_take_over/share/manual_take_over/environment/ament_prefix_path.dsv
+-- Up-to-date: /home/wyt/RC_planner/src/install/manual_take_over/share/manual_take_over/environment/path.sh
+-- Up-to-date: /home/wyt/RC_planner/src/install/manual_take_over/share/manual_take_over/environment/path.dsv
+-- Up-to-date: /home/wyt/RC_planner/src/install/manual_take_over/share/manual_take_over/local_setup.bash
+-- Up-to-date: /home/wyt/RC_planner/src/install/manual_take_over/share/manual_take_over/local_setup.sh
+-- Up-to-date: /home/wyt/RC_planner/src/install/manual_take_over/share/manual_take_over/local_setup.zsh
+-- Up-to-date: /home/wyt/RC_planner/src/install/manual_take_over/share/manual_take_over/local_setup.dsv
+-- Installing: /home/wyt/RC_planner/src/install/manual_take_over/share/manual_take_over/package.dsv
+-- Up-to-date: /home/wyt/RC_planner/src/install/manual_take_over/share/ament_index/resource_index/packages/manual_take_over
+-- Up-to-date: /home/wyt/RC_planner/src/install/manual_take_over/share/manual_take_over/cmake/manual_take_overConfig.cmake
+-- Up-to-date: /home/wyt/RC_planner/src/install/manual_take_over/share/manual_take_over/cmake/manual_take_overConfig-version.cmake
+-- Up-to-date: /home/wyt/RC_planner/src/install/manual_take_over/share/manual_take_over/package.xml

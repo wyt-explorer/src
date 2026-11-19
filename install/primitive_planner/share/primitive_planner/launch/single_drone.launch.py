@@ -1,8 +1,9 @@
-"""启动 ROS 2 单机运动基元仿真闭环。
-
-输入：环境 YAML（米、world 坐标系）及运动基元库；输出：轨迹指令、模拟里程计和 RViz2 窗口。
-调用关系：地图、局部感知、规划器、轨迹服务、理想位置跟踪模拟器。
-模式：无 Gazebo 的算法仿真，使用系统时间；依赖 launch_ros、PyYAML、rviz2。
+"""文件作用：组装地图、局部感知、基元规划、轨迹服务和理想位置跟踪闭环。
+调用关系：ros2 launch 加载；launch_nodes() 读取地图并构造节点与话题重映射。
+输入：map_file、primitive_folder、rviz 参数；地图起终点为 world 系、米制。
+输出：节点启动描述；统一连接 /state/odometry、/sensors/rgbd/points 和 /position_cmd。
+运行模式：ROS 2 单机算法仿真，可关闭 RViz2；默认使用系统时间。
+主要依赖：launch_ros、ament_index_python、PyYAML、rviz2 及闭环各包。
 """
 import os
 from pathlib import Path

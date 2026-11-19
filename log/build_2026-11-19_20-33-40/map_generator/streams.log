@@ -1,0 +1,131 @@
+[0.043s] Invoking command in '/home/wyt/RC_planner/src/build/map_generator': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/jazzy DEBUGINFOD_URLS=https://debuginfod.ubuntu.com /usr/bin/cmake /home/wyt/RC_planner/src/Primitive-Planner/src/uav_simulator/map_generator -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=/home/wyt/RC_planner/src/install/map_generator
+[0.180s] -- The C compiler identification is GNU 13.3.0
+[0.353s] -- The CXX compiler identification is GNU 13.3.0
+[0.407s] -- Detecting C compiler ABI info
+[0.639s] -- Detecting C compiler ABI info - done
+[0.669s] -- Check for working C compiler: /usr/bin/cc - skipped
+[0.670s] -- Detecting C compile features
+[0.671s] -- Detecting C compile features - done
+[0.696s] -- Detecting CXX compiler ABI info
+[0.905s] -- Detecting CXX compiler ABI info - done
+[0.939s] -- Check for working CXX compiler: /usr/bin/c++ - skipped
+[0.940s] -- Detecting CXX compile features
+[0.941s] -- Detecting CXX compile features - done
+[0.956s] -- Found ament_cmake: 2.5.6 (/opt/ros/jazzy/share/ament_cmake/cmake)
+[1.408s] -- Found Python3: /usr/bin/python3 (found version "3.12.3") found components: Interpreter 
+[1.791s] -- Found rclcpp: 28.1.22 (/opt/ros/jazzy/share/rclcpp/cmake)
+[1.984s] -- Found rosidl_generator_c: 4.6.9 (/opt/ros/jazzy/share/rosidl_generator_c/cmake)
+[2.036s] -- Found rosidl_generator_cpp: 4.6.9 (/opt/ros/jazzy/share/rosidl_generator_cpp/cmake)
+[2.107s] -- Using all available rosidl_typesupport_c: rosidl_typesupport_fastrtps_c;rosidl_typesupport_introspection_c
+[2.200s] -- Using all available rosidl_typesupport_cpp: rosidl_typesupport_fastrtps_cpp;rosidl_typesupport_introspection_cpp
+[2.536s] -- Found rmw_implementation_cmake: 7.3.4 (/opt/ros/jazzy/share/rmw_implementation_cmake/cmake)
+[2.549s] -- Found rmw_fastrtps_cpp: 8.4.4 (/opt/ros/jazzy/share/rmw_fastrtps_cpp/cmake)
+[2.832s] -- Found OpenSSL: /usr/lib/x86_64-linux-gnu/libcrypto.so (found version "3.0.13")  
+[2.915s] -- Found FastRTPS: /opt/ros/jazzy/include (Required is at least version "2.13") 
+[3.000s] -- Using RMW implementation 'rmw_fastrtps_cpp' as default
+[3.435s] -- Found std_msgs: 5.3.8 (/opt/ros/jazzy/share/std_msgs/cmake)
+[3.512s] -- Found geometry_msgs: 5.3.8 (/opt/ros/jazzy/share/geometry_msgs/cmake)
+[3.595s] -- Found nav_msgs: 5.3.8 (/opt/ros/jazzy/share/nav_msgs/cmake)
+[3.741s] -- Found sensor_msgs: 5.3.8 (/opt/ros/jazzy/share/sensor_msgs/cmake)
+[3.849s] -- Found pcl_conversions: 2.6.5 (/opt/ros/jazzy/share/pcl_conversions/cmake)
+[4.190s] [33mCMake Warning (dev) at /usr/lib/x86_64-linux-gnu/cmake/pcl/Modules/FindFLANN.cmake:45 (find_package):
+[4.190s]   Policy CMP0144 is not set: find_package uses upper-case <PACKAGENAME>_ROOT
+[4.190s]   variables.  Run "cmake --help-policy CMP0144" for policy details.  Use the
+[4.190s]   cmake_policy command to set the policy and suppress this warning.
+[4.190s] 
+[4.190s]   CMake variable FLANN_ROOT is set to:
+[4.191s] 
+[4.191s]     /usr
+[4.191s] 
+[4.191s]   For compatibility, find_package is ignoring the variable, but code in a
+[4.191s]   .cmake module might still use it.
+[4.191s] Call Stack (most recent call first):
+[4.191s]   /usr/lib/x86_64-linux-gnu/cmake/pcl/PCLConfig.cmake:261 (find_package)
+[4.191s]   /usr/lib/x86_64-linux-gnu/cmake/pcl/PCLConfig.cmake:306 (find_flann)
+[4.191s]   /usr/lib/x86_64-linux-gnu/cmake/pcl/PCLConfig.cmake:570 (find_external_library)
+[4.192s]   /opt/ros/jazzy/share/pcl_conversions/cmake/ament_cmake_export_dependencies-extras.cmake:21 (find_package)
+[4.192s]   /opt/ros/jazzy/share/pcl_conversions/cmake/pcl_conversionsConfig.cmake:41 (include)
+[4.192s]   CMakeLists.txt:10 (find_package)
+[4.192s] This warning is for project developers.  Use -Wno-dev to suppress it.
+[4.192s] [0m
+[4.193s] -- Found flann version 1.9.2
+[5.081s] -- Found OpenMP_CXX: -fopenmp (found version "4.5") 
+[5.082s] -- Found OpenMP: TRUE (found version "4.5") found components: CXX 
+[9.140s] -- Checking for module 'libusb-1.0'
+[9.189s] --   Found libusb-1.0, version 1.0.27
+[9.311s] -- Found libusb: /usr/lib/x86_64-linux-gnu/libusb-1.0.so  
+[9.314s] -- OpenNI found (version: 1.5.4.0, include: /usr/include/ni, lib: /usr/lib/libOpenNI.so;libusb::libusb)
+[9.495s] -- OpenNI2 found (version: 2.2.0.33, include: /usr/include/openni2, lib: /usr/lib/x86_64-linux-gnu/libOpenNI2.so;libusb::libusb)
+[9.510s] -- Could NOT find Pcap (missing: PCAP_LIBRARIES PCAP_INCLUDE_DIRS) 
+[9.560s] -- Found ZLIB: /usr/lib/x86_64-linux-gnu/libz.so (found version "1.3")  
+[9.630s] -- Found PNG: /usr/lib/x86_64-linux-gnu/libpng.so (found version "1.6.43") 
+[11.120s] -- OpenNI found (version: 1.5.4.0, include: /usr/include/ni, lib: /usr/lib/libOpenNI.so;libusb::libusb)
+[11.142s] -- OpenNI2 found (version: 2.2.0.33, include: /usr/include/openni2, lib: /usr/lib/x86_64-linux-gnu/libOpenNI2.so;libusb::libusb)
+[12.428s] -- Found Qhull version 8.0.2
+[14.046s] -- OpenNI found (version: 1.5.4.0, include: /usr/include/ni, lib: /usr/lib/libOpenNI.so;libusb::libusb)
+[15.431s] -- Found PCL_COMMON: /usr/lib/x86_64-linux-gnu/libpcl_common.so  
+[15.435s] -- Found PCL_KDTREE: /usr/lib/x86_64-linux-gnu/libpcl_kdtree.so  
+[15.439s] -- Found PCL_OCTREE: /usr/lib/x86_64-linux-gnu/libpcl_octree.so  
+[15.443s] -- Found PCL_SEARCH: /usr/lib/x86_64-linux-gnu/libpcl_search.so  
+[15.448s] -- Found PCL_SAMPLE_CONSENSUS: /usr/lib/x86_64-linux-gnu/libpcl_sample_consensus.so  
+[15.453s] -- Found PCL_FILTERS: /usr/lib/x86_64-linux-gnu/libpcl_filters.so  
+[15.454s] -- Found PCL_2D: /usr/include/pcl-1.14  
+[15.456s] -- Found PCL_GEOMETRY: /usr/include/pcl-1.14  
+[15.459s] -- Found PCL_IO: /usr/lib/x86_64-linux-gnu/libpcl_io.so  
+[15.463s] -- Found PCL_FEATURES: /usr/lib/x86_64-linux-gnu/libpcl_features.so  
+[15.467s] -- Found PCL_ML: /usr/lib/x86_64-linux-gnu/libpcl_ml.so  
+[15.472s] -- Found PCL_SEGMENTATION: /usr/lib/x86_64-linux-gnu/libpcl_segmentation.so  
+[15.477s] -- Found PCL_VISUALIZATION: /usr/lib/x86_64-linux-gnu/libpcl_visualization.so  
+[15.482s] -- Found PCL_SURFACE: /usr/lib/x86_64-linux-gnu/libpcl_surface.so  
+[15.487s] -- Found PCL_REGISTRATION: /usr/lib/x86_64-linux-gnu/libpcl_registration.so  
+[15.493s] -- Found PCL_KEYPOINTS: /usr/lib/x86_64-linux-gnu/libpcl_keypoints.so  
+[15.498s] -- Found PCL_TRACKING: /usr/lib/x86_64-linux-gnu/libpcl_tracking.so  
+[15.503s] -- Found PCL_RECOGNITION: /usr/lib/x86_64-linux-gnu/libpcl_recognition.so  
+[15.510s] -- Found PCL_STEREO: /usr/lib/x86_64-linux-gnu/libpcl_stereo.so  
+[15.516s] -- Found PCL_APPS: /usr/lib/x86_64-linux-gnu/libpcl_apps.so  
+[15.519s] -- Found PCL_IN_HAND_SCANNER: /usr/include/pcl-1.14  
+[15.520s] -- Found PCL_MODELER: /usr/include/pcl-1.14  
+[15.522s] -- Found PCL_POINT_CLOUD_EDITOR: /usr/include/pcl-1.14  
+[15.527s] -- Found PCL_OUTOFCORE: /usr/lib/x86_64-linux-gnu/libpcl_outofcore.so  
+[15.532s] -- Found PCL_PEOPLE: /usr/lib/x86_64-linux-gnu/libpcl_people.so  
+[15.544s] [33mCMake Warning (dev) at CMakeLists.txt:11 (find_package):
+[15.544s]   Policy CMP0074 is not set: find_package uses <PackageName>_ROOT variables.
+[15.544s]   Run "cmake --help-policy CMP0074" for policy details.  Use the cmake_policy
+[15.545s]   command to set the policy and suppress this warning.
+[15.545s] 
+[15.545s]   CMake variable PCL_ROOT is set to:
+[15.545s] 
+[15.546s]     /usr
+[15.546s] 
+[15.546s]   For compatibility, CMake is ignoring the variable.
+[15.547s] This warning is for project developers.  Use -Wno-dev to suppress it.
+[15.549s] [0m
+[16.006s] -- Configuring done (15.9s)
+[16.167s] -- Generating done (0.1s)
+[16.196s] -- Build files have been written to: /home/wyt/RC_planner/src/build/map_generator
+[16.248s] Invoked command in '/home/wyt/RC_planner/src/build/map_generator' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/jazzy DEBUGINFOD_URLS=https://debuginfod.ubuntu.com /usr/bin/cmake /home/wyt/RC_planner/src/Primitive-Planner/src/uav_simulator/map_generator -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=/home/wyt/RC_planner/src/install/map_generator
+[16.254s] Invoking command in '/home/wyt/RC_planner/src/build/map_generator': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/jazzy DEBUGINFOD_URLS=https://debuginfod.ubuntu.com /usr/bin/cmake --build /home/wyt/RC_planner/src/build/map_generator -- -j28 -l28
+[16.475s] [ 50%] [32mBuilding CXX object CMakeFiles/random_forest.dir/src/random_forest_sensing.cpp.o[0m
+[48.735s] [100%] [32m[1mLinking CXX executable random_forest[0m
+[49.630s] [100%] Built target random_forest
+[49.664s] Invoked command in '/home/wyt/RC_planner/src/build/map_generator' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/jazzy DEBUGINFOD_URLS=https://debuginfod.ubuntu.com /usr/bin/cmake --build /home/wyt/RC_planner/src/build/map_generator -- -j28 -l28
+[49.670s] Invoking command in '/home/wyt/RC_planner/src/build/map_generator': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/jazzy DEBUGINFOD_URLS=https://debuginfod.ubuntu.com /usr/bin/cmake --install /home/wyt/RC_planner/src/build/map_generator
+[49.694s] -- Install configuration: "Release"
+[49.694s] -- Installing: /home/wyt/RC_planner/src/install/map_generator/lib/map_generator/random_forest
+[49.695s] -- Set non-toolchain portion of runtime path of "/home/wyt/RC_planner/src/install/map_generator/lib/map_generator/random_forest" to ""
+[49.696s] -- Installing: /home/wyt/RC_planner/src/install/map_generator/share/ament_index/resource_index/package_run_dependencies/map_generator
+[49.697s] -- Installing: /home/wyt/RC_planner/src/install/map_generator/share/ament_index/resource_index/parent_prefix_path/map_generator
+[49.697s] -- Installing: /home/wyt/RC_planner/src/install/map_generator/share/map_generator/environment/ament_prefix_path.sh
+[49.697s] -- Installing: /home/wyt/RC_planner/src/install/map_generator/share/map_generator/environment/ament_prefix_path.dsv
+[49.698s] -- Installing: /home/wyt/RC_planner/src/install/map_generator/share/map_generator/environment/path.sh
+[49.698s] -- Installing: /home/wyt/RC_planner/src/install/map_generator/share/map_generator/environment/path.dsv
+[49.698s] -- Installing: /home/wyt/RC_planner/src/install/map_generator/share/map_generator/local_setup.bash
+[49.699s] -- Installing: /home/wyt/RC_planner/src/install/map_generator/share/map_generator/local_setup.sh
+[49.700s] -- Installing: /home/wyt/RC_planner/src/install/map_generator/share/map_generator/local_setup.zsh
+[49.700s] -- Installing: /home/wyt/RC_planner/src/install/map_generator/share/map_generator/local_setup.dsv
+[49.701s] -- Installing: /home/wyt/RC_planner/src/install/map_generator/share/map_generator/package.dsv
+[49.701s] -- Installing: /home/wyt/RC_planner/src/install/map_generator/share/ament_index/resource_index/packages/map_generator
+[49.702s] -- Installing: /home/wyt/RC_planner/src/install/map_generator/share/map_generator/cmake/map_generatorConfig.cmake
+[49.702s] -- Installing: /home/wyt/RC_planner/src/install/map_generator/share/map_generator/cmake/map_generatorConfig-version.cmake
+[49.703s] -- Installing: /home/wyt/RC_planner/src/install/map_generator/share/map_generator/package.xml
+[49.708s] Invoked command in '/home/wyt/RC_planner/src/build/map_generator' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/jazzy DEBUGINFOD_URLS=https://debuginfod.ubuntu.com /usr/bin/cmake --install /home/wyt/RC_planner/src/build/map_generator

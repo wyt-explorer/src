@@ -1,0 +1,88 @@
+{
+	"configurations" : 
+	[
+		{
+			"directories" : 
+			[
+				{
+					"build" : ".",
+					"hasInstallRule" : true,
+					"jsonFile" : "directory-.-Release-82eba67a2e054c0e1acc.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.15"
+					},
+					"projectIndex" : 0,
+					"source" : ".",
+					"targetIndexes" : 
+					[
+						0,
+						1,
+						2,
+						3
+					]
+				}
+			],
+			"name" : "Release",
+			"projects" : 
+			[
+				{
+					"directoryIndexes" : 
+					[
+						0
+					],
+					"name" : "so3_quadrotor_simulator",
+					"targetIndexes" : 
+					[
+						0,
+						1,
+						2,
+						3
+					]
+				}
+			],
+			"targets" : 
+			[
+				{
+					"directoryIndex" : 0,
+					"id" : "quadrotor_dynamics::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-quadrotor_dynamics-Release-f5fc336219d698197e8f.json",
+					"name" : "quadrotor_dynamics",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "quadrotor_simulator_so3::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-quadrotor_simulator_so3-Release-0ec3838054be7112e5b4.json",
+					"name" : "quadrotor_simulator_so3",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "so3_quadrotor_simulator_uninstall::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-so3_quadrotor_simulator_uninstall-Release-aa80c362e77b043ffbbd.json",
+					"name" : "so3_quadrotor_simulator_uninstall",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "uninstall::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-uninstall-Release-175d54c38e465557d36a.json",
+					"name" : "uninstall",
+					"projectIndex" : 0
+				}
+			]
+		}
+	],
+	"kind" : "codemodel",
+	"paths" : 
+	{
+		"build" : "/home/wyt/RC_planner/src/build/so3_quadrotor_simulator",
+		"source" : "/home/wyt/RC_planner/src/Primitive-Planner/src/uav_simulator/so3_quadrotor_simulator"
+	},
+	"version" : 
+	{
+		"major" : 2,
+		"minor" : 6
+	}
+}

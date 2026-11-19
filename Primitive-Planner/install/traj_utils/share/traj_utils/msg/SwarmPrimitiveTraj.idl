@@ -1,0 +1,29 @@
+// generated from rosidl_adapter/resource/msg.idl.em
+// with input from traj_utils/msg/SwarmPrimitiveTraj.msg
+// generated code does not contain a copyright notice
+
+#include "builtin_interfaces/msg/Time.idl"
+
+module traj_utils {
+  module msg {
+    typedef float float__3[3];
+    typedef float float__9[9];
+    struct SwarmPrimitiveTraj {
+      int16 drone_id;
+
+      builtin_interfaces::msg::Time start_time;
+
+      float__3 start_p;
+
+      float__3 start_v;
+
+      float__3 end_p;
+
+      float__9 rot_mat;
+
+      int32 vel_id;
+
+      int32 select_path_id;
+    };
+  };
+};
