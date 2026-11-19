@@ -5,7 +5,7 @@ set(primitive_planner_BUILD_DEPENDS "rclcpp" "std_msgs" "geometry_msgs" "nav_msg
 set(primitive_planner_BUILDTOOL_DEPENDS "ament_cmake")
 set(primitive_planner_BUILD_EXPORT_DEPENDS "rclcpp" "std_msgs" "geometry_msgs" "nav_msgs" "quadrotor_msgs" "traj_utils" "eigen" "pcl_conversions")
 set(primitive_planner_BUILDTOOL_EXPORT_DEPENDS )
-set(primitive_planner_EXEC_DEPENDS "launch_ros" "ament_index_python" "python3-yaml" "primitive_env" "poscmd_2_odom" "local_sensing_node" "rclcpp" "std_msgs" "geometry_msgs" "nav_msgs" "quadrotor_msgs" "traj_utils" "eigen" "pcl_conversions")
+set(primitive_planner_EXEC_DEPENDS "launch_ros" "rviz2" "ament_index_python" "python3-yaml" "primitive_env" "poscmd_2_odom" "local_sensing_node" "rclcpp" "std_msgs" "geometry_msgs" "nav_msgs" "quadrotor_msgs" "traj_utils" "eigen" "pcl_conversions")
 set(primitive_planner_TEST_DEPENDS )
 set(primitive_planner_GROUP_DEPENDS )
 set(primitive_planner_MEMBER_OF_GROUPS )

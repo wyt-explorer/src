@@ -1,14 +1,16 @@
 """启动 ROS 2 单机运动基元仿真闭环。
 
-输入：环境 YAML（米、world 坐标系）及运动基元库；输出：轨迹指令和模拟里程计。
+输入：环境 YAML（米、world 坐标系）及运动基元库；输出：轨迹指令、模拟里程计和 RViz2 窗口。
 调用关系：地图、局部感知、规划器、轨迹服务、理想位置跟踪模拟器。
-模式：无 Gazebo 的算法仿真，使用系统时间；依赖 launch_ros、PyYAML。
+模式：无 Gazebo 的算法仿真，使用系统时间；依赖 launch_ros、PyYAML、rviz2。
 """
+import os
 from pathlib import Path
 import yaml
 from ament_index_python.packages import get_package_share_directory
 from launch import LaunchDescription
 from launch.actions import DeclareLaunchArgument, OpaqueFunction
+from launch.conditions import IfCondition
 from launch.substitutions import LaunchConfiguration
 from launch_ros.actions import Node
 
@@ -38,6 +40,16 @@ def launch_nodes(context):
         params[f'fsm/waypoint0_{axis}'] = float(goal[axis])
         params[f'manager/map_size_{axis}'] = float(config['map']['size'][axis])
     return [
+        # Load a ROS 2 configuration with world-frame topics and the click tool.
+        Node(package='rviz2', executable='rviz2', name='rviz2',
+             arguments=['-d', str(Path(get_package_share_directory('primitive_env'))
+                                  / 'rviz/demo.rviz')],
+             # Snap editors can inject GTK/GIO paths incompatible with system RViz.
+             additional_env={key: '' for key in ('GTK_PATH', 'GIO_MODULE_DIR',
+                                                'QT_PLUGIN_PATH',
+                                                'QT_QPA_PLATFORM_PLUGIN_PATH')
+                             if '/snap/' in os.environ.get(key, '')},
+             condition=IfCondition(LaunchConfiguration('rviz')), output='screen'),
         Node(package='primitive_env', executable='map_publisher.py',
              parameters=[{'map_file': map_file}]),
         Node(package='primitive_env', executable='waypoint_publisher.py',
@@ -69,6 +81,8 @@ def launch_nodes(context):
 def generate_launch_description():
     """声明可替换地图和基元库路径，允许从安装目录启动。"""
     return LaunchDescription([
+        DeclareLaunchArgument('rviz', default_value='true',
+                              description='Open RViz2 with the single-drone displays'),
         DeclareLaunchArgument('map_file', default_value=str(Path(
             get_package_share_directory('primitive_env')) / 'map/map_01.yaml')),
         DeclareLaunchArgument('primitive_folder', default_value=str(Path(
