@@ -50,3 +50,24 @@
 - 2026-11-18 文档同步：更新根目录、Primitive_env、Primitive-Planner 三份 README，统一 ROS 2 启动与触发命令、构建路径、地图复制行为和验证边界；原 ROS 1 用法明确标为历史记录。
 
 - 2026-11-18：按用户要求为 single_drone.launch.py 增加默认 RViz2 窗口及 rviz:=false 开关；迁移 demo.rviz 到 ROS 2 插件、话题配置，新增 rviz2 运行依赖，同步三份 README。相关两包重新构建通过；启动验证确认 RViz 加载地图并成功初始化 OpenGL。清理 RViz 子进程中继承的 Snap 图形插件路径，解决 libpthread 符号冲突。
+
+- 2026-11-19：核对 planner_manager.cpp、PPReplanFSM 和 traj_server 的实现及单机启动映射，重写 planner_manager.cpp 文件头，明确碰撞筛选、评分、速度坐标系、候选 ID 输出与下游调用关系；未改动算法。
+- 本次注释修改验证：primitive_planner 在 /tmp 独立 Release 构建通过，目标文件差异检查通过；6 秒无 RViz 启动检查在初始化期间被 timeout 中断，关闭时出现 context invalid 异常，未据此认定运行测试通过。
+- 2026-11-19：按用户反馈精简 planner_manager.cpp 文件头，仅保留职责、调用链、输入输出、坐标单位、运行模式和依赖。
+
+- 2026-11-19：按已确认的简洁格式核对 90 个 C++/CUDA/Python/Shell 文件，本次重写其中 89 个文件头，保留 planner_manager.cpp 已确认说明；清理重复模板，保留许可证，跳过生成目录、自动生成消息及独立第三方库。Python AST、C++/CUDA 正文一致性和 Shell 语法检查通过，未修改执行逻辑。
+- 本次基础运行验证：无 RViz 单机闭环收到 636 条里程计、17 帧点云、33 条心跳、32 条位置指令，触发后位移约 0.208 米；检查通过后主动 SIGINT 停止。批量构建已发现 swarm_bridge 原有 Duration::toSec() 编译错误，已记录在文件头和 README，未扩大注释任务范围修改实现。
+- 本次构建结果：15 个包批量 Release 构建通过，primitive_planner 随后单独构建通过，共 16 个 ROS 2 包；swarm_bridge 因上述原有 API 错误失败，两个旧 RViz 插件未参与构建。产物和验证日志均位于 /tmp，未改动源码执行逻辑。
+
+## 上游功能恢复（2026-11-19，已完成）
+
+- 用户要求以 ZJU-FAST-Lab/Primitive-Planner 为基准恢复功能和调用，不修改 Primitive_env。
+- 基准提交 cab5aa2f82948be58b36e37b6a921b9dba97423c；新增 ROS 2 swarm → run_in_sim → advanced_param/simulator 启动链，逐机隔离话题，恢复 UDP、随机目标、跟踪加速度字段、SO3 控制与完整动力学、RViz2 工具。
+- 21 项上游算法体对照通过；保留非负路径 ID 修正并明确记录例外。说明见 Primitive-Planner/UPSTREAM_PARITY.md。
+- 上一轮 /tmp 构建与日志在继续时已清理，验证改用 .parity-check/ 忽略目录；现已完成全量构建、组件和 4/20 机及原单机回归测试。
+
+- 最终结果：18 包编译、21 项算法对照、6 项组件行为与正常退出、两个 RViz2 工厂实例化、5 种生成 XML 解析通过。
+- 四机最大目标误差约 0.0961 米；20 机最大误差约 0.0964 米，全部 ID 基元收发齐全；原 YAML 单机误差约 0.0981 米，均正常停止。
+- 退出异常已修复：循环复用执行器，进程结束前释放全局发布器/订阅器，防止晚于 DDS 上下文析构。复编和回归通过。
+- `Primitive_env` 文件 SHA-256 校验与本轮开始时完全一致；本轮未修改该目录。详情见 Primitive-Planner/UPSTREAM_PARITY.md；本机结果见 .parity-check/verification-summary.json。
+- 验证边界：未做 ROS 1/ROS 2 逐帧对跑、真实飞行或大规模长期稳定性测试；历史 TCP/MINCO 和 CUDA/EuRoC 不在上游默认演示链内。

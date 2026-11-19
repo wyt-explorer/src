@@ -1,3 +1,12 @@
+"""文件作用：生成机群沿 Y 轴排列、采用外部目标模式的启动文件。
+调用关系：脚本末尾直接调用 generate_launch_file()，写出启动配置。
+输入：无人机数量、初始 X 和 Y 间距；米制坐标。
+输出：random_goal_flight.launch，包含地图、通信桥、显示及逐机仿真配置。
+运行模式：离线 Python 工具，输出 ROS 2 launch XML。
+主要依赖：Python 文件接口；生成配置依赖旧 ROS 1 各包。
+"""
+from ros2_launch_xml import convert_file
+
 def generate_launch_file(num_drones, init_x, init_y_spacing, output_file='random_goal_flight.launch'):
     with open(output_file, 'w') as file:
         file.write('<launch>\n\n')
@@ -66,6 +75,7 @@ def generate_launch_file(num_drones, init_x, init_y_spacing, output_file='random
         
         # 写入XML尾部
         file.write('</launch>')
+    convert_file(output_file)
 
 # 使用示例
 num_drones = 20  # 假设我们需要启动5架飞机

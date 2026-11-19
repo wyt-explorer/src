@@ -1,9 +1,11 @@
-/*
- * 文件作用：ROS 2 Jazzy 规划与仿真组件，保留原运动基元算法。
- * 调用关系：由对应包的节点或库调用；输入输出见消息回调与发布接口。
- * 输入：ROS 2 消息、参数及运动基元文件（SI 单位，world 坐标系）。
- * 输出：规划轨迹、控制指令或可视化数据。
- * 运行模式：ROS 2 仿真/实机；依赖 rclcpp 和对应包的消息类型。
+/**
+ * @file planner_manager.h
+ * 文件作用：声明运动基元管理器及碰撞查询、评分接口。
+ * 调用关系：PPReplanFSM 持有 PPPlannerManager；实现位于 planner_manager.cpp。
+ * 输入：世界系点云、规划起点/速度/目标、时间及速度系旋转矩阵；米、秒制。
+ * 输出：候选路径 ID、规划成功标志和供 FSM 访问的基元配置、群体轨迹缓存。
+ * 运行模式：ROS 2 节点内部模块，无仿真/实机分支。
+ * 主要依赖：rclcpp、PCL、Eigen、traj_utils、nav_msgs、sensor_msgs。
  */
 #ifndef _PLANNER_MANAGER_H_
 #define _PLANNER_MANAGER_H_

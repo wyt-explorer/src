@@ -1204,3 +1204,217 @@ events:
         
       exitCode: 0
 ...
+
+---
+events:
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "/usr/share/cmake-3.28/Modules/FindMPI.cmake:1278 (try_compile)"
+      - "/usr/share/cmake-3.28/Modules/FindMPI.cmake:1322 (_MPI_try_staged_settings)"
+      - "/usr/share/cmake-3.28/Modules/FindMPI.cmake:1645 (_MPI_check_lang_works)"
+      - "/usr/lib/x86_64-linux-gnu/cmake/vtk-9.1/VTK-vtk-module-find-packages.cmake:397 (find_package)"
+      - "/usr/lib/x86_64-linux-gnu/cmake/vtk-9.1/vtk-config.cmake:150 (include)"
+      - "/usr/lib/x86_64-linux-gnu/cmake/pcl/PCLConfig.cmake:275 (find_package)"
+      - "/usr/lib/x86_64-linux-gnu/cmake/pcl/PCLConfig.cmake:324 (find_VTK)"
+      - "/usr/lib/x86_64-linux-gnu/cmake/pcl/PCLConfig.cmake:567 (find_external_library)"
+      - "/opt/ros/jazzy/share/pcl_conversions/cmake/ament_cmake_export_dependencies-extras.cmake:21 (find_package)"
+      - "/opt/ros/jazzy/share/pcl_conversions/cmake/pcl_conversionsConfig.cmake:41 (include)"
+      - "CMakeLists.txt:10 (find_package)"
+    description: "The MPI test test_mpi for C in mode normal"
+    directories:
+      source: "/home/wyt/RC_planner/src/build/local_sensing_node/CMakeFiles/CMakeScratch/TryCompile-wBZw1f"
+      binary: "/home/wyt/RC_planner/src/build/local_sensing_node/CMakeFiles/CMakeScratch/TryCompile-wBZw1f"
+    cmakeVariables:
+      CMAKE_C_FLAGS: ""
+      CMAKE_C_FLAGS_DEBUG: "-g"
+      CMAKE_EXE_LINKER_FLAGS: ""
+      CMAKE_MODULE_PATH: "/usr/lib/x86_64-linux-gnu/cmake/vtk-9.1/patches/99;/usr/lib/x86_64-linux-gnu/cmake/vtk-9.1;/opt/ros/jazzy/share/fastrtps_cmake_module/cmake/Modules;/usr/lib/x86_64-linux-gnu/cmake/pcl/Modules"
+    buildResult:
+      variable: "MPI_RESULT_C_test_mpi_normal"
+      cached: true
+      stdout: |
+        Change Dir: '/home/wyt/RC_planner/src/build/local_sensing_node/CMakeFiles/CMakeScratch/TryCompile-wBZw1f'
+        
+        Run Build Command(s): /usr/bin/cmake -E env VERBOSE=1 /usr/bin/gmake -f Makefile cmTC_dbaef/fast
+        gmake[1]: 进入目录“/home/wyt/RC_planner/src/build/local_sensing_node/CMakeFiles/CMakeScratch/TryCompile-wBZw1f”
+        /usr/bin/gmake  -f CMakeFiles/cmTC_dbaef.dir/build.make CMakeFiles/cmTC_dbaef.dir/build
+        gmake[2]: 进入目录“/home/wyt/RC_planner/src/build/local_sensing_node/CMakeFiles/CMakeScratch/TryCompile-wBZw1f”
+        Building C object CMakeFiles/cmTC_dbaef.dir/test_mpi.c.o
+        /usr/bin/cc  -isystem /usr/lib/x86_64-linux-gnu/openmpi/include -isystem /usr/lib/x86_64-linux-gnu/openmpi/include/openmpi  -o CMakeFiles/cmTC_dbaef.dir/test_mpi.c.o -c /home/wyt/RC_planner/src/build/local_sensing_node/CMakeFiles/CMakeScratch/TryCompile-wBZw1f/test_mpi.c
+        Linking C executable cmTC_dbaef
+        /usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_dbaef.dir/link.txt --verbose=1
+        /usr/bin/cc -L/usr/lib/x86_64-linux-gnu/openmpi/lib CMakeFiles/cmTC_dbaef.dir/test_mpi.c.o -o cmTC_dbaef  /usr/lib/x86_64-linux-gnu/libmpi.so 
+        gmake[2]: 离开目录“/home/wyt/RC_planner/src/build/local_sensing_node/CMakeFiles/CMakeScratch/TryCompile-wBZw1f”
+        gmake[1]: 离开目录“/home/wyt/RC_planner/src/build/local_sensing_node/CMakeFiles/CMakeScratch/TryCompile-wBZw1f”
+        
+      exitCode: 0
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "/usr/share/cmake-3.28/Modules/FindMPI.cmake:1278 (try_compile)"
+      - "/usr/share/cmake-3.28/Modules/FindMPI.cmake:1322 (_MPI_try_staged_settings)"
+      - "/usr/share/cmake-3.28/Modules/FindMPI.cmake:1645 (_MPI_check_lang_works)"
+      - "/usr/lib/x86_64-linux-gnu/cmake/vtk-9.1/VTK-vtk-module-find-packages.cmake:397 (find_package)"
+      - "/usr/lib/x86_64-linux-gnu/cmake/vtk-9.1/vtk-config.cmake:150 (include)"
+      - "/usr/lib/x86_64-linux-gnu/cmake/pcl/PCLConfig.cmake:275 (find_package)"
+      - "/usr/lib/x86_64-linux-gnu/cmake/pcl/PCLConfig.cmake:324 (find_VTK)"
+      - "/usr/lib/x86_64-linux-gnu/cmake/pcl/PCLConfig.cmake:567 (find_external_library)"
+      - "/opt/ros/jazzy/share/pcl_conversions/cmake/ament_cmake_export_dependencies-extras.cmake:21 (find_package)"
+      - "/opt/ros/jazzy/share/pcl_conversions/cmake/pcl_conversionsConfig.cmake:41 (include)"
+      - "CMakeLists.txt:10 (find_package)"
+    description: "The MPI test test_mpi for C in mode normal"
+    directories:
+      source: "/home/wyt/RC_planner/src/build/local_sensing_node/CMakeFiles/CMakeScratch/TryCompile-ghVUc8"
+      binary: "/home/wyt/RC_planner/src/build/local_sensing_node/CMakeFiles/CMakeScratch/TryCompile-ghVUc8"
+    cmakeVariables:
+      CMAKE_C_FLAGS: ""
+      CMAKE_C_FLAGS_DEBUG: "-g"
+      CMAKE_EXE_LINKER_FLAGS: ""
+      CMAKE_MODULE_PATH: "/usr/lib/x86_64-linux-gnu/cmake/vtk-9.1/patches/99;/usr/lib/x86_64-linux-gnu/cmake/vtk-9.1;/opt/ros/jazzy/share/fastrtps_cmake_module/cmake/Modules;/usr/lib/x86_64-linux-gnu/cmake/pcl/Modules"
+    buildResult:
+      variable: "MPI_RESULT_C_test_mpi_normal"
+      cached: true
+      stdout: |
+        Change Dir: '/home/wyt/RC_planner/src/build/local_sensing_node/CMakeFiles/CMakeScratch/TryCompile-ghVUc8'
+        
+        Run Build Command(s): /usr/bin/cmake -E env VERBOSE=1 /usr/bin/gmake -f Makefile cmTC_3671a/fast
+        gmake[1]: 进入目录“/home/wyt/RC_planner/src/build/local_sensing_node/CMakeFiles/CMakeScratch/TryCompile-ghVUc8”
+        /usr/bin/gmake  -f CMakeFiles/cmTC_3671a.dir/build.make CMakeFiles/cmTC_3671a.dir/build
+        gmake[2]: 进入目录“/home/wyt/RC_planner/src/build/local_sensing_node/CMakeFiles/CMakeScratch/TryCompile-ghVUc8”
+        Building C object CMakeFiles/cmTC_3671a.dir/test_mpi.c.o
+        /usr/bin/cc  -isystem /usr/lib/x86_64-linux-gnu/openmpi/include -isystem /usr/lib/x86_64-linux-gnu/openmpi/include/openmpi  -o CMakeFiles/cmTC_3671a.dir/test_mpi.c.o -c /home/wyt/RC_planner/src/build/local_sensing_node/CMakeFiles/CMakeScratch/TryCompile-ghVUc8/test_mpi.c
+        Linking C executable cmTC_3671a
+        /usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_3671a.dir/link.txt --verbose=1
+        /usr/bin/cc -L/usr/lib/x86_64-linux-gnu/openmpi/lib CMakeFiles/cmTC_3671a.dir/test_mpi.c.o -o cmTC_3671a  /usr/lib/x86_64-linux-gnu/libmpi.so 
+        gmake[2]: 离开目录“/home/wyt/RC_planner/src/build/local_sensing_node/CMakeFiles/CMakeScratch/TryCompile-ghVUc8”
+        gmake[1]: 离开目录“/home/wyt/RC_planner/src/build/local_sensing_node/CMakeFiles/CMakeScratch/TryCompile-ghVUc8”
+        
+      exitCode: 0
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "/usr/share/cmake-3.28/Modules/FindMPI.cmake:1278 (try_compile)"
+      - "/usr/share/cmake-3.28/Modules/FindMPI.cmake:1322 (_MPI_try_staged_settings)"
+      - "/usr/share/cmake-3.28/Modules/FindMPI.cmake:1645 (_MPI_check_lang_works)"
+      - "/usr/lib/x86_64-linux-gnu/cmake/vtk-9.1/VTK-vtk-module-find-packages.cmake:397 (find_package)"
+      - "/usr/lib/x86_64-linux-gnu/cmake/vtk-9.1/vtk-config.cmake:150 (include)"
+      - "/usr/lib/x86_64-linux-gnu/cmake/pcl/PCLConfig.cmake:275 (find_package)"
+      - "/usr/lib/x86_64-linux-gnu/cmake/pcl/PCLConfig.cmake:324 (find_VTK)"
+      - "/usr/lib/x86_64-linux-gnu/cmake/pcl/PCLConfig.cmake:570 (find_external_library)"
+      - "/opt/ros/jazzy/share/pcl_conversions/cmake/ament_cmake_export_dependencies-extras.cmake:21 (find_package)"
+      - "/opt/ros/jazzy/share/pcl_conversions/cmake/pcl_conversionsConfig.cmake:41 (include)"
+      - "CMakeLists.txt:10 (find_package)"
+    description: "The MPI test test_mpi for C in mode normal"
+    directories:
+      source: "/home/wyt/RC_planner/src/build/local_sensing_node/CMakeFiles/CMakeScratch/TryCompile-e2TmLw"
+      binary: "/home/wyt/RC_planner/src/build/local_sensing_node/CMakeFiles/CMakeScratch/TryCompile-e2TmLw"
+    cmakeVariables:
+      CMAKE_C_FLAGS: ""
+      CMAKE_C_FLAGS_DEBUG: "-g"
+      CMAKE_EXE_LINKER_FLAGS: ""
+      CMAKE_MODULE_PATH: "/usr/lib/x86_64-linux-gnu/cmake/vtk-9.1/patches/99;/usr/lib/x86_64-linux-gnu/cmake/vtk-9.1;/opt/ros/jazzy/share/fastrtps_cmake_module/cmake/Modules;/usr/lib/x86_64-linux-gnu/cmake/pcl/Modules"
+    buildResult:
+      variable: "MPI_RESULT_C_test_mpi_normal"
+      cached: true
+      stdout: |
+        Change Dir: '/home/wyt/RC_planner/src/build/local_sensing_node/CMakeFiles/CMakeScratch/TryCompile-e2TmLw'
+        
+        Run Build Command(s): /usr/bin/cmake -E env VERBOSE=1 /usr/bin/gmake -f Makefile cmTC_2c621/fast
+        gmake[1]: 进入目录“/home/wyt/RC_planner/src/build/local_sensing_node/CMakeFiles/CMakeScratch/TryCompile-e2TmLw”
+        /usr/bin/gmake  -f CMakeFiles/cmTC_2c621.dir/build.make CMakeFiles/cmTC_2c621.dir/build
+        gmake[2]: 进入目录“/home/wyt/RC_planner/src/build/local_sensing_node/CMakeFiles/CMakeScratch/TryCompile-e2TmLw”
+        Building C object CMakeFiles/cmTC_2c621.dir/test_mpi.c.o
+        /usr/bin/cc  -isystem /usr/lib/x86_64-linux-gnu/openmpi/include -isystem /usr/lib/x86_64-linux-gnu/openmpi/include/openmpi  -o CMakeFiles/cmTC_2c621.dir/test_mpi.c.o -c /home/wyt/RC_planner/src/build/local_sensing_node/CMakeFiles/CMakeScratch/TryCompile-e2TmLw/test_mpi.c
+        Linking C executable cmTC_2c621
+        /usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_2c621.dir/link.txt --verbose=1
+        /usr/bin/cc -L/usr/lib/x86_64-linux-gnu/openmpi/lib CMakeFiles/cmTC_2c621.dir/test_mpi.c.o -o cmTC_2c621  /usr/lib/x86_64-linux-gnu/libmpi.so 
+        gmake[2]: 离开目录“/home/wyt/RC_planner/src/build/local_sensing_node/CMakeFiles/CMakeScratch/TryCompile-e2TmLw”
+        gmake[1]: 离开目录“/home/wyt/RC_planner/src/build/local_sensing_node/CMakeFiles/CMakeScratch/TryCompile-e2TmLw”
+        
+      exitCode: 0
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "/usr/share/cmake-3.28/Modules/FindMPI.cmake:1278 (try_compile)"
+      - "/usr/share/cmake-3.28/Modules/FindMPI.cmake:1322 (_MPI_try_staged_settings)"
+      - "/usr/share/cmake-3.28/Modules/FindMPI.cmake:1645 (_MPI_check_lang_works)"
+      - "/usr/lib/x86_64-linux-gnu/cmake/vtk-9.1/VTK-vtk-module-find-packages.cmake:397 (find_package)"
+      - "/usr/lib/x86_64-linux-gnu/cmake/vtk-9.1/vtk-config.cmake:150 (include)"
+      - "/usr/lib/x86_64-linux-gnu/cmake/pcl/PCLConfig.cmake:275 (find_package)"
+      - "/usr/lib/x86_64-linux-gnu/cmake/pcl/PCLConfig.cmake:324 (find_VTK)"
+      - "/usr/lib/x86_64-linux-gnu/cmake/pcl/PCLConfig.cmake:567 (find_external_library)"
+      - "/opt/ros/jazzy/share/pcl_conversions/cmake/ament_cmake_export_dependencies-extras.cmake:21 (find_package)"
+      - "/opt/ros/jazzy/share/pcl_conversions/cmake/pcl_conversionsConfig.cmake:41 (include)"
+      - "CMakeLists.txt:10 (find_package)"
+    description: "The MPI test test_mpi for C in mode normal"
+    directories:
+      source: "/home/wyt/RC_planner/src/build/local_sensing_node/CMakeFiles/CMakeScratch/TryCompile-vmnZ7h"
+      binary: "/home/wyt/RC_planner/src/build/local_sensing_node/CMakeFiles/CMakeScratch/TryCompile-vmnZ7h"
+    cmakeVariables:
+      CMAKE_C_FLAGS: ""
+      CMAKE_C_FLAGS_DEBUG: "-g"
+      CMAKE_EXE_LINKER_FLAGS: ""
+      CMAKE_MODULE_PATH: "/usr/lib/x86_64-linux-gnu/cmake/vtk-9.1/patches/99;/usr/lib/x86_64-linux-gnu/cmake/vtk-9.1;/opt/ros/jazzy/share/fastrtps_cmake_module/cmake/Modules;/usr/lib/x86_64-linux-gnu/cmake/pcl/Modules"
+    buildResult:
+      variable: "MPI_RESULT_C_test_mpi_normal"
+      cached: true
+      stdout: |
+        Change Dir: '/home/wyt/RC_planner/src/build/local_sensing_node/CMakeFiles/CMakeScratch/TryCompile-vmnZ7h'
+        
+        Run Build Command(s): /usr/bin/cmake -E env VERBOSE=1 /usr/bin/gmake -f Makefile cmTC_12716/fast
+        gmake[1]: 进入目录“/home/wyt/RC_planner/src/build/local_sensing_node/CMakeFiles/CMakeScratch/TryCompile-vmnZ7h”
+        /usr/bin/gmake  -f CMakeFiles/cmTC_12716.dir/build.make CMakeFiles/cmTC_12716.dir/build
+        gmake[2]: 进入目录“/home/wyt/RC_planner/src/build/local_sensing_node/CMakeFiles/CMakeScratch/TryCompile-vmnZ7h”
+        Building C object CMakeFiles/cmTC_12716.dir/test_mpi.c.o
+        /usr/bin/cc  -isystem /usr/lib/x86_64-linux-gnu/openmpi/include -isystem /usr/lib/x86_64-linux-gnu/openmpi/include/openmpi  -o CMakeFiles/cmTC_12716.dir/test_mpi.c.o -c /home/wyt/RC_planner/src/build/local_sensing_node/CMakeFiles/CMakeScratch/TryCompile-vmnZ7h/test_mpi.c
+        Linking C executable cmTC_12716
+        /usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_12716.dir/link.txt --verbose=1
+        /usr/bin/cc -L/usr/lib/x86_64-linux-gnu/openmpi/lib CMakeFiles/cmTC_12716.dir/test_mpi.c.o -o cmTC_12716  /usr/lib/x86_64-linux-gnu/libmpi.so 
+        gmake[2]: 离开目录“/home/wyt/RC_planner/src/build/local_sensing_node/CMakeFiles/CMakeScratch/TryCompile-vmnZ7h”
+        gmake[1]: 离开目录“/home/wyt/RC_planner/src/build/local_sensing_node/CMakeFiles/CMakeScratch/TryCompile-vmnZ7h”
+        
+      exitCode: 0
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "/usr/share/cmake-3.28/Modules/FindMPI.cmake:1278 (try_compile)"
+      - "/usr/share/cmake-3.28/Modules/FindMPI.cmake:1322 (_MPI_try_staged_settings)"
+      - "/usr/share/cmake-3.28/Modules/FindMPI.cmake:1645 (_MPI_check_lang_works)"
+      - "/usr/lib/x86_64-linux-gnu/cmake/vtk-9.1/VTK-vtk-module-find-packages.cmake:397 (find_package)"
+      - "/usr/lib/x86_64-linux-gnu/cmake/vtk-9.1/vtk-config.cmake:150 (include)"
+      - "/usr/lib/x86_64-linux-gnu/cmake/pcl/PCLConfig.cmake:275 (find_package)"
+      - "/usr/lib/x86_64-linux-gnu/cmake/pcl/PCLConfig.cmake:324 (find_VTK)"
+      - "/usr/lib/x86_64-linux-gnu/cmake/pcl/PCLConfig.cmake:567 (find_external_library)"
+      - "/opt/ros/jazzy/share/pcl_conversions/cmake/ament_cmake_export_dependencies-extras.cmake:21 (find_package)"
+      - "/opt/ros/jazzy/share/pcl_conversions/cmake/pcl_conversionsConfig.cmake:41 (include)"
+      - "CMakeLists.txt:10 (find_package)"
+    description: "The MPI test test_mpi for C in mode normal"
+    directories:
+      source: "/home/wyt/RC_planner/src/build/local_sensing_node/CMakeFiles/CMakeScratch/TryCompile-4psxt7"
+      binary: "/home/wyt/RC_planner/src/build/local_sensing_node/CMakeFiles/CMakeScratch/TryCompile-4psxt7"
+    cmakeVariables:
+      CMAKE_C_FLAGS: ""
+      CMAKE_C_FLAGS_DEBUG: "-g"
+      CMAKE_EXE_LINKER_FLAGS: ""
+      CMAKE_MODULE_PATH: "/usr/lib/x86_64-linux-gnu/cmake/vtk-9.1/patches/99;/usr/lib/x86_64-linux-gnu/cmake/vtk-9.1;/opt/ros/jazzy/share/fastrtps_cmake_module/cmake/Modules;/usr/lib/x86_64-linux-gnu/cmake/pcl/Modules"
+    buildResult:
+      variable: "MPI_RESULT_C_test_mpi_normal"
+      cached: true
+      stdout: |
+        Change Dir: '/home/wyt/RC_planner/src/build/local_sensing_node/CMakeFiles/CMakeScratch/TryCompile-4psxt7'
+        
+        Run Build Command(s): /usr/bin/cmake -E env VERBOSE=1 /usr/bin/gmake -f Makefile cmTC_f5f99/fast
+        gmake[1]: 进入目录“/home/wyt/RC_planner/src/build/local_sensing_node/CMakeFiles/CMakeScratch/TryCompile-4psxt7”
+        /usr/bin/gmake  -f CMakeFiles/cmTC_f5f99.dir/build.make CMakeFiles/cmTC_f5f99.dir/build
+        gmake[2]: 进入目录“/home/wyt/RC_planner/src/build/local_sensing_node/CMakeFiles/CMakeScratch/TryCompile-4psxt7”
+        Building C object CMakeFiles/cmTC_f5f99.dir/test_mpi.c.o
+        /usr/bin/cc  -isystem /usr/lib/x86_64-linux-gnu/openmpi/include -isystem /usr/lib/x86_64-linux-gnu/openmpi/include/openmpi  -o CMakeFiles/cmTC_f5f99.dir/test_mpi.c.o -c /home/wyt/RC_planner/src/build/local_sensing_node/CMakeFiles/CMakeScratch/TryCompile-4psxt7/test_mpi.c
+        Linking C executable cmTC_f5f99
+        /usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_f5f99.dir/link.txt --verbose=1
+        /usr/bin/cc -L/usr/lib/x86_64-linux-gnu/openmpi/lib CMakeFiles/cmTC_f5f99.dir/test_mpi.c.o -o cmTC_f5f99  /usr/lib/x86_64-linux-gnu/libmpi.so 
+        gmake[2]: 离开目录“/home/wyt/RC_planner/src/build/local_sensing_node/CMakeFiles/CMakeScratch/TryCompile-4psxt7”
+        gmake[1]: 离开目录“/home/wyt/RC_planner/src/build/local_sensing_node/CMakeFiles/CMakeScratch/TryCompile-4psxt7”
+        
+      exitCode: 0
+...

@@ -1,3 +1,12 @@
+/**
+ * @file goal_tool.h
+ * 文件作用：声明把三维交互目标发布为普通位姿和带 ID 的目标消息。
+ * 调用关系：RViz 插件加载 Goal3DTool，Pose3DTool 完成交互后调用 onPoseSet()。
+ * 输入：RViz 固定坐标系下的位置（米）和偏航（弧度）。
+ * 输出：可配置 goal 话题及 /goal_with_id；当前目标无人机 ID 固定为 0。
+ * 运行模式：ROS 2 RViz2 插件，保留上游三维交互状态机。
+ * 主要依赖：rviz_common、rviz_rendering、Qt、rclcpp、geometry_msgs、quadrotor_msgs。
+ */
 /*
  * Copyright (c) 2012, Willow Garage, Inc.
  * All rights reserved.
@@ -33,16 +42,19 @@
 #ifndef Q_MOC_RUN  // See: https://bugreports.qt-project.org/browse/QTBUG-22829
 # include <QObject>
 
-# include <ros/ros.h>
+# include <rclcpp/rclcpp.hpp>
 
 # include "pose_tool.h"
+# include <geometry_msgs/msg/pose_stamped.hpp>
+# include <quadrotor_msgs/msg/goal_set.hpp>
+# include <rviz_common/properties/string_property.hpp>
 #endif
 
-namespace rviz
+namespace primitive_rviz
 {
-class Arrow;
-class DisplayContext;
-class StringProperty;
+
+
+
 
 class Goal3DTool: public Pose3DTool
 {
@@ -59,10 +71,11 @@ private Q_SLOTS:
   void updateTopic();
 
 private:
-  ros::NodeHandle nh_;
-  ros::Publisher pub_goal_, pub_droneID_goal_;
+  rclcpp::Node::SharedPtr nh_;
+  rclcpp::Publisher<geometry_msgs::msg::PoseStamped>::SharedPtr pub_goal_;
+  rclcpp::Publisher<quadrotor_msgs::msg::GoalSet>::SharedPtr pub_droneID_goal_;
 
-  StringProperty* topic_property_;
+  rviz_common::properties::StringProperty* topic_property_;
 };
 
 }

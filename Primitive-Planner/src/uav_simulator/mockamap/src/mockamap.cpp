@@ -1,3 +1,12 @@
+/**
+ * @file mockamap.cpp
+ * 文件作用：读取地图参数、调用生成算法并周期发布静态地图。
+ * 调用关系：mockamap_node 入口创建 Maps，调用 generate(type) 后进入发布循环。
+ * 输入：seed、type、resolution、x/y/z_length、update_freq；长度/分辨率为米。
+ * 输出：mock_map（PointCloud2）。
+ * 运行模式：ROS 2 仿真地图节点。
+ * 主要依赖：rclcpp、Maps、PCL、pcl_conversions、sensor_msgs。
+ */
 #include <cstdio>
 #define ROS_INFO(...) ((void)0)
 #include <rclcpp/rclcpp.hpp>

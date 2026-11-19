@@ -1,3 +1,12 @@
+/**
+ * @file comm_types.h
+ * 文件作用：定义飞控通信类型码和定点字段布局。
+ * 调用关系：encode_msgs.cpp 和 decode_msgs.cpp 使用这些结构体打包、解包。
+ * 输入：推力、姿态、增益和状态量；缩放因子见字段注释。
+ * 输出：SO3_CMD_INPUT、STATUS_DATA、OUTPUT_DATA 等协议结构。
+ * 运行模式：遗留飞控协议定义，当前 ROS 2 消息生成不编译编解码实现。
+ * 主要依赖：定宽整数类型及 C++ 结构体/位域。
+ */
 #ifndef __QUADROTOR_MSGS_COMM_TYPES_H__
 #define __QUADROTOR_MSGS_COMM_TYPES_H__
 

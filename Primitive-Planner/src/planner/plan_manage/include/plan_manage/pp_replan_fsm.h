@@ -1,16 +1,11 @@
-/*
- * 文件作用：ROS 2 Jazzy 规划与仿真组件，保留原运动基元算法。
- * 调用关系：由对应包的节点或库调用；输入输出见消息回调与发布接口。
- * 输入：ROS 2 消息、参数及运动基元文件（SI 单位，world 坐标系）。
- * 输出：规划轨迹、控制指令或可视化数据。
- * 运行模式：ROS 2 仿真/实机；依赖 rclcpp 和对应包的消息类型。
- */
-/*
- * 文件作用：ROS 2 Jazzy 规划与仿真组件，保留原运动基元算法。
- * 调用关系：由对应包的节点或库调用；输入输出见消息回调与发布接口。
- * 输入：ROS 2 消息、参数及运动基元文件（SI 单位，world 坐标系）。
- * 输出：规划轨迹、控制指令或可视化数据。
- * 运行模式：ROS 2 仿真/实机；依赖 rclcpp 和对应包的消息类型。
+/**
+ * @file pp_replan_fsm.h
+ * 文件作用：声明重规划状态机、消息回调和轨迹缓存。
+ * 调用关系：primitive_planner_node 创建 PPReplanFSM；其调用 PPPlannerManager 筛选基元。
+ * 输入：里程计、触发、目标、群体轨迹和轨迹服务反馈；位置使用世界系，米、秒制。
+ * 输出：基元选择、心跳、停车、偏航及多项式轨迹消息接口。
+ * 运行模式：ROS 2；共享内存通信由 USE_SHARED_MEMORY 编译开关选择。
+ * 主要依赖：rclcpp、Eigen、planner_manager、traj_utils、quadrotor_msgs。
  */
 #ifndef _PP_REPLAN_FSM_H_
 #define _PP_REPLAN_FSM_H_
@@ -111,6 +106,9 @@ namespace primitive_planner
             rclcpp::Time start_time_;
 
             bool enable_fail_safe_, flag_escape_emergency_;
+            bool trigger_pending_{false}, target_yaw_pending_{false};
+            rclcpp::Time trigger_ready_time_{0, 0, RCL_ROS_TIME};
+            double target_yaw_{0.0};
             
             // crash recovery
             rclcpp::Time crash_rec_start_time_;

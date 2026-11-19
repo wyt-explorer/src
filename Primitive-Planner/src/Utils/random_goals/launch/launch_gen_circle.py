@@ -1,10 +1,20 @@
+"""文件作用：生成 circle 布局的目标参数 XML 启动文件。
+调用关系：离线运行脚本；生成配置供 random_goals_node 使用。
+输入：命令行目标数量；在半径 4 米、高度 1 米的圆周上采样目标。
+输出：脚本 fname 指定路径的 random_goals.launch.xml，包含 goalN 坐标参数。
+运行模式：离线 Python 工具，生成的是 ROS 2 launch XML。
+主要依赖：Python 标准库、NumPy。
+"""
 import sys
+from pathlib import Path
+sys.path.insert(0, str(Path(__file__).resolve().parents[2] / "scripts"))
+from ros2_launch_xml import convert_file
 import numpy as np
 import os
 import math
 
 script_dir = os.path.dirname(os.path.abspath(__file__))
-fname = script_dir + "/../Utils/random_goals/launch/random_goals.launch"
+fname = str(Path(script_dir) / "random_goals.launch.xml")
 def main(argv):
     goal_num_in = int(argv[1])
     height = 1.0
@@ -27,6 +37,7 @@ def main(argv):
     file.write(str_tail)
     
     file.close()
+    convert_file(fname)
 
 if __name__ == '__main__':
     main(sys.argv)

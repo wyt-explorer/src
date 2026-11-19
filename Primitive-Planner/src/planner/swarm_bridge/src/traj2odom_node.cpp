@@ -1,3 +1,12 @@
+/**
+ * @file traj2odom_node.cpp
+ * 文件作用：重建接收到的五阶 MINCO 轨迹，采样其他无人机当前状态。
+ * 调用关系：订阅广播轨迹，重建 poly_traj::Trajectory 后周期发布里程计。
+ * 输入：/broadcast_traj_to_planner 的 MINCOTraj，包含无人机 ID、起始时间和轨迹参数。
+ * 输出：/others_odom；轨迹位置、速度及由运动方向得到的偏航姿态。
+ * 运行模式：遗留 ROS 1 工具，不属于当前 ROS 2 基元闭环。
+ * 主要依赖：roscpp、traj_utils/MINCOTraj、optimizer/poly_traj_utils、nav_msgs。
+ */
 #include <ros/ros.h>
 #include <stdio.h>
 #include <stdlib.h>

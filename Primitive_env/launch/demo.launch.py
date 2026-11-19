@@ -1,3 +1,10 @@
+"""文件作用：启动地图、起终点标记和 RViz 点击触发转换节点。
+调用关系：ros2 launch primitive_env demo.launch.py 加载本文件并创建三个节点。
+输入：map_file 参数，默认 map_01.yaml。
+输出：LaunchDescription；启动全局地图、标记与 /traj_start_trigger 发布链路。
+运行模式：ROS 2 地图演示，不启动规划器和轨迹执行闭环。
+主要依赖：launch、launch_ros、ament_index_python、primitive_env。
+"""
 from launch import LaunchDescription
 from launch.actions import DeclareLaunchArgument
 from launch.substitutions import LaunchConfiguration, PathJoinSubstitution

@@ -1,20 +1,16 @@
-/*
- * 文件作用：ROS 2 Jazzy 规划与仿真组件，保留原运动基元算法。
- * 调用关系：由对应包的节点或库调用；输入输出见消息回调与发布接口。
- * 输入：ROS 2 消息、参数及运动基元文件（SI 单位，world 坐标系）。
- * 输出：规划轨迹、控制指令或可视化数据。
- * 运行模式：ROS 2 仿真/实机；依赖 rclcpp 和对应包的消息类型。
- */
-/*
- * 文件作用：ROS 2 Jazzy 规划与仿真组件，保留原运动基元算法。
- * 调用关系：由对应包的节点或库调用；输入输出见消息回调与发布接口。
- * 输入：ROS 2 消息、参数及运动基元文件（SI 单位，world 坐标系）。
- * 输出：规划轨迹、控制指令或可视化数据。
- * 运行模式：ROS 2 仿真/实机；依赖 rclcpp 和对应包的消息类型。
+/**
+ * @file pp_replan_fsm.cpp
+ * 文件作用：实现目标等待、基元规划、轨迹执行和停车恢复的状态切换。
+ * 调用关系：primitive_planner_node 调用 init()；10 ms 定时器驱动状态机，planPrimitive() 调用管理器筛选基元。
+ * 输入：odom_world、触发、目标、位置指令、群体轨迹及执行反馈；世界系，米、秒制。
+ * 输出：planning/ 下的基元选择、心跳、全局目标、停车、偏航和多项式轨迹消息。
+ * 运行模式：ROS 2；轨迹可经话题或编译期开关启用的共享内存交换。
+ * 主要依赖：PPPlannerManager、PlanningVisualization、rclcpp、Eigen、traj_utils。
  */
 #include <thread>
 #include <chrono>
 #include <functional>
+#include <rclcpp/create_timer.hpp>
 #include <cstdio>
 #include <plan_manage/pp_replan_fsm.h>
 #include <plan_manage/shared_memory.h>
@@ -56,6 +52,8 @@ PPReplanFSM::~PPReplanFSM()
 void PPReplanFSM::init(rclcpp::Node::SharedPtr nh)
 {
     nh_ = nh;
+    rclcpp::executors::SingleThreadedExecutor init_executor;
+    init_executor.add_node(nh_);
     have_odom_ = false;
     have_target_ = false;
     flag_escape_emergency_ = true;
@@ -121,16 +119,17 @@ void PPReplanFSM::init(rclcpp::Node::SharedPtr nh)
     int count = 0;
     while (rclcpp::ok() && count++ < 3000)
     {
-      rclcpp::spin_some(nh_);
+      if (rclcpp::ok()) init_executor.spin_some();
       std::this_thread::sleep_for(std::chrono::milliseconds(1));
     }
     while (rclcpp::ok() && !have_odom_)
     {
-      rclcpp::spin_some(nh_);
+      if (rclcpp::ok()) init_executor.spin_some();
       std::this_thread::sleep_for(std::chrono::milliseconds(1));
     }
 
-    exec_timer_ = nh->create_wall_timer(std::chrono::duration<double>(0.01), std::bind(&PPReplanFSM::execFSMCallback, this));
+    if (!rclcpp::ok()) return;
+    exec_timer_ = rclcpp::create_timer(nh, nh->get_clock(), std::chrono::duration<double>(0.01), std::bind(&PPReplanFSM::execFSMCallback, this));
 
     // global goal
     if (target_type_ == 1)
@@ -182,7 +181,7 @@ void PPReplanFSM::init(rclcpp::Node::SharedPtr nh)
             if(abs(diff) < 0.1)
               break;
 
-            rclcpp::spin_some(nh_);
+            if (rclcpp::ok()) init_executor.spin_some();
             std::this_thread::sleep_for(std::chrono::milliseconds(10));
           }
           have_target_ = true;
@@ -198,7 +197,7 @@ void PPReplanFSM::waypointCallback(const quadrotor_msgs::msg::GoalSet::SharedPtr
   if ( msg->drone_id != planner_manager_->drone_id )
     return;
 
-  fprintf(stderr, "%s\n", "Received goal: %f, %f, %f");
+  RCLCPP_INFO(nh_->get_logger(), "Received goal: %f, %f, %f", msg->goal[0], msg->goal[1], msg->goal[2]);
 
   waypoint_num_ = 1;
   goal_id_ = 0;
@@ -215,16 +214,20 @@ void PPReplanFSM::waypointCallback(const quadrotor_msgs::msg::GoalSet::SharedPtr
 
   Eigen::Vector3d dir_to_goal = global_goal_ - odom_pos_;
   double yaw_des = atan2(dir_to_goal(1), dir_to_goal(0));
-  // Executor callbacks must not spin the same node recursively. The trajectory
-  // server applies yaw commands asynchronously while odometry continues arriving.
+  // 对齐上游“等待朝向再规划”的顺序，用定时器继续处理而不在回调内递归 spin。
   if (exec_state_ == WAIT_TARGET) {
+    target_yaw_ = yaw_des;
+    target_yaw_pending_ = true;
+    have_target_ = false;
     std_msgs::msg::Float64 yaw_command;
-    yaw_command.data = yaw_des;
+    yaw_command.data = target_yaw_;
     yaw_cmd_pub_->publish(yaw_command);
+  } else {
+    have_target_ = true;
+    have_trigger_ = true;
+    changeFSMExecState(GEN_NEW_TRAJ, "NEW_GOAL");
   }
-  have_target_ = true;
-  have_trigger_ = true;
-  changeFSMExecState(GEN_NEW_TRAJ, "NEW_GOAL");
+
 }
 
 /** 接收 world 下的启动信号；保持回调非阻塞以继续处理里程计。 */
@@ -237,14 +240,16 @@ void PPReplanFSM::triggerCallback(const geometry_msgs::msg::PoseStamped::SharedP
     // computing_time_logger_.appendData("timestamp,computing_time");
 
     
-    // Trigger immediately; keep the executor available for sensor callbacks.
-    have_trigger_ = true;
+    // 上游触发后等待 2 秒；以截止时间实现同等顺序，保持传感器回调可执行。
+    trigger_pending_ = true;
+    trigger_ready_time_ = nh_->now() + rclcpp::Duration::from_seconds(2.0);
     have_log_files_ = true;
-    std::cout << "Triggered!" << std::endl;
+    std::cout << "Trigger received; waiting 2 seconds." << std::endl;
 }
 
 void PPReplanFSM::RecvBroadcastPrimitiveCallback(const traj_utils::msg::SwarmPrimitiveTraj::ConstSharedPtr &msg)
 {
+    if (msg->drone_id < 0 || msg->drone_id >= TOTAL_DRONE_NUM_) return;
     const size_t recv_id = (size_t)msg->drone_id;
     if ((int)recv_id == planner_manager_->drone_id) // myself
       return;
@@ -280,7 +285,7 @@ void PPReplanFSM::RecvBroadcastPrimitiveCallback(const traj_utils::msg::SwarmPri
       std::vector<Eigen::Vector3d> traj_pos;
       double traj_duration;
       int vel_id = msg->vel_id;
-      readLocalTrajPos(start_pos, vel_id, Rwv, path_id, traj_pos, traj_duration);
+      if (!readLocalTrajPos(start_pos, vel_id, Rwv, path_id, traj_pos, traj_duration)) return;
       if ( vel_id != msg->vel_id ){
         fprintf(stderr, "%s\n", "vel_id has been changed! Should not happen!");
       }
@@ -313,7 +318,7 @@ void PPReplanFSM::RecvBroadcastPrimitiveCallback(const traj_utils::msg::SwarmPri
 bool PPReplanFSM::checkCollision(int recv_id)
 {
   // my first planning has not started
-  if(myself_traj_.start_time < 1e9)
+  if (myself_traj_.traj_pos.empty())
     return false;
   // invalid trajectory
   if(planner_manager_->swarm_traj[recv_id].drone_id != recv_id)
@@ -335,7 +340,11 @@ bool PPReplanFSM::checkCollision(int recv_id)
   {
     // precise approach: interpolation pos by time [to be realized]
     // pos resolution: 10ms; 1000/10
-    if((myself_traj_.traj_pos[round((t - my_traj_start_time) * 100)] - planner_manager_->swarm_traj[recv_id].traj_pos[round((t - other_traj_start_time) * 100)]).norm() < planner_manager_->swarm_clearence_){
+    const auto& other = planner_manager_->swarm_traj[recv_id].traj_pos;
+    if (other.empty()) return false;
+    const auto my_index = std::min(myself_traj_.traj_pos.size() - 1, static_cast<size_t>(std::max(0.0, round((t - my_traj_start_time) * 100))));
+    const auto other_index = std::min(other.size() - 1, static_cast<size_t>(std::max(0.0, round((t - other_traj_start_time) * 100))));
+    if ((myself_traj_.traj_pos[my_index] - other[other_index]).norm() < planner_manager_->swarm_clearence_){
       return true;
     }
   }
@@ -348,7 +357,7 @@ bool PPReplanFSM::readLocalTrajPos(Eigen::Vector3d& start_pos, int& vel_id, Eige
 {
   int best_path_id;
 
-  if ( vel_id >= primitve_pos_.size() )
+  if (vel_id < 0 || path_id.empty() || vel_id >= static_cast<int>(primitve_pos_.size()))
   {
     fprintf(stderr, "%s\n", "vel_id >= primitve_pos_.size()!");
     return false;
@@ -358,7 +367,7 @@ bool PPReplanFSM::readLocalTrajPos(Eigen::Vector3d& start_pos, int& vel_id, Eige
 
   int idx = 0;
   while(true){
-    if (path_id[idx] >= primitve_pos_[vel_id].size()) {
+    if (path_id[idx] < 0 || path_id[idx] >= static_cast<int>(primitve_pos_[vel_id].size())) {
       idx++;
     }
     else{
@@ -565,6 +574,7 @@ void PPReplanFSM::odometryCallback(const nav_msgs::msg::Odometry::ConstSharedPtr
 
 void PPReplanFSM::pathEndCallback(const std_msgs::msg::Float64MultiArray::SharedPtr msg)
 {
+    if (msg->data.size() < 3) return;
     select_path_end_last_ = select_path_end_;
 
     select_path_end_(0) = msg->data[0];
@@ -588,6 +598,20 @@ void PPReplanFSM::execFSMCallback()
     // The single-threaded executor prevents concurrent FSM callbacks.
     std_msgs::msg::Empty heartbeat_msg;
     heartbeat_pub_->publish(heartbeat_msg);
+    if (trigger_pending_ && nh_->now() >= trigger_ready_time_) {
+      trigger_pending_ = false;
+      have_trigger_ = true;
+      std::cout << "Triggered!" << std::endl;
+    }
+    if (target_yaw_pending_) {
+      if (std::abs(yaw_diff(odom_yaw_, target_yaw_)) < 0.1) {
+        target_yaw_pending_ = false;
+        have_target_ = true;
+        have_trigger_ = true;
+        changeFSMExecState(GEN_NEW_TRAJ, "NEW_GOAL");
+      }
+    }
+
 
     static int fsm_num = 0;
     fsm_num++;
@@ -795,7 +819,7 @@ void PPReplanFSM::execFSMCallback()
         {
           yaw_cmd_count_ = 0;
           changeFSMExecState(EXEC_TRAJ, "CRASH");
-          fprintf(stderr, "%s\n", "Recover from crash! id=%d, crash_rec_stage_=1");
+          RCLCPP_INFO(nh_->get_logger(), "Recover from crash! id=%d, crash_rec_stage_=1", planner_manager_->drone_id);
         }
         else if ( !flag_pub_first_yaw_ || fabs(yaw_diff(odom_yaw_, final_yaw_des_)) < 0.05 )
         {
@@ -829,7 +853,7 @@ void PPReplanFSM::execFSMCallback()
           if ((latest_safe_pt_ - odom_pos_).norm() < 0.01)
           {
             flag_wait_crash_rec_ = false;
-            fprintf(stderr, "%s\n", "Recover from crash! id=%d, latest_safe_pt_=(%f, %f, %f)");
+            RCLCPP_INFO(nh_->get_logger(), "Recover from crash! id=%d, latest_safe_pt_=(%f, %f, %f)", planner_manager_->drone_id, latest_safe_pt_(0), latest_safe_pt_(1), latest_safe_pt_(2));
             changeFSMExecState(GEN_NEW_TRAJ, "FSM");
           }
         }
@@ -842,7 +866,7 @@ void PPReplanFSM::execFSMCallback()
       }
       else
       {
-        fprintf(stderr, "%s\n", "crash_rec_stage_=%d, have_latest_safe_pt_=%d !!!");
+        RCLCPP_ERROR(nh_->get_logger(), "crash_rec_stage_=%d, have_latest_safe_pt_=%d !!!", crash_rec_stage_, have_latest_safe_pt_);
       }
       
     }
@@ -905,7 +929,7 @@ bool PPReplanFSM::planPrimitive(bool first_plan, double xV_offset /*= 0.0*/ )
       if (!swarm_traj_ptr_[i].first)
       {
 
-        if ( swarm_traj_ptr_[i].second.drone_id != -1 && std::abs(swarm_traj_ptr_[i].second.start_time.seconds() - planner_manager_->swarm_traj[i].start_time) > 0.001 )
+        if ( swarm_traj_ptr_[i].second.drone_id != -1 && std::abs(rclcpp::Time(swarm_traj_ptr_[i].second.start_time).seconds() - planner_manager_->swarm_traj[i].start_time) > 0.001 )
         {
           traj_utils::msg::SwarmPrimitiveTraj::SharedPtr traj_ptr = std::make_shared<traj_utils::msg::SwarmPrimitiveTraj>();
           std::memcpy(traj_ptr.get(), &(swarm_traj_ptr_[i].second), sizeof(traj_utils::msg::SwarmPrimitiveTraj));

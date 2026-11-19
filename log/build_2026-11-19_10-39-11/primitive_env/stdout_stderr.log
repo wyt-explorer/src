@@ -1,0 +1,40 @@
+-- Found ament_cmake: 2.5.6 (/opt/ros/jazzy/share/ament_cmake/cmake)
+-- Found rclpy: 7.1.12 (/opt/ros/jazzy/share/rclpy/cmake)
+-- Found sensor_msgs: 5.3.8 (/opt/ros/jazzy/share/sensor_msgs/cmake)
+-- Found rosidl_generator_c: 4.6.9 (/opt/ros/jazzy/share/rosidl_generator_c/cmake)
+-- Found rosidl_generator_cpp: 4.6.9 (/opt/ros/jazzy/share/rosidl_generator_cpp/cmake)
+-- Using all available rosidl_typesupport_c: rosidl_typesupport_fastrtps_c;rosidl_typesupport_introspection_c
+-- Using all available rosidl_typesupport_cpp: rosidl_typesupport_fastrtps_cpp;rosidl_typesupport_introspection_cpp
+-- Found visualization_msgs: 5.3.8 (/opt/ros/jazzy/share/visualization_msgs/cmake)
+-- Configuring done (1.0s)
+-- Generating done (0.0s)
+-- Build files have been written to: /home/wyt/RC_planner/src/build/primitive_env
+-- Install configuration: "Release"
+-- Up-to-date: /home/wyt/RC_planner/src/install/primitive_env/lib/primitive_env/map_publisher.py
+-- Up-to-date: /home/wyt/RC_planner/src/install/primitive_env/lib/primitive_env/waypoint_publisher.py
+-- Up-to-date: /home/wyt/RC_planner/src/install/primitive_env/lib/primitive_env/rviz_click_trigger.py
+-- Up-to-date: /home/wyt/RC_planner/src/install/primitive_env/share/primitive_env/launch
+-- Installing: /home/wyt/RC_planner/src/install/primitive_env/share/primitive_env/launch/demo.launch
+-- Up-to-date: /home/wyt/RC_planner/src/install/primitive_env/share/primitive_env/launch/demo.launch.py
+-- Up-to-date: /home/wyt/RC_planner/src/install/primitive_env/share/primitive_env/launch/__pycache__
+-- Installing: /home/wyt/RC_planner/src/install/primitive_env/share/primitive_env/launch/__pycache__/demo.launch.cpython-38.pyc
+-- Installing: /home/wyt/RC_planner/src/install/primitive_env/share/primitive_env/launch/demo_env.launch
+-- Up-to-date: /home/wyt/RC_planner/src/install/primitive_env/share/primitive_env/map
+-- Installing: /home/wyt/RC_planner/src/install/primitive_env/share/primitive_env/map/map_01.yaml
+-- Up-to-date: /home/wyt/RC_planner/src/install/primitive_env/share/primitive_env/rviz
+-- Up-to-date: /home/wyt/RC_planner/src/install/primitive_env/share/primitive_env/rviz/demo.rviz
+-- Up-to-date: /home/wyt/RC_planner/src/install/primitive_env/share/ament_index/resource_index/package_run_dependencies/primitive_env
+-- Up-to-date: /home/wyt/RC_planner/src/install/primitive_env/share/ament_index/resource_index/parent_prefix_path/primitive_env
+-- Installing: /home/wyt/RC_planner/src/install/primitive_env/share/primitive_env/environment/ament_prefix_path.sh
+-- Up-to-date: /home/wyt/RC_planner/src/install/primitive_env/share/primitive_env/environment/ament_prefix_path.dsv
+-- Installing: /home/wyt/RC_planner/src/install/primitive_env/share/primitive_env/environment/path.sh
+-- Up-to-date: /home/wyt/RC_planner/src/install/primitive_env/share/primitive_env/environment/path.dsv
+-- Up-to-date: /home/wyt/RC_planner/src/install/primitive_env/share/primitive_env/local_setup.bash
+-- Up-to-date: /home/wyt/RC_planner/src/install/primitive_env/share/primitive_env/local_setup.sh
+-- Up-to-date: /home/wyt/RC_planner/src/install/primitive_env/share/primitive_env/local_setup.zsh
+-- Up-to-date: /home/wyt/RC_planner/src/install/primitive_env/share/primitive_env/local_setup.dsv
+-- Up-to-date: /home/wyt/RC_planner/src/install/primitive_env/share/primitive_env/package.dsv
+-- Up-to-date: /home/wyt/RC_planner/src/install/primitive_env/share/ament_index/resource_index/packages/primitive_env
+-- Up-to-date: /home/wyt/RC_planner/src/install/primitive_env/share/primitive_env/cmake/primitive_envConfig.cmake
+-- Up-to-date: /home/wyt/RC_planner/src/install/primitive_env/share/primitive_env/cmake/primitive_envConfig-version.cmake
+-- Up-to-date: /home/wyt/RC_planner/src/install/primitive_env/share/primitive_env/package.xml

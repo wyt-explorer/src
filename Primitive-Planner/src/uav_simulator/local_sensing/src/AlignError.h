@@ -1,3 +1,12 @@
+/**
+ * @file AlignError.h
+ * 文件作用：构造相机与激光雷达位姿对齐的六维自动微分残差。
+ * 调用关系：调用方通过 AlignError::Create() 创建 Ceres 代价函数。
+ * 输入：两组位姿观测及待估世界/传感器外参；四元数存储为 x/y/z/w。
+ * 输出：四元数差的虚部和三维平移差组成的残差。
+ * 运行模式：C++ 标定辅助头文件，无独立节点入口。
+ * 主要依赖：Eigen、Ceres AutoDiff。
+ */
 #include <Eigen/Eigen>
 #include <ceres/ceres.h>
 

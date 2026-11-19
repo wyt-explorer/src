@@ -1,75 +1,49 @@
-import numpy as np
-import os
-import sys
+#!/usr/bin/env python3
+"""文件作用：生成上游圆周位置交换演示的 ROS 2 启动入口。
+调用关系：run_swarm.sh 或命令行调用，入口转交 swarm.launch.py 生成逐机节点。
+输入：命令行无人机数量；半径按上游 N/π 米计算。
+输出：plan_manage/launch/swarm.launch 与 swarm.launch.xml。
+运行模式：离线 Python 3，不启动 ROS 节点或修改 Primitive_env。
+主要依赖：pathlib、argparse、math。
+"""
+import argparse
+import math
+from pathlib import Path
+
 
 def generate_launch_file(start_num, end_num, total_num, radius, obs_density, output_file):
-    
-    obs_map_width = (radius - 1.0) / 1.414 * 2
-    with open(output_file, 'w') as file:
-        file.write('<launch>\n\n')
-        file.write('    <arg name="map_size_x" value="{}"/>\n'.format((radius + 10.0) * 2))
-        file.write('    <arg name="map_size_y" value="{}"/>\n'.format((radius + 10.0) * 2))
-        file.write('    <arg name="map_size_z" value="3.0"/>\n')
-        file.write('    <arg name="odom_topic" value="visual_slam/odom" />\n')
-        file.write('\n')
-        file.write('    <!-- swarm topic transmitter bridge-->\n')
-        file.write('    <include file="$(find swarm_bridge)/launch/bridge_udp.launch">\n')
-        file.write('    <arg name="drone_id" value="0"/>\n')
-        file.write('    <arg name="broadcast_ip" value="127.0.0.255"/>\n')
-        file.write('    </include> \n')
-        file.write('\n')
-        file.write('    <!-- map --> \n')
-        file.write('	<node pkg ="map_generator" name ="random_forest" type ="random_forest" output = "screen">\n')
-        file.write('        <param name="map/x_size"     value="{}"/>\n'.format(obs_map_width))
-        file.write('        <param name="map/y_size"     value="{}"/>\n'.format(obs_map_width))
-        file.write('        <param name="map/z_size"     value="3.0" />\n')
-        file.write('        <param name="map/resolution" value="0.1"/>\n')
-        file.write('        <param name="map/obs_num"    value="{}"/>\n'.format(obs_map_width * obs_map_width * obs_density / 2.0))
-        file.write('        <param name="ObstacleShape/lower_rad" value="0.2"/>\n')
-        file.write('        <param name="ObstacleShape/upper_rad" value="0.5"/>\n')
-        file.write('        <param name="ObstacleShape/lower_hei" value="0.0"/>\n')
-        file.write('        <param name="ObstacleShape/upper_hei" value="3.0"/>\n')
-        file.write('        <param name="map/circle_num" value="{}"/>\n'.format(obs_map_width * obs_map_width * obs_density / 2.0))
-        file.write('        <param name="ObstacleShape/radius_l" value="0.7"/>\n')
-        file.write('        <param name="ObstacleShape/radius_h" value="0.5"/>\n')
-        file.write('        <param name="ObstacleShape/z_l" value="0.7"/>\n')
-        file.write('        <param name="ObstacleShape/z_h" value="0.8"/>\n')
-        file.write('        <param name="ObstacleShape/theta" value="0.5"/>\n')
-        file.write('        <param name="pub_rate"   value="1.0"/>\n')
-        file.write('        <param name="min_distance" value="0.8"/>\n')
-        file.write('    </node> \n')
-        file.write('\n')
-        file.write('    <node name="rviz" pkg="rviz" type="rviz" args="-d $(find primitive_planner)/launch/{}.rviz" required="true" />\n'.format("verbose" if total_num <= 40 else "drone_1000"))
-        file.write('\n')
-    
-        step = 2 * np.pi / total_num
-        for i in range(start_num, end_num + 1):
-            angle = i * step
-            init_x = np.cos(angle) * radius
-            init_y = np.sin(angle) * radius
-            file.write('    <include file="$(find primitive_planner)/launch/run_in_sim.xml">\n')
-            file.write('        <arg name="drone_id"   value="{}"/>\n'.format(i))
-            file.write('        <arg name="init_x"     value="{}"/>\n'.format(init_x))
-            file.write('        <arg name="init_y"     value="{}"/>\n'.format(init_y))
-            file.write('        <arg name="init_z"     value="0.5"/>\n')
-            file.write('        <arg name="target0_x"   value="{}"/>\n'.format(-init_x))
-            file.write('        <arg name="target0_y"   value="{}"/>\n'.format(-init_y))
-            file.write('        <arg name="target0_z"   value="0.5"/>\n')
-            file.write('        <arg name="map_size_x" value="$(arg map_size_x)"/>\n')
-            file.write('        <arg name="map_size_y" value="$(arg map_size_y)"/>\n')
-            file.write('        <arg name="map_size_z" value="$(arg map_size_z)"/>\n')
-            file.write('        <arg name="odom_topic" value="$(arg odom_topic)"/>\n')
-            file.write('    </include>\n')
-        
-        file.write('</launch>')
-        
-        
-if __name__ == "__main__":
-        
-    if len(sys.argv) >= 2:
-        drone_num = int(sys.argv[1])
-    else:
-        drone_num = 20
-    radius = drone_num / 2.0 / np.pi * 2.0
-    launch_dir = os.path.dirname(os.path.abspath(__file__)) + '/../planner/plan_manage/launch/'
-    generate_launch_file(0, drone_num - 1, drone_num, radius, 1.0, launch_dir + 'swarm.launch')
+    """兼容上游生成函数；完整机群使用相同 ID、半径和障碍密度。"""
+    if start_num != 0 or end_num != total_num - 1:
+        raise ValueError('start_num/end_num must cover the complete swarm')
+    if not 1 <= total_num <= 1000 or radius <= 0 or obs_density < 0:
+        raise ValueError('invalid swarm layout')
+    content = f'''<launch>
+  <arg name="rviz" default="true"/>
+  <include file="$(find-pkg-share primitive_planner)/launch/swarm.launch.py">
+    <arg name="drone_num" value="{total_num}"/>
+    <arg name="radius" value="{radius}"/>
+    <arg name="obs_density" value="{obs_density}"/>
+    <arg name="rviz" value="$(var rviz)"/>
+  </include>
+</launch>
+'''
+    output = Path(output_file)
+    output.write_text(content)
+    if output.suffix == '.launch':
+        output.with_suffix('.launch.xml').write_text(content)
+
+
+def main():
+    parser = argparse.ArgumentParser()
+    parser.add_argument('drone_num', nargs='?', type=int, default=20)
+    source_output = Path(__file__).resolve().parents[1] / 'planner/plan_manage/launch/swarm.launch'
+    if not source_output.parent.is_dir():
+        from ament_index_python.packages import get_package_share_directory
+        source_output = Path(get_package_share_directory('primitive_planner')) / 'launch/swarm.launch'
+    parser.add_argument('--output', type=Path, default=source_output)
+    args = parser.parse_args()
+    generate_launch_file(0, args.drone_num - 1, args.drone_num, args.drone_num / math.pi, 1.0, args.output)
+
+
+if __name__ == '__main__':
+    main()

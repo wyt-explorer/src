@@ -17,4 +17,5 @@ ament_target_dependencies(odom_visualization rclcpp nav_msgs sensor_msgs geometr
 target_link_libraries(odom_visualization ${ARMADILLO_LIBRARIES})
 install(TARGETS odom_visualization DESTINATION lib/${PROJECT_NAME})
 install(PROGRAMS src/rotate_tf_for_vis.py DESTINATION lib/${PROJECT_NAME})
+install(DIRECTORY meshes launch DESTINATION share/${PROJECT_NAME})
 ament_package()

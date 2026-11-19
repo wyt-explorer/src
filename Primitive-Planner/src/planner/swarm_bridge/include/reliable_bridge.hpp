@@ -1,24 +1,15 @@
 /**
  * @file reliable_bridge.hpp
- * @author Haojia Li (wisderek@stumail.neu.edu.cn)
- * @brief Reliable bridge for ros data transfer in unstable network.
- * It will estiblish the connections as peer to peer mode.
- * It will reconnect each other autonomously.
- * It can guarantee the data transfer to the device in the strict order.
- * It has a queue for sending data asynchronously. 
- * 
- * Note: This program relies on ZMQ amd ZMQPP.
- * sudo apt install libzmqpp-dev
- * 
- * Core Idea: It would create the sending and receving thread for each devices and processing asynchronously.
- * The index number would correspond to the resource for one device.
- *       
- * @version 0.1
- * @date 2021-08-11
- * 
- * @copyright Copyright (c) 2021
- * 
+ * 文件作用：封装对等网络连接、异步发送队列与接收回调分发。
+ * 调用关系：bridge_node_tcp.cpp 创建 ReliableBridge，通过模板接口发送和接收 ROS 消息。
+ * 输入：对端地址、设备 ID、话题名及 ROS 1 序列化消息。
+ * 输出：有序发送的数据包及收到消息后的注册回调。
+ * 运行模式：遗留 ROS 1 网络通信库，每个对端使用收发线程。
+ * 主要依赖：roscpp serialization、ZMQ/zmqpp、Boost、C++ 线程同步。
  */
+// Author: Haojia Li (wisderek@stumail.neu.edu.cn)
+// Version 0.1, 2021-08-11; Copyright (c) 2021.
+
 #ifndef __RELIABLE_BRIDGE__
 #define __RELIABLE_BRIDGE__
 #include "zmq.hpp"

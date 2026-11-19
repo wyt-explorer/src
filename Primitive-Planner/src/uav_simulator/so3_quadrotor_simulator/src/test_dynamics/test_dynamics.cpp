@@ -1,3 +1,12 @@
+/**
+ * @file test_dynamics.cpp
+ * 文件作用：用悬停转速初始化四旋翼并循环积分，检查动力学输出。
+ * 调用关系：独立 main() 创建 Quadrotor，按 0.001 秒步长调用模型。
+ * 输入：模型参数、悬停转速及测试内设置的高度目标和外力。
+ * 输出：标准输出中的仿真状态，以及标准错误流中的悬停转速和计时。
+ * 运行模式：独立 C++ 动力学调试程序，当前 CMake 未定义此测试目标。
+ * 主要依赖：Quadrotor 动力学库、Eigen。
+ */
 #include "quadrotor_simulator/Quadrotor.h"
 #include <Eigen/Geometry>
 

@@ -1,3 +1,12 @@
+/**
+ * @file shared_memory.h
+ * 文件作用：封装 System V 共享内存的创建、挂接、分离和删除。
+ * 调用关系：PPReplanFSM 在 USE_SHARED_MEMORY 启用时调用这些辅助函数。
+ * 输入：共享内存大小、段 ID；默认通过 /etc/apt/sources.list 和项目字符生成键。
+ * 输出：共享内存段 ID 或进程地址；创建、挂接等关键调用失败时退出进程。
+ * 运行模式：同一 Linux 主机上的进程间通信，不负责轨迹序列化或同步。
+ * 主要依赖：sys/ipc.h、sys/shm.h、C++ 标准库、traj_utils。
+ */
 #include <sys/ipc.h>
 #include <sys/shm.h>
 #include <vector>

@@ -1418,3 +1418,217 @@ events:
         
       exitCode: 0
 ...
+
+---
+events:
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "/usr/share/cmake-3.28/Modules/FindMPI.cmake:1278 (try_compile)"
+      - "/usr/share/cmake-3.28/Modules/FindMPI.cmake:1322 (_MPI_try_staged_settings)"
+      - "/usr/share/cmake-3.28/Modules/FindMPI.cmake:1645 (_MPI_check_lang_works)"
+      - "/usr/lib/x86_64-linux-gnu/cmake/vtk-9.1/VTK-vtk-module-find-packages.cmake:397 (find_package)"
+      - "/usr/lib/x86_64-linux-gnu/cmake/vtk-9.1/vtk-config.cmake:150 (include)"
+      - "/usr/lib/x86_64-linux-gnu/cmake/pcl/PCLConfig.cmake:275 (find_package)"
+      - "/usr/lib/x86_64-linux-gnu/cmake/pcl/PCLConfig.cmake:324 (find_VTK)"
+      - "/usr/lib/x86_64-linux-gnu/cmake/pcl/PCLConfig.cmake:567 (find_external_library)"
+      - "/opt/ros/jazzy/share/pcl_conversions/cmake/ament_cmake_export_dependencies-extras.cmake:21 (find_package)"
+      - "/opt/ros/jazzy/share/pcl_conversions/cmake/pcl_conversionsConfig.cmake:41 (include)"
+      - "CMakeLists.txt:11 (find_package)"
+    description: "The MPI test test_mpi for C in mode normal"
+    directories:
+      source: "/home/wyt/RC_planner/src/build/primitive_planner/CMakeFiles/CMakeScratch/TryCompile-gojOKj"
+      binary: "/home/wyt/RC_planner/src/build/primitive_planner/CMakeFiles/CMakeScratch/TryCompile-gojOKj"
+    cmakeVariables:
+      CMAKE_C_FLAGS: ""
+      CMAKE_C_FLAGS_DEBUG: "-g"
+      CMAKE_EXE_LINKER_FLAGS: ""
+      CMAKE_MODULE_PATH: "/usr/lib/x86_64-linux-gnu/cmake/vtk-9.1/patches/99;/usr/lib/x86_64-linux-gnu/cmake/vtk-9.1;/opt/ros/jazzy/share/fastrtps_cmake_module/cmake/Modules;/usr/lib/x86_64-linux-gnu/cmake/pcl/Modules"
+    buildResult:
+      variable: "MPI_RESULT_C_test_mpi_normal"
+      cached: true
+      stdout: |
+        Change Dir: '/home/wyt/RC_planner/src/build/primitive_planner/CMakeFiles/CMakeScratch/TryCompile-gojOKj'
+        
+        Run Build Command(s): /usr/bin/cmake -E env VERBOSE=1 /usr/bin/gmake -f Makefile cmTC_7e52c/fast
+        gmake[1]: 进入目录“/home/wyt/RC_planner/src/build/primitive_planner/CMakeFiles/CMakeScratch/TryCompile-gojOKj”
+        /usr/bin/gmake  -f CMakeFiles/cmTC_7e52c.dir/build.make CMakeFiles/cmTC_7e52c.dir/build
+        gmake[2]: 进入目录“/home/wyt/RC_planner/src/build/primitive_planner/CMakeFiles/CMakeScratch/TryCompile-gojOKj”
+        Building C object CMakeFiles/cmTC_7e52c.dir/test_mpi.c.o
+        /usr/bin/cc  -isystem /usr/lib/x86_64-linux-gnu/openmpi/include -isystem /usr/lib/x86_64-linux-gnu/openmpi/include/openmpi  -o CMakeFiles/cmTC_7e52c.dir/test_mpi.c.o -c /home/wyt/RC_planner/src/build/primitive_planner/CMakeFiles/CMakeScratch/TryCompile-gojOKj/test_mpi.c
+        Linking C executable cmTC_7e52c
+        /usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_7e52c.dir/link.txt --verbose=1
+        /usr/bin/cc -L/usr/lib/x86_64-linux-gnu/openmpi/lib CMakeFiles/cmTC_7e52c.dir/test_mpi.c.o -o cmTC_7e52c  /usr/lib/x86_64-linux-gnu/libmpi.so 
+        gmake[2]: 离开目录“/home/wyt/RC_planner/src/build/primitive_planner/CMakeFiles/CMakeScratch/TryCompile-gojOKj”
+        gmake[1]: 离开目录“/home/wyt/RC_planner/src/build/primitive_planner/CMakeFiles/CMakeScratch/TryCompile-gojOKj”
+        
+      exitCode: 0
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "/usr/share/cmake-3.28/Modules/FindMPI.cmake:1278 (try_compile)"
+      - "/usr/share/cmake-3.28/Modules/FindMPI.cmake:1322 (_MPI_try_staged_settings)"
+      - "/usr/share/cmake-3.28/Modules/FindMPI.cmake:1645 (_MPI_check_lang_works)"
+      - "/usr/lib/x86_64-linux-gnu/cmake/vtk-9.1/VTK-vtk-module-find-packages.cmake:397 (find_package)"
+      - "/usr/lib/x86_64-linux-gnu/cmake/vtk-9.1/vtk-config.cmake:150 (include)"
+      - "/usr/lib/x86_64-linux-gnu/cmake/pcl/PCLConfig.cmake:275 (find_package)"
+      - "/usr/lib/x86_64-linux-gnu/cmake/pcl/PCLConfig.cmake:324 (find_VTK)"
+      - "/usr/lib/x86_64-linux-gnu/cmake/pcl/PCLConfig.cmake:567 (find_external_library)"
+      - "/opt/ros/jazzy/share/pcl_conversions/cmake/ament_cmake_export_dependencies-extras.cmake:21 (find_package)"
+      - "/opt/ros/jazzy/share/pcl_conversions/cmake/pcl_conversionsConfig.cmake:41 (include)"
+      - "CMakeLists.txt:11 (find_package)"
+    description: "The MPI test test_mpi for C in mode normal"
+    directories:
+      source: "/home/wyt/RC_planner/src/build/primitive_planner/CMakeFiles/CMakeScratch/TryCompile-RBGg9M"
+      binary: "/home/wyt/RC_planner/src/build/primitive_planner/CMakeFiles/CMakeScratch/TryCompile-RBGg9M"
+    cmakeVariables:
+      CMAKE_C_FLAGS: ""
+      CMAKE_C_FLAGS_DEBUG: "-g"
+      CMAKE_EXE_LINKER_FLAGS: ""
+      CMAKE_MODULE_PATH: "/usr/lib/x86_64-linux-gnu/cmake/vtk-9.1/patches/99;/usr/lib/x86_64-linux-gnu/cmake/vtk-9.1;/opt/ros/jazzy/share/fastrtps_cmake_module/cmake/Modules;/usr/lib/x86_64-linux-gnu/cmake/pcl/Modules"
+    buildResult:
+      variable: "MPI_RESULT_C_test_mpi_normal"
+      cached: true
+      stdout: |
+        Change Dir: '/home/wyt/RC_planner/src/build/primitive_planner/CMakeFiles/CMakeScratch/TryCompile-RBGg9M'
+        
+        Run Build Command(s): /usr/bin/cmake -E env VERBOSE=1 /usr/bin/gmake -f Makefile cmTC_413e2/fast
+        gmake[1]: 进入目录“/home/wyt/RC_planner/src/build/primitive_planner/CMakeFiles/CMakeScratch/TryCompile-RBGg9M”
+        /usr/bin/gmake  -f CMakeFiles/cmTC_413e2.dir/build.make CMakeFiles/cmTC_413e2.dir/build
+        gmake[2]: 进入目录“/home/wyt/RC_planner/src/build/primitive_planner/CMakeFiles/CMakeScratch/TryCompile-RBGg9M”
+        Building C object CMakeFiles/cmTC_413e2.dir/test_mpi.c.o
+        /usr/bin/cc  -isystem /usr/lib/x86_64-linux-gnu/openmpi/include -isystem /usr/lib/x86_64-linux-gnu/openmpi/include/openmpi  -o CMakeFiles/cmTC_413e2.dir/test_mpi.c.o -c /home/wyt/RC_planner/src/build/primitive_planner/CMakeFiles/CMakeScratch/TryCompile-RBGg9M/test_mpi.c
+        Linking C executable cmTC_413e2
+        /usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_413e2.dir/link.txt --verbose=1
+        /usr/bin/cc -L/usr/lib/x86_64-linux-gnu/openmpi/lib CMakeFiles/cmTC_413e2.dir/test_mpi.c.o -o cmTC_413e2  /usr/lib/x86_64-linux-gnu/libmpi.so 
+        gmake[2]: 离开目录“/home/wyt/RC_planner/src/build/primitive_planner/CMakeFiles/CMakeScratch/TryCompile-RBGg9M”
+        gmake[1]: 离开目录“/home/wyt/RC_planner/src/build/primitive_planner/CMakeFiles/CMakeScratch/TryCompile-RBGg9M”
+        
+      exitCode: 0
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "/usr/share/cmake-3.28/Modules/FindMPI.cmake:1278 (try_compile)"
+      - "/usr/share/cmake-3.28/Modules/FindMPI.cmake:1322 (_MPI_try_staged_settings)"
+      - "/usr/share/cmake-3.28/Modules/FindMPI.cmake:1645 (_MPI_check_lang_works)"
+      - "/usr/lib/x86_64-linux-gnu/cmake/vtk-9.1/VTK-vtk-module-find-packages.cmake:397 (find_package)"
+      - "/usr/lib/x86_64-linux-gnu/cmake/vtk-9.1/vtk-config.cmake:150 (include)"
+      - "/usr/lib/x86_64-linux-gnu/cmake/pcl/PCLConfig.cmake:275 (find_package)"
+      - "/usr/lib/x86_64-linux-gnu/cmake/pcl/PCLConfig.cmake:324 (find_VTK)"
+      - "/usr/lib/x86_64-linux-gnu/cmake/pcl/PCLConfig.cmake:570 (find_external_library)"
+      - "/opt/ros/jazzy/share/pcl_conversions/cmake/ament_cmake_export_dependencies-extras.cmake:21 (find_package)"
+      - "/opt/ros/jazzy/share/pcl_conversions/cmake/pcl_conversionsConfig.cmake:41 (include)"
+      - "CMakeLists.txt:11 (find_package)"
+    description: "The MPI test test_mpi for C in mode normal"
+    directories:
+      source: "/home/wyt/RC_planner/src/build/primitive_planner/CMakeFiles/CMakeScratch/TryCompile-fPwafS"
+      binary: "/home/wyt/RC_planner/src/build/primitive_planner/CMakeFiles/CMakeScratch/TryCompile-fPwafS"
+    cmakeVariables:
+      CMAKE_C_FLAGS: ""
+      CMAKE_C_FLAGS_DEBUG: "-g"
+      CMAKE_EXE_LINKER_FLAGS: ""
+      CMAKE_MODULE_PATH: "/usr/lib/x86_64-linux-gnu/cmake/vtk-9.1/patches/99;/usr/lib/x86_64-linux-gnu/cmake/vtk-9.1;/opt/ros/jazzy/share/fastrtps_cmake_module/cmake/Modules;/usr/lib/x86_64-linux-gnu/cmake/pcl/Modules"
+    buildResult:
+      variable: "MPI_RESULT_C_test_mpi_normal"
+      cached: true
+      stdout: |
+        Change Dir: '/home/wyt/RC_planner/src/build/primitive_planner/CMakeFiles/CMakeScratch/TryCompile-fPwafS'
+        
+        Run Build Command(s): /usr/bin/cmake -E env VERBOSE=1 /usr/bin/gmake -f Makefile cmTC_b5357/fast
+        gmake[1]: 进入目录“/home/wyt/RC_planner/src/build/primitive_planner/CMakeFiles/CMakeScratch/TryCompile-fPwafS”
+        /usr/bin/gmake  -f CMakeFiles/cmTC_b5357.dir/build.make CMakeFiles/cmTC_b5357.dir/build
+        gmake[2]: 进入目录“/home/wyt/RC_planner/src/build/primitive_planner/CMakeFiles/CMakeScratch/TryCompile-fPwafS”
+        Building C object CMakeFiles/cmTC_b5357.dir/test_mpi.c.o
+        /usr/bin/cc  -isystem /usr/lib/x86_64-linux-gnu/openmpi/include -isystem /usr/lib/x86_64-linux-gnu/openmpi/include/openmpi  -o CMakeFiles/cmTC_b5357.dir/test_mpi.c.o -c /home/wyt/RC_planner/src/build/primitive_planner/CMakeFiles/CMakeScratch/TryCompile-fPwafS/test_mpi.c
+        Linking C executable cmTC_b5357
+        /usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_b5357.dir/link.txt --verbose=1
+        /usr/bin/cc -L/usr/lib/x86_64-linux-gnu/openmpi/lib CMakeFiles/cmTC_b5357.dir/test_mpi.c.o -o cmTC_b5357  /usr/lib/x86_64-linux-gnu/libmpi.so 
+        gmake[2]: 离开目录“/home/wyt/RC_planner/src/build/primitive_planner/CMakeFiles/CMakeScratch/TryCompile-fPwafS”
+        gmake[1]: 离开目录“/home/wyt/RC_planner/src/build/primitive_planner/CMakeFiles/CMakeScratch/TryCompile-fPwafS”
+        
+      exitCode: 0
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "/usr/share/cmake-3.28/Modules/FindMPI.cmake:1278 (try_compile)"
+      - "/usr/share/cmake-3.28/Modules/FindMPI.cmake:1322 (_MPI_try_staged_settings)"
+      - "/usr/share/cmake-3.28/Modules/FindMPI.cmake:1645 (_MPI_check_lang_works)"
+      - "/usr/lib/x86_64-linux-gnu/cmake/vtk-9.1/VTK-vtk-module-find-packages.cmake:397 (find_package)"
+      - "/usr/lib/x86_64-linux-gnu/cmake/vtk-9.1/vtk-config.cmake:150 (include)"
+      - "/usr/lib/x86_64-linux-gnu/cmake/pcl/PCLConfig.cmake:275 (find_package)"
+      - "/usr/lib/x86_64-linux-gnu/cmake/pcl/PCLConfig.cmake:324 (find_VTK)"
+      - "/usr/lib/x86_64-linux-gnu/cmake/pcl/PCLConfig.cmake:567 (find_external_library)"
+      - "/opt/ros/jazzy/share/pcl_conversions/cmake/ament_cmake_export_dependencies-extras.cmake:21 (find_package)"
+      - "/opt/ros/jazzy/share/pcl_conversions/cmake/pcl_conversionsConfig.cmake:41 (include)"
+      - "CMakeLists.txt:11 (find_package)"
+    description: "The MPI test test_mpi for C in mode normal"
+    directories:
+      source: "/home/wyt/RC_planner/src/build/primitive_planner/CMakeFiles/CMakeScratch/TryCompile-dmQ3NB"
+      binary: "/home/wyt/RC_planner/src/build/primitive_planner/CMakeFiles/CMakeScratch/TryCompile-dmQ3NB"
+    cmakeVariables:
+      CMAKE_C_FLAGS: ""
+      CMAKE_C_FLAGS_DEBUG: "-g"
+      CMAKE_EXE_LINKER_FLAGS: ""
+      CMAKE_MODULE_PATH: "/usr/lib/x86_64-linux-gnu/cmake/vtk-9.1/patches/99;/usr/lib/x86_64-linux-gnu/cmake/vtk-9.1;/opt/ros/jazzy/share/fastrtps_cmake_module/cmake/Modules;/usr/lib/x86_64-linux-gnu/cmake/pcl/Modules"
+    buildResult:
+      variable: "MPI_RESULT_C_test_mpi_normal"
+      cached: true
+      stdout: |
+        Change Dir: '/home/wyt/RC_planner/src/build/primitive_planner/CMakeFiles/CMakeScratch/TryCompile-dmQ3NB'
+        
+        Run Build Command(s): /usr/bin/cmake -E env VERBOSE=1 /usr/bin/gmake -f Makefile cmTC_31b42/fast
+        gmake[1]: 进入目录“/home/wyt/RC_planner/src/build/primitive_planner/CMakeFiles/CMakeScratch/TryCompile-dmQ3NB”
+        /usr/bin/gmake  -f CMakeFiles/cmTC_31b42.dir/build.make CMakeFiles/cmTC_31b42.dir/build
+        gmake[2]: 进入目录“/home/wyt/RC_planner/src/build/primitive_planner/CMakeFiles/CMakeScratch/TryCompile-dmQ3NB”
+        Building C object CMakeFiles/cmTC_31b42.dir/test_mpi.c.o
+        /usr/bin/cc  -isystem /usr/lib/x86_64-linux-gnu/openmpi/include -isystem /usr/lib/x86_64-linux-gnu/openmpi/include/openmpi  -o CMakeFiles/cmTC_31b42.dir/test_mpi.c.o -c /home/wyt/RC_planner/src/build/primitive_planner/CMakeFiles/CMakeScratch/TryCompile-dmQ3NB/test_mpi.c
+        Linking C executable cmTC_31b42
+        /usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_31b42.dir/link.txt --verbose=1
+        /usr/bin/cc -L/usr/lib/x86_64-linux-gnu/openmpi/lib CMakeFiles/cmTC_31b42.dir/test_mpi.c.o -o cmTC_31b42  /usr/lib/x86_64-linux-gnu/libmpi.so 
+        gmake[2]: 离开目录“/home/wyt/RC_planner/src/build/primitive_planner/CMakeFiles/CMakeScratch/TryCompile-dmQ3NB”
+        gmake[1]: 离开目录“/home/wyt/RC_planner/src/build/primitive_planner/CMakeFiles/CMakeScratch/TryCompile-dmQ3NB”
+        
+      exitCode: 0
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "/usr/share/cmake-3.28/Modules/FindMPI.cmake:1278 (try_compile)"
+      - "/usr/share/cmake-3.28/Modules/FindMPI.cmake:1322 (_MPI_try_staged_settings)"
+      - "/usr/share/cmake-3.28/Modules/FindMPI.cmake:1645 (_MPI_check_lang_works)"
+      - "/usr/lib/x86_64-linux-gnu/cmake/vtk-9.1/VTK-vtk-module-find-packages.cmake:397 (find_package)"
+      - "/usr/lib/x86_64-linux-gnu/cmake/vtk-9.1/vtk-config.cmake:150 (include)"
+      - "/usr/lib/x86_64-linux-gnu/cmake/pcl/PCLConfig.cmake:275 (find_package)"
+      - "/usr/lib/x86_64-linux-gnu/cmake/pcl/PCLConfig.cmake:324 (find_VTK)"
+      - "/usr/lib/x86_64-linux-gnu/cmake/pcl/PCLConfig.cmake:567 (find_external_library)"
+      - "/opt/ros/jazzy/share/pcl_conversions/cmake/ament_cmake_export_dependencies-extras.cmake:21 (find_package)"
+      - "/opt/ros/jazzy/share/pcl_conversions/cmake/pcl_conversionsConfig.cmake:41 (include)"
+      - "CMakeLists.txt:11 (find_package)"
+    description: "The MPI test test_mpi for C in mode normal"
+    directories:
+      source: "/home/wyt/RC_planner/src/build/primitive_planner/CMakeFiles/CMakeScratch/TryCompile-EZ5d4Z"
+      binary: "/home/wyt/RC_planner/src/build/primitive_planner/CMakeFiles/CMakeScratch/TryCompile-EZ5d4Z"
+    cmakeVariables:
+      CMAKE_C_FLAGS: ""
+      CMAKE_C_FLAGS_DEBUG: "-g"
+      CMAKE_EXE_LINKER_FLAGS: ""
+      CMAKE_MODULE_PATH: "/usr/lib/x86_64-linux-gnu/cmake/vtk-9.1/patches/99;/usr/lib/x86_64-linux-gnu/cmake/vtk-9.1;/opt/ros/jazzy/share/fastrtps_cmake_module/cmake/Modules;/usr/lib/x86_64-linux-gnu/cmake/pcl/Modules"
+    buildResult:
+      variable: "MPI_RESULT_C_test_mpi_normal"
+      cached: true
+      stdout: |
+        Change Dir: '/home/wyt/RC_planner/src/build/primitive_planner/CMakeFiles/CMakeScratch/TryCompile-EZ5d4Z'
+        
+        Run Build Command(s): /usr/bin/cmake -E env VERBOSE=1 /usr/bin/gmake -f Makefile cmTC_3f356/fast
+        gmake[1]: 进入目录“/home/wyt/RC_planner/src/build/primitive_planner/CMakeFiles/CMakeScratch/TryCompile-EZ5d4Z”
+        /usr/bin/gmake  -f CMakeFiles/cmTC_3f356.dir/build.make CMakeFiles/cmTC_3f356.dir/build
+        gmake[2]: 进入目录“/home/wyt/RC_planner/src/build/primitive_planner/CMakeFiles/CMakeScratch/TryCompile-EZ5d4Z”
+        Building C object CMakeFiles/cmTC_3f356.dir/test_mpi.c.o
+        /usr/bin/cc  -isystem /usr/lib/x86_64-linux-gnu/openmpi/include -isystem /usr/lib/x86_64-linux-gnu/openmpi/include/openmpi  -o CMakeFiles/cmTC_3f356.dir/test_mpi.c.o -c /home/wyt/RC_planner/src/build/primitive_planner/CMakeFiles/CMakeScratch/TryCompile-EZ5d4Z/test_mpi.c
+        Linking C executable cmTC_3f356
+        /usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_3f356.dir/link.txt --verbose=1
+        /usr/bin/cc -L/usr/lib/x86_64-linux-gnu/openmpi/lib CMakeFiles/cmTC_3f356.dir/test_mpi.c.o -o cmTC_3f356  /usr/lib/x86_64-linux-gnu/libmpi.so 
+        gmake[2]: 离开目录“/home/wyt/RC_planner/src/build/primitive_planner/CMakeFiles/CMakeScratch/TryCompile-EZ5d4Z”
+        gmake[1]: 离开目录“/home/wyt/RC_planner/src/build/primitive_planner/CMakeFiles/CMakeScratch/TryCompile-EZ5d4Z”
+        
+      exitCode: 0
+...

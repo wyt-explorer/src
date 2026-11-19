@@ -1,359 +1,185 @@
-/*
- * 文件作用：提供 ROS 2 节点消息回调；由包内可执行程序启动。
- * 输入/输出：见 create_subscription/create_publisher 的消息及话题声明。
- * 运行模式：ROS 2；位置单位为米，时间为秒；依赖 rclcpp 和对应消息包。
+/**
+ * @file bridge_node_udp.cpp
+ * 文件作用：按上游消息类型通过 UDP 转发里程计、基元轨迹、目标和手柄数据。
+ * 调用关系：订阅回调序列化并广播，接收线程校验包长后发布到规划器输入话题。
+ * 输入：my_odom、/broadcast_primitive_from_planner、/goal_user2brig、/joystick_from_users。
+ * 输出：/others_odom、/broadcast_primitive_to_planner、/goal_brig2plner、/joystick_from_bridge。
+ * 运行模式：ROS 2 网络桥，默认 UDP 8081；ROS 2 CDR 报文不兼容 ROS 1 线格式。
+ * 主要依赖：rclcpp 序列化、POSIX socket、C++ thread、相应消息包。
  */
 #include <rclcpp/rclcpp.hpp>
 #include <rclcpp/serialization.hpp>
-#include <cstdint>
-#include <cstddef>
-#include <cstring>
-#include <memory>
-#include <thread>
-#include <chrono>
-#include <boost/thread.hpp>
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
-#include <iostream>
 #include <nav_msgs/msg/odometry.hpp>
-#include <std_msgs/msg/empty.hpp>
 #include <traj_utils/msg/swarm_primitive_traj.hpp>
 #include <quadrotor_msgs/msg/goal_set.hpp>
 #include <sensor_msgs/msg/joy.hpp>
-
-#include <unistd.h>
+#include <std_msgs/msg/empty.hpp>
 #include <arpa/inet.h>
 #include <sys/socket.h>
-#include <netinet/in.h>
-#define UDP_PORT 8081
-#define BUF_LEN 1048576    // 1MB
-#define BUF_LEN_SHORT 1024 // 1KB
+#include <unistd.h>
+#include <array>
+#include <atomic>
+#include <cstring>
+#include <thread>
+#include <vector>
 
-using namespace std;
-
-int udp_server_fd_, udp_send_fd_;
-rclcpp::SubscriptionBase::SharedPtr other_odoms_sub_, one_traj_sub_, mandatory_stop_sub_, goal_sub_, joy_sub_, one_primitive_sub_;
-rclcpp::Publisher<nav_msgs::msg::Odometry>::SharedPtr other_odoms_pub_;
-rclcpp::Publisher<traj_utils::msg::SwarmPrimitiveTraj>::SharedPtr one_primitive_pub_;
-rclcpp::Publisher<std_msgs::msg::Empty>::SharedPtr mandatory_stop_pub_;
-rclcpp::Publisher<quadrotor_msgs::msg::GoalSet>::SharedPtr goal_pub_;
-rclcpp::Publisher<sensor_msgs::msg::Joy>::SharedPtr joy_pub_;
-std::shared_ptr<rclcpp::Clock> ros_clock_;
-string udp_ip_;
-int drone_id_;
-double odom_broadcast_freq_;
-char udp_recv_buf_[BUF_LEN], udp_send_buf_[BUF_LEN];
-struct sockaddr_in addr_udp_send_;
-nav_msgs::msg::Odometry odom_msg_;
-traj_utils::msg::SwarmPrimitiveTraj swarmPrimitiveTraj_msg_;
-std_msgs::msg::Empty stop_msg_;
-quadrotor_msgs::msg::GoalSet goal_msg_;
-sensor_msgs::msg::Joy joy_msg_;
-
-enum MESSAGE_TYPE
+class SwarmBridge : public rclcpp::Node
 {
-  ODOM = 100,
-  ONE_PRIMITIVE,
-  STOP,
-  GOAL,
-  JOY
-} massage_type_;
-
-int init_broadcast(const char *ip, const int port)
-{
-  int fd;
-
-  if ((fd = socket(AF_INET, SOCK_DGRAM, 0)) <= 0)
+  // 保留上游的消息类型编号以及 [类型, CDR长度, CDR数据] 包布局。
+  enum MessageType : uint32_t { ODOM = 100, ONE_PRIMITIVE, STOP, GOAL, JOY };
+  using Primitive = traj_utils::msg::SwarmPrimitiveTraj;
+  using Goal = quadrotor_msgs::msg::GoalSet;
+public:
+  SwarmBridge() : Node("swarm_bridge"), last_odom_(0, 0, RCL_ROS_TIME)
   {
-    fprintf(stderr, "%s\n", "[bridge_node]Socket sender creation error!");
-    exit(EXIT_FAILURE);
-  }
-
-  int so_broadcast = 1;
-  if (setsockopt(fd, SOL_SOCKET, SO_BROADCAST, &so_broadcast, sizeof(so_broadcast)) < 0)
-  {
-    cout << "Error in setting Broadcast option";
-    exit(EXIT_FAILURE);
-  }
-
-  addr_udp_send_.sin_family = AF_INET;
-  addr_udp_send_.sin_port = htons(port);
-
-  if (inet_pton(AF_INET, ip, &addr_udp_send_.sin_addr) <= 0)
-  {
-    printf("\nInvalid address/ Address not supported \n");
-    return -1;
-  }
-
-  return fd;
-}
-
-int udp_bind_to_port(const int port, int &server_fd)
-{
-  struct sockaddr_in address;
-  int opt = 1;
-
-  // Creating socket file descriptor
-  if ((server_fd = socket(AF_INET, SOCK_DGRAM, 0)) == 0)
-  {
-    perror("socket failed");
-    exit(EXIT_FAILURE);
-  }
-
-  // Forcefully attaching socket to the port
-  if (setsockopt(server_fd, SOL_SOCKET, SO_REUSEADDR | SO_REUSEPORT,
-                 &opt, sizeof(opt)))
-  {
-    perror("setsockopt");
-    exit(EXIT_FAILURE);
-  }
-  address.sin_family = AF_INET;
-  address.sin_addr.s_addr = INADDR_ANY;
-  address.sin_port = htons(port);
-
-  // Forcefully attaching socket to the port
-  if (bind(server_fd, (struct sockaddr *)&address,
-           sizeof(address)) < 0)
-  {
-    perror("bind failed");
-    exit(EXIT_FAILURE);
-  }
-
-  return server_fd;
-}
-
-template <typename T>
-int serializeTopic(const MESSAGE_TYPE msg_type, const T &msg)
-{
-  auto ptr = (uint8_t *)(udp_send_buf_);
-
-  *((MESSAGE_TYPE*)ptr) = msg_type;
-  ptr += sizeof(MESSAGE_TYPE);
-
-  rclcpp::Serialization<T> serializer;
-  rclcpp::SerializedMessage serialized;
-  serializer.serialize_message(&msg, &serialized);
-  uint32_t msg_size = serialized.size();
-  *((uint32_t *)ptr) = msg_size;
-  ptr += sizeof(uint32_t);
-  std::memcpy(ptr, serialized.get_rcl_serialized_message().buffer, msg_size);
-  return msg_size + sizeof(MESSAGE_TYPE) + sizeof(uint32_t);
-}
-
-template <typename T>
-int deserializeTopic(T &msg)
-{
-  auto ptr = (uint8_t *)(udp_recv_buf_ + sizeof(MESSAGE_TYPE));
-
-  uint32_t msg_size = *((uint32_t *)ptr);
-  ptr += sizeof(uint32_t);
-
-  rclcpp::Serialization<T> serializer;
-  rclcpp::SerializedMessage serialized(msg_size);
-  std::memcpy(serialized.get_rcl_serialized_message().buffer, ptr, msg_size);
-  serializer.deserialize_message(&serialized, &msg);
-
-  return msg_size + sizeof(MESSAGE_TYPE) + sizeof(uint32_t);
-}
-
-void odom_sub_udp_cb(const nav_msgs::msg::Odometry::SharedPtr &msg)
-{
-
-  static rclcpp::Time t_last(0, 0, RCL_ROS_TIME);
-  rclcpp::Time t_now = ros_clock_->now();
-  if ((t_now - t_last).toSec() * odom_broadcast_freq_ < 1.0)
-  {
-    return;
-  }
-  t_last = t_now;
-
-  msg->child_frame_id = string("drone_") + std::to_string(drone_id_);
-
-  int len = serializeTopic(MESSAGE_TYPE::ODOM, *msg);
-
-  if (sendto(udp_send_fd_, udp_send_buf_, len, 0, (struct sockaddr *)&addr_udp_send_, sizeof(addr_udp_send_)) <= 0)
-  {
-    fprintf(stderr, "%s\n", "UDP SEND ERROR (1)!!!");
-  }
-}
-
-void one_primitive_sub_udp_cb(const traj_utils::msg::SwarmPrimitiveTraj::SharedPtr &msg)
-{
-
-  int len = serializeTopic(MESSAGE_TYPE::ONE_PRIMITIVE, *msg);
-
-  if (sendto(udp_send_fd_, udp_send_buf_, len, 0, (struct sockaddr *)&addr_udp_send_, sizeof(addr_udp_send_)) <= 0)
-  {
-    fprintf(stderr, "%s\n", "UDP SEND ERROR (2)!!!");
-  }
-}
-
-void mandatory_stop_sub_udp_cb(const std_msgs::msg::Empty::SharedPtr &msg)
-{
-
-  int len = serializeTopic(MESSAGE_TYPE::STOP, *msg);
-
-  if (sendto(udp_send_fd_, udp_send_buf_, len, 0, (struct sockaddr *)&addr_udp_send_, sizeof(addr_udp_send_)) <= 0)
-  {
-    fprintf(stderr, "%s\n", "UDP SEND ERROR (3)!!!");
-  }
-}
-
-void goal_sub_udp_cb(const quadrotor_msgs::msg::GoalSet::SharedPtr &msg)
-{
-
-  int len = serializeTopic(MESSAGE_TYPE::GOAL, *msg);
-
-  if (sendto(udp_send_fd_, udp_send_buf_, len, 0, (struct sockaddr *)&addr_udp_send_, sizeof(addr_udp_send_)) <= 0)
-  {
-    fprintf(stderr, "%s\n", "UDP SEND ERROR (4)!!!");
-  }
-}
-
-void joy_sub_udp_cb(const sensor_msgs::msg::Joy::SharedPtr &msg)
-{
-
-  int len = serializeTopic(MESSAGE_TYPE::JOY, *msg);
-
-  if (sendto(udp_send_fd_, udp_send_buf_, len, 0, (struct sockaddr *)&addr_udp_send_, sizeof(addr_udp_send_)) <= 0)
-  {
-    fprintf(stderr, "%s\n", "UDP SEND ERROR (5)!!!");
-  }
-}
-
-void udp_recv_fun()
-{
-  int valread;
-  struct sockaddr_in addr_client;
-  socklen_t addr_len;
-
-  // Connect
-  if (udp_bind_to_port(UDP_PORT, udp_server_fd_) < 0)
-  {
-    fprintf(stderr, "%s\n", "[bridge_node]Socket recever creation error!");
-    exit(EXIT_FAILURE);
-  }
-
-  while (true)
-  {
-    if ((valread = recvfrom(udp_server_fd_, udp_recv_buf_, BUF_LEN, 0, (struct sockaddr *)&addr_client, (socklen_t *)&addr_len)) < 0)
-    {
-      perror("recvfrom() < 0, error:");
-      exit(EXIT_FAILURE);
+    const auto ip = declare_parameter<std::string>("broadcast_ip", "127.0.0.255");
+    const int port = declare_parameter("port", 8081);
+    drone_id_ = declare_parameter("drone_id", -1);
+    odom_frequency_ = declare_parameter("odom_max_freq", 1000.0);
+    if (drone_id_ < 0 || port < 1 || port > 65535 || odom_frequency_ <= 0)
+      throw std::invalid_argument("invalid drone_id, port or odom_max_freq");
+    odom_pub_ = create_publisher<nav_msgs::msg::Odometry>("/others_odom", 10);
+    primitive_pub_ = create_publisher<Primitive>("/broadcast_primitive_to_planner", 100);
+    goal_pub_ = create_publisher<Goal>("/goal_brig2plner", 100);
+    joy_pub_ = create_publisher<sensor_msgs::msg::Joy>("/joystick_from_bridge", 100);
+    stop_pub_ = create_publisher<std_msgs::msg::Empty>("/mandatory_stop_to_planner", 100);
+    send_fd_ = socket(AF_INET, SOCK_DGRAM, 0);
+    receive_fd_ = socket(AF_INET, SOCK_DGRAM, 0);
+    try {
+      if (send_fd_ < 0 || receive_fd_ < 0) throw std::runtime_error("cannot create UDP sockets");
+      int enabled = 1;
+      if (setsockopt(send_fd_, SOL_SOCKET, SO_BROADCAST, &enabled, sizeof(enabled)) < 0 ||
+          setsockopt(receive_fd_, SOL_SOCKET, SO_REUSEADDR, &enabled, sizeof(enabled)) < 0)
+        throw std::runtime_error("cannot configure UDP sockets");
+      // 接收超时使退出时无需 detach 线程或销毁仍被接收线程访问的发布器。
+      timeval timeout{0, 100000};
+      setsockopt(receive_fd_, SOL_SOCKET, SO_RCVTIMEO, &timeout, sizeof(timeout));
+      destination_.sin_family = AF_INET;
+      destination_.sin_port = htons(port);
+      if (inet_pton(AF_INET, ip.c_str(), &destination_.sin_addr) != 1)
+        throw std::invalid_argument("broadcast_ip must be IPv4");
+      sockaddr_in local{};
+      local.sin_family = AF_INET;
+      local.sin_addr.s_addr = INADDR_ANY;
+      local.sin_port = htons(port);
+      if (bind(receive_fd_, reinterpret_cast<sockaddr*>(&local), sizeof(local)) < 0)
+        throw std::runtime_error("cannot bind UDP port");
+    } catch (...) {
+      if (send_fd_ >= 0) close(send_fd_);
+      if (receive_fd_ >= 0) close(receive_fd_);
+      throw;
     }
+    subscriptions_.push_back(create_subscription<nav_msgs::msg::Odometry>("my_odom", 10,
+        [this](nav_msgs::msg::Odometry::ConstSharedPtr input) {
+          const auto stamp = now();
+          if ((stamp - last_odom_).seconds() * odom_frequency_ < 1.0) return;
+          last_odom_ = stamp;
+          auto msg = *input;
+          msg.child_frame_id = "drone_" + std::to_string(drone_id_);
+          send(ODOM, msg);
+        }));
+    subscriptions_.push_back(create_subscription<Primitive>("/broadcast_primitive_from_planner", 100,
+        [this](Primitive::ConstSharedPtr msg) { send(ONE_PRIMITIVE, *msg); }));
+    subscriptions_.push_back(create_subscription<Goal>("/goal_user2brig", 100,
+        [this](Goal::ConstSharedPtr msg) { send(GOAL, *msg); }));
+    subscriptions_.push_back(create_subscription<sensor_msgs::msg::Joy>("/joystick_from_users", 100,
+        [this](sensor_msgs::msg::Joy::ConstSharedPtr msg) { send(JOY, *msg); }));
+    // 上游保留但默认关闭的停止广播通道，使用显式参数开启。
+    if (declare_parameter("enable_stop_broadcast", false)) {
+      subscriptions_.push_back(create_subscription<std_msgs::msg::Empty>("/mandatory_stop_from_users", 100,
+          [this](std_msgs::msg::Empty::ConstSharedPtr msg) { send(STOP, *msg); }));
+    }
+    receive_thread_ = std::thread([this] { receive(); });
+  }
 
-    char *ptr = udp_recv_buf_;
-    switch (*((MESSAGE_TYPE *)ptr))
-    {
+  ~SwarmBridge() override
+  {
+    running_ = false;
+    if (receive_thread_.joinable()) receive_thread_.join();
+    if (receive_fd_ >= 0) close(receive_fd_);
+    if (send_fd_ >= 0) close(send_fd_);
+  }
+private:
+  /** 每条 ROS 消息独立打包；超出 UDP 有效载荷上限时拒绝发送。 */
+  template<class Message> void send(MessageType type, const Message& message)
+  {
+    rclcpp::Serialization<Message> serializer;
+    rclcpp::SerializedMessage serialized;
+    serializer.serialize_message(&message, &serialized);
+    const uint32_t length = static_cast<uint32_t>(serialized.size());
+    if (length > 65507 - 8) { RCLCPP_ERROR(get_logger(), "UDP message exceeds payload limit"); return; }
+    std::vector<uint8_t> packet(length + 8);
+    const uint32_t wire_type = type;
+    std::memcpy(packet.data(), &wire_type, 4);
+    std::memcpy(packet.data() + 4, &length, 4);
+    std::memcpy(packet.data() + 8, serialized.get_rcl_serialized_message().buffer, length);
+    if (sendto(send_fd_, packet.data(), packet.size(), 0,
+        reinterpret_cast<sockaddr*>(&destination_), sizeof(destination_)) < 0)
+      RCLCPP_ERROR(get_logger(), "UDP send failed: %s", strerror(errno));
+  }
 
-    case MESSAGE_TYPE::ODOM:
-    {
-      if (valread == deserializeTopic(odom_msg_))
-      {
-        other_odoms_pub_->publish(odom_msg_);
-      }
-      else
-      {
-        fprintf(stderr, "%s\n", "Received message length not matches the sent one (2)!!!");
+  /** 在已校验完整包长的前提下反序列化，正确设置 ROS 2 缓冲的有效长度。 */
+  template<class Message> void publish(const uint8_t* data, uint32_t length,
+      const typename rclcpp::Publisher<Message>::SharedPtr& publisher)
+  {
+    rclcpp::SerializedMessage serialized(length);
+    auto& buffer = serialized.get_rcl_serialized_message();
+    std::memcpy(buffer.buffer, data, length);
+    buffer.buffer_length = length;
+    Message message;
+    rclcpp::Serialization<Message> serializer;
+    serializer.deserialize_message(&serialized, &message);
+    publisher->publish(message);
+  }
+
+  void receive()
+  {
+    std::array<uint8_t, 65536> packet{};
+    while (running_) {
+      const auto size = recvfrom(receive_fd_, packet.data(), packet.size(), 0, nullptr, nullptr);
+      if (size < 0) {
+        if (errno != EAGAIN && errno != EWOULDBLOCK && errno != EINTR)
+          RCLCPP_WARN(get_logger(), "UDP receive failed: %s", strerror(errno));
         continue;
       }
-
-      break;
-    }
-
-    case MESSAGE_TYPE::ONE_PRIMITIVE:
-    {
-
-      if (valread == deserializeTopic(swarmPrimitiveTraj_msg_))
-      {
-        one_primitive_pub_->publish(swarmPrimitiveTraj_msg_);
+      if (size < 8) continue;
+      uint32_t type, length;
+      std::memcpy(&type, packet.data(), 4);
+      std::memcpy(&length, packet.data() + 4, 4);
+      if (length != static_cast<size_t>(size) - 8 || length < 4) continue;
+      try {
+        const auto* data = packet.data() + 8;
+        switch (type) {
+          case ODOM: publish<nav_msgs::msg::Odometry>(data, length, odom_pub_); break;
+          case ONE_PRIMITIVE: publish<Primitive>(data, length, primitive_pub_); break;
+          case STOP: publish<std_msgs::msg::Empty>(data, length, stop_pub_); break;
+          case GOAL: publish<Goal>(data, length, goal_pub_); break;
+          case JOY: publish<sensor_msgs::msg::Joy>(data, length, joy_pub_); break;
+          default: break;
+        }
+      } catch (const std::exception& error) {
+        RCLCPP_WARN(get_logger(), "Discarding invalid UDP message: %s", error.what());
       }
-      else
-      {
-        fprintf(stderr, "%s\n", "Received message length not matches the sent one (2)!!!");
-        continue;
-      }
-
-      break;
-    }
-
-    case MESSAGE_TYPE::STOP:
-    {
-
-      if (valread == deserializeTopic(stop_msg_))
-      {
-        mandatory_stop_pub_->publish(stop_msg_);
-      }
-      else
-      {
-        fprintf(stderr, "%s\n", "Received message length not matches the sent one (3)!!!");
-        continue;
-      }
-
-      break;
-    }
-
-    case MESSAGE_TYPE::GOAL:
-    {
-      
-      if (valread == deserializeTopic(goal_msg_))
-      {
-        goal_pub_->publish(goal_msg_);
-      }
-      else
-      {
-        fprintf(stderr, "%s\n", "Received message length not matches the sent one (4)!!!");
-        continue;
-      }
-
-      break;
-    }
-
-    case MESSAGE_TYPE::JOY:
-    {
-      
-      if (valread == deserializeTopic(joy_msg_))
-      {
-        joy_pub_->publish(joy_msg_);
-      }
-      else
-      {
-        fprintf(stderr, "%s\n", "Received message length not matches the sent one (5)!!!");
-        continue;
-      }
-
-      break;
-    }
-
-    default:
-
-      fprintf(stderr, "%s\n", "Unknown received message type???");
-
-      break;
     }
   }
-}
+  int drone_id_, send_fd_{-1}, receive_fd_{-1};
+  double odom_frequency_;
+  rclcpp::Time last_odom_;
+  sockaddr_in destination_{};
+  std::atomic<bool> running_{true};
+  std::thread receive_thread_;
+  std::vector<rclcpp::SubscriptionBase::SharedPtr> subscriptions_;
+  rclcpp::Publisher<nav_msgs::msg::Odometry>::SharedPtr odom_pub_;
+  rclcpp::Publisher<Primitive>::SharedPtr primitive_pub_;
+  rclcpp::Publisher<Goal>::SharedPtr goal_pub_;
+  rclcpp::Publisher<sensor_msgs::msg::Joy>::SharedPtr joy_pub_;
+  rclcpp::Publisher<std_msgs::msg::Empty>::SharedPtr stop_pub_;
+};
 
-int main(int argc, char **argv)
+int main(int argc, char** argv)
 {
   rclcpp::init(argc, argv);
-  auto node = std::make_shared<rclcpp::Node>("swarm_bridge");
-  ros_clock_ = node->get_clock();
-  udp_ip_ = node->declare_parameter<std::string>("broadcast_ip", "127.0.0.255");
-  drone_id_ = node->declare_parameter<int>("drone_id", -1);
-  odom_broadcast_freq_ = node->declare_parameter<double>("odom_max_freq", 1000.0);
-  if (drone_id_ < 0) { RCLCPP_WARN(node->get_logger(), "Wrong drone_id"); return 1; }
-  other_odoms_pub_ = node->create_publisher<nav_msgs::msg::Odometry>("/others_odom", 10);
-  one_primitive_pub_ = node->create_publisher<traj_utils::msg::SwarmPrimitiveTraj>("/broadcast_primitive_to_planner", 100);
-  goal_pub_ = node->create_publisher<quadrotor_msgs::msg::GoalSet>("/goal_brig2plner", 100);
-  joy_pub_ = node->create_publisher<sensor_msgs::msg::Joy>("/joystick_from_bridge", 100);
-  other_odoms_sub_ = node->create_subscription<nav_msgs::msg::Odometry>("my_odom", 10, [](nav_msgs::msg::Odometry::SharedPtr m){ odom_sub_udp_cb(m); });
-  one_primitive_sub_ = node->create_subscription<traj_utils::msg::SwarmPrimitiveTraj>("/broadcast_primitive_from_planner", 100, [](traj_utils::msg::SwarmPrimitiveTraj::SharedPtr m){ one_primitive_sub_udp_cb(m); });
-  goal_sub_ = node->create_subscription<quadrotor_msgs::msg::GoalSet>("/goal_user2brig", 100, [](quadrotor_msgs::msg::GoalSet::SharedPtr m){ goal_sub_udp_cb(m); });
-  joy_sub_ = node->create_subscription<sensor_msgs::msg::Joy>("/joystick_from_users", 100, [](sensor_msgs::msg::Joy::SharedPtr m){ joy_sub_udp_cb(m); });
-  udp_send_fd_ = init_broadcast(udp_ip_.c_str(), UDP_PORT);
-  std::thread udp_recv_thd(udp_recv_fun); udp_recv_thd.detach();
-  rclcpp::spin(node);
-  close(udp_server_fd_); close(udp_send_fd_); rclcpp::shutdown(); return 0;
+  rclcpp::spin(std::make_shared<SwarmBridge>());
+  rclcpp::shutdown();
+  return 0;
 }

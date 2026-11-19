@@ -1,5 +1,12 @@
 #!/usr/bin/env python3
 # coding=utf-8
+"""文件作用：生成正方形边界上的多层机群起点，并打乱分配交换目标。
+调用关系：run_batch.py 按无人机数量调用；结果供 gen_primitive_planner_launch.py 读取。
+输入：命令行无人机数量（支持 8、20、40、60、80）及脚本内布局常量。
+输出：start_and_goals.txt，记录世界系米制 square_starts 和 square_goals 列表。
+运行模式：离线实验数据生成脚本。
+主要依赖：sys、copy、random；未启用的绘图函数另需 Matplotlib。
+"""
 import sys
 import copy
 import random

@@ -20,4 +20,7 @@ foreach(t primitive_planner_node traj_server)
 endforeach()
 install(TARGETS primitive_planner_node traj_server DESTINATION lib/${PROJECT_NAME})
 install(DIRECTORY launch primitive_library DESTINATION share/${PROJECT_NAME})
+install(PROGRAMS
+  ../../scripts/gen_position_swap.py ../../scripts/pub_trigger.sh ../../scripts/run_swarm.sh
+  DESTINATION lib/${PROJECT_NAME})
 ament_package()

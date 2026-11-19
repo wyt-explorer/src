@@ -1,3 +1,12 @@
+"""文件作用：生成地图与多机里程计显示的启动文件。
+调用关系：运行脚本直接调用 generate_launch_file()。
+输入：num_drones 及脚本内地图和显示参数。
+输出：run_odom_vis.launch，将每机里程计映射到独立显示节点。
+运行模式：离线 Python 工具，输出 ROS 2 launch XML。
+主要依赖：Python 文件接口、旧 odom_visualization/map_generator 配置。
+"""
+from ros2_launch_xml import convert_file
+
 def generate_launch_file(num_drones, output_file='run_odom_vis.launch'):
     with open(output_file, 'w') as file:
         file.write('<launch>\n\n')
@@ -45,6 +54,7 @@ def generate_launch_file(num_drones, output_file='run_odom_vis.launch'):
         
         # 写入XML尾部
         file.write('</launch>')
+    convert_file(output_file)
 
 # 使用示例
 num_drones = 20  # 假设我们需要启动5架飞机

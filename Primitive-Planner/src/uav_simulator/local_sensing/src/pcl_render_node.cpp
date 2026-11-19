@@ -1,3 +1,12 @@
+/**
+ * @file pcl_render_node.cpp
+ * 文件作用：根据地图点云和机体位姿渲染深度、局部点云及相机姿态。
+ * 调用关系：遗留感知节点的定时器调用渲染函数，底层调用 DepthRender。
+ * 输入：global_map、local_map、odometry 及相机内参/感知参数；世界系米制点云。
+ * 输出：深度图、深度着色图、相机位姿和感知点云。
+ * 运行模式：遗留 ROS 1 CUDA 感知节点，当前 CMake 使用 pointcloud_render_node.cpp。
+ * 主要依赖：roscpp、PCL、OpenCV、cv_bridge、TF、CUDA DepthRender。
+ */
 #include <iostream>
 #include <fstream>
 #include <vector>

@@ -1,3 +1,12 @@
+/**
+ * @file utils.h
+ * 文件作用：汇总几何与消息转换工具，并提供范围判断和限幅模板。
+ * 调用关系：调用方包含此头文件；uav_utils_test.cpp 验证工具函数。
+ * 输入：待判断或限幅的数值及区间上下界。
+ * 输出：范围判断结果，或原地限幅后的数值；单位沿用输入。
+ * 运行模式：头文件工具；汇总接口仍包含 ROS 1 消息依赖。
+ * 主要依赖：cassert、converters.h、geometry_utils.h。
+ */
 #ifndef __UAV_UTILS_H
 #define __UAV_UTILS_H
 

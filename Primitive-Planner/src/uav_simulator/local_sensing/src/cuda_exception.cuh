@@ -1,3 +1,12 @@
+/**
+ * @file cuda_exception.cuh
+ * 文件作用：封装 CUDA 错误码与上下文描述为 C++ 异常。
+ * 调用关系：DeviceImage 和 DepthRender 在 CUDA 分配或拷贝失败时抛出。
+ * 输入：错误描述字符串和 cudaError。
+ * 输出：CudaException 异常及 what() 描述接口。
+ * 运行模式：CUDA 辅助类型，保留原 REMODE 许可证。
+ * 主要依赖：CUDA runtime、exception、sstream。
+ */
 // This file is part of REMODE - REgularized MOnocular Depth Estimation.
 //
 // Copyright (C) 2014 Matia Pizzoli <matia dot pizzoli at gmail dot com>

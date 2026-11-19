@@ -1,9 +1,11 @@
-/*
- * 文件作用：ROS 2 Jazzy 规划与仿真组件，保留原运动基元算法。
- * 调用关系：由对应包的节点或库调用；输入输出见消息回调与发布接口。
- * 输入：ROS 2 消息、参数及运动基元文件（SI 单位，world 坐标系）。
- * 输出：规划轨迹、控制指令或可视化数据。
- * 运行模式：ROS 2 仿真/实机；依赖 rclcpp 和对应包的消息类型。
+/**
+ * @file random_forest_sensing.cpp
+ * 文件作用：生成随机柱体和圆环障碍物点云，周期发布全局地图。
+ * 调用关系：random_forest 入口调用 RandomMapGenerateCylinder()，循环执行 pubPoints()。
+ * 输入：地图尺寸、分辨率、障碍数量与形状参数；随机种子来自 random_device，位置为米。
+ * 输出：/map_generator/global_cloud（world 系 PointCloud2）；文件加载和点击函数未接入入口。
+ * 运行模式：ROS 2 地图仿真；当前单机示例使用 Primitive_env 的 YAML 地图发布器。
+ * 主要依赖：rclcpp、PCL、Eigen、pcl_conversions、geometry_msgs、sensor_msgs。
  */
 #include <thread>
 #include <chrono>
@@ -500,6 +502,8 @@ int main(int argc, char **argv)
 {
   rclcpp::init(argc, argv);
   auto n = std::make_shared<rclcpp::Node>("random_map_sensing");
+  rclcpp::executors::SingleThreadedExecutor executor;
+  executor.add_node(n);
 
   _local_map_pub = n->create_publisher<sensor_msgs::msg::PointCloud2>("/map_generator/local_cloud", 1);
   _all_map_pub = n->create_publisher<sensor_msgs::msg::PointCloud2>("/map_generator/global_cloud", 1);
@@ -552,8 +556,13 @@ int main(int argc, char **argv)
   while (rclcpp::ok())
   {
     pubPoints();
-    rclcpp::spin_some(n);
+    if (rclcpp::ok()) executor.spin_some();
     std::this_thread::sleep_for(period);
   }
+  _local_map_pub.reset();
+  _all_map_pub.reset();
+  click_map_pub_.reset();
+  executor.remove_node(n);
+  n.reset();
   rclcpp::shutdown();
 }

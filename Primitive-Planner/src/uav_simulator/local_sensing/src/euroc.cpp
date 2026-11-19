@@ -1,3 +1,12 @@
+/**
+ * @file euroc.cpp
+ * 文件作用：结合 EuRoC 图像、位姿和加载点云渲染相机深度并显示结果。
+ * 调用关系：同步图像/位姿回调更新相机状态，再调用 DepthRender::render_pose()。
+ * 输入：/cam0/image_raw、Vicon 位姿、点云/真值文件及相机配置；位置为米。
+ * 输出：depth（浮点米制深度）、colordepth 着色图与 OpenCV 显示窗口。
+ * 运行模式：遗留 ROS 1/CUDA 数据集工具，不属于当前 ROS 2 单机启动。
+ * 主要依赖：roscpp、message_filters、cv_bridge、OpenCV、PCL、DepthRender。
+ */
 #include <iostream>
 #include <fstream>
 #include <vector>

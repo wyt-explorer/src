@@ -1,3 +1,12 @@
+/**
+ * @file pose_tool.cpp
+ * 文件作用：处理三维位置、高度及朝向的鼠标交互。
+ * 调用关系：RViz 调用 Pose3DTool 事件接口，完成操作后调用派生类 onPoseSet()。
+ * 输入：RViz 鼠标/键盘事件、相机和固定坐标系。
+ * 输出：目标位置与偏航回调，以及交互箭头显示。
+ * 运行模式：ROS 2 RViz2 插件，保留上游三维交互状态机。
+ * 主要依赖：rviz_common、rviz_rendering、OGRE、Qt、rclcpp。
+ */
 /*
  * Copyright (c) 2008, Willow Garage, Inc.
  * All rights reserved.
@@ -27,24 +36,33 @@
  * POSSIBILITY OF SUCH DAMAGE.
  */
 
-#include <OGRE/OgrePlane.h>
-#include <OGRE/OgreRay.h>
-#include <OGRE/OgreSceneNode.h>
-#include <OGRE/OgreViewport.h>
+#include <OgrePlane.h>
+#include <OgreRay.h>
+#include <OgreSceneNode.h>
+#include <OgreViewport.h>
 
-#include "rviz/geometry.h"
-#include "rviz/load_resource.h"
-#include "rviz/ogre_helpers/arrow.h"
-#include "rviz/render_panel.h"
-#include "rviz/viewport_mouse_event.h"
+#include "rviz_rendering/viewport_projection_finder.hpp"
+#include <cassert>
+#include "rviz_common/load_resource.hpp"
+#include "rviz_rendering/objects/arrow.hpp"
+#include "rviz_common/render_panel.hpp"
+#include "rviz_common/viewport_mouse_event.hpp"
 
 #include "pose_tool.h"
 
-namespace rviz
+namespace primitive_rviz
 {
 
+static bool projectGround(rviz_common::ViewportMouseEvent& event, Ogre::Vector3& point)
+{
+  rviz_rendering::ViewportProjectionFinder finder;
+  const auto projected = finder.getViewportPointProjectionOnXYPlane(event.panel->getRenderWindow(), event.x, event.y);
+  point = projected.second;
+  return projected.first;
+}
+
 Pose3DTool::Pose3DTool()
-  : Tool()
+  : rviz_common::Tool()
   , arrow_(NULL)
 {
 }
@@ -52,12 +70,13 @@ Pose3DTool::Pose3DTool()
 Pose3DTool::~Pose3DTool()
 {
   delete arrow_;
+  for (auto* arrow : arrow_array) delete arrow;
 }
 
 void
 Pose3DTool::onInitialize()
 {
-  arrow_ = new Arrow(scene_manager_, NULL, 2.0f, 0.2f, 0.5f, 0.35f);
+  arrow_ = new rviz_rendering::Arrow(scene_manager_, NULL, 2.0f, 0.2f, 0.5f, 0.35f);
   arrow_->setColor(0.0f, 1.0f, 0.0f, 1.0f);
   arrow_->getSceneNode()->setVisible(false);
 }
@@ -76,7 +95,7 @@ Pose3DTool::deactivate()
 }
 
 int
-Pose3DTool::processMouseEvent(ViewportMouseEvent& event)
+Pose3DTool::processMouseEvent(rviz_common::ViewportMouseEvent& event)
 {
   int                  flags = 0;
   static Ogre::Vector3 ang_pos;
@@ -90,11 +109,10 @@ Pose3DTool::processMouseEvent(ViewportMouseEvent& event)
 
   if (event.leftDown())
   {
-    ROS_ASSERT(state_ == Position);
+    assert(state_ == Position);
     Ogre::Vector3 intersection;
     Ogre::Plane   ground_plane(Ogre::Vector3::UNIT_Z, 0.0f);
-    if (getPointOnPlaneFromWindowXY(event.viewport, ground_plane, event.x,
-                                    event.y, intersection))
+    if (projectGround(event, intersection))
     {
       pos_ = intersection;
       arrow_->setPosition(pos_);
@@ -109,8 +127,7 @@ Pose3DTool::processMouseEvent(ViewportMouseEvent& event)
       // compute angle in x-y plane
       Ogre::Vector3 cur_pos;
       Ogre::Plane   ground_plane(Ogre::Vector3::UNIT_Z, 0.0f);
-      if (getPointOnPlaneFromWindowXY(event.viewport, ground_plane, event.x,
-                                      event.y, cur_pos))
+      if (projectGround(event, cur_pos))
       {
         double angle = atan2(cur_pos.y - pos_.y, cur_pos.x - pos_.x);
         arrow_->getSceneNode()->setVisible(true);
@@ -137,8 +154,8 @@ Pose3DTool::processMouseEvent(ViewportMouseEvent& event)
       int cnt = ceil(fabs(initz - pos_.z) / z_interval);
       for (int k = 0; k < cnt; k++)
       {
-        Arrow* arrow__;
-        arrow__ = new Arrow(scene_manager_, NULL, 0.5f, 0.1f, 0.0f, 0.1f);
+        rviz_rendering::Arrow* arrow__;
+        arrow__ = new rviz_rendering::Arrow(scene_manager_, NULL, 0.5f, 0.1f, 0.0f, 0.1f);
         arrow__->setColor(0.0f, 1.0f, 0.0f, 1.0f);
         arrow__->getSceneNode()->setVisible(true);
         Ogre::Vector3 arr_pos = pos_;

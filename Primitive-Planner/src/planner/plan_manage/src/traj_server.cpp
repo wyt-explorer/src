@@ -1,16 +1,11 @@
-/*
- * 文件作用：ROS 2 Jazzy 规划与仿真组件，保留原运动基元算法。
- * 调用关系：由对应包的节点或库调用；输入输出见消息回调与发布接口。
- * 输入：ROS 2 消息、参数及运动基元文件（SI 单位，world 坐标系）。
- * 输出：规划轨迹、控制指令或可视化数据。
- * 运行模式：ROS 2 仿真/实机；依赖 rclcpp 和对应包的消息类型。
- */
-/*
- * 文件作用：ROS 2 Jazzy 规划与仿真组件，保留原运动基元算法。
- * 调用关系：由对应包的节点或库调用；输入输出见消息回调与发布接口。
- * 输入：ROS 2 消息、参数及运动基元文件（SI 单位，world 坐标系）。
- * 输出：规划轨迹、控制指令或可视化数据。
- * 运行模式：ROS 2 仿真/实机；依赖 rclcpp 和对应包的消息类型。
+/**
+ * @file traj_server.cpp
+ * 文件作用：读取选定基元或多项式轨迹，按执行时间生成位置与偏航指令。
+ * 调用关系：FSM 发布 planning/selected_path_id 等消息；本节点的 10 ms 定时器采样并发布指令。
+ * 输入：基元库、轨迹消息、odom、heartbeat、停车及偏航消息；世界系，米、秒、弧度制。
+ * 输出：/position_cmd（PositionCommand）和 planning/select_path_end 执行反馈。
+ * 运行模式：ROS 2 轨迹服务；单机仿真由 single_drone.launch.py 启动。
+ * 主要依赖：rclcpp、Eigen、traj_utils、quadrotor_msgs、nav_msgs、std_msgs。
  */
 #include <cstdio>
 #include <nav_msgs/msg/odometry.hpp>
@@ -32,6 +27,8 @@
 
 using namespace Eigen;
 using namespace std;
+
+#include <rclcpp/create_timer.hpp>
 
 rclcpp::Node::SharedPtr node;
 
@@ -481,11 +478,11 @@ int main(int argc, char **argv)
 {
   rclcpp::init(argc, argv);
   node = std::make_shared<rclcpp::Node>("traj_server");
-  primitiveFolder_ = node->declare_parameter<std::string>("primitiveFolder", "none");
-  max_vel_ = node->declare_parameter("max_vel", -1.0);
-  time_delay_idx_ = node->declare_parameter("time_delay_idx", 1);
+  primitiveFolder_ = node->declare_parameter<std::string>("traj_server/primitiveFolder", node->declare_parameter<std::string>("primitiveFolder", "none"));
+  max_vel_ = node->declare_parameter("traj_server/max_vel", node->declare_parameter("max_vel", -1.0));
+  time_delay_idx_ = node->declare_parameter("traj_server/time_delay_idx", node->declare_parameter("time_delay_idx", 1));
   _init_x = node->declare_parameter("init_x", 0.0); _init_y = node->declare_parameter("init_y", 0.0); _init_z = node->declare_parameter("init_z", 0.0);
-  time_forward_ = node->declare_parameter("time_forward", -1.0); last_yaw_=0.; last_yawdot_=0.;
+  time_forward_ = node->declare_parameter("traj_server/time_forward", node->declare_parameter("time_forward", -1.0)); last_yaw_=0.; last_yawdot_=0.;
   auto s1=node->create_subscription<std_msgs::msg::Empty>("heartbeat",10,heartbeatCallback);
   auto s2=node->create_subscription<nav_msgs::msg::Odometry>("odom",10,odometryCallback);
   auto s3=node->create_subscription<std_msgs::msg::Float64MultiArray>("stop_command",10,stopCommandCallback);
@@ -495,7 +492,12 @@ int main(int argc, char **argv)
   auto s7=node->create_subscription<traj_utils::msg::Polynomial>("planning/polynomial_traj",10,polytrajCallback);
   pos_cmd_pub=node->create_publisher<quadrotor_msgs::msg::PositionCommand>("/position_cmd",50);
   select_path_end_pub=node->create_publisher<std_msgs::msg::Float64MultiArray>("planning/select_path_end",10);
-  auto timer=node->create_wall_timer(std::chrono::duration<double>(loop_time_),[](){cmdCallback();});
+  auto timer=rclcpp::create_timer(node, node->get_clock(), std::chrono::duration<double>(loop_time_), [](){cmdCallback();});
   RCLCPP_INFO(node->get_logger(), "Traj server ready.");
-  rclcpp::spin(node); rclcpp::shutdown(); return 0;
+  rclcpp::spin(node);
+  timer.reset();
+  s1.reset(); s2.reset(); s3.reset(); s4.reset(); s5.reset(); s6.reset(); s7.reset();
+  pos_cmd_pub.reset(); select_path_end_pub.reset(); node.reset();
+  rclcpp::shutdown();
+  return 0;
 }

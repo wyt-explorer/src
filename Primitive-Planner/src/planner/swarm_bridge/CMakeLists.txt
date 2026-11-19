@@ -16,4 +16,5 @@ target_include_directories(bridge_node_udp PRIVATE include ${EIGEN3_INCLUDE_DIRS
 ament_target_dependencies(bridge_node_udp rclcpp std_msgs geometry_msgs sensor_msgs traj_utils quadrotor_msgs nav_msgs)
 target_link_libraries(bridge_node_udp Threads::Threads)
 install(TARGETS bridge_node_udp DESTINATION lib/${PROJECT_NAME})
+install(DIRECTORY launch DESTINATION share/${PROJECT_NAME})
 ament_package()

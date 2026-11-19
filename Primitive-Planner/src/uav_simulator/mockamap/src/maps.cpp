@@ -1,3 +1,12 @@
+/**
+ * @file maps.cpp
+ * 文件作用：实现噪声场、随机障碍、二维迷宫和三维迷宫点云生成。
+ * 调用关系：mockamap_node 通过 Maps::generate(type) 分派生成方法，并转换为 ROS 点云。
+ * 输入：Maps::BasicInfo、地图类型及节点参数；网格坐标按 scale 换算为米。
+ * 输出：PCL 障碍点云与配置的 PointCloud2 输出对象。
+ * 运行模式：ROS 2 仿真地图算法模块。
+ * 主要依赖：maps.hpp、PerlinNoise、PCL、Eigen、C++ 随机数。
+ */
 #include <cstdio>
 #define ROS_INFO(...) ((void)0)
 #include "maps.hpp"

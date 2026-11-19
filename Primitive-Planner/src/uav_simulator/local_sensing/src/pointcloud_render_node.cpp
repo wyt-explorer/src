@@ -1,9 +1,14 @@
-/*
- * 文件作用：提供 ROS 2 节点消息回调；由包内可执行程序启动。
- * 输入/输出：见 create_subscription/create_publisher 的消息及话题声明。
- * 运行模式：ROS 2；位置单位为米，时间为秒；依赖 rclcpp 和对应消息包。
+/**
+ * @file pointcloud_render_node.cpp
+ * 文件作用：从地图点云中提取无人机附近的点，模拟局部点云感知。
+ * 调用关系：编译为 pcl_render_node，由 single_drone.launch.py 启动；定时执行半径搜索。
+ * 输入：global_map、odometry 及感知距离/频率参数；世界系米制，local_map 回调为空。
+ * 输出：pcl_render_node/cloud（PointCloud2），frame_id 为 world，时间戳沿用里程计。
+ * 运行模式：ROS 2 CPU 点云感知仿真。
+ * 主要依赖：rclcpp、PCL KdTree、pcl_conversions、Eigen、nav_msgs、sensor_msgs。
  */
 #include <memory>
+#include <rclcpp/create_timer.hpp>
 #include <chrono>
 #include <nav_msgs/msg/odometry.hpp>
 #include <nav_msgs/msg/path.hpp>
@@ -175,6 +180,10 @@ int main(int argc, char** argv) {
   _resolution=nh->declare_parameter("map/resolution",0.1);
   if (_resolution <= 0.0 || sensing_rate <= 0.0) throw std::invalid_argument("resolution and sensing_rate must be positive");
   _inv_resolution=1.0/_resolution; _gl_xl=-_x_size/2.; _gl_yl=-_y_size/2.; _gl_zl=0.; _GLX_SIZE=(int)(_x_size*_inv_resolution); _GLY_SIZE=(int)(_y_size*_inv_resolution); _GLZ_SIZE=(int)(_z_size*_inv_resolution);
-  auto timer=nh->create_wall_timer(std::chrono::duration<double>(1.0/sensing_rate*2.5),[](){renderSensedPoints();});
-  rclcpp::spin(nh); rclcpp::shutdown(); return 0;
+  auto timer=rclcpp::create_timer(nh, nh->get_clock(), std::chrono::duration<double>(1.0/sensing_rate*2.5), [](){renderSensedPoints();});
+  rclcpp::spin(nh);
+  timer.reset(); global_sub.reset(); local_sub.reset(); odom.reset();
+  pub_cloud.reset(); nh.reset();
+  rclcpp::shutdown();
+  return 0;
 }

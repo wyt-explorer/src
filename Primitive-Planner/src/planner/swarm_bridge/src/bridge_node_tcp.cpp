@@ -1,3 +1,12 @@
+/**
+ * @file bridge_node_tcp.cpp
+ * 文件作用：在无人机和地面站间转发里程计、MINCO 轨迹、目标及手柄消息。
+ * 调用关系：本节点调用 ReliableBridge 注册收发回调，按配置的对端 ID 转发数据。
+ * 输入：本机 ROS 话题、对端 IP/ID 配置及网络序列化消息。
+ * 输出：/others_odom、/broadcast_traj_to_planner、目标及手柄接收话题。
+ * 运行模式：遗留 ROS 1 TCP/ZMQ 桥，尚未迁移到当前 ROS 2 闭环。
+ * 主要依赖：roscpp、ReliableBridge、ZMQ/zmqpp、traj_utils、quadrotor_msgs。
+ */
 #include <ros/ros.h>
 #include <stdio.h>
 #include <stdlib.h>

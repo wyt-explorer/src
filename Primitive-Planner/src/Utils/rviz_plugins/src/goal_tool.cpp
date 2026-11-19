@@ -1,3 +1,12 @@
+/**
+ * @file goal_tool.cpp
+ * 文件作用：把三维交互目标发布为普通位姿和带 ID 的目标消息。
+ * 调用关系：RViz 插件加载 Goal3DTool，Pose3DTool 完成交互后调用 onPoseSet()。
+ * 输入：RViz 固定坐标系下的位置（米）和偏航（弧度）。
+ * 输出：可配置 goal 话题及 /goal_with_id；当前目标无人机 ID 固定为 0。
+ * 运行模式：ROS 2 RViz2 插件，保留上游三维交互状态机。
+ * 主要依赖：rviz_common、rviz_rendering、Qt、rclcpp、geometry_msgs、quadrotor_msgs。
+ */
 /*
  * Copyright (c) 2008, Willow Garage, Inc.
  * All rights reserved.
@@ -27,28 +36,29 @@
  * POSSIBILITY OF SUCH DAMAGE.
  */
 
-#include <tf/transform_listener.h>
+#include <cmath>
+#include <rviz_common/ros_integration/ros_node_abstraction_iface.hpp>
 
-#include <geometry_msgs/PoseStamped.h>
+#include <geometry_msgs/msg/pose_stamped.hpp>
 
-#include "rviz/display_context.h"
-#include "rviz/properties/string_property.h"
+#include "rviz_common/display_context.hpp"
+#include "rviz_common/properties/string_property.hpp"
 
-#include <quadrotor_msgs/GoalSet.h>
+#include <quadrotor_msgs/msg/goal_set.hpp>
 
 #include "goal_tool.h"
 
-namespace rviz
+namespace primitive_rviz
 {
 
 Goal3DTool::Goal3DTool()
 {
   shortcut_key_ = 'g';
 
-  topic_property_ = new StringProperty("Topic", "goal",
+  topic_property_ = new rviz_common::properties::StringProperty("Topic", "goal",
                                        "The topic on which to publish navigation goals.",
                                        getPropertyContainer(), SLOT(updateTopic()), this);
-  // topic_property_droneID_ = new StringProperty("Topic", "goal_with_id",
+  // topic_property_droneID_ = new rviz_common::properties::StringProperty("Topic", "goal_with_id",
   //                                              "The topic on which to publish navigation goals.",
   //                                              getPropertyContainer(), SLOT(updateTopic()), this);
 }
@@ -62,33 +72,29 @@ void Goal3DTool::onInitialize()
 
 void Goal3DTool::updateTopic()
 {
-  pub_goal_ = nh_.advertise<geometry_msgs::PoseStamped>(topic_property_->getStdString(), 1);
-  pub_droneID_goal_ = nh_.advertise<quadrotor_msgs::GoalSet>("/goal_with_id", 1);
+  nh_ = context_->getRosNodeAbstraction().lock()->get_raw_node();
+  pub_goal_ = nh_->create_publisher<geometry_msgs::msg::PoseStamped>(topic_property_->getStdString(), 1);
+  pub_droneID_goal_ = nh_->create_publisher<quadrotor_msgs::msg::GoalSet>("/goal_with_id", 1);
 }
 
 void Goal3DTool::onPoseSet(double x, double y, double z, double theta)
 {
-  ROS_WARN("3D Goal Set");
-  std::string fixed_frame = context_->getFixedFrame().toStdString();
-  tf::Quaternion quat;
-  quat.setRPY(0.0, 0.0, theta);
-  tf::Stamped<tf::Pose> p = tf::Stamped<tf::Pose>(tf::Pose(quat, tf::Point(x, y, z)), ros::Time::now(), fixed_frame);
-  geometry_msgs::PoseStamped goal;
-  tf::poseStampedTFToMsg(p, goal);
-  ROS_INFO("Setting goal: Frame:%s, Position(%.3f, %.3f, %.3f), Orientation(%.3f, %.3f, %.3f, %.3f) = Angle: %.3f\n", fixed_frame.c_str(),
-           goal.pose.position.x, goal.pose.position.y, goal.pose.position.z,
-           goal.pose.orientation.x, goal.pose.orientation.y, goal.pose.orientation.z, goal.pose.orientation.w, theta);
-  pub_goal_.publish(goal);
-
-  quadrotor_msgs::GoalSet goal_with_id;
-  goal_with_id.drone_id = 0;
-  goal_with_id.goal[0] = x;
-  goal_with_id.goal[1] = y;
-  goal_with_id.goal[2] = z;
-  pub_droneID_goal_.publish(goal_with_id);
+  geometry_msgs::msg::PoseStamped goal;
+  goal.header.frame_id = context_->getFixedFrame().toStdString();
+  goal.header.stamp = nh_->now();
+  goal.pose.position.x = x;
+  goal.pose.position.y = y;
+  goal.pose.position.z = z;
+  goal.pose.orientation.z = std::sin(theta / 2.0);
+  goal.pose.orientation.w = std::cos(theta / 2.0);
+  pub_goal_->publish(goal);
+  quadrotor_msgs::msg::GoalSet with_id;
+  with_id.drone_id = 0;
+  with_id.goal = {static_cast<float>(x), static_cast<float>(y), static_cast<float>(z)};
+  pub_droneID_goal_->publish(with_id);
 }
 
-} // end namespace rviz
+} // end namespace primitive_rviz
 
-#include <pluginlib/class_list_macros.h>
-PLUGINLIB_EXPORT_CLASS(rviz::Goal3DTool, rviz::Tool)
+#include <pluginlib/class_list_macros.hpp>
+PLUGINLIB_EXPORT_CLASS(primitive_rviz::Goal3DTool, rviz_common::Tool)

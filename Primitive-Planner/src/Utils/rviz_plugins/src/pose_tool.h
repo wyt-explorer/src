@@ -1,3 +1,12 @@
+/**
+ * @file pose_tool.h
+ * 文件作用：声明处理三维位置、高度及朝向的鼠标交互。
+ * 调用关系：RViz 调用 Pose3DTool 事件接口，完成操作后调用派生类 onPoseSet()。
+ * 输入：RViz 鼠标/键盘事件、相机和固定坐标系。
+ * 输出：目标位置与偏航回调，以及交互箭头显示。
+ * 运行模式：ROS 2 RViz2 插件，保留上游三维交互状态机。
+ * 主要依赖：rviz_common、rviz_rendering、OGRE、Qt、rclcpp。
+ */
 /*
  * Copyright (c) 2008, Willow Garage, Inc.
  * All rights reserved.
@@ -30,20 +39,22 @@
 #ifndef RVIZ_POSE_TOOL_H
 #define RVIZ_POSE_TOOL_H
 
-#include <OGRE/OgreVector3.h>
+#include <OgreVector3.h>
 
 #include <QCursor>
 
-#include <ros/ros.h>
+#include <rclcpp/rclcpp.hpp>
 
-#include "rviz/tool.h"
+#include "rviz_common/tool.hpp"
+#include "rviz_rendering/objects/arrow.hpp"
+#include <vector>
 
-namespace rviz
+namespace primitive_rviz
 {
-class Arrow;
-class DisplayContext;
 
-class Pose3DTool : public Tool
+
+
+class Pose3DTool : public rviz_common::Tool
 {
 public:
   Pose3DTool();
@@ -54,13 +65,13 @@ public:
   virtual void activate();
   virtual void deactivate();
 
-  virtual int processMouseEvent(ViewportMouseEvent& event);
+  virtual int processMouseEvent(rviz_common::ViewportMouseEvent& event);
 
 protected:
   virtual void onPoseSet(double x, double y, double z, double theta) = 0;
 
-  Arrow*              arrow_;
-  std::vector<Arrow*> arrow_array;
+  rviz_rendering::Arrow*              arrow_;
+  std::vector<rviz_rendering::Arrow*> arrow_array;
 
   enum State
   {

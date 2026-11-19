@@ -2,3 +2,5 @@
 .jazzy-check/
 .jazzy-check-output*.txt
 __pycache__/
+
+.parity-check/

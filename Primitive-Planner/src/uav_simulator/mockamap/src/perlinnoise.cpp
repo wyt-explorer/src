@@ -1,3 +1,12 @@
+/**
+ * @file perlinnoise.cpp
+ * 文件作用：实现 Perlin 噪声的置换表、平滑插值和梯度计算。
+ * 调用关系：Maps::perlin3D() 调用 PerlinNoise::noise() 构造地图噪声场。
+ * 输入：随机种子或默认置换表，以及三维无量纲采样坐标。
+ * 输出：连续噪声值，供地图阈值筛选使用。
+ * 运行模式：纯 C++ 数学辅助模块。
+ * 主要依赖：C++ 标准库 vector、random、cmath。
+ */
 #include "perlinnoise.hpp"
 
 #include <algorithm>

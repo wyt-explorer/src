@@ -1,1 +1,1 @@
-/home/wyt/RC_planner/src/install/primitive_planner:/home/wyt/RC_planner/src/install/traj_utils:/home/wyt/RC_planner/src/install/poscmd_2_odom:/home/wyt/RC_planner/src/install/local_sensing_node:/home/wyt/RC_planner/src/install/quadrotor_msgs:/home/wyt/RC_planner/src/install/primitive_env:/opt/ros/jazzy
+/home/wyt/RC_planner/src/install/poscmd_2_odom:/home/wyt/RC_planner/src/install/local_sensing_node:/home/wyt/RC_planner/src/install/traj_utils:/home/wyt/RC_planner/src/install/quadrotor_msgs:/home/wyt/RC_planner/src/install/primitive_env:/opt/ros/jazzy

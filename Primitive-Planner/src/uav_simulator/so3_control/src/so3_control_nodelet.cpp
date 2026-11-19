@@ -1,3 +1,12 @@
+/**
+ * @file so3_control_nodelet.cpp
+ * 文件作用：将状态、位置指令和校正量转换为含电机使能配置的 SO3 指令。
+ * 调用关系：ROS 1 nodelet 加载后注册回调，调用 SO3Control 计算期望力和姿态。
+ * 输入：odom、position_cmd、imu、motors、corrections 及质量/增益参数。
+ * 输出：so3_cmd（SO3Command）；力 N，姿态四元数，位置与时间采用米、秒制。
+ * 运行模式：遗留 ROS 1 nodelet，当前 ROS 2 构建使用 so3_control_ros2.cpp。
+ * 主要依赖：nodelet、roscpp、SO3Control、Eigen、TF、quadrotor_msgs。
+ */
 #include <Eigen/Geometry>
 #include <nav_msgs/Odometry.h>
 #include <nodelet/nodelet.h>

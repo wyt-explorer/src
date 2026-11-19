@@ -1,4 +1,11 @@
 #!/usr/bin/env python3
+"""文件作用：周期广播绕 Z 轴旋转的可视化坐标系。
+调用关系：RotateTF 节点以 30 Hz 定时调用 tick()。
+输入：节点启动后经过的秒数，无订阅输入。
+输出：world → rotate 的 TF，旋转角为 0.02 × 经过秒数（弧度）。
+运行模式：ROS 2 可视化辅助脚本。
+主要依赖：rclpy、tf2_ros、geometry_msgs、math。
+"""
 import math
 import rclpy
 from rclpy.node import Node

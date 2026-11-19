@@ -1,3 +1,12 @@
+/**
+ * @file maps.hpp
+ * 文件作用：声明噪声地图、随机障碍和二维/三维迷宫生成接口。
+ * 调用关系：mockamap.cpp 配置 Maps::BasicInfo 后调用 generate(type)，实现在 maps.cpp。
+ * 输入：网格尺寸、每米网格数 scale、种子、ROS 节点及点云输出指针。
+ * 输出：填充的 PCL 点云、PointCloud2 和迷宫辅助数据。
+ * 运行模式：ROS 2 仿真地图内部模块。
+ * 主要依赖：rclcpp、PCL、Eigen、sensor_msgs。
+ */
 #ifndef MAPS_HPP
 #define MAPS_HPP
 

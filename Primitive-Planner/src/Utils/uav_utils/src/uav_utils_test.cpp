@@ -1,3 +1,12 @@
+/**
+ * @file uav_utils_test.cpp
+ * 文件作用：验证旋转表示、叉乘矩阵、角度运算及消息转换工具。
+ * 调用关系：GoogleTest 运行各 TEST 用例，main() 返回测试执行结果。
+ * 输入：测试内构造的数值、Eigen 对象与 ROS 消息。
+ * 输出：断言结果和测试退出码。
+ * 运行模式：遗留 C++ 单元测试，使用 ROS 1 消息接口，当前 CMake 未构建此测试。
+ * 主要依赖：GoogleTest、uav_utils。
+ */
 #include <gtest/gtest.h>
 #include <uav_utils/utils.h>
 

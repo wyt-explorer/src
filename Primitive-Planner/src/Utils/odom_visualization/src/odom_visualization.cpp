@@ -1,8 +1,11 @@
-/*
- * 文件作用：将里程计和控制指令转换为 RViz2 可视化及 TF2。
- * 调用关系：odom_visualization 节点订阅 odom/cmd，发布姿态、轨迹和模型标记。
- * 输入：米/秒制里程计及位置指令；输出：world 下可视化消息。
- * 运行模式：仿真/实机；依赖 rclcpp、TF2、Armadillo 和 pose_utils。
+/**
+ * @file odom_visualization.cpp
+ * 文件作用：将里程计和位置指令转换为姿态、路径、速度、协方差及模型显示。
+ * 调用关系：odom_visualization 节点的 odom/cmd 回调更新并发布可视化消息。
+ * 输入：odom、cmd 及显示参数；位置米、速度米/秒，支持原点偏移配置。
+ * 输出：pose、path、trajectory、robot 等可视化话题及 TF。
+ * 运行模式：ROS 2 可视化节点，显示坐标受输入和配置影响。
+ * 主要依赖：rclcpp、tf2_ros、Armadillo、pose_utils、visualization_msgs。
  */
 #include <iostream>
 #include <string>
@@ -493,6 +496,10 @@ int main(int argc, char **argv)
   broadcaster = std::make_shared<tf2_ros::TransformBroadcaster>(n);
 
   rclcpp::spin(n);
+  sub_odom.reset(); sub_cmd.reset(); broadcaster.reset();
+  posePub.reset(); pathPub.reset(); velPub.reset(); covPub.reset(); covVelPub.reset();
+  trajPub.reset(); sensorPub.reset(); meshPub.reset(); heightPub.reset();
+  n.reset();
   rclcpp::shutdown();
 
   return 0;

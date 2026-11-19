@@ -1,7 +1,9 @@
-"""
-retime a path for uav
-=======================================
-Dof: 2 [x, y]; z = 0
+"""文件作用：对直线/圆弧基元做时间参数化，并生成障碍物和机间碰撞体素对应表。
+调用关系：离线运行 run() → timeSpaceCorrespondence()；生成库供管理器、FSM 与 traj_server 读取。
+输入：速度/加速度上限、弧长、半径、旋转角、机体半径和体素尺寸；米、秒制。
+输出：trajectory、trajectory_pos、obs_correspondence、agent_correspondence；轨迹约 100 Hz，时间窗以毫秒存储。
+运行模式：离线 Python 基元库生成，运行会清理指定库目录。
+主要依赖：TOPPRA、NumPy、SciPy、Matplotlib、struct、文件系统工具。
 """
 
 from os import mkdir

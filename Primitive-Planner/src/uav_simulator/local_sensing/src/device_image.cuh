@@ -1,3 +1,12 @@
+/**
+ * @file device_image.cuh
+ * 文件作用：封装 CUDA 二维设备图像的内存分配、像素访问和主机拷贝。
+ * 调用关系：DepthRender 分配深度缓冲，CUDA 核函数通过 atXY() 访问像素。
+ * 输入：图像宽高、像素类型和主机/设备数据。
+ * 输出：设备图像、主机数据副本；像素单位由调用方定义。
+ * 运行模式：CUDA 模板辅助类，保留原 REMODE 许可证。
+ * 主要依赖：CUDA runtime、assert、CudaException。
+ */
 // This file is part of REMODE - REgularized MOnocular Depth Estimation.
 //
 // Copyright (C) 2014 Matia Pizzoli <matia dot pizzoli at gmail dot com>

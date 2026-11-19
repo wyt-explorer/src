@@ -1,3 +1,12 @@
+/**
+ * @file Quadrotor.h
+ * 文件作用：声明四旋翼状态、物理参数、转速输入和动力学积分接口。
+ * 调用关系：Quadrotor.cpp 实现，动力学测试和完整 ROS 2 模拟器调用。
+ * 输入：电机转速、外力/力矩、初始状态和秒制积分步长；状态含世界系位置/速度与机体姿态。
+ * 输出：积分后的位姿、速度、角速度与电机转速；米、秒、kg 制。
+ * 运行模式：独立 C++ 动力学模型。
+ * 主要依赖：Eigen、Boost array。
+ */
 #ifndef __QUADROTOR_SIMULATOR_QUADROTOR_H__
 #define __QUADROTOR_SIMULATOR_QUADROTOR_H__
 

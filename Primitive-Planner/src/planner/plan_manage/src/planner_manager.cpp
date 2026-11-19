@@ -1,9 +1,15 @@
-/*
- * 文件作用：ROS 2 Jazzy 规划与仿真组件，保留原运动基元算法。
- * 调用关系：由对应包的节点或库调用；输入输出见消息回调与发布接口。
- * 输入：ROS 2 消息、参数及运动基元文件（SI 单位，world 坐标系）。
- * 输出：规划轨迹、控制指令或可视化数据。
- * 运行模式：ROS 2 仿真/实机；依赖 rclcpp 和对应包的消息类型。
+/**
+ * @file planner_manager.cpp
+ * 文件作用：加载离线运动基元及体素对应表，筛除障碍物和其他飞机造成的碰撞路径，
+ *           按目标距离与端点越界代价排序，返回候选路径 ID。
+ * 调用关系：PPReplanFSM::init() 初始化本模块；planPrimitive() 调用 trajReplan()，
+ *           依次执行障碍物标记、机间碰撞标记和评分。FSM 再读取轨迹并发布给 traj_server。
+ * 输入：manager/ 参数、基元文件、plan_manage/odom 和 plan_manage/cloud；
+ *       FSM 提供规划起点、速度、时间、目标、速度系到世界系的旋转矩阵及 swarm_traj。
+ *       点云和位置须在同一世界系，长度为米、速度为米/秒、时间为秒；本模块不查询 TF。
+ * 输出：按代价升序排列的路径 ID；无可行候选时 trajReplan() 返回 false。
+ * 运行模式：primitive_planner_node 内部模块，无仿真/实机分支。
+ * 主要依赖：rclcpp、nav_msgs、sensor_msgs、PCL、Eigen 和 traj_utils。
  */
 #include <cstdio>
 #include <plan_manage/planner_manager.h>

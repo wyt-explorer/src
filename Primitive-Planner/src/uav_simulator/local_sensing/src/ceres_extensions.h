@@ -1,3 +1,12 @@
+/**
+ * @file ceres_extensions.h
+ * 文件作用：为 Eigen 四元数存储顺序提供 Ceres 局部参数化与旋转计算。
+ * 调用关系：标定或优化调用方直接使用头文件内参数化类和模板函数。
+ * 输入：x/y/z/w 四元数、三维局部增量、点和矩阵。
+ * 输出：更新后的四元数、雅可比、旋转矩阵或旋转后的点。
+ * 运行模式：遗留 Ceres LocalParameterization 接口辅助代码。
+ * 主要依赖：Eigen、Ceres local_parameterization/rotation。
+ */
 //
 //  ceres_extensions.h
 //  Bundle_Adjust_Test

@@ -1,9 +1,11 @@
-/*
- * 文件作用：ROS 2 Jazzy 规划与仿真组件，保留原运动基元算法。
- * 调用关系：由对应包的节点或库调用；输入输出见消息回调与发布接口。
- * 输入：ROS 2 消息、参数及运动基元文件（SI 单位，world 坐标系）。
- * 输出：规划轨迹、控制指令或可视化数据。
- * 运行模式：ROS 2 仿真/实机；依赖 rclcpp 和对应包的消息类型。
+/**
+ * @file planning_visualization.cpp
+ * 文件作用：将目标、候选路径和最优轨迹转换为 RViz Marker。
+ * 调用关系：PlanningVisualization 由 FSM 初始化，规划与显示函数按需调用发布接口。
+ * 输入：节点句柄、世界系目标或路径点、颜色及显示尺寸；位置与尺寸为米。
+ * 输出：goal_point、init_list、optimal_list 等 Marker/MarkerArray 话题。
+ * 运行模式：ROS 2 可视化模块。
+ * 主要依赖：rclcpp、Eigen、visualization_msgs。
  */
 #include <thread>
 #include <chrono>

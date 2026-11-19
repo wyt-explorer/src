@@ -1,3 +1,12 @@
+/**
+ * @file Quadrotor.cpp
+ * 文件作用：实现电机响应、推力/力矩及四旋翼刚体动力学数值积分。
+ * 调用关系：Quadrotor::step() 调用 ODE 积分器，供完整 ROS 2 模拟器和模型测试使用。
+ * 输入：四电机转速指令、扰动力/力矩和时间步长；力 N、力矩 N·m、时间秒。
+ * 输出：更新后的世界系位置/速度、旋转矩阵、机体系角速度和电机转速。
+ * 运行模式：纯 C++ 动力学库；ROS 2 模拟器通过 step() 执行此积分。
+ * 主要依赖：Eigen、Boost Odeint、Quadrotor.h。
+ */
 #include "quadrotor_simulator/Quadrotor.h"
 #include "ode/boost/numeric/odeint.hpp"
 #include <Eigen/Geometry>

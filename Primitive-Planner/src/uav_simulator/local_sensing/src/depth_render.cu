@@ -1,3 +1,12 @@
+/**
+ * @file depth_render.cu
+ * 文件作用：将点云变换至相机系并投影，使用 GPU 原子最小值计算可见深度。
+ * 调用关系：DepthRender::set_data() 上传点云，render_pose() 启动初始化和投影 CUDA 核函数。
+ * 输入：米制点云、相机内参/图像尺寸和世界到相机的行主序 4×4 变换。
+ * 输出：主机 int 深度缓冲，单位毫米；无命中像素初始值为 999999。
+ * 运行模式：CUDA 深度渲染实现，供遗留感知程序调用。
+ * 主要依赖：CUDA runtime、DeviceImage、CudaException、helper_math。
+ */
 #include "depth_render.cuh"
 __global__ void render(float3 *data_devptr, Parameter *para_devptr, DeviceImage<int> *depth_devptr)
 {

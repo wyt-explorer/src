@@ -1,3 +1,12 @@
+/**
+ * @file selected_points_publisher.hpp
+ * 文件作用：声明 ROS 2 机群框选、选择发布和目标点击工具。
+ * 调用关系：RViz2 加载插件，onInitialize() 创建发布器，鼠标/键盘回调读取选择属性。
+ * 输入：RViz 选择结果、鼠标/键盘事件；位置为固定坐标系米制。
+ * 输出：/rviz_selected_drones 与 /goal（PoseStamped），连接 assign_goals。
+ * 运行模式：ROS 2 RViz2 插件，保留上游 C 清除、P 发布和右键目标交互。
+ * 主要依赖：rviz_common、rviz_default_plugins、Qt、OGRE、rclcpp、geometry_msgs。
+ */
 /*
  * Copyright 2019-2020 Autoware Foundation. All rights reserved.
  *
@@ -20,49 +29,27 @@
  *  Created on: December 5th 2019
  */
 
-#ifndef SELECTED_POINTS_PUBLISHER_HPP
-#define SELECTED_POINTS_PUBLISHER_HPP
-
-#ifndef Q_MOC_RUN  // See: https://bugreports.qt-project.org/browse/QTBUG-22829
-#include <ros/node_handle.h>
-#include <ros/publisher.h>
-#include "rviz/tool.h"
-#include <QCursor>
-#include <QObject>
-#endif
-
-#include <geometry_msgs/PoseStamped.h>
-#include "rviz/default_plugin/tools/selection_tool.h"
-
+#pragma once
+#include <rviz_default_plugins/tools/select/selection_tool.hpp>
+#include <rclcpp/rclcpp.hpp>
+#include <geometry_msgs/msg/pose_stamped.hpp>
+#include <vector>
 namespace rviz_plugin_selected_points_publisher
 {
-class SelectedPointsPublisher;
-
-class SelectedPointsPublisher : public rviz::SelectionTool
+class SelectedPointsPublisher : public rviz_default_plugins::tools::SelectionTool
 {
   Q_OBJECT
 public:
   SelectedPointsPublisher();
-  virtual ~SelectedPointsPublisher();
-  virtual int processMouseEvent(rviz::ViewportMouseEvent& event);
-  virtual int processKeyEvent(QKeyEvent* event, rviz::RenderPanel* panel);
-
+  void onInitialize() override;
+  int processMouseEvent(rviz_common::ViewportMouseEvent& event) override;
+  int processKeyEvent(QKeyEvent* event, rviz_common::RenderPanel* panel) override;
 public Q_SLOTS:
   void updateTopic();
-
 protected:
-  int processSelectedArea();
-  ros::NodeHandle node_handle_;
-  ros::Publisher rviz_selected_publisher_, goal_publisher_;
-
-  std::string tf_frame_;
-  std::string selected_drones_topic_, goal_topic_;
-
-  std::vector<geometry_msgs::PoseStamped> selected_drones_;
-
-  bool selecting_;
-  int num_selected_points_;
+  void processSelectedArea();
+  rclcpp::Node::SharedPtr node_;
+  rclcpp::Publisher<geometry_msgs::msg::PoseStamped>::SharedPtr selected_pub_, goal_pub_;
+  std::vector<geometry_msgs::msg::PoseStamped> selected_drones_;
 };
-}  // namespace rviz_plugin_selected_points_publisher
-
-#endif  // SELECTED_POINTS_PUBLISHER_HPP
+}

@@ -1,6 +1,14 @@
 #!/usr/bin/env python3
 # coding=utf-8
+"""文件作用：从起终点列表生成多机规划启动配置。
+调用关系：run_batch.py 先生成起终点，再调用本脚本生成启动文件。
+输入：start_and_goals.txt 中的 square_starts/square_goals；世界系米制坐标。
+输出：primitive_swarm.launch，包含地图、通信桥和逐机规划配置。
+运行模式：离线 Python 工具，输出 ROS 2 launch XML。
+主要依赖：ast、os。
+"""
 
+from ros2_launch_xml import convert_text
 import ast
 import os
 
@@ -84,7 +92,7 @@ def generate_launch_content(starts, goals):
         )
 
     launch_content = launch_template.format(includes=includes_content)
-    return launch_content + "\n</launch>"
+    return convert_text(launch_content + "\n</launch>")
 
 def main():
     script_dir = os.path.dirname(os.path.abspath(__file__))

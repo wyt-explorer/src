@@ -1,7 +1,10 @@
 #!/usr/bin/env python3
-"""由 demo.launch.py 调用，从 YAML（米、world 坐标）生成障碍物点云。
-输入：map_file 参数；输出：PointCloud2；模式：ROS 2 仿真地图。
-依赖：rclpy、sensor_msgs_py、NumPy、PyYAML。
+"""文件作用：按 YAML 中的箱体、圆柱和圆环配置采样静态障碍物点云。
+调用关系：demo.launch.py 或 single_drone.launch.py 启动，每秒调用 publish()。
+输入：map_file、cloud_topic；地图位置/尺寸/分辨率为米，坐标系来自 map.frame_id。
+输出：PointCloud2，默认 /map_generator/global_cloud，使用节点时钟时间戳。
+运行模式：ROS 2 仿真地图生成节点。
+主要依赖：rclpy、sensor_msgs_py、NumPy、PyYAML。
 """
 import os
 import yaml

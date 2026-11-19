@@ -1,3 +1,12 @@
+/**
+ * @file pose_utils.h
+ * 文件作用：声明姿态转换、位姿组合和滤波状态/雅可比计算接口。
+ * 调用关系：odom_visualization 等模块包含本头文件；实现在 pose_utils.cpp。
+ * 输入：Armadillo 向量/矩阵、位姿、输入量和时间步长；欧拉角为弧度。
+ * 输出：转换后的姿态、组合位姿、预测状态及雅可比矩阵。
+ * 运行模式：纯 C++ 数学库，无 ROS 订阅或发布。
+ * 主要依赖：Armadillo、C++ 标准库。
+ */
 #ifndef POSE_UTILS_H
 #define POSE_UTILS_H
 

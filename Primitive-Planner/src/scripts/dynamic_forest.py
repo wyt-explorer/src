@@ -1,4 +1,11 @@
 #!/usr/bin/env python3
+"""文件作用：生成森林障碍物及其运动表达式，并发布模型、标记与障碍轨迹。
+调用关系：独立运行 FakeSim，1 秒定时器调用 pubTF() 更新障碍信息。
+输入：脚本内障碍数量、范围、尺寸和随机种子；世界系米制。
+输出：/trajs、/shapes_*、TF 和 obstacles.txt；Gazebo 状态发布调用已注释。
+运行模式：遗留 ROS 1 场景脚本，依赖外部 RMADER/Snapstack 消息。
+主要依赖：rospy、tf、NumPy、rmader_msgs、snapstack_msgs、gazebo_msgs。
+"""
 
 # /* ----------------------------------------------------------------------------
 #  * Copyright 2020, Jesus Tordesillas Torres, Aerospace Controls Laboratory

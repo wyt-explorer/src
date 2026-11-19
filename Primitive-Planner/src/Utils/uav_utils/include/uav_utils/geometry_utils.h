@@ -1,3 +1,12 @@
+/**
+ * @file geometry_utils.h
+ * 文件作用：提供角度换算、四元数/旋转矩阵运算及姿态几何辅助函数。
+ * 调用关系：由 uav_utils/utils.h、动力学模拟器和工具测试按需调用。
+ * 输入：Eigen 向量、矩阵、四元数及角度；角度转换接口区分度与弧度。
+ * 输出：几何运算结果，不发布消息。
+ * 运行模式：纯 C++ 模板数学工具。
+ * 主要依赖：Eigen、数学函数。
+ */
 #ifndef __GEOMETRY_UTILS_H
 #define __GEOMETRY_UTILS_H
 

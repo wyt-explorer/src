@@ -1,27 +1,25 @@
-# Primitive_Planner
+# Primitive_Planner — ROS 2 Jazzy
 
-## 当前 `new` 分支：ROS 2 Jazzy
+本地实现以 [ZJU-FAST-Lab 上游 cab5aa2](https://github.com/ZJU-FAST-Lab/Primitive-Planner/tree/cab5aa2f82948be58b36e37b6a921b9dba97423c) 为基准，保留规划算法和节点分工，恢复圆周对径交换的多机演示。调用映射、适配说明和验证见 [UPSTREAM_PARITY.md](UPSTREAM_PARITY.md)。本次不修改 `Primitive_env`。
 
-本分支的单机规划闭环已完成 ROS 2 Jazzy 基础编译与运行验证。完整说明以[仓库根目录 README](../README.md)为准；环境配置见 [Primitive_env README](../Primitive_env/README.md)。
-
-从仓库根目录 `~/RC_planner/src` 编译并启动：
+从工作空间根目录编译：
 
 ```bash
 source /opt/ros/jazzy/setup.bash
-colcon build --packages-up-to primitive_planner --cmake-args -DCMAKE_BUILD_TYPE=Release
+colcon build --base-paths Primitive-Planner/src --cmake-args -DCMAKE_BUILD_TYPE=Release
 source install/setup.bash
-ros2 launch primitive_planner single_drone.launch.py
+ros2 launch primitive_planner swarm.launch.py drone_num:=20
 ```
 
-启动后会自动打开 RViz2 并加载地图、起终点和里程计。等待 `WAIT_TARGET` 后，可以使用 Publish Point 点击地图触发；也可在另一个已加载同一环境的终端触发：
+等待各机 `WAIT_TARGET` 后，在加载相同环境的终端触发：
 
 ```bash
 ros2 topic pub --once /traj_start_trigger geometry_msgs/msg/PoseStamped '{header: {frame_id: world}, pose: {orientation: {w: 1.0}}}'
 ```
 
-起终点与地图共用 `Primitive_env/map/map_01.yaml`，可以通过 `map_file:=/absolute/path/map.yaml` 替换。当前使用理想位置指令跟踪器；旧 RViz 插件、完整 SO3 动力学、多机和实机尚未验证通过。
+默认使用上游的理想位置跟踪器；`simulator:=so3` 选择完整 SO3 控制/动力学。`rviz:=false` 关闭 RViz2。保留 `single_drone.launch.py` 以使用现有 YAML 地图；详见[根目录 README](../README.md)。
 
-下方保留原项目的论文、架构与 ROS 1 历史说明。`catkin_make`、`devel/setup.bash`、`roslaunch` 和旧 XML launch 不适用于当前 ROS 2 启动流程。
+下面保留论文及上游 ROS 1 历史说明。当前 ROS 2 使用 `.launch.py`/`.launch.xml` 入口，不使用 `catkin_make`、`roslaunch` 或 `devel/setup.bash`。
 
 ## Paper
 

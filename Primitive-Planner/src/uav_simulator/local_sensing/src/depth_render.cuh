@@ -1,3 +1,12 @@
+/**
+ * @file depth_render.cuh
+ * 文件作用：声明 GPU 深度渲染参数与 DepthRender 数据上传、位姿渲染接口。
+ * 调用关系：遗留 pcl_render_node.cpp、euroc.cpp 调用；实现位于 depth_render.cu。
+ * 输入：米制点云、像素制相机内参、图像尺寸及世界到相机变换。
+ * 输出：毫米制整数深度缓冲。
+ * 运行模式：CUDA 工具类，当前 ROS 2 CPU 感知节点不使用此接口。
+ * 主要依赖：CUDA runtime、device_image.cuh、cuda_exception.cuh、helper_math.h。
+ */
 #ifndef DEPTH_RENDER_CUH
 #define DEPTH_RENDER_CUH
 

@@ -1,3 +1,12 @@
+/**
+ * @file SO3Control.h
+ * 文件作用：声明基于位置、速度误差及期望加速度的 SO3 控制计算接口。
+ * 调用关系：SO3 ROS 2 节点及遗留 nodelet 调用 calculateControl()，再读取推力和姿态。
+ * 输入：世界系状态/期望位置、速度、加速度、偏航及增益；米、秒、弧度制，质量 kg。
+ * 输出：期望力向量（N）和姿态四元数。
+ * 运行模式：独立 C++ 控制算法，无 ROS 回调。
+ * 主要依赖：Eigen。
+ */
 #ifndef __SO3_CONTROL_H__
 #define __SO3_CONTROL_H__
 

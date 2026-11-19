@@ -1,3 +1,12 @@
+/**
+ * @file CSVLogger.h
+ * 文件作用：提供按时间建目录、创建 CSV 文件和追加记录的工具类。
+ * 调用关系：PPReplanFSM 包含本类；当前日志初始化及写入调用已注释。
+ * 输入：基础目录、文件前缀、无人机 ID、rclcpp::Time 和数值数组。
+ * 输出：CSV 文件及包含秒制时间戳的逗号分隔字符串。
+ * 运行模式：进程内文件工具；目录名使用系统本地时间。
+ * 主要依赖：C++17 filesystem、文件流、rclcpp。
+ */
 #include <iostream>
 #include <sstream>
 #include <fstream>

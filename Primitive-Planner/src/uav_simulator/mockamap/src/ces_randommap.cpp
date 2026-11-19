@@ -1,3 +1,12 @@
+/**
+ * @file ces_randommap.cpp
+ * 文件作用：保留固定障碍地图生成与里程计附近点云提取的辅助实现。
+ * 调用关系：提供 fixedMapGenerate() 等函数；当前 mockamap CMake 未编译此文件。
+ * 输入：地图/里程计缓存、感知半径和内部障碍列表；位置为米。
+ * 输出：通过全局发布器输出全局与局部点云，坐标标签由 MAP_OR_WORLD 决定。
+ * 运行模式：未接入当前构建的历史实现，包含未完成的 ROS 2 时间接口。
+ * 主要依赖：rclcpp、PCL、Eigen、maps.hpp、ROS 点云与里程计消息。
+ */
 #include <iostream>
 #include <pcl/point_cloud.h>
 #include <pcl/point_types.h>

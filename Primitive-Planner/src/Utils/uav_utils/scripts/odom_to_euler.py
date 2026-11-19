@@ -1,4 +1,11 @@
 #!/usr/bin/env python3
+"""文件作用：将里程计/IMU 四元数转换为欧拉角，并提取手柄控制轴。
+调用关系：订阅回调分别转换姿态或轴值，沿用输入消息头发布。
+输入：odom、imu、ctrlin；四元数和 Joy 轴。
+输出：euler、imueuler 的 x/y/z 为 roll/pitch/yaw（度）；ctrlout 为选取的轴值。
+运行模式：ROS 2 诊断脚本。
+主要依赖：rclpy、nav_msgs、sensor_msgs、geometry_msgs、math。
+"""
 import math
 import rclpy
 from rclpy.node import Node
@@ -22,7 +29,7 @@ class NodeE(Node):
     def joy(self,m):
         o=Vector3Stamped(); o.header=m.header; o.vector.x=m.axes[0]; o.vector.y=m.axes[1]; o.vector.z=-m.axes[3]; self.pc.publish(o)
     def pub(self,h,e,p):
-        o=Vector3Stamped(); o.header=h; o.vector.x=math.degrees(e[2]); o.vector.y=math.degrees(e[1]); o.vector.z=math.degrees(e[0]); p.publish(o)
+        o=Vector3Stamped(); o.header=h; o.vector.x=e[0]*180.0/3.14159; o.vector.y=e[1]*180.0/3.14159; o.vector.z=e[2]*180.0/3.14159; p.publish(o)
 def main():
     rclpy.init(); n=NodeE(); rclpy.spin(n); n.destroy_node(); rclpy.shutdown()
 if __name__=='__main__': main()

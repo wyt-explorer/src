@@ -1,6 +1,10 @@
 #!/usr/bin/env python3
-"""读取地图 YAML 的起终点（米、world），周期发布 RViz2 Marker。
-由 demo/single_drone launch 调用；用于仿真可视化，依赖 rclpy、PyYAML。
+"""文件作用：将地图 YAML 中的起点和终点显示为不同颜色的球形标记。
+调用关系：demo.launch.py 或 single_drone.launch.py 启动，每秒发布两个 Marker。
+输入：map_file 中的 start、goal 与 map.frame_id；位置为米。
+输出：/my_primitive_demo/waypoint_markers，起点绿色、终点红色。
+运行模式：ROS 2 仿真可视化节点。
+主要依赖：rclpy、visualization_msgs、PyYAML。
 """
 import os,yaml
 import rclpy

@@ -1,3 +1,12 @@
+/**
+ * @file SO3Control.cpp
+ * 文件作用：计算含重力补偿的期望推力向量，并由推力方向和偏航构造期望姿态。
+ * 调用关系：完整 SO3 ROS 2 节点及遗留 nodelet 调用 calculateControl()，再读取推力和姿态。
+ * 输入：世界系状态/期望位置、速度、加速度、偏航及增益；米、秒、弧度制，质量 kg。
+ * 输出：期望力向量（N）和姿态四元数。
+ * 运行模式：独立 C++ 控制算法，无 ROS 回调。
+ * 主要依赖：Eigen。
+ */
 #include <iostream>
 #include <so3_control/SO3Control.h>
 
