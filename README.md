@@ -4,15 +4,12 @@
 
 在 Ubuntu 24.04 / ROS 2 Jazzy 环境中，按“离线生成基元 → 编译 → 启动”的顺序执行。规划器启动时只读取基元库，不会自动生成。
 
-首次生成或修改基元参数后，从工作空间根目录执行（已有匹配的完整基元库可跳过）：
+首次生成或修改基元参数后，从工作空间根目录执行（已有匹配的完整基元库可跳过）。系统 Python 3.12 已自带 numpy/scipy/matplotlib，只需补装 toppra 与 pyrfc3339：
 
 ```bash
 cd ~/RC_planner/src
-python3 -m venv /tmp/primitive-library-venv
-source /tmp/primitive-library-venv/bin/activate
-python -m pip install numpy scipy matplotlib toppra pyrfc3339
-python Primitive-Planner/src/scripts/swarm_path.py
-deactivate
+python3 -m pip install --user --break-system-packages toppra pyrfc3339
+python3 Primitive-Planner/src/scripts/swarm_path.py
 ```
 
 生成参数在 [swarm_path.py](Primitive-Planner/src/scripts/swarm_path.py) 的 `run()` 和末尾调用处：速度、加速度、弧长、半径、旋转间隔、机体半径及体素尺寸。默认开启绘图，生成过程中出现图窗时需关闭后继续。脚本会先清空 `Primitive-Planner/src/planner/plan_manage/primitive_library/`，再生成 `trajectory/`、`trajectory_pos/`、`obs_correspondence/`、`agent_correspondence/`。修改参数后应整套重新生成，并核对规划器的速度范围、体素尺寸和覆盖盒尺寸配置。

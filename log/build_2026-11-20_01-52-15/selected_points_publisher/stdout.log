@@ -1,0 +1,26 @@
+[  0%] Built target selected_points_publisher_autogen_timestamp_deps
+[ 20%] Built target selected_points_publisher_autogen
+[100%] Built target selected_points_publisher
+-- Install configuration: "Release"
+-- Up-to-date: /home/wyt/RC_planner/src/install/selected_points_publisher/share/selected_points_publisher/plugin_description.xml
+-- Up-to-date: /home/wyt/RC_planner/src/install/selected_points_publisher/lib/libselected_points_publisher.so
+-- Up-to-date: /home/wyt/RC_planner/src/install/selected_points_publisher/include
+-- Up-to-date: /home/wyt/RC_planner/src/install/selected_points_publisher/include/selected_points_publisher
+-- Up-to-date: /home/wyt/RC_planner/src/install/selected_points_publisher/include/selected_points_publisher/selected_points_publisher.hpp
+-- Up-to-date: /home/wyt/RC_planner/src/install/selected_points_publisher/share/selected_points_publisher/plugin_description.xml
+-- Up-to-date: /home/wyt/RC_planner/src/install/selected_points_publisher/share/ament_index/resource_index/package_run_dependencies/selected_points_publisher
+-- Up-to-date: /home/wyt/RC_planner/src/install/selected_points_publisher/share/ament_index/resource_index/parent_prefix_path/selected_points_publisher
+-- Up-to-date: /home/wyt/RC_planner/src/install/selected_points_publisher/share/selected_points_publisher/environment/ament_prefix_path.sh
+-- Up-to-date: /home/wyt/RC_planner/src/install/selected_points_publisher/share/selected_points_publisher/environment/ament_prefix_path.dsv
+-- Up-to-date: /home/wyt/RC_planner/src/install/selected_points_publisher/share/selected_points_publisher/environment/path.sh
+-- Up-to-date: /home/wyt/RC_planner/src/install/selected_points_publisher/share/selected_points_publisher/environment/path.dsv
+-- Up-to-date: /home/wyt/RC_planner/src/install/selected_points_publisher/share/selected_points_publisher/local_setup.bash
+-- Up-to-date: /home/wyt/RC_planner/src/install/selected_points_publisher/share/selected_points_publisher/local_setup.sh
+-- Up-to-date: /home/wyt/RC_planner/src/install/selected_points_publisher/share/selected_points_publisher/local_setup.zsh
+-- Up-to-date: /home/wyt/RC_planner/src/install/selected_points_publisher/share/selected_points_publisher/local_setup.dsv
+-- Installing: /home/wyt/RC_planner/src/install/selected_points_publisher/share/selected_points_publisher/package.dsv
+-- Up-to-date: /home/wyt/RC_planner/src/install/selected_points_publisher/share/ament_index/resource_index/packages/selected_points_publisher
+-- Up-to-date: /home/wyt/RC_planner/src/install/selected_points_publisher/share/ament_index/resource_index/rviz_common__pluginlib__plugin/selected_points_publisher
+-- Up-to-date: /home/wyt/RC_planner/src/install/selected_points_publisher/share/selected_points_publisher/cmake/selected_points_publisherConfig.cmake
+-- Up-to-date: /home/wyt/RC_planner/src/install/selected_points_publisher/share/selected_points_publisher/cmake/selected_points_publisherConfig-version.cmake
+-- Up-to-date: /home/wyt/RC_planner/src/install/selected_points_publisher/share/selected_points_publisher/package.xml

@@ -2,22 +2,20 @@
 
 本地实现以 [ZJU-FAST-Lab 上游 cab5aa2](https://github.com/ZJU-FAST-Lab/Primitive-Planner/tree/cab5aa2f82948be58b36e37b6a921b9dba97423c) 为基准，保留规划算法和节点分工，恢复圆周对径交换的多机演示。目录结构、类与函数、调用关系严格对齐上游，仅做 ROS 1 → ROS 2 Jazzy 的必要转换。本次不修改 `Primitive_env`。
 
-先离线生成运动基元，再编译和启动。规划器只加载基元库，不会自动生成；已有匹配的完整库可复用。以下命令从工作空间根目录执行：
+先离线生成运动基元，再编译和启动。规划器只加载基元库，不会自动生成；已有匹配的完整库可复用。系统 Python 3.12 已自带 numpy/scipy/matplotlib，只需补装 toppra 与 pyrfc3339。以下命令从工作空间根目录执行：
 
 ```bash
+cd ~/RC_planner/src
+python3 -m pip install --user --break-system-packages toppra pyrfc3339
+python3 Primitive-Planner/src/scripts/swarm_path.py
+
 source /opt/ros/jazzy/setup.bash
 colcon build --base-paths Primitive-Planner/src --cmake-args -DCMAKE_BUILD_TYPE=Release
 source install/setup.bash
-python Primitive-Planner/src/scripts/swarm_path.py
+ros2 launch primitive_planner swarm.launch.py drone_num:=20
 ```
 
 参数在 `src/scripts/swarm_path.py` 的 `run()` 和末尾调用处修改。脚本会先清空 `src/planner/plan_manage/primitive_library/`，再生成轨迹及障碍物、机间碰撞对应表；默认显示图窗，关闭后继续。修改参数后需整套重新生成，并核对规划器的速度范围、体素尺寸和覆盖盒尺寸配置。
-
-生成完成后编译，基元库会随包安装：
-
-```bash
-ros2 launch primitive_planner swarm.launch.py drone_num:=20
-```
 
 编译后重新生成需重新构建 `primitive_planner` 并加载安装环境，或在启动命令后加 `primitive_folder:="$PWD/Primitive-Planner/src/planner/plan_manage/primitive_library"` 直接加载源码库。详细输出目录见[根目录 README](../README.md)。
 
