@@ -1,0 +1,22 @@
+[ 33%] Built target SO3Control
+[ 66%] Built target control_example
+[100%] Built target so3_control_ros2
+-- Install configuration: "Release"
+-- Up-to-date: /home/wyt/RC_planner/src/install/so3_control/lib/libSO3Control.a
+-- Up-to-date: /home/wyt/RC_planner/src/install/so3_control/lib/so3_control/control_example
+-- Up-to-date: /home/wyt/RC_planner/src/install/so3_control/lib/so3_control/so3_control_ros2
+-- Up-to-date: /home/wyt/RC_planner/src/install/so3_control/share/ament_index/resource_index/package_run_dependencies/so3_control
+-- Up-to-date: /home/wyt/RC_planner/src/install/so3_control/share/ament_index/resource_index/parent_prefix_path/so3_control
+-- Up-to-date: /home/wyt/RC_planner/src/install/so3_control/share/so3_control/environment/ament_prefix_path.sh
+-- Up-to-date: /home/wyt/RC_planner/src/install/so3_control/share/so3_control/environment/ament_prefix_path.dsv
+-- Up-to-date: /home/wyt/RC_planner/src/install/so3_control/share/so3_control/environment/path.sh
+-- Up-to-date: /home/wyt/RC_planner/src/install/so3_control/share/so3_control/environment/path.dsv
+-- Up-to-date: /home/wyt/RC_planner/src/install/so3_control/share/so3_control/local_setup.bash
+-- Up-to-date: /home/wyt/RC_planner/src/install/so3_control/share/so3_control/local_setup.sh
+-- Up-to-date: /home/wyt/RC_planner/src/install/so3_control/share/so3_control/local_setup.zsh
+-- Up-to-date: /home/wyt/RC_planner/src/install/so3_control/share/so3_control/local_setup.dsv
+-- Installing: /home/wyt/RC_planner/src/install/so3_control/share/so3_control/package.dsv
+-- Up-to-date: /home/wyt/RC_planner/src/install/so3_control/share/ament_index/resource_index/packages/so3_control
+-- Up-to-date: /home/wyt/RC_planner/src/install/so3_control/share/so3_control/cmake/so3_controlConfig.cmake
+-- Up-to-date: /home/wyt/RC_planner/src/install/so3_control/share/so3_control/cmake/so3_controlConfig-version.cmake
+-- Up-to-date: /home/wyt/RC_planner/src/install/so3_control/share/so3_control/package.xml

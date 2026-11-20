@@ -1,0 +1,356 @@
+[0.573s] DEBUG:colcon:Command line arguments: ['/usr/bin/colcon', 'build', '--base-paths', 'Primitive-Planner/src', '--packages-select', 'primitive_planner', '--cmake-args', '-DCMAKE_BUILD_TYPE=Release']
+[0.573s] DEBUG:colcon:Parsed command line arguments: Namespace(log_base=None, log_level=None, verb_name='build', build_base='build', install_base='install', merge_install=False, symlink_install=False, test_result_base=None, continue_on_error=False, executor='parallel', parallel_workers=28, event_handlers=None, ignore_user_meta=False, metas=['./colcon.meta'], base_paths=['Primitive-Planner/src'], packages_ignore=None, packages_ignore_regex=None, paths=None, packages_up_to=None, packages_up_to_regex=None, packages_above=None, packages_above_and_dependencies=None, packages_above_depth=None, packages_select_by_dep=None, packages_skip_by_dep=None, packages_skip_up_to=None, packages_select_build_failed=False, packages_skip_build_finished=False, packages_select_test_failures=False, packages_skip_test_passed=False, packages_select=['primitive_planner'], packages_skip=None, packages_select_regex=None, packages_skip_regex=None, packages_start=None, packages_end=None, allow_overriding=[], cmake_args=['-DCMAKE_BUILD_TYPE=Release'], cmake_target=None, cmake_target_skip_unavailable=False, cmake_clean_cache=False, cmake_clean_first=False, cmake_force_configure=False, ament_cmake_args=None, catkin_cmake_args=None, catkin_skip_building_tests=False, verb_parser=<colcon_defaults.argument_parser.defaults.DefaultArgumentsDecorator object at 0x74f9be9de9c0>, verb_extension=<colcon_core.verb.build.BuildVerb object at 0x74f9be9de540>, main=<bound method BuildVerb.main of <colcon_core.verb.build.BuildVerb object at 0x74f9be9de540>>)
+[0.695s] Level 1:colcon.colcon_core.package_discovery:discover_packages(colcon_meta) check parameters
+[0.696s] Level 1:colcon.colcon_core.package_discovery:discover_packages(recursive) check parameters
+[0.696s] Level 1:colcon.colcon_core.package_discovery:discover_packages(ignore) check parameters
+[0.696s] Level 1:colcon.colcon_core.package_discovery:discover_packages(path) check parameters
+[0.696s] Level 1:colcon.colcon_core.package_discovery:discover_packages(recursive) discover
+[0.696s] INFO:colcon.colcon_core.package_discovery:Crawling recursively for packages in '/home/wyt/RC_planner/src/Primitive-Planner/src'
+[0.697s] Level 1:colcon.colcon_core.package_identification:_identify(Primitive-Planner/src) by extensions ['ignore', 'ignore_ament_install']
+[0.697s] Level 1:colcon.colcon_core.package_identification:_identify(Primitive-Planner/src) by extension 'ignore'
+[0.697s] Level 1:colcon.colcon_core.package_identification:_identify(Primitive-Planner/src) by extension 'ignore_ament_install'
+[0.697s] Level 1:colcon.colcon_core.package_identification:_identify(Primitive-Planner/src) by extensions ['colcon_pkg']
+[0.697s] Level 1:colcon.colcon_core.package_identification:_identify(Primitive-Planner/src) by extension 'colcon_pkg'
+[0.697s] Level 1:colcon.colcon_core.package_identification:_identify(Primitive-Planner/src) by extensions ['colcon_meta']
+[0.698s] Level 1:colcon.colcon_core.package_identification:_identify(Primitive-Planner/src) by extension 'colcon_meta'
+[0.698s] Level 1:colcon.colcon_core.package_identification:_identify(Primitive-Planner/src) by extensions ['ros']
+[0.698s] Level 1:colcon.colcon_core.package_identification:_identify(Primitive-Planner/src) by extension 'ros'
+[0.790s] Level 1:colcon.colcon_core.package_identification:_identify(Primitive-Planner/src) by extensions ['cmake', 'python']
+[0.790s] Level 1:colcon.colcon_core.package_identification:_identify(Primitive-Planner/src) by extension 'cmake'
+[0.790s] Level 1:colcon.colcon_core.package_identification:_identify(Primitive-Planner/src) by extension 'python'
+[0.791s] Level 1:colcon.colcon_core.package_identification:_identify(Primitive-Planner/src) by extensions ['python_setup_py']
+[0.791s] Level 1:colcon.colcon_core.package_identification:_identify(Primitive-Planner/src) by extension 'python_setup_py'
+[0.791s] Level 1:colcon.colcon_core.package_identification:_identify(Primitive-Planner/src/Utils) by extensions ['ignore', 'ignore_ament_install']
+[0.791s] Level 1:colcon.colcon_core.package_identification:_identify(Primitive-Planner/src/Utils) by extension 'ignore'
+[0.791s] Level 1:colcon.colcon_core.package_identification:_identify(Primitive-Planner/src/Utils) by extension 'ignore_ament_install'
+[0.792s] Level 1:colcon.colcon_core.package_identification:_identify(Primitive-Planner/src/Utils) by extensions ['colcon_pkg']
+[0.792s] Level 1:colcon.colcon_core.package_identification:_identify(Primitive-Planner/src/Utils) by extension 'colcon_pkg'
+[0.792s] Level 1:colcon.colcon_core.package_identification:_identify(Primitive-Planner/src/Utils) by extensions ['colcon_meta']
+[0.792s] Level 1:colcon.colcon_core.package_identification:_identify(Primitive-Planner/src/Utils) by extension 'colcon_meta'
+[0.792s] Level 1:colcon.colcon_core.package_identification:_identify(Primitive-Planner/src/Utils) by extensions ['ros']
+[0.792s] Level 1:colcon.colcon_core.package_identification:_identify(Primitive-Planner/src/Utils) by extension 'ros'
+[0.792s] Level 1:colcon.colcon_core.package_identification:_identify(Primitive-Planner/src/Utils) by extensions ['cmake', 'python']
+[0.792s] Level 1:colcon.colcon_core.package_identification:_identify(Primitive-Planner/src/Utils) by extension 'cmake'
+[0.792s] Level 1:colcon.colcon_core.package_identification:_identify(Primitive-Planner/src/Utils) by extension 'python'
+[0.793s] Level 1:colcon.colcon_core.package_identification:_identify(Primitive-Planner/src/Utils) by extensions ['python_setup_py']
+[0.793s] Level 1:colcon.colcon_core.package_identification:_identify(Primitive-Planner/src/Utils) by extension 'python_setup_py'
+[0.793s] Level 1:colcon.colcon_core.package_identification:_identify(Primitive-Planner/src/Utils/assign_goals) by extensions ['ignore', 'ignore_ament_install']
+[0.793s] Level 1:colcon.colcon_core.package_identification:_identify(Primitive-Planner/src/Utils/assign_goals) by extension 'ignore'
+[0.793s] Level 1:colcon.colcon_core.package_identification:_identify(Primitive-Planner/src/Utils/assign_goals) by extension 'ignore_ament_install'
+[0.793s] Level 1:colcon.colcon_core.package_identification:_identify(Primitive-Planner/src/Utils/assign_goals) by extensions ['colcon_pkg']
+[0.793s] Level 1:colcon.colcon_core.package_identification:_identify(Primitive-Planner/src/Utils/assign_goals) by extension 'colcon_pkg'
+[0.794s] Level 1:colcon.colcon_core.package_identification:_identify(Primitive-Planner/src/Utils/assign_goals) by extensions ['colcon_meta']
+[0.794s] Level 1:colcon.colcon_core.package_identification:_identify(Primitive-Planner/src/Utils/assign_goals) by extension 'colcon_meta'
+[0.794s] Level 1:colcon.colcon_core.package_identification:_identify(Primitive-Planner/src/Utils/assign_goals) by extensions ['ros']
+[0.794s] Level 1:colcon.colcon_core.package_identification:_identify(Primitive-Planner/src/Utils/assign_goals) by extension 'ros'
+[0.804s] DEBUG:colcon.colcon_core.package_identification:Package 'Primitive-Planner/src/Utils/assign_goals' with type 'ros.ament_cmake' and name 'assign_goals'
+[0.804s] Level 1:colcon.colcon_core.package_identification:_identify(Primitive-Planner/src/Utils/manual_take_over) by extensions ['ignore', 'ignore_ament_install']
+[0.804s] Level 1:colcon.colcon_core.package_identification:_identify(Primitive-Planner/src/Utils/manual_take_over) by extension 'ignore'
+[0.804s] Level 1:colcon.colcon_core.package_identification:_identify(Primitive-Planner/src/Utils/manual_take_over) by extension 'ignore_ament_install'
+[0.805s] Level 1:colcon.colcon_core.package_identification:_identify(Primitive-Planner/src/Utils/manual_take_over) by extensions ['colcon_pkg']
+[0.805s] Level 1:colcon.colcon_core.package_identification:_identify(Primitive-Planner/src/Utils/manual_take_over) by extension 'colcon_pkg'
+[0.805s] Level 1:colcon.colcon_core.package_identification:_identify(Primitive-Planner/src/Utils/manual_take_over) by extensions ['colcon_meta']
+[0.805s] Level 1:colcon.colcon_core.package_identification:_identify(Primitive-Planner/src/Utils/manual_take_over) by extension 'colcon_meta'
+[0.805s] Level 1:colcon.colcon_core.package_identification:_identify(Primitive-Planner/src/Utils/manual_take_over) by extensions ['ros']
+[0.805s] Level 1:colcon.colcon_core.package_identification:_identify(Primitive-Planner/src/Utils/manual_take_over) by extension 'ros'
+[0.807s] DEBUG:colcon.colcon_core.package_identification:Package 'Primitive-Planner/src/Utils/manual_take_over' with type 'ros.ament_cmake' and name 'manual_take_over'
+[0.807s] Level 1:colcon.colcon_core.package_identification:_identify(Primitive-Planner/src/Utils/odom_visualization) by extensions ['ignore', 'ignore_ament_install']
+[0.808s] Level 1:colcon.colcon_core.package_identification:_identify(Primitive-Planner/src/Utils/odom_visualization) by extension 'ignore'
+[0.808s] Level 1:colcon.colcon_core.package_identification:_identify(Primitive-Planner/src/Utils/odom_visualization) by extension 'ignore_ament_install'
+[0.808s] Level 1:colcon.colcon_core.package_identification:_identify(Primitive-Planner/src/Utils/odom_visualization) by extensions ['colcon_pkg']
+[0.808s] Level 1:colcon.colcon_core.package_identification:_identify(Primitive-Planner/src/Utils/odom_visualization) by extension 'colcon_pkg'
+[0.808s] Level 1:colcon.colcon_core.package_identification:_identify(Primitive-Planner/src/Utils/odom_visualization) by extensions ['colcon_meta']
+[0.808s] Level 1:colcon.colcon_core.package_identification:_identify(Primitive-Planner/src/Utils/odom_visualization) by extension 'colcon_meta'
+[0.808s] Level 1:colcon.colcon_core.package_identification:_identify(Primitive-Planner/src/Utils/odom_visualization) by extensions ['ros']
+[0.809s] Level 1:colcon.colcon_core.package_identification:_identify(Primitive-Planner/src/Utils/odom_visualization) by extension 'ros'
+[0.811s] DEBUG:colcon.colcon_core.package_identification:Package 'Primitive-Planner/src/Utils/odom_visualization' with type 'ros.ament_cmake' and name 'odom_visualization'
+[0.811s] Level 1:colcon.colcon_core.package_identification:_identify(Primitive-Planner/src/Utils/pose_utils) by extensions ['ignore', 'ignore_ament_install']
+[0.811s] Level 1:colcon.colcon_core.package_identification:_identify(Primitive-Planner/src/Utils/pose_utils) by extension 'ignore'
+[0.812s] Level 1:colcon.colcon_core.package_identification:_identify(Primitive-Planner/src/Utils/pose_utils) by extension 'ignore_ament_install'
+[0.812s] Level 1:colcon.colcon_core.package_identification:_identify(Primitive-Planner/src/Utils/pose_utils) by extensions ['colcon_pkg']
+[0.812s] Level 1:colcon.colcon_core.package_identification:_identify(Primitive-Planner/src/Utils/pose_utils) by extension 'colcon_pkg'
+[0.812s] Level 1:colcon.colcon_core.package_identification:_identify(Primitive-Planner/src/Utils/pose_utils) by extensions ['colcon_meta']
+[0.812s] Level 1:colcon.colcon_core.package_identification:_identify(Primitive-Planner/src/Utils/pose_utils) by extension 'colcon_meta'
+[0.812s] Level 1:colcon.colcon_core.package_identification:_identify(Primitive-Planner/src/Utils/pose_utils) by extensions ['ros']
+[0.812s] Level 1:colcon.colcon_core.package_identification:_identify(Primitive-Planner/src/Utils/pose_utils) by extension 'ros'
+[0.814s] DEBUG:colcon.colcon_core.package_identification:Package 'Primitive-Planner/src/Utils/pose_utils' with type 'ros.ament_cmake' and name 'pose_utils'
+[0.814s] Level 1:colcon.colcon_core.package_identification:_identify(Primitive-Planner/src/Utils/quadrotor_msgs) by extensions ['ignore', 'ignore_ament_install']
+[0.814s] Level 1:colcon.colcon_core.package_identification:_identify(Primitive-Planner/src/Utils/quadrotor_msgs) by extension 'ignore'
+[0.814s] Level 1:colcon.colcon_core.package_identification:_identify(Primitive-Planner/src/Utils/quadrotor_msgs) by extension 'ignore_ament_install'
+[0.815s] Level 1:colcon.colcon_core.package_identification:_identify(Primitive-Planner/src/Utils/quadrotor_msgs) by extensions ['colcon_pkg']
+[0.815s] Level 1:colcon.colcon_core.package_identification:_identify(Primitive-Planner/src/Utils/quadrotor_msgs) by extension 'colcon_pkg'
+[0.815s] Level 1:colcon.colcon_core.package_identification:_identify(Primitive-Planner/src/Utils/quadrotor_msgs) by extensions ['colcon_meta']
+[0.815s] Level 1:colcon.colcon_core.package_identification:_identify(Primitive-Planner/src/Utils/quadrotor_msgs) by extension 'colcon_meta'
+[0.815s] Level 1:colcon.colcon_core.package_identification:_identify(Primitive-Planner/src/Utils/quadrotor_msgs) by extensions ['ros']
+[0.815s] Level 1:colcon.colcon_core.package_identification:_identify(Primitive-Planner/src/Utils/quadrotor_msgs) by extension 'ros'
+[0.817s] DEBUG:colcon.colcon_core.package_identification:Package 'Primitive-Planner/src/Utils/quadrotor_msgs' with type 'ros.ament_cmake' and name 'quadrotor_msgs'
+[0.817s] Level 1:colcon.colcon_core.package_identification:_identify(Primitive-Planner/src/Utils/random_goals) by extensions ['ignore', 'ignore_ament_install']
+[0.817s] Level 1:colcon.colcon_core.package_identification:_identify(Primitive-Planner/src/Utils/random_goals) by extension 'ignore'
+[0.818s] Level 1:colcon.colcon_core.package_identification:_identify(Primitive-Planner/src/Utils/random_goals) by extension 'ignore_ament_install'
+[0.818s] Level 1:colcon.colcon_core.package_identification:_identify(Primitive-Planner/src/Utils/random_goals) by extensions ['colcon_pkg']
+[0.818s] Level 1:colcon.colcon_core.package_identification:_identify(Primitive-Planner/src/Utils/random_goals) by extension 'colcon_pkg'
+[0.818s] Level 1:colcon.colcon_core.package_identification:_identify(Primitive-Planner/src/Utils/random_goals) by extensions ['colcon_meta']
+[0.818s] Level 1:colcon.colcon_core.package_identification:_identify(Primitive-Planner/src/Utils/random_goals) by extension 'colcon_meta'
+[0.818s] Level 1:colcon.colcon_core.package_identification:_identify(Primitive-Planner/src/Utils/random_goals) by extensions ['ros']
+[0.818s] Level 1:colcon.colcon_core.package_identification:_identify(Primitive-Planner/src/Utils/random_goals) by extension 'ros'
+[0.820s] DEBUG:colcon.colcon_core.package_identification:Package 'Primitive-Planner/src/Utils/random_goals' with type 'ros.ament_cmake' and name 'random_goals'
+[0.820s] Level 1:colcon.colcon_core.package_identification:_identify(Primitive-Planner/src/Utils/rviz_plugins) by extensions ['ignore', 'ignore_ament_install']
+[0.820s] Level 1:colcon.colcon_core.package_identification:_identify(Primitive-Planner/src/Utils/rviz_plugins) by extension 'ignore'
+[0.821s] Level 1:colcon.colcon_core.package_identification:_identify(Primitive-Planner/src/Utils/rviz_plugins) by extension 'ignore_ament_install'
+[0.821s] Level 1:colcon.colcon_core.package_identification:_identify(Primitive-Planner/src/Utils/rviz_plugins) by extensions ['colcon_pkg']
+[0.821s] Level 1:colcon.colcon_core.package_identification:_identify(Primitive-Planner/src/Utils/rviz_plugins) by extension 'colcon_pkg'
+[0.821s] Level 1:colcon.colcon_core.package_identification:_identify(Primitive-Planner/src/Utils/rviz_plugins) by extensions ['colcon_meta']
+[0.821s] Level 1:colcon.colcon_core.package_identification:_identify(Primitive-Planner/src/Utils/rviz_plugins) by extension 'colcon_meta'
+[0.821s] Level 1:colcon.colcon_core.package_identification:_identify(Primitive-Planner/src/Utils/rviz_plugins) by extensions ['ros']
+[0.821s] Level 1:colcon.colcon_core.package_identification:_identify(Primitive-Planner/src/Utils/rviz_plugins) by extension 'ros'
+[0.823s] DEBUG:colcon.colcon_core.package_identification:Package 'Primitive-Planner/src/Utils/rviz_plugins' with type 'ros.ament_cmake' and name 'rviz_plugins'
+[0.823s] Level 1:colcon.colcon_core.package_identification:_identify(Primitive-Planner/src/Utils/selected_points_publisher) by extensions ['ignore', 'ignore_ament_install']
+[0.824s] Level 1:colcon.colcon_core.package_identification:_identify(Primitive-Planner/src/Utils/selected_points_publisher) by extension 'ignore'
+[0.824s] Level 1:colcon.colcon_core.package_identification:_identify(Primitive-Planner/src/Utils/selected_points_publisher) by extension 'ignore_ament_install'
+[0.824s] Level 1:colcon.colcon_core.package_identification:_identify(Primitive-Planner/src/Utils/selected_points_publisher) by extensions ['colcon_pkg']
+[0.824s] Level 1:colcon.colcon_core.package_identification:_identify(Primitive-Planner/src/Utils/selected_points_publisher) by extension 'colcon_pkg'
+[0.824s] Level 1:colcon.colcon_core.package_identification:_identify(Primitive-Planner/src/Utils/selected_points_publisher) by extensions ['colcon_meta']
+[0.824s] Level 1:colcon.colcon_core.package_identification:_identify(Primitive-Planner/src/Utils/selected_points_publisher) by extension 'colcon_meta'
+[0.824s] Level 1:colcon.colcon_core.package_identification:_identify(Primitive-Planner/src/Utils/selected_points_publisher) by extensions ['ros']
+[0.824s] Level 1:colcon.colcon_core.package_identification:_identify(Primitive-Planner/src/Utils/selected_points_publisher) by extension 'ros'
+[0.826s] DEBUG:colcon.colcon_core.package_identification:Package 'Primitive-Planner/src/Utils/selected_points_publisher' with type 'ros.ament_cmake' and name 'selected_points_publisher'
+[0.827s] Level 1:colcon.colcon_core.package_identification:_identify(Primitive-Planner/src/Utils/uav_utils) by extensions ['ignore', 'ignore_ament_install']
+[0.827s] Level 1:colcon.colcon_core.package_identification:_identify(Primitive-Planner/src/Utils/uav_utils) by extension 'ignore'
+[0.827s] Level 1:colcon.colcon_core.package_identification:_identify(Primitive-Planner/src/Utils/uav_utils) by extension 'ignore_ament_install'
+[0.827s] Level 1:colcon.colcon_core.package_identification:_identify(Primitive-Planner/src/Utils/uav_utils) by extensions ['colcon_pkg']
+[0.827s] Level 1:colcon.colcon_core.package_identification:_identify(Primitive-Planner/src/Utils/uav_utils) by extension 'colcon_pkg'
+[0.827s] Level 1:colcon.colcon_core.package_identification:_identify(Primitive-Planner/src/Utils/uav_utils) by extensions ['colcon_meta']
+[0.827s] Level 1:colcon.colcon_core.package_identification:_identify(Primitive-Planner/src/Utils/uav_utils) by extension 'colcon_meta'
+[0.828s] Level 1:colcon.colcon_core.package_identification:_identify(Primitive-Planner/src/Utils/uav_utils) by extensions ['ros']
+[0.828s] Level 1:colcon.colcon_core.package_identification:_identify(Primitive-Planner/src/Utils/uav_utils) by extension 'ros'
+[0.830s] DEBUG:colcon.colcon_core.package_identification:Package 'Primitive-Planner/src/Utils/uav_utils' with type 'ros.ament_cmake' and name 'uav_utils'
+[0.830s] Level 1:colcon.colcon_core.package_identification:_identify(Primitive-Planner/src/planner) by extensions ['ignore', 'ignore_ament_install']
+[0.830s] Level 1:colcon.colcon_core.package_identification:_identify(Primitive-Planner/src/planner) by extension 'ignore'
+[0.830s] Level 1:colcon.colcon_core.package_identification:_identify(Primitive-Planner/src/planner) by extension 'ignore_ament_install'
+[0.830s] Level 1:colcon.colcon_core.package_identification:_identify(Primitive-Planner/src/planner) by extensions ['colcon_pkg']
+[0.831s] Level 1:colcon.colcon_core.package_identification:_identify(Primitive-Planner/src/planner) by extension 'colcon_pkg'
+[0.831s] Level 1:colcon.colcon_core.package_identification:_identify(Primitive-Planner/src/planner) by extensions ['colcon_meta']
+[0.831s] Level 1:colcon.colcon_core.package_identification:_identify(Primitive-Planner/src/planner) by extension 'colcon_meta'
+[0.831s] Level 1:colcon.colcon_core.package_identification:_identify(Primitive-Planner/src/planner) by extensions ['ros']
+[0.831s] Level 1:colcon.colcon_core.package_identification:_identify(Primitive-Planner/src/planner) by extension 'ros'
+[0.831s] Level 1:colcon.colcon_core.package_identification:_identify(Primitive-Planner/src/planner) by extensions ['cmake', 'python']
+[0.831s] Level 1:colcon.colcon_core.package_identification:_identify(Primitive-Planner/src/planner) by extension 'cmake'
+[0.831s] Level 1:colcon.colcon_core.package_identification:_identify(Primitive-Planner/src/planner) by extension 'python'
+[0.831s] Level 1:colcon.colcon_core.package_identification:_identify(Primitive-Planner/src/planner) by extensions ['python_setup_py']
+[0.831s] Level 1:colcon.colcon_core.package_identification:_identify(Primitive-Planner/src/planner) by extension 'python_setup_py'
+[0.832s] Level 1:colcon.colcon_core.package_identification:_identify(Primitive-Planner/src/planner/plan_manage) by extensions ['ignore', 'ignore_ament_install']
+[0.832s] Level 1:colcon.colcon_core.package_identification:_identify(Primitive-Planner/src/planner/plan_manage) by extension 'ignore'
+[0.832s] Level 1:colcon.colcon_core.package_identification:_identify(Primitive-Planner/src/planner/plan_manage) by extension 'ignore_ament_install'
+[0.832s] Level 1:colcon.colcon_core.package_identification:_identify(Primitive-Planner/src/planner/plan_manage) by extensions ['colcon_pkg']
+[0.832s] Level 1:colcon.colcon_core.package_identification:_identify(Primitive-Planner/src/planner/plan_manage) by extension 'colcon_pkg'
+[0.832s] Level 1:colcon.colcon_core.package_identification:_identify(Primitive-Planner/src/planner/plan_manage) by extensions ['colcon_meta']
+[0.832s] Level 1:colcon.colcon_core.package_identification:_identify(Primitive-Planner/src/planner/plan_manage) by extension 'colcon_meta'
+[0.833s] Level 1:colcon.colcon_core.package_identification:_identify(Primitive-Planner/src/planner/plan_manage) by extensions ['ros']
+[0.833s] Level 1:colcon.colcon_core.package_identification:_identify(Primitive-Planner/src/planner/plan_manage) by extension 'ros'
+[0.835s] DEBUG:colcon.colcon_core.package_identification:Package 'Primitive-Planner/src/planner/plan_manage' with type 'ros.ament_cmake' and name 'primitive_planner'
+[0.836s] Level 1:colcon.colcon_core.package_identification:_identify(Primitive-Planner/src/planner/swarm_bridge) by extensions ['ignore', 'ignore_ament_install']
+[0.836s] Level 1:colcon.colcon_core.package_identification:_identify(Primitive-Planner/src/planner/swarm_bridge) by extension 'ignore'
+[0.836s] Level 1:colcon.colcon_core.package_identification:_identify(Primitive-Planner/src/planner/swarm_bridge) by extension 'ignore_ament_install'
+[0.836s] Level 1:colcon.colcon_core.package_identification:_identify(Primitive-Planner/src/planner/swarm_bridge) by extensions ['colcon_pkg']
+[0.836s] Level 1:colcon.colcon_core.package_identification:_identify(Primitive-Planner/src/planner/swarm_bridge) by extension 'colcon_pkg'
+[0.836s] Level 1:colcon.colcon_core.package_identification:_identify(Primitive-Planner/src/planner/swarm_bridge) by extensions ['colcon_meta']
+[0.836s] Level 1:colcon.colcon_core.package_identification:_identify(Primitive-Planner/src/planner/swarm_bridge) by extension 'colcon_meta'
+[0.837s] Level 1:colcon.colcon_core.package_identification:_identify(Primitive-Planner/src/planner/swarm_bridge) by extensions ['ros']
+[0.837s] Level 1:colcon.colcon_core.package_identification:_identify(Primitive-Planner/src/planner/swarm_bridge) by extension 'ros'
+[0.839s] DEBUG:colcon.colcon_core.package_identification:Package 'Primitive-Planner/src/planner/swarm_bridge' with type 'ros.ament_cmake' and name 'swarm_bridge'
+[0.839s] Level 1:colcon.colcon_core.package_identification:_identify(Primitive-Planner/src/planner/traj_utils) by extensions ['ignore', 'ignore_ament_install']
+[0.839s] Level 1:colcon.colcon_core.package_identification:_identify(Primitive-Planner/src/planner/traj_utils) by extension 'ignore'
+[0.839s] Level 1:colcon.colcon_core.package_identification:_identify(Primitive-Planner/src/planner/traj_utils) by extension 'ignore_ament_install'
+[0.840s] Level 1:colcon.colcon_core.package_identification:_identify(Primitive-Planner/src/planner/traj_utils) by extensions ['colcon_pkg']
+[0.840s] Level 1:colcon.colcon_core.package_identification:_identify(Primitive-Planner/src/planner/traj_utils) by extension 'colcon_pkg'
+[0.840s] Level 1:colcon.colcon_core.package_identification:_identify(Primitive-Planner/src/planner/traj_utils) by extensions ['colcon_meta']
+[0.840s] Level 1:colcon.colcon_core.package_identification:_identify(Primitive-Planner/src/planner/traj_utils) by extension 'colcon_meta'
+[0.840s] Level 1:colcon.colcon_core.package_identification:_identify(Primitive-Planner/src/planner/traj_utils) by extensions ['ros']
+[0.840s] Level 1:colcon.colcon_core.package_identification:_identify(Primitive-Planner/src/planner/traj_utils) by extension 'ros'
+[0.842s] DEBUG:colcon.colcon_core.package_identification:Package 'Primitive-Planner/src/planner/traj_utils' with type 'ros.ament_cmake' and name 'traj_utils'
+[0.842s] Level 1:colcon.colcon_core.package_identification:_identify(Primitive-Planner/src/scripts) by extensions ['ignore', 'ignore_ament_install']
+[0.843s] Level 1:colcon.colcon_core.package_identification:_identify(Primitive-Planner/src/scripts) by extension 'ignore'
+[0.843s] Level 1:colcon.colcon_core.package_identification:_identify(Primitive-Planner/src/scripts) by extension 'ignore_ament_install'
+[0.843s] Level 1:colcon.colcon_core.package_identification:_identify(Primitive-Planner/src/scripts) by extensions ['colcon_pkg']
+[0.843s] Level 1:colcon.colcon_core.package_identification:_identify(Primitive-Planner/src/scripts) by extension 'colcon_pkg'
+[0.843s] Level 1:colcon.colcon_core.package_identification:_identify(Primitive-Planner/src/scripts) by extensions ['colcon_meta']
+[0.843s] Level 1:colcon.colcon_core.package_identification:_identify(Primitive-Planner/src/scripts) by extension 'colcon_meta'
+[0.843s] Level 1:colcon.colcon_core.package_identification:_identify(Primitive-Planner/src/scripts) by extensions ['ros']
+[0.843s] Level 1:colcon.colcon_core.package_identification:_identify(Primitive-Planner/src/scripts) by extension 'ros'
+[0.844s] Level 1:colcon.colcon_core.package_identification:_identify(Primitive-Planner/src/scripts) by extensions ['cmake', 'python']
+[0.844s] Level 1:colcon.colcon_core.package_identification:_identify(Primitive-Planner/src/scripts) by extension 'cmake'
+[0.844s] Level 1:colcon.colcon_core.package_identification:_identify(Primitive-Planner/src/scripts) by extension 'python'
+[0.844s] Level 1:colcon.colcon_core.package_identification:_identify(Primitive-Planner/src/scripts) by extensions ['python_setup_py']
+[0.844s] Level 1:colcon.colcon_core.package_identification:_identify(Primitive-Planner/src/scripts) by extension 'python_setup_py'
+[0.844s] Level 1:colcon.colcon_core.package_identification:_identify(Primitive-Planner/src/uav_simulator) by extensions ['ignore', 'ignore_ament_install']
+[0.844s] Level 1:colcon.colcon_core.package_identification:_identify(Primitive-Planner/src/uav_simulator) by extension 'ignore'
+[0.844s] Level 1:colcon.colcon_core.package_identification:_identify(Primitive-Planner/src/uav_simulator) by extension 'ignore_ament_install'
+[0.845s] Level 1:colcon.colcon_core.package_identification:_identify(Primitive-Planner/src/uav_simulator) by extensions ['colcon_pkg']
+[0.845s] Level 1:colcon.colcon_core.package_identification:_identify(Primitive-Planner/src/uav_simulator) by extension 'colcon_pkg'
+[0.845s] Level 1:colcon.colcon_core.package_identification:_identify(Primitive-Planner/src/uav_simulator) by extensions ['colcon_meta']
+[0.845s] Level 1:colcon.colcon_core.package_identification:_identify(Primitive-Planner/src/uav_simulator) by extension 'colcon_meta'
+[0.845s] Level 1:colcon.colcon_core.package_identification:_identify(Primitive-Planner/src/uav_simulator) by extensions ['ros']
+[0.845s] Level 1:colcon.colcon_core.package_identification:_identify(Primitive-Planner/src/uav_simulator) by extension 'ros'
+[0.845s] Level 1:colcon.colcon_core.package_identification:_identify(Primitive-Planner/src/uav_simulator) by extensions ['cmake', 'python']
+[0.845s] Level 1:colcon.colcon_core.package_identification:_identify(Primitive-Planner/src/uav_simulator) by extension 'cmake'
+[0.845s] Level 1:colcon.colcon_core.package_identification:_identify(Primitive-Planner/src/uav_simulator) by extension 'python'
+[0.845s] Level 1:colcon.colcon_core.package_identification:_identify(Primitive-Planner/src/uav_simulator) by extensions ['python_setup_py']
+[0.845s] Level 1:colcon.colcon_core.package_identification:_identify(Primitive-Planner/src/uav_simulator) by extension 'python_setup_py'
+[0.846s] Level 1:colcon.colcon_core.package_identification:_identify(Primitive-Planner/src/uav_simulator/fake_drone) by extensions ['ignore', 'ignore_ament_install']
+[0.846s] Level 1:colcon.colcon_core.package_identification:_identify(Primitive-Planner/src/uav_simulator/fake_drone) by extension 'ignore'
+[0.846s] Level 1:colcon.colcon_core.package_identification:_identify(Primitive-Planner/src/uav_simulator/fake_drone) by extension 'ignore_ament_install'
+[0.846s] Level 1:colcon.colcon_core.package_identification:_identify(Primitive-Planner/src/uav_simulator/fake_drone) by extensions ['colcon_pkg']
+[0.846s] Level 1:colcon.colcon_core.package_identification:_identify(Primitive-Planner/src/uav_simulator/fake_drone) by extension 'colcon_pkg'
+[0.846s] Level 1:colcon.colcon_core.package_identification:_identify(Primitive-Planner/src/uav_simulator/fake_drone) by extensions ['colcon_meta']
+[0.846s] Level 1:colcon.colcon_core.package_identification:_identify(Primitive-Planner/src/uav_simulator/fake_drone) by extension 'colcon_meta'
+[0.847s] Level 1:colcon.colcon_core.package_identification:_identify(Primitive-Planner/src/uav_simulator/fake_drone) by extensions ['ros']
+[0.847s] Level 1:colcon.colcon_core.package_identification:_identify(Primitive-Planner/src/uav_simulator/fake_drone) by extension 'ros'
+[0.848s] DEBUG:colcon.colcon_core.package_identification:Package 'Primitive-Planner/src/uav_simulator/fake_drone' with type 'ros.ament_cmake' and name 'poscmd_2_odom'
+[0.849s] Level 1:colcon.colcon_core.package_identification:_identify(Primitive-Planner/src/uav_simulator/local_sensing) by extensions ['ignore', 'ignore_ament_install']
+[0.849s] Level 1:colcon.colcon_core.package_identification:_identify(Primitive-Planner/src/uav_simulator/local_sensing) by extension 'ignore'
+[0.849s] Level 1:colcon.colcon_core.package_identification:_identify(Primitive-Planner/src/uav_simulator/local_sensing) by extension 'ignore_ament_install'
+[0.849s] Level 1:colcon.colcon_core.package_identification:_identify(Primitive-Planner/src/uav_simulator/local_sensing) by extensions ['colcon_pkg']
+[0.849s] Level 1:colcon.colcon_core.package_identification:_identify(Primitive-Planner/src/uav_simulator/local_sensing) by extension 'colcon_pkg'
+[0.849s] Level 1:colcon.colcon_core.package_identification:_identify(Primitive-Planner/src/uav_simulator/local_sensing) by extensions ['colcon_meta']
+[0.849s] Level 1:colcon.colcon_core.package_identification:_identify(Primitive-Planner/src/uav_simulator/local_sensing) by extension 'colcon_meta'
+[0.850s] Level 1:colcon.colcon_core.package_identification:_identify(Primitive-Planner/src/uav_simulator/local_sensing) by extensions ['ros']
+[0.850s] Level 1:colcon.colcon_core.package_identification:_identify(Primitive-Planner/src/uav_simulator/local_sensing) by extension 'ros'
+[0.852s] DEBUG:colcon.colcon_core.package_identification:Package 'Primitive-Planner/src/uav_simulator/local_sensing' with type 'ros.ament_cmake' and name 'local_sensing_node'
+[0.852s] Level 1:colcon.colcon_core.package_identification:_identify(Primitive-Planner/src/uav_simulator/map_generator) by extensions ['ignore', 'ignore_ament_install']
+[0.852s] Level 1:colcon.colcon_core.package_identification:_identify(Primitive-Planner/src/uav_simulator/map_generator) by extension 'ignore'
+[0.852s] Level 1:colcon.colcon_core.package_identification:_identify(Primitive-Planner/src/uav_simulator/map_generator) by extension 'ignore_ament_install'
+[0.852s] Level 1:colcon.colcon_core.package_identification:_identify(Primitive-Planner/src/uav_simulator/map_generator) by extensions ['colcon_pkg']
+[0.853s] Level 1:colcon.colcon_core.package_identification:_identify(Primitive-Planner/src/uav_simulator/map_generator) by extension 'colcon_pkg'
+[0.853s] Level 1:colcon.colcon_core.package_identification:_identify(Primitive-Planner/src/uav_simulator/map_generator) by extensions ['colcon_meta']
+[0.853s] Level 1:colcon.colcon_core.package_identification:_identify(Primitive-Planner/src/uav_simulator/map_generator) by extension 'colcon_meta'
+[0.853s] Level 1:colcon.colcon_core.package_identification:_identify(Primitive-Planner/src/uav_simulator/map_generator) by extensions ['ros']
+[0.853s] Level 1:colcon.colcon_core.package_identification:_identify(Primitive-Planner/src/uav_simulator/map_generator) by extension 'ros'
+[0.857s] DEBUG:colcon.colcon_core.package_identification:Package 'Primitive-Planner/src/uav_simulator/map_generator' with type 'ros.ament_cmake' and name 'map_generator'
+[0.857s] Level 1:colcon.colcon_core.package_identification:_identify(Primitive-Planner/src/uav_simulator/mockamap) by extensions ['ignore', 'ignore_ament_install']
+[0.857s] Level 1:colcon.colcon_core.package_identification:_identify(Primitive-Planner/src/uav_simulator/mockamap) by extension 'ignore'
+[0.858s] Level 1:colcon.colcon_core.package_identification:_identify(Primitive-Planner/src/uav_simulator/mockamap) by extension 'ignore_ament_install'
+[0.858s] Level 1:colcon.colcon_core.package_identification:_identify(Primitive-Planner/src/uav_simulator/mockamap) by extensions ['colcon_pkg']
+[0.858s] Level 1:colcon.colcon_core.package_identification:_identify(Primitive-Planner/src/uav_simulator/mockamap) by extension 'colcon_pkg'
+[0.858s] Level 1:colcon.colcon_core.package_identification:_identify(Primitive-Planner/src/uav_simulator/mockamap) by extensions ['colcon_meta']
+[0.858s] Level 1:colcon.colcon_core.package_identification:_identify(Primitive-Planner/src/uav_simulator/mockamap) by extension 'colcon_meta'
+[0.858s] Level 1:colcon.colcon_core.package_identification:_identify(Primitive-Planner/src/uav_simulator/mockamap) by extensions ['ros']
+[0.858s] Level 1:colcon.colcon_core.package_identification:_identify(Primitive-Planner/src/uav_simulator/mockamap) by extension 'ros'
+[0.860s] DEBUG:colcon.colcon_core.package_identification:Package 'Primitive-Planner/src/uav_simulator/mockamap' with type 'ros.ament_cmake' and name 'mockamap'
+[0.860s] Level 1:colcon.colcon_core.package_identification:_identify(Primitive-Planner/src/uav_simulator/so3_control) by extensions ['ignore', 'ignore_ament_install']
+[0.860s] Level 1:colcon.colcon_core.package_identification:_identify(Primitive-Planner/src/uav_simulator/so3_control) by extension 'ignore'
+[0.860s] Level 1:colcon.colcon_core.package_identification:_identify(Primitive-Planner/src/uav_simulator/so3_control) by extension 'ignore_ament_install'
+[0.860s] Level 1:colcon.colcon_core.package_identification:_identify(Primitive-Planner/src/uav_simulator/so3_control) by extensions ['colcon_pkg']
+[0.861s] Level 1:colcon.colcon_core.package_identification:_identify(Primitive-Planner/src/uav_simulator/so3_control) by extension 'colcon_pkg'
+[0.861s] Level 1:colcon.colcon_core.package_identification:_identify(Primitive-Planner/src/uav_simulator/so3_control) by extensions ['colcon_meta']
+[0.861s] Level 1:colcon.colcon_core.package_identification:_identify(Primitive-Planner/src/uav_simulator/so3_control) by extension 'colcon_meta'
+[0.861s] Level 1:colcon.colcon_core.package_identification:_identify(Primitive-Planner/src/uav_simulator/so3_control) by extensions ['ros']
+[0.861s] Level 1:colcon.colcon_core.package_identification:_identify(Primitive-Planner/src/uav_simulator/so3_control) by extension 'ros'
+[0.863s] DEBUG:colcon.colcon_core.package_identification:Package 'Primitive-Planner/src/uav_simulator/so3_control' with type 'ros.ament_cmake' and name 'so3_control'
+[0.863s] Level 1:colcon.colcon_core.package_identification:_identify(Primitive-Planner/src/uav_simulator/so3_quadrotor_simulator) by extensions ['ignore', 'ignore_ament_install']
+[0.863s] Level 1:colcon.colcon_core.package_identification:_identify(Primitive-Planner/src/uav_simulator/so3_quadrotor_simulator) by extension 'ignore'
+[0.864s] Level 1:colcon.colcon_core.package_identification:_identify(Primitive-Planner/src/uav_simulator/so3_quadrotor_simulator) by extension 'ignore_ament_install'
+[0.864s] Level 1:colcon.colcon_core.package_identification:_identify(Primitive-Planner/src/uav_simulator/so3_quadrotor_simulator) by extensions ['colcon_pkg']
+[0.864s] Level 1:colcon.colcon_core.package_identification:_identify(Primitive-Planner/src/uav_simulator/so3_quadrotor_simulator) by extension 'colcon_pkg'
+[0.864s] Level 1:colcon.colcon_core.package_identification:_identify(Primitive-Planner/src/uav_simulator/so3_quadrotor_simulator) by extensions ['colcon_meta']
+[0.864s] Level 1:colcon.colcon_core.package_identification:_identify(Primitive-Planner/src/uav_simulator/so3_quadrotor_simulator) by extension 'colcon_meta'
+[0.864s] Level 1:colcon.colcon_core.package_identification:_identify(Primitive-Planner/src/uav_simulator/so3_quadrotor_simulator) by extensions ['ros']
+[0.864s] Level 1:colcon.colcon_core.package_identification:_identify(Primitive-Planner/src/uav_simulator/so3_quadrotor_simulator) by extension 'ros'
+[0.866s] DEBUG:colcon.colcon_core.package_identification:Package 'Primitive-Planner/src/uav_simulator/so3_quadrotor_simulator' with type 'ros.ament_cmake' and name 'so3_quadrotor_simulator'
+[0.866s] Level 1:colcon.colcon_core.package_discovery:discover_packages(recursive) using defaults
+[0.939s] INFO:colcon.colcon_core.package_selection:Skipping not selected package 'map_generator' in 'Primitive-Planner/src/uav_simulator/map_generator'
+[0.939s] INFO:colcon.colcon_core.package_selection:Skipping not selected package 'mockamap' in 'Primitive-Planner/src/uav_simulator/mockamap'
+[0.939s] INFO:colcon.colcon_core.package_selection:Skipping not selected package 'pose_utils' in 'Primitive-Planner/src/Utils/pose_utils'
+[0.939s] INFO:colcon.colcon_core.package_selection:Skipping not selected package 'quadrotor_msgs' in 'Primitive-Planner/src/Utils/quadrotor_msgs'
+[0.939s] INFO:colcon.colcon_core.package_selection:Skipping not selected package 'selected_points_publisher' in 'Primitive-Planner/src/Utils/selected_points_publisher'
+[0.939s] INFO:colcon.colcon_core.package_selection:Skipping not selected package 'traj_utils' in 'Primitive-Planner/src/planner/traj_utils'
+[0.939s] INFO:colcon.colcon_core.package_selection:Skipping not selected package 'uav_utils' in 'Primitive-Planner/src/Utils/uav_utils'
+[0.939s] INFO:colcon.colcon_core.package_selection:Skipping not selected package 'assign_goals' in 'Primitive-Planner/src/Utils/assign_goals'
+[0.939s] INFO:colcon.colcon_core.package_selection:Skipping not selected package 'local_sensing_node' in 'Primitive-Planner/src/uav_simulator/local_sensing'
+[0.939s] INFO:colcon.colcon_core.package_selection:Skipping not selected package 'manual_take_over' in 'Primitive-Planner/src/Utils/manual_take_over'
+[0.939s] INFO:colcon.colcon_core.package_selection:Skipping not selected package 'odom_visualization' in 'Primitive-Planner/src/Utils/odom_visualization'
+[0.939s] INFO:colcon.colcon_core.package_selection:Skipping not selected package 'poscmd_2_odom' in 'Primitive-Planner/src/uav_simulator/fake_drone'
+[0.939s] INFO:colcon.colcon_core.package_selection:Skipping not selected package 'random_goals' in 'Primitive-Planner/src/Utils/random_goals'
+[0.939s] INFO:colcon.colcon_core.package_selection:Skipping not selected package 'rviz_plugins' in 'Primitive-Planner/src/Utils/rviz_plugins'
+[0.940s] INFO:colcon.colcon_core.package_selection:Skipping not selected package 'so3_control' in 'Primitive-Planner/src/uav_simulator/so3_control'
+[0.940s] INFO:colcon.colcon_core.package_selection:Skipping not selected package 'so3_quadrotor_simulator' in 'Primitive-Planner/src/uav_simulator/so3_quadrotor_simulator'
+[0.940s] INFO:colcon.colcon_core.package_selection:Skipping not selected package 'swarm_bridge' in 'Primitive-Planner/src/planner/swarm_bridge'
+[0.942s] Level 1:colcon.colcon_core.package_discovery:discover_packages(prefix_path) check parameters
+[0.942s] Level 1:colcon.colcon_core.package_discovery:discover_packages(prefix_path) discover
+[0.955s] DEBUG:colcon.colcon_installed_package_information.package_discovery:Found 19 installed packages in /home/wyt/RC_planner/src/install
+[0.960s] DEBUG:colcon.colcon_installed_package_information.package_discovery:Found 396 installed packages in /opt/ros/jazzy
+[0.964s] Level 1:colcon.colcon_core.package_discovery:discover_packages(prefix_path) using defaults
+[1.102s] Level 5:colcon.colcon_core.verb:set package 'primitive_planner' build argument 'cmake_args' from command line to '['-DCMAKE_BUILD_TYPE=Release']'
+[1.102s] Level 5:colcon.colcon_core.verb:set package 'primitive_planner' build argument 'cmake_target' from command line to 'None'
+[1.102s] Level 5:colcon.colcon_core.verb:set package 'primitive_planner' build argument 'cmake_target_skip_unavailable' from command line to 'False'
+[1.102s] Level 5:colcon.colcon_core.verb:set package 'primitive_planner' build argument 'cmake_clean_cache' from command line to 'False'
+[1.102s] Level 5:colcon.colcon_core.verb:set package 'primitive_planner' build argument 'cmake_clean_first' from command line to 'False'
+[1.102s] Level 5:colcon.colcon_core.verb:set package 'primitive_planner' build argument 'cmake_force_configure' from command line to 'False'
+[1.102s] Level 5:colcon.colcon_core.verb:set package 'primitive_planner' build argument 'ament_cmake_args' from command line to 'None'
+[1.103s] Level 5:colcon.colcon_core.verb:set package 'primitive_planner' build argument 'catkin_cmake_args' from command line to 'None'
+[1.103s] Level 5:colcon.colcon_core.verb:set package 'primitive_planner' build argument 'catkin_skip_building_tests' from command line to 'False'
+[1.103s] DEBUG:colcon.colcon_core.verb:Building package 'primitive_planner' with the following arguments: {'ament_cmake_args': None, 'build_base': '/home/wyt/RC_planner/src/build/primitive_planner', 'catkin_cmake_args': None, 'catkin_skip_building_tests': False, 'cmake_args': ['-DCMAKE_BUILD_TYPE=Release'], 'cmake_clean_cache': False, 'cmake_clean_first': False, 'cmake_force_configure': False, 'cmake_target': None, 'cmake_target_skip_unavailable': False, 'install_base': '/home/wyt/RC_planner/src/install/primitive_planner', 'merge_install': False, 'path': '/home/wyt/RC_planner/src/Primitive-Planner/src/planner/plan_manage', 'symlink_install': False, 'test_result_base': None}
+[1.103s] INFO:colcon.colcon_core.executor:Executing jobs using 'parallel' executor
+[1.105s] DEBUG:colcon.colcon_parallel_executor.executor.parallel:run_until_complete
+[1.106s] INFO:colcon.colcon_ros.task.ament_cmake.build:Building ROS package in '/home/wyt/RC_planner/src/Primitive-Planner/src/planner/plan_manage' with build type 'ament_cmake'
+[1.107s] INFO:colcon.colcon_cmake.task.cmake.build:Building CMake package in '/home/wyt/RC_planner/src/Primitive-Planner/src/planner/plan_manage'
+[1.125s] INFO:colcon.colcon_core.plugin_system:Skipping extension 'colcon_core.shell.bat': Not used on non-Windows systems
+[1.125s] INFO:colcon.colcon_core.shell:Skip shell extension 'powershell' for command environment: Not usable outside of PowerShell
+[1.125s] DEBUG:colcon.colcon_core.shell:Skip shell extension 'dsv' for command environment
+[1.204s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoking command in '/home/wyt/RC_planner/src/build/primitive_planner': CMAKE_PREFIX_PATH=/home/wyt/RC_planner/src/install/swarm_bridge:/home/wyt/RC_planner/src/install/so3_quadrotor_simulator:/home/wyt/RC_planner/src/install/so3_control:/home/wyt/RC_planner/src/install/rviz_plugins:/home/wyt/RC_planner/src/install/poscmd_2_odom:/home/wyt/RC_planner/src/install/odom_visualization:/home/wyt/RC_planner/src/install/local_sensing_node:/home/wyt/RC_planner/src/install/uav_utils:/home/wyt/RC_planner/src/install/traj_utils:/home/wyt/RC_planner/src/install/selected_points_publisher:/home/wyt/RC_planner/src/install/quadrotor_msgs:/home/wyt/RC_planner/src/install/pose_utils:/home/wyt/RC_planner/src/install/map_generator:/home/wyt/RC_planner/src/install/primitive_planner:/home/wyt/RC_planner/src/install/random_goals:/home/wyt/RC_planner/src/install/assign_goals:/home/wyt/RC_planner/src/install/manual_take_over:/home/wyt/RC_planner/src/install/primitive_env:/home/wyt/RC_planner/src/install/mockamap:/opt/ros/jazzy/opt/gz_sim_vendor:/opt/ros/jazzy/opt/gz_sensors_vendor:/opt/ros/jazzy/opt/gz_physics_vendor:/opt/ros/jazzy/opt/sdformat_vendor:/opt/ros/jazzy/opt/gz_gui_vendor:/opt/ros/jazzy/opt/gz_transport_vendor:/opt/ros/jazzy/opt/gz_rendering_vendor:/opt/ros/jazzy/opt/gz_plugin_vendor:/opt/ros/jazzy/opt/gz_fuel_tools_vendor:/opt/ros/jazzy/opt/gz_msgs_vendor:/opt/ros/jazzy/opt/gz_common_vendor:/opt/ros/jazzy/opt/gz_math_vendor:/opt/ros/jazzy/opt/gz_utils_vendor:/opt/ros/jazzy/opt/gz_tools_vendor:/opt/ros/jazzy/opt/gz_ogre_next_vendor:/opt/ros/jazzy/opt/gz_dartsim_vendor:/opt/ros/jazzy/opt/gz_cmake_vendor:/opt/ros/jazzy DEBUGINFOD_URLS=https://debuginfod.ubuntu.com LD_LIBRARY_PATH=/home/wyt/RC_planner/src/install/rviz_plugins/lib:/home/wyt/RC_planner/src/install/traj_utils/lib:/home/wyt/RC_planner/src/install/selected_points_publisher/lib:/home/wyt/RC_planner/src/install/quadrotor_msgs/lib:/home/wyt/RC_planner/src/install/pose_utils/lib:/opt/ros/jazzy/opt/gz_sim_vendor/lib:/opt/ros/jazzy/opt/gz_sensors_vendor/lib:/opt/ros/jazzy/opt/gz_physics_vendor/lib:/opt/ros/jazzy/opt/sdformat_vendor/lib:/opt/ros/jazzy/opt/rviz_ogre_vendor/lib:/opt/ros/jazzy/lib/x86_64-linux-gnu:/opt/ros/jazzy/opt/gz_gui_vendor/lib:/opt/ros/jazzy/opt/gz_transport_vendor/lib:/opt/ros/jazzy/opt/gz_rendering_vendor/lib:/opt/ros/jazzy/opt/gz_plugin_vendor/lib:/opt/ros/jazzy/opt/gz_fuel_tools_vendor/lib:/opt/ros/jazzy/opt/gz_msgs_vendor/lib:/opt/ros/jazzy/opt/gz_common_vendor/lib:/opt/ros/jazzy/opt/gz_math_vendor/lib:/opt/ros/jazzy/opt/gz_utils_vendor/lib:/opt/ros/jazzy/opt/gz_tools_vendor/lib:/opt/ros/jazzy/opt/gz_ogre_next_vendor/lib:/opt/ros/jazzy/opt/gz_dartsim_vendor/lib:/opt/ros/jazzy/opt/gz_cmake_vendor/lib:/opt/ros/jazzy/lib /usr/bin/cmake --build /home/wyt/RC_planner/src/build/primitive_planner -- -j28 -l28
+[1.495s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoked command in '/home/wyt/RC_planner/src/build/primitive_planner' returned '0': CMAKE_PREFIX_PATH=/home/wyt/RC_planner/src/install/swarm_bridge:/home/wyt/RC_planner/src/install/so3_quadrotor_simulator:/home/wyt/RC_planner/src/install/so3_control:/home/wyt/RC_planner/src/install/rviz_plugins:/home/wyt/RC_planner/src/install/poscmd_2_odom:/home/wyt/RC_planner/src/install/odom_visualization:/home/wyt/RC_planner/src/install/local_sensing_node:/home/wyt/RC_planner/src/install/uav_utils:/home/wyt/RC_planner/src/install/traj_utils:/home/wyt/RC_planner/src/install/selected_points_publisher:/home/wyt/RC_planner/src/install/quadrotor_msgs:/home/wyt/RC_planner/src/install/pose_utils:/home/wyt/RC_planner/src/install/map_generator:/home/wyt/RC_planner/src/install/primitive_planner:/home/wyt/RC_planner/src/install/random_goals:/home/wyt/RC_planner/src/install/assign_goals:/home/wyt/RC_planner/src/install/manual_take_over:/home/wyt/RC_planner/src/install/primitive_env:/home/wyt/RC_planner/src/install/mockamap:/opt/ros/jazzy/opt/gz_sim_vendor:/opt/ros/jazzy/opt/gz_sensors_vendor:/opt/ros/jazzy/opt/gz_physics_vendor:/opt/ros/jazzy/opt/sdformat_vendor:/opt/ros/jazzy/opt/gz_gui_vendor:/opt/ros/jazzy/opt/gz_transport_vendor:/opt/ros/jazzy/opt/gz_rendering_vendor:/opt/ros/jazzy/opt/gz_plugin_vendor:/opt/ros/jazzy/opt/gz_fuel_tools_vendor:/opt/ros/jazzy/opt/gz_msgs_vendor:/opt/ros/jazzy/opt/gz_common_vendor:/opt/ros/jazzy/opt/gz_math_vendor:/opt/ros/jazzy/opt/gz_utils_vendor:/opt/ros/jazzy/opt/gz_tools_vendor:/opt/ros/jazzy/opt/gz_ogre_next_vendor:/opt/ros/jazzy/opt/gz_dartsim_vendor:/opt/ros/jazzy/opt/gz_cmake_vendor:/opt/ros/jazzy DEBUGINFOD_URLS=https://debuginfod.ubuntu.com LD_LIBRARY_PATH=/home/wyt/RC_planner/src/install/rviz_plugins/lib:/home/wyt/RC_planner/src/install/traj_utils/lib:/home/wyt/RC_planner/src/install/selected_points_publisher/lib:/home/wyt/RC_planner/src/install/quadrotor_msgs/lib:/home/wyt/RC_planner/src/install/pose_utils/lib:/opt/ros/jazzy/opt/gz_sim_vendor/lib:/opt/ros/jazzy/opt/gz_sensors_vendor/lib:/opt/ros/jazzy/opt/gz_physics_vendor/lib:/opt/ros/jazzy/opt/sdformat_vendor/lib:/opt/ros/jazzy/opt/rviz_ogre_vendor/lib:/opt/ros/jazzy/lib/x86_64-linux-gnu:/opt/ros/jazzy/opt/gz_gui_vendor/lib:/opt/ros/jazzy/opt/gz_transport_vendor/lib:/opt/ros/jazzy/opt/gz_rendering_vendor/lib:/opt/ros/jazzy/opt/gz_plugin_vendor/lib:/opt/ros/jazzy/opt/gz_fuel_tools_vendor/lib:/opt/ros/jazzy/opt/gz_msgs_vendor/lib:/opt/ros/jazzy/opt/gz_common_vendor/lib:/opt/ros/jazzy/opt/gz_math_vendor/lib:/opt/ros/jazzy/opt/gz_utils_vendor/lib:/opt/ros/jazzy/opt/gz_tools_vendor/lib:/opt/ros/jazzy/opt/gz_ogre_next_vendor/lib:/opt/ros/jazzy/opt/gz_dartsim_vendor/lib:/opt/ros/jazzy/opt/gz_cmake_vendor/lib:/opt/ros/jazzy/lib /usr/bin/cmake --build /home/wyt/RC_planner/src/build/primitive_planner -- -j28 -l28
+[1.527s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoking command in '/home/wyt/RC_planner/src/build/primitive_planner': CMAKE_PREFIX_PATH=/home/wyt/RC_planner/src/install/swarm_bridge:/home/wyt/RC_planner/src/install/so3_quadrotor_simulator:/home/wyt/RC_planner/src/install/so3_control:/home/wyt/RC_planner/src/install/rviz_plugins:/home/wyt/RC_planner/src/install/poscmd_2_odom:/home/wyt/RC_planner/src/install/odom_visualization:/home/wyt/RC_planner/src/install/local_sensing_node:/home/wyt/RC_planner/src/install/uav_utils:/home/wyt/RC_planner/src/install/traj_utils:/home/wyt/RC_planner/src/install/selected_points_publisher:/home/wyt/RC_planner/src/install/quadrotor_msgs:/home/wyt/RC_planner/src/install/pose_utils:/home/wyt/RC_planner/src/install/map_generator:/home/wyt/RC_planner/src/install/primitive_planner:/home/wyt/RC_planner/src/install/random_goals:/home/wyt/RC_planner/src/install/assign_goals:/home/wyt/RC_planner/src/install/manual_take_over:/home/wyt/RC_planner/src/install/primitive_env:/home/wyt/RC_planner/src/install/mockamap:/opt/ros/jazzy/opt/gz_sim_vendor:/opt/ros/jazzy/opt/gz_sensors_vendor:/opt/ros/jazzy/opt/gz_physics_vendor:/opt/ros/jazzy/opt/sdformat_vendor:/opt/ros/jazzy/opt/gz_gui_vendor:/opt/ros/jazzy/opt/gz_transport_vendor:/opt/ros/jazzy/opt/gz_rendering_vendor:/opt/ros/jazzy/opt/gz_plugin_vendor:/opt/ros/jazzy/opt/gz_fuel_tools_vendor:/opt/ros/jazzy/opt/gz_msgs_vendor:/opt/ros/jazzy/opt/gz_common_vendor:/opt/ros/jazzy/opt/gz_math_vendor:/opt/ros/jazzy/opt/gz_utils_vendor:/opt/ros/jazzy/opt/gz_tools_vendor:/opt/ros/jazzy/opt/gz_ogre_next_vendor:/opt/ros/jazzy/opt/gz_dartsim_vendor:/opt/ros/jazzy/opt/gz_cmake_vendor:/opt/ros/jazzy DEBUGINFOD_URLS=https://debuginfod.ubuntu.com LD_LIBRARY_PATH=/home/wyt/RC_planner/src/install/rviz_plugins/lib:/home/wyt/RC_planner/src/install/traj_utils/lib:/home/wyt/RC_planner/src/install/selected_points_publisher/lib:/home/wyt/RC_planner/src/install/quadrotor_msgs/lib:/home/wyt/RC_planner/src/install/pose_utils/lib:/opt/ros/jazzy/opt/gz_sim_vendor/lib:/opt/ros/jazzy/opt/gz_sensors_vendor/lib:/opt/ros/jazzy/opt/gz_physics_vendor/lib:/opt/ros/jazzy/opt/sdformat_vendor/lib:/opt/ros/jazzy/opt/rviz_ogre_vendor/lib:/opt/ros/jazzy/lib/x86_64-linux-gnu:/opt/ros/jazzy/opt/gz_gui_vendor/lib:/opt/ros/jazzy/opt/gz_transport_vendor/lib:/opt/ros/jazzy/opt/gz_rendering_vendor/lib:/opt/ros/jazzy/opt/gz_plugin_vendor/lib:/opt/ros/jazzy/opt/gz_fuel_tools_vendor/lib:/opt/ros/jazzy/opt/gz_msgs_vendor/lib:/opt/ros/jazzy/opt/gz_common_vendor/lib:/opt/ros/jazzy/opt/gz_math_vendor/lib:/opt/ros/jazzy/opt/gz_utils_vendor/lib:/opt/ros/jazzy/opt/gz_tools_vendor/lib:/opt/ros/jazzy/opt/gz_ogre_next_vendor/lib:/opt/ros/jazzy/opt/gz_dartsim_vendor/lib:/opt/ros/jazzy/opt/gz_cmake_vendor/lib:/opt/ros/jazzy/lib /usr/bin/cmake --install /home/wyt/RC_planner/src/build/primitive_planner
+[2.808s] Level 1:colcon.colcon_core.environment:create_environment_scripts_only(primitive_planner)
+[2.832s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoked command in '/home/wyt/RC_planner/src/build/primitive_planner' returned '0': CMAKE_PREFIX_PATH=/home/wyt/RC_planner/src/install/swarm_bridge:/home/wyt/RC_planner/src/install/so3_quadrotor_simulator:/home/wyt/RC_planner/src/install/so3_control:/home/wyt/RC_planner/src/install/rviz_plugins:/home/wyt/RC_planner/src/install/poscmd_2_odom:/home/wyt/RC_planner/src/install/odom_visualization:/home/wyt/RC_planner/src/install/local_sensing_node:/home/wyt/RC_planner/src/install/uav_utils:/home/wyt/RC_planner/src/install/traj_utils:/home/wyt/RC_planner/src/install/selected_points_publisher:/home/wyt/RC_planner/src/install/quadrotor_msgs:/home/wyt/RC_planner/src/install/pose_utils:/home/wyt/RC_planner/src/install/map_generator:/home/wyt/RC_planner/src/install/primitive_planner:/home/wyt/RC_planner/src/install/random_goals:/home/wyt/RC_planner/src/install/assign_goals:/home/wyt/RC_planner/src/install/manual_take_over:/home/wyt/RC_planner/src/install/primitive_env:/home/wyt/RC_planner/src/install/mockamap:/opt/ros/jazzy/opt/gz_sim_vendor:/opt/ros/jazzy/opt/gz_sensors_vendor:/opt/ros/jazzy/opt/gz_physics_vendor:/opt/ros/jazzy/opt/sdformat_vendor:/opt/ros/jazzy/opt/gz_gui_vendor:/opt/ros/jazzy/opt/gz_transport_vendor:/opt/ros/jazzy/opt/gz_rendering_vendor:/opt/ros/jazzy/opt/gz_plugin_vendor:/opt/ros/jazzy/opt/gz_fuel_tools_vendor:/opt/ros/jazzy/opt/gz_msgs_vendor:/opt/ros/jazzy/opt/gz_common_vendor:/opt/ros/jazzy/opt/gz_math_vendor:/opt/ros/jazzy/opt/gz_utils_vendor:/opt/ros/jazzy/opt/gz_tools_vendor:/opt/ros/jazzy/opt/gz_ogre_next_vendor:/opt/ros/jazzy/opt/gz_dartsim_vendor:/opt/ros/jazzy/opt/gz_cmake_vendor:/opt/ros/jazzy DEBUGINFOD_URLS=https://debuginfod.ubuntu.com LD_LIBRARY_PATH=/home/wyt/RC_planner/src/install/rviz_plugins/lib:/home/wyt/RC_planner/src/install/traj_utils/lib:/home/wyt/RC_planner/src/install/selected_points_publisher/lib:/home/wyt/RC_planner/src/install/quadrotor_msgs/lib:/home/wyt/RC_planner/src/install/pose_utils/lib:/opt/ros/jazzy/opt/gz_sim_vendor/lib:/opt/ros/jazzy/opt/gz_sensors_vendor/lib:/opt/ros/jazzy/opt/gz_physics_vendor/lib:/opt/ros/jazzy/opt/sdformat_vendor/lib:/opt/ros/jazzy/opt/rviz_ogre_vendor/lib:/opt/ros/jazzy/lib/x86_64-linux-gnu:/opt/ros/jazzy/opt/gz_gui_vendor/lib:/opt/ros/jazzy/opt/gz_transport_vendor/lib:/opt/ros/jazzy/opt/gz_rendering_vendor/lib:/opt/ros/jazzy/opt/gz_plugin_vendor/lib:/opt/ros/jazzy/opt/gz_fuel_tools_vendor/lib:/opt/ros/jazzy/opt/gz_msgs_vendor/lib:/opt/ros/jazzy/opt/gz_common_vendor/lib:/opt/ros/jazzy/opt/gz_math_vendor/lib:/opt/ros/jazzy/opt/gz_utils_vendor/lib:/opt/ros/jazzy/opt/gz_tools_vendor/lib:/opt/ros/jazzy/opt/gz_ogre_next_vendor/lib:/opt/ros/jazzy/opt/gz_dartsim_vendor/lib:/opt/ros/jazzy/opt/gz_cmake_vendor/lib:/opt/ros/jazzy/lib /usr/bin/cmake --install /home/wyt/RC_planner/src/build/primitive_planner
+[2.841s] Level 1:colcon.colcon_core.environment:checking '/home/wyt/RC_planner/src/install/primitive_planner' for CMake module files
+[2.842s] Level 1:colcon.colcon_core.environment:checking '/home/wyt/RC_planner/src/install/primitive_planner' for CMake config files
+[2.843s] Level 1:colcon.colcon_core.shell:create_environment_hook('primitive_planner', 'cmake_prefix_path')
+[2.843s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/wyt/RC_planner/src/install/primitive_planner/share/primitive_planner/hook/cmake_prefix_path.ps1'
+[2.845s] INFO:colcon.colcon_core.shell:Creating environment descriptor '/home/wyt/RC_planner/src/install/primitive_planner/share/primitive_planner/hook/cmake_prefix_path.dsv'
+[2.845s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/wyt/RC_planner/src/install/primitive_planner/share/primitive_planner/hook/cmake_prefix_path.sh'
+[2.848s] Level 1:colcon.colcon_core.environment:checking '/home/wyt/RC_planner/src/install/primitive_planner/lib'
+[2.848s] Level 1:colcon.colcon_core.environment:checking '/home/wyt/RC_planner/src/install/primitive_planner/bin'
+[2.848s] Level 1:colcon.colcon_core.environment:checking '/home/wyt/RC_planner/src/install/primitive_planner/lib/pkgconfig/primitive_planner.pc'
+[2.849s] Level 1:colcon.colcon_core.environment:checking '/home/wyt/RC_planner/src/install/primitive_planner/lib/python3.12/site-packages'
+[2.850s] Level 1:colcon.colcon_core.environment:checking '/home/wyt/RC_planner/src/install/primitive_planner/bin'
+[2.850s] INFO:colcon.colcon_core.shell:Creating package script '/home/wyt/RC_planner/src/install/primitive_planner/share/primitive_planner/package.ps1'
+[2.853s] INFO:colcon.colcon_core.shell:Creating package descriptor '/home/wyt/RC_planner/src/install/primitive_planner/share/primitive_planner/package.dsv'
+[2.854s] INFO:colcon.colcon_core.shell:Creating package script '/home/wyt/RC_planner/src/install/primitive_planner/share/primitive_planner/package.sh'
+[2.855s] INFO:colcon.colcon_core.shell:Creating package script '/home/wyt/RC_planner/src/install/primitive_planner/share/primitive_planner/package.bash'
+[2.857s] INFO:colcon.colcon_core.shell:Creating package script '/home/wyt/RC_planner/src/install/primitive_planner/share/primitive_planner/package.zsh'
+[2.858s] Level 1:colcon.colcon_core.environment:create_file_with_runtime_dependencies(/home/wyt/RC_planner/src/install/primitive_planner/share/colcon-core/packages/primitive_planner)
+[2.859s] Level 1:colcon.colcon_core.environment:create_environment_scripts_only(primitive_planner)
+[2.859s] Level 1:colcon.colcon_core.environment:checking '/home/wyt/RC_planner/src/install/primitive_planner' for CMake module files
+[2.861s] Level 1:colcon.colcon_core.environment:checking '/home/wyt/RC_planner/src/install/primitive_planner' for CMake config files
+[2.861s] Level 1:colcon.colcon_core.shell:create_environment_hook('primitive_planner', 'cmake_prefix_path')
+[2.861s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/wyt/RC_planner/src/install/primitive_planner/share/primitive_planner/hook/cmake_prefix_path.ps1'
+[2.862s] INFO:colcon.colcon_core.shell:Creating environment descriptor '/home/wyt/RC_planner/src/install/primitive_planner/share/primitive_planner/hook/cmake_prefix_path.dsv'
+[2.863s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/wyt/RC_planner/src/install/primitive_planner/share/primitive_planner/hook/cmake_prefix_path.sh'
+[2.865s] Level 1:colcon.colcon_core.environment:checking '/home/wyt/RC_planner/src/install/primitive_planner/lib'
+[2.865s] Level 1:colcon.colcon_core.environment:checking '/home/wyt/RC_planner/src/install/primitive_planner/bin'
+[2.865s] Level 1:colcon.colcon_core.environment:checking '/home/wyt/RC_planner/src/install/primitive_planner/lib/pkgconfig/primitive_planner.pc'
+[2.866s] Level 1:colcon.colcon_core.environment:checking '/home/wyt/RC_planner/src/install/primitive_planner/lib/python3.12/site-packages'
+[2.866s] Level 1:colcon.colcon_core.environment:checking '/home/wyt/RC_planner/src/install/primitive_planner/bin'
+[2.867s] INFO:colcon.colcon_core.shell:Creating package script '/home/wyt/RC_planner/src/install/primitive_planner/share/primitive_planner/package.ps1'
+[2.868s] INFO:colcon.colcon_core.shell:Creating package descriptor '/home/wyt/RC_planner/src/install/primitive_planner/share/primitive_planner/package.dsv'
+[2.870s] INFO:colcon.colcon_core.shell:Creating package script '/home/wyt/RC_planner/src/install/primitive_planner/share/primitive_planner/package.sh'
+[2.870s] INFO:colcon.colcon_core.shell:Creating package script '/home/wyt/RC_planner/src/install/primitive_planner/share/primitive_planner/package.bash'
+[2.872s] INFO:colcon.colcon_core.shell:Creating package script '/home/wyt/RC_planner/src/install/primitive_planner/share/primitive_planner/package.zsh'
+[2.873s] Level 1:colcon.colcon_core.environment:create_file_with_runtime_dependencies(/home/wyt/RC_planner/src/install/primitive_planner/share/colcon-core/packages/primitive_planner)
+[2.873s] DEBUG:colcon.colcon_parallel_executor.executor.parallel:closing loop
+[2.874s] DEBUG:colcon.colcon_parallel_executor.executor.parallel:loop closed
+[2.874s] DEBUG:colcon.colcon_parallel_executor.executor.parallel:run_until_complete finished with '0'
+[2.875s] DEBUG:colcon.colcon_core.event_reactor:joining thread
+[2.895s] INFO:colcon.colcon_core.plugin_system:Skipping extension 'colcon_notification.desktop_notification.terminal_notifier': Not used on non-Darwin systems
+[2.895s] INFO:colcon.colcon_core.plugin_system:Skipping extension 'colcon_notification.desktop_notification.win32': Not used on non-Windows systems
+[2.895s] INFO:colcon.colcon_notification.desktop_notification:Sending desktop notification using 'notify2'
+[2.928s] DEBUG:colcon.colcon_core.event_reactor:joined thread
+[2.928s] INFO:colcon.colcon_core.shell:Creating prefix script '/home/wyt/RC_planner/src/install/local_setup.ps1'
+[2.930s] INFO:colcon.colcon_core.shell:Creating prefix util module '/home/wyt/RC_planner/src/install/_local_setup_util_ps1.py'
+[2.933s] INFO:colcon.colcon_core.shell:Creating prefix chain script '/home/wyt/RC_planner/src/install/setup.ps1'
+[2.937s] INFO:colcon.colcon_core.shell:Creating prefix script '/home/wyt/RC_planner/src/install/local_setup.sh'
+[2.939s] INFO:colcon.colcon_core.shell:Creating prefix util module '/home/wyt/RC_planner/src/install/_local_setup_util_sh.py'
+[2.940s] INFO:colcon.colcon_core.shell:Creating prefix chain script '/home/wyt/RC_planner/src/install/setup.sh'
+[2.944s] INFO:colcon.colcon_core.shell:Creating prefix script '/home/wyt/RC_planner/src/install/local_setup.bash'
+[2.945s] INFO:colcon.colcon_core.shell:Creating prefix chain script '/home/wyt/RC_planner/src/install/setup.bash'
+[2.948s] INFO:colcon.colcon_core.shell:Creating prefix script '/home/wyt/RC_planner/src/install/local_setup.zsh'
+[2.949s] INFO:colcon.colcon_core.shell:Creating prefix chain script '/home/wyt/RC_planner/src/install/setup.zsh'

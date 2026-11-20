@@ -84,3 +84,9 @@
 - 编译：18 包 colcon build 全绿。swarm_bridge 仅编译 bridge_node_udp，与上游 ENABLE_TCP=false 一致，原 toSec 错误已不存在（bridge_node_tcp.cpp / traj2odom_node.cpp 仍为上游禁用分支，未编译）。
 - 运行：8 机 swarm 冒烟测试（rviz:=false）验证 FSM 全链 INIT→WAIT_TARGET→GEN_NEW_TRAJ→EXEC_TRAJ→REPLAN→APPROACH_GOAL→WAIT_TARGET，6/8 机到达目标。drone_num≤3 时地图为空导致 pcl_render_node 段错误，属上游边界情况，非本次改动引入。
 - 文档：同步根 README、Primitive-Planner/README 与 memory.md。
+
+## 运行排障（2026-11-20）
+
+- CycloneDDS 单机大机群需配 `MaxAutoParticipantIndex`（默认 9），否则 100+ 进程报 `Failed to find a free participant index`。已写 `~/.ros/cyclonedds.xml`（lo + 单播 + localhost + MaxAutoParticipantIndex=120，覆盖约 20 机）。启动前 `export RMW_IMPLEMENTATION=rmw_cyclonedds_cpp CYCLONEDDS_URI=file://$HOME/.ros/cyclonedds.xml`。跨机运行时需删掉 NetworkInterfaceAddress/AllowMulticast/Peers 三行。
+- **基元库重新生成有坑（已修复）**：toppra 0.6.x 对一维直线路径 `path(s,1)` 返回 1 元素数组而非标量，导致 swarm_path.py 里 `s_start=v_start/path(...,1)` 得到数组，`compute_trajectory` 内部 `K[self._N]=[sdmin**2,sdmax**2]` 抛 `setting an array element with a sequence`，直线基元（pathID=0）被误判不可行、pathID 整体 +1，规划器报 `Illegal pathID=180` 退出（exit 0 无 WAIT_TARGET）。已在 `solveHorizonToppAndSample` 直线分支加 `np.asarray(...).item()` 转标量修复，重新生成恢复 181 条、pathID 从 0 开始。正确库可随时从 `.parity-check/install/.../primitive_library` 恢复。
+- FSM 的 `/traj_start_trigger` 订阅在 `init()` 读完基元库之后才创建，故 pub 触发前必须等启动终端出现 `WAIT_TARGET`。

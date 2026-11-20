@@ -110,8 +110,10 @@ def solveHorizonToppAndSample(radius, ss, way_pts, vlims, alims, v_start, v_end)
 
     if math.isinf(radius):
         instance = algo.TOPPRA([pc_vel, pc_acc], path, gridpoints=gridpoints, parametrizer="ParametrizeSpline")
-        s_start = v_start / path(gridpoints[0], 1)
-        s_end = v_end / path(gridpoints[-1], 1)
+        # toppra 0.6.x 对一维路径 path(s,1) 返回 1 元素数组，须转标量，否则 compute_trajectory 报
+        # "setting an array element with a sequence"（直线基元被误判不可行）。
+        s_start = v_start / np.asarray(path(gridpoints[0], 1)).item()
+        s_end = v_end / np.asarray(path(gridpoints[-1], 1)).item()
     else:
         pc_vel_norm = constraint.SecondOrderConstraint(inv_dyn, constraintF, constraintg, dof=2)
         instance = algo.TOPPRA([pc_vel, pc_acc, pc_vel_norm], path, gridpoints=gridpoints, parametrizer="ParametrizeSpline")

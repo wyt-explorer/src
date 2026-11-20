@@ -1,0 +1,22 @@
+[0.064s] Invoking command in '/home/wyt/RC_planner/src/build/map_generator': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/jazzy DEBUGINFOD_URLS=https://debuginfod.ubuntu.com /usr/bin/cmake --build /home/wyt/RC_planner/src/build/map_generator -- -j28 -l28
+[0.282s] [100%] Built target random_forest
+[0.321s] Invoked command in '/home/wyt/RC_planner/src/build/map_generator' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/jazzy DEBUGINFOD_URLS=https://debuginfod.ubuntu.com /usr/bin/cmake --build /home/wyt/RC_planner/src/build/map_generator -- -j28 -l28
+[0.327s] Invoking command in '/home/wyt/RC_planner/src/build/map_generator': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/jazzy DEBUGINFOD_URLS=https://debuginfod.ubuntu.com /usr/bin/cmake --install /home/wyt/RC_planner/src/build/map_generator
+[0.355s] -- Install configuration: "Release"
+[0.363s] -- Up-to-date: /home/wyt/RC_planner/src/install/map_generator/lib/map_generator/random_forest
+[0.363s] -- Up-to-date: /home/wyt/RC_planner/src/install/map_generator/share/ament_index/resource_index/package_run_dependencies/map_generator
+[0.363s] -- Up-to-date: /home/wyt/RC_planner/src/install/map_generator/share/ament_index/resource_index/parent_prefix_path/map_generator
+[0.363s] -- Up-to-date: /home/wyt/RC_planner/src/install/map_generator/share/map_generator/environment/ament_prefix_path.sh
+[0.364s] -- Up-to-date: /home/wyt/RC_planner/src/install/map_generator/share/map_generator/environment/ament_prefix_path.dsv
+[0.364s] -- Up-to-date: /home/wyt/RC_planner/src/install/map_generator/share/map_generator/environment/path.sh
+[0.364s] -- Up-to-date: /home/wyt/RC_planner/src/install/map_generator/share/map_generator/environment/path.dsv
+[0.365s] -- Up-to-date: /home/wyt/RC_planner/src/install/map_generator/share/map_generator/local_setup.bash
+[0.365s] -- Up-to-date: /home/wyt/RC_planner/src/install/map_generator/share/map_generator/local_setup.sh
+[0.365s] -- Up-to-date: /home/wyt/RC_planner/src/install/map_generator/share/map_generator/local_setup.zsh
+[0.365s] -- Up-to-date: /home/wyt/RC_planner/src/install/map_generator/share/map_generator/local_setup.dsv
+[0.366s] -- Installing: /home/wyt/RC_planner/src/install/map_generator/share/map_generator/package.dsv
+[0.369s] -- Up-to-date: /home/wyt/RC_planner/src/install/map_generator/share/ament_index/resource_index/packages/map_generator
+[0.370s] -- Up-to-date: /home/wyt/RC_planner/src/install/map_generator/share/map_generator/cmake/map_generatorConfig.cmake
+[0.371s] -- Up-to-date: /home/wyt/RC_planner/src/install/map_generator/share/map_generator/cmake/map_generatorConfig-version.cmake
+[0.372s] -- Up-to-date: /home/wyt/RC_planner/src/install/map_generator/share/map_generator/package.xml
+[0.433s] Invoked command in '/home/wyt/RC_planner/src/build/map_generator' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/jazzy DEBUGINFOD_URLS=https://debuginfod.ubuntu.com /usr/bin/cmake --install /home/wyt/RC_planner/src/build/map_generator

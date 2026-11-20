@@ -39,6 +39,7 @@
 /home/wyt/RC_planner/src/install/primitive_planner/share/primitive_planner/primitive_library/trajectory/9/41_trajectory.ply
 /home/wyt/RC_planner/src/install/primitive_planner/share/primitive_planner/primitive_library/trajectory/9/81_trajectory.ply
 /home/wyt/RC_planner/src/install/primitive_planner/share/primitive_planner/primitive_library/trajectory/9/147_trajectory.ply
+/home/wyt/RC_planner/src/install/primitive_planner/share/primitive_planner/primitive_library/trajectory/9/0_trajectory.ply
 /home/wyt/RC_planner/src/install/primitive_planner/share/primitive_planner/primitive_library/trajectory/9/23_trajectory.ply
 /home/wyt/RC_planner/src/install/primitive_planner/share/primitive_planner/primitive_library/trajectory/9/21_trajectory.ply
 /home/wyt/RC_planner/src/install/primitive_planner/share/primitive_planner/primitive_library/trajectory/9/130_trajectory.ply
@@ -203,6 +204,7 @@
 /home/wyt/RC_planner/src/install/primitive_planner/share/primitive_planner/primitive_library/trajectory/2/41_trajectory.ply
 /home/wyt/RC_planner/src/install/primitive_planner/share/primitive_planner/primitive_library/trajectory/2/81_trajectory.ply
 /home/wyt/RC_planner/src/install/primitive_planner/share/primitive_planner/primitive_library/trajectory/2/147_trajectory.ply
+/home/wyt/RC_planner/src/install/primitive_planner/share/primitive_planner/primitive_library/trajectory/2/0_trajectory.ply
 /home/wyt/RC_planner/src/install/primitive_planner/share/primitive_planner/primitive_library/trajectory/2/23_trajectory.ply
 /home/wyt/RC_planner/src/install/primitive_planner/share/primitive_planner/primitive_library/trajectory/2/175_trajectory.ply
 /home/wyt/RC_planner/src/install/primitive_planner/share/primitive_planner/primitive_library/trajectory/2/21_trajectory.ply
@@ -382,6 +384,7 @@
 /home/wyt/RC_planner/src/install/primitive_planner/share/primitive_planner/primitive_library/trajectory/7/41_trajectory.ply
 /home/wyt/RC_planner/src/install/primitive_planner/share/primitive_planner/primitive_library/trajectory/7/81_trajectory.ply
 /home/wyt/RC_planner/src/install/primitive_planner/share/primitive_planner/primitive_library/trajectory/7/147_trajectory.ply
+/home/wyt/RC_planner/src/install/primitive_planner/share/primitive_planner/primitive_library/trajectory/7/0_trajectory.ply
 /home/wyt/RC_planner/src/install/primitive_planner/share/primitive_planner/primitive_library/trajectory/7/23_trajectory.ply
 /home/wyt/RC_planner/src/install/primitive_planner/share/primitive_planner/primitive_library/trajectory/7/21_trajectory.ply
 /home/wyt/RC_planner/src/install/primitive_planner/share/primitive_planner/primitive_library/trajectory/7/130_trajectory.ply
@@ -553,6 +556,7 @@
 /home/wyt/RC_planner/src/install/primitive_planner/share/primitive_planner/primitive_library/trajectory/1/41_trajectory.ply
 /home/wyt/RC_planner/src/install/primitive_planner/share/primitive_planner/primitive_library/trajectory/1/81_trajectory.ply
 /home/wyt/RC_planner/src/install/primitive_planner/share/primitive_planner/primitive_library/trajectory/1/147_trajectory.ply
+/home/wyt/RC_planner/src/install/primitive_planner/share/primitive_planner/primitive_library/trajectory/1/0_trajectory.ply
 /home/wyt/RC_planner/src/install/primitive_planner/share/primitive_planner/primitive_library/trajectory/1/23_trajectory.ply
 /home/wyt/RC_planner/src/install/primitive_planner/share/primitive_planner/primitive_library/trajectory/1/175_trajectory.ply
 /home/wyt/RC_planner/src/install/primitive_planner/share/primitive_planner/primitive_library/trajectory/1/21_trajectory.ply
@@ -734,6 +738,7 @@
 /home/wyt/RC_planner/src/install/primitive_planner/share/primitive_planner/primitive_library/trajectory/0/41_trajectory.ply
 /home/wyt/RC_planner/src/install/primitive_planner/share/primitive_planner/primitive_library/trajectory/0/81_trajectory.ply
 /home/wyt/RC_planner/src/install/primitive_planner/share/primitive_planner/primitive_library/trajectory/0/147_trajectory.ply
+/home/wyt/RC_planner/src/install/primitive_planner/share/primitive_planner/primitive_library/trajectory/0/0_trajectory.ply
 /home/wyt/RC_planner/src/install/primitive_planner/share/primitive_planner/primitive_library/trajectory/0/23_trajectory.ply
 /home/wyt/RC_planner/src/install/primitive_planner/share/primitive_planner/primitive_library/trajectory/0/175_trajectory.ply
 /home/wyt/RC_planner/src/install/primitive_planner/share/primitive_planner/primitive_library/trajectory/0/21_trajectory.ply
@@ -915,6 +920,7 @@
 /home/wyt/RC_planner/src/install/primitive_planner/share/primitive_planner/primitive_library/trajectory/5/41_trajectory.ply
 /home/wyt/RC_planner/src/install/primitive_planner/share/primitive_planner/primitive_library/trajectory/5/81_trajectory.ply
 /home/wyt/RC_planner/src/install/primitive_planner/share/primitive_planner/primitive_library/trajectory/5/147_trajectory.ply
+/home/wyt/RC_planner/src/install/primitive_planner/share/primitive_planner/primitive_library/trajectory/5/0_trajectory.ply
 /home/wyt/RC_planner/src/install/primitive_planner/share/primitive_planner/primitive_library/trajectory/5/23_trajectory.ply
 /home/wyt/RC_planner/src/install/primitive_planner/share/primitive_planner/primitive_library/trajectory/5/175_trajectory.ply
 /home/wyt/RC_planner/src/install/primitive_planner/share/primitive_planner/primitive_library/trajectory/5/21_trajectory.ply
@@ -1097,6 +1103,7 @@
 /home/wyt/RC_planner/src/install/primitive_planner/share/primitive_planner/primitive_library/trajectory/4/41_trajectory.ply
 /home/wyt/RC_planner/src/install/primitive_planner/share/primitive_planner/primitive_library/trajectory/4/81_trajectory.ply
 /home/wyt/RC_planner/src/install/primitive_planner/share/primitive_planner/primitive_library/trajectory/4/147_trajectory.ply
+/home/wyt/RC_planner/src/install/primitive_planner/share/primitive_planner/primitive_library/trajectory/4/0_trajectory.ply
 /home/wyt/RC_planner/src/install/primitive_planner/share/primitive_planner/primitive_library/trajectory/4/23_trajectory.ply
 /home/wyt/RC_planner/src/install/primitive_planner/share/primitive_planner/primitive_library/trajectory/4/175_trajectory.ply
 /home/wyt/RC_planner/src/install/primitive_planner/share/primitive_planner/primitive_library/trajectory/4/21_trajectory.ply
@@ -1275,6 +1282,7 @@
 /home/wyt/RC_planner/src/install/primitive_planner/share/primitive_planner/primitive_library/trajectory/6/41_trajectory.ply
 /home/wyt/RC_planner/src/install/primitive_planner/share/primitive_planner/primitive_library/trajectory/6/81_trajectory.ply
 /home/wyt/RC_planner/src/install/primitive_planner/share/primitive_planner/primitive_library/trajectory/6/147_trajectory.ply
+/home/wyt/RC_planner/src/install/primitive_planner/share/primitive_planner/primitive_library/trajectory/6/0_trajectory.ply
 /home/wyt/RC_planner/src/install/primitive_planner/share/primitive_planner/primitive_library/trajectory/6/23_trajectory.ply
 /home/wyt/RC_planner/src/install/primitive_planner/share/primitive_planner/primitive_library/trajectory/6/21_trajectory.ply
 /home/wyt/RC_planner/src/install/primitive_planner/share/primitive_planner/primitive_library/trajectory/6/130_trajectory.ply
@@ -1446,6 +1454,7 @@
 /home/wyt/RC_planner/src/install/primitive_planner/share/primitive_planner/primitive_library/trajectory/3/41_trajectory.ply
 /home/wyt/RC_planner/src/install/primitive_planner/share/primitive_planner/primitive_library/trajectory/3/81_trajectory.ply
 /home/wyt/RC_planner/src/install/primitive_planner/share/primitive_planner/primitive_library/trajectory/3/147_trajectory.ply
+/home/wyt/RC_planner/src/install/primitive_planner/share/primitive_planner/primitive_library/trajectory/3/0_trajectory.ply
 /home/wyt/RC_planner/src/install/primitive_planner/share/primitive_planner/primitive_library/trajectory/3/23_trajectory.ply
 /home/wyt/RC_planner/src/install/primitive_planner/share/primitive_planner/primitive_library/trajectory/3/175_trajectory.ply
 /home/wyt/RC_planner/src/install/primitive_planner/share/primitive_planner/primitive_library/trajectory/3/21_trajectory.ply
@@ -1620,6 +1629,7 @@
 /home/wyt/RC_planner/src/install/primitive_planner/share/primitive_planner/primitive_library/trajectory/10/41_trajectory.ply
 /home/wyt/RC_planner/src/install/primitive_planner/share/primitive_planner/primitive_library/trajectory/10/81_trajectory.ply
 /home/wyt/RC_planner/src/install/primitive_planner/share/primitive_planner/primitive_library/trajectory/10/147_trajectory.ply
+/home/wyt/RC_planner/src/install/primitive_planner/share/primitive_planner/primitive_library/trajectory/10/0_trajectory.ply
 /home/wyt/RC_planner/src/install/primitive_planner/share/primitive_planner/primitive_library/trajectory/10/23_trajectory.ply
 /home/wyt/RC_planner/src/install/primitive_planner/share/primitive_planner/primitive_library/trajectory/10/21_trajectory.ply
 /home/wyt/RC_planner/src/install/primitive_planner/share/primitive_planner/primitive_library/trajectory/10/130_trajectory.ply
@@ -1783,6 +1793,7 @@
 /home/wyt/RC_planner/src/install/primitive_planner/share/primitive_planner/primitive_library/trajectory/8/41_trajectory.ply
 /home/wyt/RC_planner/src/install/primitive_planner/share/primitive_planner/primitive_library/trajectory/8/81_trajectory.ply
 /home/wyt/RC_planner/src/install/primitive_planner/share/primitive_planner/primitive_library/trajectory/8/147_trajectory.ply
+/home/wyt/RC_planner/src/install/primitive_planner/share/primitive_planner/primitive_library/trajectory/8/0_trajectory.ply
 /home/wyt/RC_planner/src/install/primitive_planner/share/primitive_planner/primitive_library/trajectory/8/23_trajectory.ply
 /home/wyt/RC_planner/src/install/primitive_planner/share/primitive_planner/primitive_library/trajectory/8/21_trajectory.ply
 /home/wyt/RC_planner/src/install/primitive_planner/share/primitive_planner/primitive_library/trajectory/8/130_trajectory.ply
@@ -1960,6 +1971,7 @@
 /home/wyt/RC_planner/src/install/primitive_planner/share/primitive_planner/primitive_library/trajectory_pos/9/41_trajectory.ply
 /home/wyt/RC_planner/src/install/primitive_planner/share/primitive_planner/primitive_library/trajectory_pos/9/81_trajectory.ply
 /home/wyt/RC_planner/src/install/primitive_planner/share/primitive_planner/primitive_library/trajectory_pos/9/147_trajectory.ply
+/home/wyt/RC_planner/src/install/primitive_planner/share/primitive_planner/primitive_library/trajectory_pos/9/0_trajectory.ply
 /home/wyt/RC_planner/src/install/primitive_planner/share/primitive_planner/primitive_library/trajectory_pos/9/23_trajectory.ply
 /home/wyt/RC_planner/src/install/primitive_planner/share/primitive_planner/primitive_library/trajectory_pos/9/21_trajectory.ply
 /home/wyt/RC_planner/src/install/primitive_planner/share/primitive_planner/primitive_library/trajectory_pos/9/130_trajectory.ply
@@ -2123,6 +2135,7 @@
 /home/wyt/RC_planner/src/install/primitive_planner/share/primitive_planner/primitive_library/trajectory_pos/2/41_trajectory.ply
 /home/wyt/RC_planner/src/install/primitive_planner/share/primitive_planner/primitive_library/trajectory_pos/2/81_trajectory.ply
 /home/wyt/RC_planner/src/install/primitive_planner/share/primitive_planner/primitive_library/trajectory_pos/2/147_trajectory.ply
+/home/wyt/RC_planner/src/install/primitive_planner/share/primitive_planner/primitive_library/trajectory_pos/2/0_trajectory.ply
 /home/wyt/RC_planner/src/install/primitive_planner/share/primitive_planner/primitive_library/trajectory_pos/2/23_trajectory.ply
 /home/wyt/RC_planner/src/install/primitive_planner/share/primitive_planner/primitive_library/trajectory_pos/2/175_trajectory.ply
 /home/wyt/RC_planner/src/install/primitive_planner/share/primitive_planner/primitive_library/trajectory_pos/2/21_trajectory.ply
@@ -2301,6 +2314,7 @@
 /home/wyt/RC_planner/src/install/primitive_planner/share/primitive_planner/primitive_library/trajectory_pos/7/41_trajectory.ply
 /home/wyt/RC_planner/src/install/primitive_planner/share/primitive_planner/primitive_library/trajectory_pos/7/81_trajectory.ply
 /home/wyt/RC_planner/src/install/primitive_planner/share/primitive_planner/primitive_library/trajectory_pos/7/147_trajectory.ply
+/home/wyt/RC_planner/src/install/primitive_planner/share/primitive_planner/primitive_library/trajectory_pos/7/0_trajectory.ply
 /home/wyt/RC_planner/src/install/primitive_planner/share/primitive_planner/primitive_library/trajectory_pos/7/23_trajectory.ply
 /home/wyt/RC_planner/src/install/primitive_planner/share/primitive_planner/primitive_library/trajectory_pos/7/21_trajectory.ply
 /home/wyt/RC_planner/src/install/primitive_planner/share/primitive_planner/primitive_library/trajectory_pos/7/130_trajectory.ply
@@ -2471,6 +2485,7 @@
 /home/wyt/RC_planner/src/install/primitive_planner/share/primitive_planner/primitive_library/trajectory_pos/1/41_trajectory.ply
 /home/wyt/RC_planner/src/install/primitive_planner/share/primitive_planner/primitive_library/trajectory_pos/1/81_trajectory.ply
 /home/wyt/RC_planner/src/install/primitive_planner/share/primitive_planner/primitive_library/trajectory_pos/1/147_trajectory.ply
+/home/wyt/RC_planner/src/install/primitive_planner/share/primitive_planner/primitive_library/trajectory_pos/1/0_trajectory.ply
 /home/wyt/RC_planner/src/install/primitive_planner/share/primitive_planner/primitive_library/trajectory_pos/1/23_trajectory.ply
 /home/wyt/RC_planner/src/install/primitive_planner/share/primitive_planner/primitive_library/trajectory_pos/1/175_trajectory.ply
 /home/wyt/RC_planner/src/install/primitive_planner/share/primitive_planner/primitive_library/trajectory_pos/1/21_trajectory.ply
@@ -2651,6 +2666,7 @@
 /home/wyt/RC_planner/src/install/primitive_planner/share/primitive_planner/primitive_library/trajectory_pos/0/41_trajectory.ply
 /home/wyt/RC_planner/src/install/primitive_planner/share/primitive_planner/primitive_library/trajectory_pos/0/81_trajectory.ply
 /home/wyt/RC_planner/src/install/primitive_planner/share/primitive_planner/primitive_library/trajectory_pos/0/147_trajectory.ply
+/home/wyt/RC_planner/src/install/primitive_planner/share/primitive_planner/primitive_library/trajectory_pos/0/0_trajectory.ply
 /home/wyt/RC_planner/src/install/primitive_planner/share/primitive_planner/primitive_library/trajectory_pos/0/23_trajectory.ply
 /home/wyt/RC_planner/src/install/primitive_planner/share/primitive_planner/primitive_library/trajectory_pos/0/175_trajectory.ply
 /home/wyt/RC_planner/src/install/primitive_planner/share/primitive_planner/primitive_library/trajectory_pos/0/21_trajectory.ply
@@ -2831,6 +2847,7 @@
 /home/wyt/RC_planner/src/install/primitive_planner/share/primitive_planner/primitive_library/trajectory_pos/5/41_trajectory.ply
 /home/wyt/RC_planner/src/install/primitive_planner/share/primitive_planner/primitive_library/trajectory_pos/5/81_trajectory.ply
 /home/wyt/RC_planner/src/install/primitive_planner/share/primitive_planner/primitive_library/trajectory_pos/5/147_trajectory.ply
+/home/wyt/RC_planner/src/install/primitive_planner/share/primitive_planner/primitive_library/trajectory_pos/5/0_trajectory.ply
 /home/wyt/RC_planner/src/install/primitive_planner/share/primitive_planner/primitive_library/trajectory_pos/5/23_trajectory.ply
 /home/wyt/RC_planner/src/install/primitive_planner/share/primitive_planner/primitive_library/trajectory_pos/5/175_trajectory.ply
 /home/wyt/RC_planner/src/install/primitive_planner/share/primitive_planner/primitive_library/trajectory_pos/5/21_trajectory.ply
@@ -3011,6 +3028,7 @@
 /home/wyt/RC_planner/src/install/primitive_planner/share/primitive_planner/primitive_library/trajectory_pos/4/41_trajectory.ply
 /home/wyt/RC_planner/src/install/primitive_planner/share/primitive_planner/primitive_library/trajectory_pos/4/81_trajectory.ply
 /home/wyt/RC_planner/src/install/primitive_planner/share/primitive_planner/primitive_library/trajectory_pos/4/147_trajectory.ply
+/home/wyt/RC_planner/src/install/primitive_planner/share/primitive_planner/primitive_library/trajectory_pos/4/0_trajectory.ply
 /home/wyt/RC_planner/src/install/primitive_planner/share/primitive_planner/primitive_library/trajectory_pos/4/23_trajectory.ply
 /home/wyt/RC_planner/src/install/primitive_planner/share/primitive_planner/primitive_library/trajectory_pos/4/175_trajectory.ply
 /home/wyt/RC_planner/src/install/primitive_planner/share/primitive_planner/primitive_library/trajectory_pos/4/21_trajectory.ply
@@ -3189,6 +3207,7 @@
 /home/wyt/RC_planner/src/install/primitive_planner/share/primitive_planner/primitive_library/trajectory_pos/6/41_trajectory.ply
 /home/wyt/RC_planner/src/install/primitive_planner/share/primitive_planner/primitive_library/trajectory_pos/6/81_trajectory.ply
 /home/wyt/RC_planner/src/install/primitive_planner/share/primitive_planner/primitive_library/trajectory_pos/6/147_trajectory.ply
+/home/wyt/RC_planner/src/install/primitive_planner/share/primitive_planner/primitive_library/trajectory_pos/6/0_trajectory.ply
 /home/wyt/RC_planner/src/install/primitive_planner/share/primitive_planner/primitive_library/trajectory_pos/6/23_trajectory.ply
 /home/wyt/RC_planner/src/install/primitive_planner/share/primitive_planner/primitive_library/trajectory_pos/6/21_trajectory.ply
 /home/wyt/RC_planner/src/install/primitive_planner/share/primitive_planner/primitive_library/trajectory_pos/6/130_trajectory.ply
@@ -3359,6 +3378,7 @@
 /home/wyt/RC_planner/src/install/primitive_planner/share/primitive_planner/primitive_library/trajectory_pos/3/41_trajectory.ply
 /home/wyt/RC_planner/src/install/primitive_planner/share/primitive_planner/primitive_library/trajectory_pos/3/81_trajectory.ply
 /home/wyt/RC_planner/src/install/primitive_planner/share/primitive_planner/primitive_library/trajectory_pos/3/147_trajectory.ply
+/home/wyt/RC_planner/src/install/primitive_planner/share/primitive_planner/primitive_library/trajectory_pos/3/0_trajectory.ply
 /home/wyt/RC_planner/src/install/primitive_planner/share/primitive_planner/primitive_library/trajectory_pos/3/23_trajectory.ply
 /home/wyt/RC_planner/src/install/primitive_planner/share/primitive_planner/primitive_library/trajectory_pos/3/175_trajectory.ply
 /home/wyt/RC_planner/src/install/primitive_planner/share/primitive_planner/primitive_library/trajectory_pos/3/21_trajectory.ply
@@ -3532,6 +3552,7 @@
 /home/wyt/RC_planner/src/install/primitive_planner/share/primitive_planner/primitive_library/trajectory_pos/10/41_trajectory.ply
 /home/wyt/RC_planner/src/install/primitive_planner/share/primitive_planner/primitive_library/trajectory_pos/10/81_trajectory.ply
 /home/wyt/RC_planner/src/install/primitive_planner/share/primitive_planner/primitive_library/trajectory_pos/10/147_trajectory.ply
+/home/wyt/RC_planner/src/install/primitive_planner/share/primitive_planner/primitive_library/trajectory_pos/10/0_trajectory.ply
 /home/wyt/RC_planner/src/install/primitive_planner/share/primitive_planner/primitive_library/trajectory_pos/10/23_trajectory.ply
 /home/wyt/RC_planner/src/install/primitive_planner/share/primitive_planner/primitive_library/trajectory_pos/10/21_trajectory.ply
 /home/wyt/RC_planner/src/install/primitive_planner/share/primitive_planner/primitive_library/trajectory_pos/10/130_trajectory.ply
@@ -3693,6 +3714,7 @@
 /home/wyt/RC_planner/src/install/primitive_planner/share/primitive_planner/primitive_library/trajectory_pos/8/41_trajectory.ply
 /home/wyt/RC_planner/src/install/primitive_planner/share/primitive_planner/primitive_library/trajectory_pos/8/81_trajectory.ply
 /home/wyt/RC_planner/src/install/primitive_planner/share/primitive_planner/primitive_library/trajectory_pos/8/147_trajectory.ply
+/home/wyt/RC_planner/src/install/primitive_planner/share/primitive_planner/primitive_library/trajectory_pos/8/0_trajectory.ply
 /home/wyt/RC_planner/src/install/primitive_planner/share/primitive_planner/primitive_library/trajectory_pos/8/23_trajectory.ply
 /home/wyt/RC_planner/src/install/primitive_planner/share/primitive_planner/primitive_library/trajectory_pos/8/21_trajectory.ply
 /home/wyt/RC_planner/src/install/primitive_planner/share/primitive_planner/primitive_library/trajectory_pos/8/130_trajectory.ply

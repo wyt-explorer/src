@@ -2,13 +2,10 @@
 
 本地实现以 [ZJU-FAST-Lab 上游 cab5aa2](https://github.com/ZJU-FAST-Lab/Primitive-Planner/tree/cab5aa2f82948be58b36e37b6a921b9dba97423c) 为基准，保留规划算法和节点分工，恢复圆周对径交换的多机演示。目录结构、类与函数、调用关系严格对齐上游，仅做 ROS 1 → ROS 2 Jazzy 的必要转换。本次不修改 `Primitive_env`。
 
-先离线生成运动基元，再编译和启动。规划器只加载基元库，不会自动生成；已有匹配的完整库可复用。系统 Python 3.12 已自带 numpy/scipy/matplotlib，只需补装 toppra 与 pyrfc3339。以下命令从工作空间根目录执行：
+基元库已随仓库生成（181 条路径），正常使用无需重新生成；仅修改 `swarm_path.py` 参数后才需重跑（脚本已适配 toppra 0.6.x）。以下命令从工作空间根目录执行：
 
 ```bash
 cd ~/RC_planner/src
-python3 -m pip install --user --break-system-packages toppra pyrfc3339
-python3 Primitive-Planner/src/scripts/swarm_path.py
-
 source /opt/ros/jazzy/setup.bash
 colcon build --base-paths Primitive-Planner/src --cmake-args -DCMAKE_BUILD_TYPE=Release
 source install/setup.bash
